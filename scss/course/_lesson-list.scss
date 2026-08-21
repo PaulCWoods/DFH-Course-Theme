@@ -164,6 +164,10 @@
     .chip {
         white-space: nowrap;
     }
+
+    &.l1 .chip {
+        display: none;
+    }
 }
 
 span.lesson-item {
