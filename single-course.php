@@ -11,18 +11,18 @@ get_template_part('content', 'course-header');
 ?>
 
 <main class="course-landing site-main" id="main">
-    <article class="article course-about">
-        <figure class="course-about-poster">
+    <article class="article course-landing">
+        <figure class="course-landing__poster">
 <?php if (has_post_thumbnail())
                 the_post_thumbnail(); ?>
         </figure>
-        <header class="article-header course-about-header prose">
+        <header class="article-header course-landing__header prose">
             
             <div class="container">
                 <h1><?php the_title(); ?></h1>
             </div>
         </header>
-        <div class="course-about-intro prose">
+        <div class="course-landing__intro prose">
             <div class="container">
                 <?php the_excerpt(); ?>
             </div>
@@ -43,11 +43,11 @@ get_template_part('content', 'course-header');
     if ($current_user && $current_user->ID) {
         $user_name = $current_user->display_name ? $current_user->display_name : $current_user->user_login;
     }
-    $welcome_msg = '<span id="course-access-welcome" class="small-heading tc-muted">Welcome, ' . esc_html($user_name) . '!</span>';
-    $welcome_back_msg = '<span id="course-access-welcome" class="small-heading tc-muted">Welcome back, ' . esc_html($user_name) . '</span>';
+    $welcome_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome, ' . esc_html($user_name) . '!</span>';
+    $welcome_back_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome back, ' . esc_html($user_name) . '</span>';
     ?>
 
-    <section class="course-access prose" aria-describedby="course-access-heading">
+    <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
         <div class="container">
             <?php if (!is_user_logged_in()): ?>
                 <!-- State 0: Guest Visitor -->
@@ -59,7 +59,7 @@ get_template_part('content', 'course-header');
 
             <?php elseif ('completed' === $active_lesson_status): ?>
                 <!-- State 3: Course Completed -->
-                <div class="course-complete-badge">
+                <div class="course-landing__completion">
                     <h2>🎉 Course completed!</h2>
                     <p>Congratulations! You have finished all lessons in this course.</p>
                     <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review
@@ -70,7 +70,7 @@ get_template_part('content', 'course-header');
                 <!-- State 2: In-Progress (Resume) -->
                 <?php echo $welcome_back_msg; ?>
                 <h2>Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h2>
-                <div class="progress-bar-container course-access-progress">
+                <div class="progress-bar-container course-landing__progress">
                     <progress class="progress-bar" max="100"
                         value="<?php echo esc_html($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
                 </div>
@@ -108,17 +108,17 @@ get_template_part('content', 'course-header');
             <?php endif; ?>
         </div>
     </section>
-    <div class="course-about-main prose">
+    <div class="course-landing__main prose">
             <div class="container">
                 <?php the_content(); ?>
             </div>
         </div>
     </article>
-    <section class="course-syllabus" aria-describedby="course-permissions-heading">
+    <section class="course-landing__syllabus" aria-describedby="course-permissions-heading">
         <div class="container">
             <h2 id="course-permissions-heading" class="heading">Course Plan</h2>
             <?php if ($root_lessons): ?>
-                <div class="lesson-list-container">
+                <div class="lesson-list__container">
                     <?php echo dfh_render_lesson_tree($root_lessons, 1); ?>
                 </div>
             <?php endif; ?>

@@ -49,7 +49,7 @@
             &:hover {
                 text-decoration: none;
 
-                .lesson-item-label {
+                .lesson-item__label {
                     color: var(--link-hover-color);
                     text-decoration: underline;
                 }
@@ -59,7 +59,7 @@
         &:active {
             text-decoration: none;
 
-            .lesson-item-label {
+            .lesson-item__label {
                 color: var(--link-active-color);
                 text-decoration: underline;
             }
@@ -67,7 +67,7 @@
     }
 }
 
-.lesson-item-label {
+.lesson-item__label {
     flex-grow: 1;
     font-family: var(--label-font-family);
     font-size: var(--label-font-size);
@@ -77,9 +77,10 @@
     text-decoration-thickness: var(--link-underline-thickness);
     text-transform: var(--label-text-transform);
     text-underline-offset: var(--link-underline-offset);
+    text-wrap: balance;
 }
 
-.lesson-item-code {
+.lesson-item__code {
     font-family: var(--code-font-family);
     font-size: var(--code-font-size);
     font-weight: var(--code-font-weight);
@@ -87,7 +88,7 @@
     text-transform: var(--code-text-transform);
 }
 
-.lesson-list-container {
+.lesson-list__container {
     >.lesson-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(var(--syllabus-width, 28rem), 100%), 1fr));
@@ -109,7 +110,7 @@
             }
         }
 
-        >.lesson-list-item {
+        >.lesson-list__item {
             border: var(--l1-box-border-width) solid currentColor;
             padding: var(--l1-box-padding);
 

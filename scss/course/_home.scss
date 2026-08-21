@@ -1,23 +1,23 @@
-.home-hero {
+.home__hero {
     border-block-start: var(--ui-border-subtle);
     padding-block: var(--spacing-fluid-x2);
 }
 
-.home-title__hi {
+.home__title-highlight {
     color: var(--ui-color-foreground-accent);
 }
 
-.home-hero__access {
+.home__access {
     display: flex;
     flex-wrap: wrap;
     gap: var(--ui-spacing-unit);
 }
 
-.home-hero__logged-in {
+.home__logged-in {
     margin-block-end: var(--ui-spacing-unit);
 }
 
-.home-section {
+.home__section {
     border-block-start: var(--ui-border-subtle);
     margin-block-end: var(--spacing-fluid-x2);
     padding-block-start: var(--spacing-fluid-x2);

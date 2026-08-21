@@ -37,7 +37,7 @@ get_header();
 ?>
 
 <header class="lesson-head site-header" aria-label="Lesson navigation">
-    <div class="lesson-head-inner container">
+    <div class="lesson-head__inner container">
         <?php
         $lesson_code = dfh_get_lesson_hierarchy_number();
         if ($lesson_code):
@@ -148,7 +148,7 @@ get_header();
             <?php else: ?>
                 <h2 class="heading progress-panel-course-name">Course</h2>
             <?php endif; ?>
-            <div class="lesson-list-container">
+            <div class="lesson-list__container">
                 <?php
                 // If we have a course, get its roots; otherwise leave null to render top-level lessons
                 $roots = null;
@@ -184,7 +184,7 @@ get_header();
         $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
         if ($playback_id): ?>
             <div class="lesson-video">
-                <div class="lesson-video-container container">
+                <div class="lesson-video__container container">
                     <mux-player playback-id="<?php echo esc_attr($playback_id); ?>" accent-color="#2eab93"
                         metadata-video-title="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:auto;">
                     </mux-player>
@@ -220,9 +220,9 @@ get_header();
                         if (!empty($stats_meta)):
                             $slines = explode("\n", $stats_meta);
                             ?>
-                            <section class="lesson-resources lesson-stats" aria-describedby="lesson-stats-heading">
-                                <h2 class="subheading lesson-resources-heading" id="lesson-stats-heading">Key statistics</h2>
-                                <dl class="lesson-stats-list">
+                            <section class="lesson-resources lesson-stats" aria-describedby="lesson-stats__heading">
+                                <h2 class="subheading lesson-resources__heading" id="lesson-stats__heading">Key statistics</h2>
+                                <dl class="lesson-stats__list">
                                     <?php foreach ($slines as $sline) {
                                         $sline = trim($sline);
                                         if (empty($sline))
@@ -249,7 +249,7 @@ get_header();
                             ?>
                             <section class="lesson-resources lesson-links" aria-describedby="lesson-links-heading">
                                 <div class="container">
-                                    <h2 class="subheading lesson-resources-heading" id="lesson-links-heading">Further reading &
+                                    <h2 class="subheading lesson-resources__heading" id="lesson-links-heading">Further reading &
                                         links</h2>
                                     <ul class="resource-list">
                                         <?php
@@ -290,10 +290,10 @@ get_header();
             <?php
             $children_html = dfh_render_lesson_children($parent_id, $child_level);
             if (!empty(trim($children_html))): ?>
-                <section class="container lesson-explore-section lesson-children" aria-describedby="lesson-children-heading"
+                <section class="container lesson-explore__section lesson-children" aria-describedby="lesson-children-heading"
                     data-level="<?php echo esc_attr($child_level); ?>">
                     <h2 class="heading" id="lesson-children-heading">Lessons in this section</h2>
-                    <div class="lesson-list-container">
+                    <div class="lesson-list__container">
                         <?php echo $children_html; ?>
                     </div>
                 </section>
@@ -360,10 +360,10 @@ get_header();
             }
             ?>
 
-            <div class="container lesson-explore-section lesson-progression"
-                aria-describedby="lesson-progression-heading">
+            <div class="container lesson-explore__section lesson-progression"
+                aria-describedby="lesson-progression__heading">
                 <h2 class="sr" id="progression-progress-heading">Proceed to the next step</h2>
-                <div class="lesson-progression-buttons">
+                <div class="lesson-progression__buttons">
                     <?php if ($adjacent['previous']): ?>
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
                             class="link-button prev-lesson">

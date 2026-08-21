@@ -1,7 +1,7 @@
 <?php
 // Migration helper: migrate legacy `lesson_video_url` postmeta to `mux_playback_id`.
 // Usage (from WP root):
-//   wp eval-file wp-content/themes/dfh-course-theme/bin/migrate-lesson-video-meta.php
+//   wp eval-file wp-content/themes/dfh-course-theme/bin/migrate-lesson-video__meta.php
 // The script is idempotent: it will not overwrite existing `mux_playback_id` values.
 
 $processed = 0;

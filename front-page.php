@@ -6,14 +6,14 @@ get_header();
 <main class="home site-main" id="main">
     <article class="prose container">
         <header class="article-header">
-            <h1 class="display-title">Design for Humans: <span class="home-title__hi">Courses</span></h1>
+            <h1 class="display-title">Design for Humans: <span class="home__title-highlight">Courses</span></h1>
         </header>
         <?php the_content(); ?>
     </article>
 
 
     <!-- Hero Section -->
-    <section class="home-hero">
+    <section class="home__hero">
         <div class="container">
                 <?php
                 // Determine the target URL for the hero button: prefer the user's active course when available.
@@ -34,8 +34,8 @@ get_header();
                 }
 
                 if (is_user_logged_in()): ?>
-                <p class="home-hero__logged-in title">Welcome back, <?php echo esc_html($user_name); ?></p>
-                <div class="home-hero__access">
+                <p class="home__logged-in title">Welcome back, <?php echo esc_html($user_name); ?></p>
+                <div class="home__access">
                     <a href="<?php echo esc_url($hero_target); ?>" class="button strong">
                         Resume your course
                         <svg class="icon dir" width="32" height="32" aria-hidden="true">
@@ -46,7 +46,7 @@ get_header();
                 </div>
                 <?php else: ?>
 
-                <div class="home-hero__access">
+                <div class="home__access">
                     <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button strong">Get Started</a>
                     <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In</a>
                 </div>
@@ -55,7 +55,7 @@ get_header();
     </section>
 
     <!-- Courses Grid Section -->
-    <section class="home-section">
+    <section class="home__section">
         <div class="container">
             <h2 class="title">Available courses</h2>
 
