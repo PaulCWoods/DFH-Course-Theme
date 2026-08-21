@@ -1,4 +1,6 @@
 .progress-panel {
+    --progress-panel-width: var(--spacing-32);
+
     background: var(--ui-color-background-surface);
     block-size: 100%;
     box-shadow: var(--ui-shadow-ambient);
@@ -8,6 +10,7 @@
     inset-inline-end: 0;
     inset-inline-start: auto;
     max-inline-size: 100%;
+    inline-size: var(--progress-panel-width);
     opacity: 0;
     overflow: auto;
     padding-inline-end: calc(0px + env(safe-area-inset-left));

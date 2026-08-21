@@ -399,7 +399,7 @@ function dfh_render_lesson_children($parent_id, $level = 1)
         
         $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($child->ID) : false;
         $bookmarked = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($child->ID) : false;
-        $bookmark_html = $bookmarked ? '<span class="lesson-item-bookmark"><svg class="icon" width="32" height="32" title="Bookmarked by you" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="sr">Bookmarked</span></span>' : '';
+        $bookmark_html = $bookmarked ? '<span class="lesson-item__bookmark"><svg class="icon" width="32" height="32" title="Bookmarked by you" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="sr">Bookmarked</span></span>' : '';
         $active = function_exists('dfh_get_student_current_lesson') ? dfh_get_student_current_lesson() : null;
         // A lesson is considered "started" if it's completed or it's the user's current active lesson.
         $started = $completed || ($active && ((int) $active === (int) $child->ID));
@@ -461,7 +461,7 @@ function dfh_render_lesson_tree($roots = null, $level = 1)
         $data_lesson = $code ? $code : (string) $r_id;
         
         $bookmarked_root = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($r_id) : false;
-        $bookmark_html_root = $bookmarked_root ? '<span class="lesson-item-bookmark"><svg class="icon" width="32" height="32" title="Bookmarked by you" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="sr">Bookmarked</span></span>' : '';
+        $bookmark_html_root = $bookmarked_root ? '<span class="lesson-item__bookmark"><svg class="icon" width="32" height="32" title="Bookmarked by you" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="sr">Bookmarked</span></span>' : '';
         $output .= '<li class="lesson-list-item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><a' . $link_class . ' href="' . esc_url(get_permalink($r_id)) . '">' . $code_html . '<span class="lesson-item-label l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '</a>';
         $output .= dfh_render_lesson_children($r_id, $lvl + 1);
         $output .= '</li>';
