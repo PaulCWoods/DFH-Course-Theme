@@ -76,11 +76,9 @@ get_header();
                                 <li class="index-card-list__item">
                                     <div class="index-card course-card">
                                         <?php if (has_post_thumbnail()): ?>
-                                                <div class="index-card__thumb">
-                                                    <a href="<?php the_permalink(); ?>">
-                                                        <?php the_post_thumbnail('medium_large'); ?>
-                                                    </a>
-                                                </div>
+                                        <div class="index-card__thumb">
+                                            <?php the_post_thumbnail('medium_large'); ?>
+                                        </div>
                                         <?php endif; ?>
                                         <div class="index-card__content">
                                             <a class="index-card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
