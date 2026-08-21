@@ -126,4 +126,5 @@ if (function_exists('is_singular') && is_singular('lesson')) {
     </defs>
 </svg>
 <?php wp_body_open(); ?>
+<a href="#main" class="skip-content">Skip to main content</a>
 <div class="site">
