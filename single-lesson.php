@@ -16,7 +16,7 @@ if (!dfh_user_has_course_access()) {
             <nav class="site-navigation">
                 <ul class="site-breadcrumb container">
                     <li>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="link site-title">
+                        <a href="<?php echo esc_url(home_url('/')); ?>" class="link site-breadcrumb__home">
                             <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
                             Courses Home
                         </a>
