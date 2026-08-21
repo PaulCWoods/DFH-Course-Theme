@@ -6,6 +6,7 @@
  * The template for displaying all single lesson posts.
  */
 
+
 get_header();
 ?>
 <main class="home site-main">
