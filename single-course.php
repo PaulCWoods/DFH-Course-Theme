@@ -10,7 +10,7 @@ if (!$root_lessons) {
 get_template_part('content', 'course-header');
 ?>
 
-<main class="course-landing site-main">
+<main class="course-landing site-main" id="main">
     <article class="article course-about prose">
         <figure class="course-about-poster">
 <?php if (has_post_thumbnail())

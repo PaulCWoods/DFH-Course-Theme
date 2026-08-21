@@ -12,7 +12,7 @@ if (!dfh_user_has_course_access()) {
     get_header();
     get_template_part('content', 'course-header');
     ?>
-    <main class="restricted-access site-main">
+    <main class="restricted-access site-main" id="main">
         <article class="article prose container">
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
@@ -92,7 +92,7 @@ get_header();
     </div>
 
 </header>
-<main id="primary" class="site-main lesson-page">
+<main id="primary" class="site-main lesson-page" id="main">
     <!-- Syllabus overlay panel (hidden by default) -->
     <aside id="lesson-progress" class="lesson-progress progress-panel" popover>
         <?php

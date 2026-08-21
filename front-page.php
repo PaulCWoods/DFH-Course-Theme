@@ -3,7 +3,7 @@
 
 get_header();
 ?>
-<main class="home site-main">
+<main class="home site-main" id="main">
     <article class="prose container">
         <header class="article-header">
             <h1 class="display-title">Design for Humans: <span class="home-title__hi">Courses</span></h1>
