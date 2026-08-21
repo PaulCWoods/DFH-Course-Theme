@@ -9,7 +9,7 @@
     inset-block-start: 0;
     inset-inline-end: 0;
     inset-inline-start: auto;
-    max-inline-size: 100%;
+    max-inline-size: calc(100% - var(--ui-spacing-unit));
     inline-size: var(--progress-panel-width);
     opacity: 0;
     overflow: auto;
