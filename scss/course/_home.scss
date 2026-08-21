@@ -3,6 +3,10 @@
     padding-block: var(--spacing-fluid-x2);
 }
 
+.home-title__hi {
+    color: var(--ui-color-foreground-accent);
+}
+
 .home-hero__access {
     display: flex;
     flex-wrap: wrap;

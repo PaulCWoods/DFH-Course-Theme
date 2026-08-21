@@ -6,7 +6,7 @@ get_header();
 <main class="home site-main">
     <article class="prose container">
         <header class="article-header">
-            <h1 class="display-title">Design for Humans: Courses</h1>
+            <h1 class="display-title">Design for Humans: <span class="home-title__hi">Courses</span></h1>
         </header>
         <?php the_content(); ?>
     </article>
