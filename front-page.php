@@ -1,9 +1,4 @@
 <?php
-/**
- * Template Name: Homepage
- * 
- * The template for displaying all single lesson posts.
- */
 
 
 get_header();
