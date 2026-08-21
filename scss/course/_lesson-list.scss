@@ -1,5 +1,15 @@
 // Lesson Levels
 
+:where(.lesson-list) {
+    margin-block-start: calc(var(--ui-spacing-unit, 1rem) / 2);
+    &:first-child {
+        margin-block-start: 0;
+    }
+    li + li {
+        margin-block-start: calc(var(--ui-spacing-unit, 1rem) / 2);
+    }
+}
+
 .lesson-list {
     --l1-box-padding: var(--spacing-1);
     --l1-box-border-width: var(--ui-border-width);
@@ -19,7 +29,7 @@
     --l3-label-font-family: var(--ui-typography-body-font-family);
     --l3-label-font-size: var(--typography-font-size-base);
     --l3-label-font-weight: var(--ui-typography-body-font-weight);
-    --l3-label-line-height: var(--ui-typography-body-line-height);
+    --l3-label-line-height: var(--ui-typography-subheading-line-height);
     --l3-label-text-transform: none;
 
     --label-font-family: var(--l1-label-font-family);
@@ -101,6 +111,7 @@
             --label-line-height: var(--l2-label-line-height);
             --label-text-transform: var(--l2-label-text-transform);
 
+            
             .lesson-list {
                 --label-font-family: var(--l3-label-font-family);
                 --label-font-size: var(--l3-label-font-size);
@@ -112,6 +123,7 @@
 
         >.lesson-list__item {
             border: var(--l1-box-border-width) solid currentColor;
+            margin-block-start: 0;
             padding: var(--l1-box-padding);
 
             &:has(a[href]) {
@@ -131,6 +143,13 @@
                 margin-block-start: var(--ui-spacing-unit, 1rem);
                 border-block-start: var(--border-width-sm) dashed var(--ui-color-border-accent);
                 padding-block-start: var(--ui-spacing-unit, 1rem);
+
+                > li + li {
+                    margin-block-start: var(--ui-spacing-unit, 1rem);
+                    border-block-start: var(--border-width-sm) dashed var(--ui-color-border-accent);
+                    padding-block-start: var(--ui-spacing-unit, 1rem);
+                }
+
             }
         }
     }
