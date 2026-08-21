@@ -9,7 +9,7 @@
     inset-block-start: 0;
     inset-inline-end: 0;
     inset-inline-start: auto;
-    max-inline-size: calc(100% - var(--ui-spacing-unit));
+    max-inline-size: calc(100% - (var(--ui-spacing-unit) * 2));
     inline-size: var(--progress-panel-width);
     opacity: 0;
     overflow: auto;
@@ -44,7 +44,8 @@
 
 .progress-panel-header {
     align-items: center;
-    background: var(--ui-color-background-surface);
+    background: color-mix(in srgb, var(--ui-color-background-surface), transparent 10%);
+    backdrop-filter: blur(2px);
     display: flex;
     gap: var(--ui-spacing-unit, 1rem);
     inset-block-start: 0;
@@ -53,11 +54,13 @@
     padding-block: .5rem;
     padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
     position: sticky;
+    z-index: 1;
 
 }
 
 .progress-panel-footer {
-    background: var(--ui-color-background-surface);
+    background: color-mix(in srgb, var(--ui-color-background-surface), transparent 10%);
+    backdrop-filter: blur(2px);
     inset-block-end: 0;
     padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
     padding-block-end: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-bottom));
