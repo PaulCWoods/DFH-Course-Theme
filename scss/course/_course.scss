@@ -56,14 +56,8 @@
     p {
         font-weight: var(--ui-typography-body-strong-font-weight);
 
-        @supports (margin-trim: block) {
-            margin-trim: block;
-        }
-
-        @supports not (margin-trim: block) {
-            &:last-child {
-                margin-block-end: 0;
-            }
+        &:last-child {
+            margin-block-end: 0;
         }
     }
 }
