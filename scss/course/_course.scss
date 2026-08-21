@@ -7,7 +7,7 @@
     flex-direction: column;
 }
 
-:where(.course-about-main, .course-about-header, .course-access, .course-syllabus) {
+:where(.course-about-main, .course-about-intro, .course-about-header, .course-access, .course-syllabus) {
     padding-block: var(--site-block-padding, var(--spacing-fluid-x2));
     padding-inline-start: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
     padding-inline-end: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
@@ -38,7 +38,6 @@
 }
 
 .course-access {
-    border-block-start: var(--ui-border-subtle);
     padding-block: calc(var(--site-block-padding, var(--spacing-fluid-x2))*2);
 
     h2 {
@@ -48,6 +47,29 @@
     .course-access-progress {
         margin-block: var(--spacing-fluid);
     }
+}
+
+.course-about-intro {
+    background-color: var(--ui-color-background-base);
+    color: var(--ui-color-foreground-base);
+    color-scheme: dark;
+    p {
+        font-weight: var(--ui-typography-body-strong-font-weight);
+
+        @supports (margin-trim: block) {
+            margin-trim: block;
+        }
+
+        @supports not (margin-trim: block) {
+            &:last-child {
+                margin-block-end: 0;
+            }
+        }
+    }
+}
+
+.course-about-main {
+    border-block-start: var(--ui-border-subtle);
 }
 
 .course-syllabus {

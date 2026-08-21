@@ -11,23 +11,22 @@ get_template_part('content', 'course-header');
 ?>
 
 <main class="course-landing site-main" id="main">
-    <article class="article course-about prose">
+    <article class="article course-about">
         <figure class="course-about-poster">
 <?php if (has_post_thumbnail())
                 the_post_thumbnail(); ?>
         </figure>
-        <header class="article-header course-about-header">
+        <header class="article-header course-about-header prose">
             
             <div class="container">
                 <h1><?php the_title(); ?></h1>
             </div>
         </header>
-        <div class="course-about-main">
+        <div class="course-about-intro prose">
             <div class="container">
-                <?php the_content(); ?>
+                <?php the_excerpt(); ?>
             </div>
         </div>
-    </article>
 
     <?php
     $user_id = get_current_user_id();
@@ -109,6 +108,12 @@ get_template_part('content', 'course-header');
             <?php endif; ?>
         </div>
     </section>
+    <div class="course-about-main prose">
+            <div class="container">
+                <?php the_content(); ?>
+            </div>
+        </div>
+    </article>
     <section class="course-syllabus" aria-describedby="course-permissions-heading">
         <div class="container">
             <h2 id="course-permissions-heading" class="heading">Course Plan</h2>
