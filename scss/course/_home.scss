@@ -1,0 +1,24 @@
+.home-hero {
+    border-block-start: var(--ui-border-subtle);
+    padding-block: var(--spacing-fluid-x2);
+}
+
+.home-hero__access {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ui-spacing-unit);
+}
+
+.home-hero__logged-in {
+    margin-block-end: var(--ui-spacing-unit);
+}
+
+.home-section {
+    border-block-start: var(--ui-border-subtle);
+    margin-block-end: var(--spacing-fluid-x2);
+    padding-block-start: var(--spacing-fluid-x2);
+
+    h2 {
+        margin-block-end: var(--ui-spacing-unit);
+    }
+}

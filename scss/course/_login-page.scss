@@ -1,0 +1,57 @@
+.login-page {
+    align-items: center;
+    display: flex;
+
+    h1 {
+        margin-block-end: 1em;
+    }
+
+    .container {
+        max-inline-size: calc(var(--ui-site-width) / 2);
+        inline-size: 100%;
+    }
+
+    form {
+
+        p {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        input:is([type="button"], [type="submit"]) {
+            align-self: start;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        label:has([type="checkbox"], [type="radio"]) {
+            align-items: center;
+            display: flex;
+            gap: 1em;
+        }
+    }
+
+    input:is([type="checkbox"], [type="radio"]) {
+        all: revert;
+        block-size: 20px;
+        inline-size: 20px;
+        margin: 0;
+    }
+}
+
+.login-extras {
+    margin-block-start: var(--spacing-fluid);
+}
+
+.login-page form,
+.login-message {
+    background-color: var(--ui-color-background-fade);
+    box-shadow: var(--ui-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-fluid);
+    padding: var(--spacing-fluid-x2);
+}

@@ -1,0 +1,21 @@
+:root {
+    --lesson-header-height: var(--site-header-height);
+    --lesson-aside-sticky-top: var(--lesson-header-height); // Calculate the top offset for sticky positioning of the lesson stats column, based on the height of the masthead.
+    --lesson-syllabus-transition: var(--ui-duration-md);
+    
+    --prose-body-font-family: var(--ui-typography-body-font-family);
+
+    --site-header-z-index: var(--z-index-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --lesson-syllabus-transition: 0s;
+    }
+}
+
+:is([data-lesson], [data-syllabus]) {
+    --link-color: var(--ui-color-foreground-accent);
+    --link-hover-color: var(--ui-color-foreground-accent-hover);
+    --link-active-color: var(--ui-color-foreground-accent-pressed);
+}

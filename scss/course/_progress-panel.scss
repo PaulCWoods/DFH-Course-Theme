@@ -1,0 +1,96 @@
+.progress-panel {
+    background: var(--ui-color-background-surface);
+    block-size: 100%;
+    box-shadow: var(--ui-shadow-ambient);
+    display: none;
+    flex-direction: column;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: auto;
+    max-inline-size: 100%;
+    opacity: 0;
+    overflow: auto;
+    padding-inline-end: calc(0px + env(safe-area-inset-left));
+    position: fixed;
+
+    @supports (overlay: auto) {
+        transition:
+            opacity var(--lesson-syllabus-transition),
+            translate var(--lesson-syllabus-transition),
+            display var(--lesson-syllabus-transition) allow-discrete,
+            overlay var(--lesson-syllabus-transition) allow-discrete;
+        translate: 100% 0;
+    }
+
+    &:popover-open {
+        display: flex;
+        opacity: 1;
+        transition:
+            opacity var(--lesson-syllabus-transition),
+            translate var(--lesson-syllabus-transition),
+            display var(--lesson-syllabus-transition) allow-discrete,
+            overlay var(--lesson-syllabus-transition) allow-discrete;
+        translate: 0 0;
+
+        @starting-style {
+            opacity: 0;
+            translate: 100% 0;
+        }
+    }
+}
+
+.progress-panel-header {
+    align-items: center;
+    background: var(--ui-color-background-surface);
+    display: flex;
+    gap: var(--ui-spacing-unit, 1rem);
+    inset-block-start: 0;
+    justify-content: space-between;
+    min-block-size: var(--site-header-height);
+    padding-block: .5rem;
+    padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
+    position: sticky;
+
+}
+
+.progress-panel-footer {
+    background: var(--ui-color-background-surface);
+    inset-block-end: 0;
+    padding: var(--site-block-padding, var(--spacing-fluid-x2));
+    padding-block-start: calc(var(--site-block-padding, var(--spacing-fluid-x2)) / 2);
+    position: sticky;
+}
+
+.progress-panel-brand {
+    display: block;
+    font-family: var(--ui-typography-display-title-font-family);
+    font-size: 1.5em;
+    letter-spacing: var(--ui-typography-display-title-letter-spacing);
+    text-fit: grow;
+    text-transform:  var(--ui-typography-display-title-text-transform);
+    word-spacing: var(--ui-typography-display-title-word-spacing);
+}
+
+a.progress-panel-brand {
+    @media (hover:hover) {
+        &:hover {
+            color: var(--link-hover-color);
+            text-decoration: none;
+        }
+    }
+
+    &:active {
+        color: var(--link-active-color);
+        text-decoration: none;
+    }
+}
+
+.progress-panel-course {
+    flex-grow: 1;
+    padding-block: calc(var(--site-block-padding, var(--spacing-fluid-x2)) / 2);
+    padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
+}
+
+.progress-panel-course-name {
+    margin-block-end: var(--ui-spacing-unit, 1rem);
+}

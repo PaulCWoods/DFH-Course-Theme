@@ -1,0 +1,22 @@
+.stat {
+    align-items: center;
+    background-color: var(--ui-color-background-surface);
+    display: flex;
+    gap: var(--spacing-1);
+    justify-content: space-between;
+    padding: var(--spacing-1);
+    &[data-pc] {
+        background-image: linear-gradient(to left, var(--ui-color-background-accent) var(--stat-progress), transparent var(--stat-progress));
+    }
+}
+
+.stat-label {
+    opacity: var(--ui-opacity-muted, 0.8);
+}
+
+.stat-value {
+    font-size: var(--ui-typography-heading-font-size);
+    font-weight: bold;
+    text-box: trim-both cap alphabetic;
+    white-space: nowrap;
+}

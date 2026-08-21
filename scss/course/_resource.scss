@@ -1,0 +1,14 @@
+.resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+    max-inline-size: var(--spacing-32);
+
+    a {
+        display: block;
+        background-color: var(--ui-color-background-surface);
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+    }
+}

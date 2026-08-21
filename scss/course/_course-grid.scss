@@ -1,0 +1,10 @@
+
+.course-card-list {
+    --index-card-width: var(--spacing-20);
+}
+
+.course-card__badge {
+    align-self: start;
+    margin-block-start: calc(var(--spacing-fluid) * -1);
+    order: -1;
+}

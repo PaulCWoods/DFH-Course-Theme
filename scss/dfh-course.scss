@@ -1,0 +1,9 @@
+@use 'sass:meta';
+
+@layer components {
+    @include meta.load-css('course');
+}
+
+@layer theme {
+    @include meta.load-css('theme');
+}
