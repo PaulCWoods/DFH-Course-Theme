@@ -4,8 +4,8 @@
             <ul class="site-breadcrumb container">
                 <li>
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="link site-breadcrumb__home">
-                        <svg class="icon dir" width="32" height="32" aria-hidden="true">
-                            <use href="#Home" />
+                        <svg class="icon" width="32" height="32" aria-hidden="true">
+                            <use href="#DesignForHumans" />
                         </svg>
                         Courses Home
                     </a>

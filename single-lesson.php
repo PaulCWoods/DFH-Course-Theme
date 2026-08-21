@@ -10,21 +10,8 @@ $bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
 // Gate check at the very top of single-lesson.php or single-course.php
 if (!dfh_user_has_course_access()) {
     get_header();
+    get_template_part('content', 'course-header');
     ?>
-    <header class="site-header">
-        <div class="container site-header-inner">
-            <nav class="site-navigation">
-                <ul class="site-breadcrumb container">
-                    <li>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="link site-breadcrumb__home">
-                            <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
-                            Courses Home
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
     <main class="restricted-access site-main">
         <article class="article prose container">
             <h1>Student-only content</h1>
@@ -140,7 +127,7 @@ get_header();
         ?>
         <header class="progress-panel-header">
             <a class="link-button syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
-                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
+                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#DesignForHumans" /></svg>
                 Courses Home
             </a>
 

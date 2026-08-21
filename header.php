@@ -55,6 +55,13 @@ if (function_exists('is_singular') && is_singular('lesson')) {
 <body <?php body_class(); ?> data-syllabus="<?php echo esc_attr($syllabus_index); ?>">
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="DesignForHumans" viewBox="0 0 82.5 82.5" fill="currentColor" version="1.1">
+            <!-- Generator: Adobe Illustrator 30.7.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 114) -->
+            <polygon points="22.5 60 60 60 60 67.5 67.5 67.5 67.5 60 67.5 52.5 67.5 37.5 60 37.5 60 52.5 22.5 52.5 22.5 45 15 45 15 52.5 15 60 15 67.5 22.5 67.5 22.5 60"></polygon>
+            <polygon points="52.5 30 60 30 60 22.5 67.5 22.5 67.5 15 52.5 15 45 15 45 22.5 45 30 45 37.5 52.5 37.5 52.5 30"></polygon>
+            <path d="M0 0v82.5h82.5V0zM75 75H7.5V7.5H75z"></path>
+            <polygon points="37.5 37.5 37.5 22.5 37.5 15 30 15 30 22.5 15 22.5 15 37.5 30 37.5 37.5 37.5"></polygon>
+        </symbol>
         <symbol id="Starred" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <polygon points="60 83.79 27.55 107.36 39.95 69.22 7.5 45.64 47.61 45.64 60 7.5 72.39 45.64 112.5 45.64 80.05 69.22 92.45 107.36 60 83.79"></polygon>
             <path d="M60 33.39l4.79 14.73 1.8 5.53h21.3l-12.53 9.1-4.7 3.42 1.8 5.53 4.79 14.73-12.53-9.1-4.7-3.42-4.7 3.42-12.53 9.1 4.79-14.73 1.8-5.53-4.7-3.42-12.53-9.1h21.3l1.8-5.53 4.79-14.73v0zM60 7.5 47.61 45.64H7.5l32.45 23.57-12.39 38.14 32.45-23.57 32.45 23.57-12.39-38.14 32.45-23.57H72.41L60 7.5z"></path>
