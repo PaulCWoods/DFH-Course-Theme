@@ -1,0 +1,19 @@
+{
+  "name": "Design for Humans: Courses",
+  "short_name": "DFH Courses",
+  "icons": [
+    {
+      "src": "/wp-content/themes/dfh-course-theme/assets/favicons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/wp-content/themes/dfh-course-theme/assets/favicons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#6da1c2",
+  "background_color": "#6da1c2",
+  "display": "standalone"
+}

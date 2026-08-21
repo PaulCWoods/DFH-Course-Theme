@@ -3,23 +3,8 @@
  * Template Name: Student Register
  */
 get_header();
+get_template_part('content', 'course-header');
 ?>
-<header class="site-header">
-    <div class="container site-header-inner">
-        <nav class="site-navigation">
-            <ul class="site-breadcrumb container">
-                <li>
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="link site-breadcrumb__home">
-                        <svg class="icon" width="32" height="32" aria-hidden="true">
-                            <use href="#Home" />
-                        </svg>
-                        Courses Home
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
 <main class="site-main login-page">
     <div class="container">
 

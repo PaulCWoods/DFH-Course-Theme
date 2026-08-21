@@ -25,6 +25,18 @@
     <link rel="stylesheet" href="https://designforhumans.blog/styles/css/dfh-shared.css">
     <link rel="stylesheet" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/css/dfh-course.css' ); ?>">
 
+    <!-- Modern scalable SVG favicon with dark mode support -->
+    <link rel="icon" type="image/svg+xml" href="<?php echo get_template_directory_uri(); ?>/assets/favicons/favicon.svg">
+
+    <!-- Legacy fallback ICO (using sizes="any" tells modern browsers to prefer the SVG above) -->
+    <link rel="icon" type="image/x-icon" sizes="32x32 48x48" href="<?php echo get_template_directory_uri(); ?>/assets/favicons/favicon.ico">
+
+    <!-- Apple Touch Icon for iOS home screen bookmarks -->
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/assets/favicons/apple-touch-icon.png">
+
+    <!-- Web Manifest -->
+    <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/site.webmanifest">
+
     <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 </head>
 <?php
