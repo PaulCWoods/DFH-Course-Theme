@@ -59,7 +59,8 @@
 .progress-panel-footer {
     background: var(--ui-color-background-surface);
     inset-block-end: 0;
-    padding: var(--site-block-padding, var(--spacing-fluid-x2));
+    padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
+    padding-block-end: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-bottom));
     padding-block-start: calc(var(--site-block-padding, var(--spacing-fluid-x2)) / 2);
     position: sticky;
 }
