@@ -87,7 +87,7 @@ get_header();
         <button class="progress-toggle lesson-progress-toggle button subtle" command="toggle-popover"
             commandfor="lesson-progress">
             <span class="sr@<sm">Progress</span>
-            <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Navigation" /></svg>
+            <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Navigation" /></svg>
         </button>
     </div>
 
