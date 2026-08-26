@@ -460,9 +460,21 @@ function dfh_render_lesson_tree($roots = null, $level = 1)
         $code_html = $code ? '<span class="lesson-item__code">' . esc_html($code) . '</span> ' : '';
         $data_lesson = $code ? $code : (string) $r_id;
         
+        $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($r_id) : false;
         $bookmarked_root = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($r_id) : false;
         $bookmark_html_root = $bookmarked_root ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="sr">Bookmarked</span></span>' : '';
-        $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><a' . $link_class . ' href="' . esc_url(get_permalink($r_id)) . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '</a>';
+        $active = function_exists('dfh_get_student_current_lesson') ? dfh_get_student_current_lesson() : null;
+        // A lesson is considered "started" if it's completed or it's the user's current active lesson.
+        $started = $completed || ($active && ((int) $active === (int) $r_id));
+
+        if ( ! $started ) {
+            // Not started: render as non-clickable span and omit the progress chip.
+            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '</span>';
+        } else {
+            $chip_label = $completed ? 'Complete' : 'In Progress';
+            $chip_class = $completed ? 'chip complete' : 'chip in-progress';
+            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><a ' . $link_class . ' href="' . esc_url(get_permalink($r_id)) . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></a>';
+        }
         $output .= dfh_render_lesson_children($r_id, $lvl + 1);
         $output .= '</li>';
     }
