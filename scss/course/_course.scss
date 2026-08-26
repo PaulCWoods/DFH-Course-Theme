@@ -78,6 +78,11 @@
     }
 }
 
+.course-landing__note {
+    color: var(--ui-color-foreground-muted);
+    margin-block-end: var(--ui-spacing-unit);
+}
+
 .course-landing__completion {
     background-color: var(--ui-color-background-accent);
     border: var(--ui-border);

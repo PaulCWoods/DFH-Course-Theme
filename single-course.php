@@ -117,6 +117,7 @@ get_template_part('content', 'course-header');
     <section class="course-landing__syllabus" aria-describedby="course-permissions-heading">
         <div class="container">
             <h2 id="course-permissions-heading" class="heading">Course Plan</h2>
+            <p class="small-text course-landing__note">Note: Access to lessons will be granted as you progress through the course.</p>
             <?php if ($root_lessons): ?>
                 <div class="lesson-list__container">
                     <?php echo dfh_render_lesson_tree($root_lessons, 1); ?>
