@@ -87,7 +87,7 @@ get_header();
         <button class="progress-toggle lesson-progress-toggle button subtle" command="toggle-popover"
             commandfor="lesson-progress">
             <span class="sr@<sm">Progress</span>
-            <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Navigation" /></svg>
+            <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Progress" /></svg>
         </button>
     </div>
 
@@ -127,7 +127,7 @@ get_header();
         ?>
         <header class="progress-panel-header">
             <a class="link-button syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
-                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#DesignForHumans" /></svg>
+                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
                 Courses Home
             </a>
 
@@ -374,7 +374,7 @@ get_header();
 
                             <?php
                             // Choose an icon id for the progress button
-                            $complete_icon = $is_last_lesson ? '#Home' : '#ArrowRight';
+                            $complete_icon = $is_last_lesson ? '#Check' : '#ArrowRight';
                             ?>
                             <button id="dfh-complete-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
                                 data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_progress_nonce')); ?>"
