@@ -94,6 +94,7 @@
     font-family: var(--code-font-family);
     font-size: var(--code-font-size);
     font-weight: var(--code-font-weight);
+    font-variant-numeric: tabular-nums;
     line-height: var(--code-line-height);
     text-transform: var(--code-text-transform);
 }
