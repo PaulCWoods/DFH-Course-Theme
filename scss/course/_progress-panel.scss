@@ -1,5 +1,5 @@
 .progress-panel {
-    --progress-panel-width: var(--spacing-32);
+    --progress-panel__width: var(--spacing-32);
 
     background: var(--ui-color-background-surface);
     block-size: 100%;
@@ -10,7 +10,7 @@
     inset-inline-end: 0;
     inset-inline-start: auto;
     max-inline-size: calc(100% - (var(--ui-spacing-unit) * 2));
-    inline-size: var(--progress-panel-width);
+    inline-size: var(--progress-panel__width);
     opacity: 0;
     overflow: auto;
     padding-inline-end: calc(0px + env(safe-area-inset-left));
@@ -42,7 +42,7 @@
     }
 }
 
-.progress-panel-header {
+.progress-panel__header {
     align-items: center;
     background: color-mix(in srgb, var(--ui-color-background-surface), transparent 10%);
     backdrop-filter: blur(2px);
@@ -58,7 +58,7 @@
 
 }
 
-.progress-panel-footer {
+.progress-panel__footer {
     background: color-mix(in srgb, var(--ui-color-background-surface), transparent 10%);
     backdrop-filter: blur(2px);
     inset-block-end: 0;
@@ -68,7 +68,7 @@
     position: sticky;
 }
 
-.progress-panel-brand {
+.progress-panel__brand {
     display: block;
     font-family: var(--ui-typography-display-title-font-family);
     font-size: 1.5em;
@@ -78,7 +78,7 @@
     word-spacing: var(--ui-typography-display-title-word-spacing);
 }
 
-a.progress-panel-brand {
+a.progress-panel__brand {
     @media (hover:hover) {
         &:hover {
             color: var(--link-hover-color);
@@ -92,12 +92,24 @@ a.progress-panel-brand {
     }
 }
 
-.progress-panel-course {
+.progress-panel__course {
     flex-grow: 1;
     padding-block: calc(var(--site-block-padding, var(--spacing-fluid-x2)) / 2);
     padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
 }
 
-.progress-panel-course-name {
+.progress-panel__course-name {
     margin-block-end: var(--ui-spacing-unit, 1rem);
+}
+
+.progress-panel__course-progress {
+    margin-block-end: var(--ui-spacing-unit, 1rem);
+}
+
+.progress-panel__course-progress-heading {
+    font-family: var(--ui-typography-subheading-font-family);
+    font-size: var(--typography-font-size-lower-1);
+    font-weight: var(--ui-typography-subheading-font-weight);
+    line-height: var(--ui-typography-subheading-line-height);
+    text-transform: uppercase;
 }

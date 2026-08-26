@@ -125,7 +125,7 @@ get_header();
         }
 
         ?>
-        <header class="progress-panel-header">
+        <header class="progress-panel__header">
             <a class="link-button syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
                 <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
                 Courses Home
@@ -136,18 +136,52 @@ get_header();
                 <span class="sr">Close navigation</span>
             </button>
         </header>
-        <nav class="progress-panel-course" aria-label="Course syllabus">
+        <nav class="progress-panel__course" aria-label="Course syllabus">
 
             <?php
             // Show the current Course title and link when available
             $display_course_id = !empty($panel_course_id) ? $panel_course_id : (!empty($course_id) ? $course_id : null);
             if ($display_course_id): ?>
-                <h2 class="heading progress-panel-course-name"><a class="link"
+                <h2 class="heading progress-panel__course-name"><a class="link"
                         href="<?php echo esc_url(get_permalink($display_course_id)); ?>"><?php echo esc_html(get_the_title($display_course_id)); ?></a>
                 </h2>
             <?php else: ?>
-                <h2 class="heading progress-panel-course-name">Course</h2>
+                <h2 class="heading progress-panel__course-name">Course</h2>
             <?php endif; ?>
+
+            <?php
+            $progress_roots = !empty($panel_course_id)
+                ? (function_exists('get_field') ? get_field('course_root_lessons', $panel_course_id) : get_post_meta($panel_course_id, 'course_root_lessons', true))
+                : array();
+            if (!is_array($progress_roots)) {
+                $progress_roots = empty($progress_roots) ? array() : array((int) $progress_roots);
+            }
+
+            $progress_lessons = array();
+            if (empty($panel_course_id)) {
+                $progress_lessons = dfh_get_ordered_lesson_tree(0);
+            } else {
+                foreach ($progress_roots as $progress_root) {
+                    $progress_root_id = is_object($progress_root) ? (int) $progress_root->ID : (int) $progress_root;
+                    if ($progress_root_id) {
+                        $progress_lessons[] = $progress_root_id;
+                        $progress_lessons = array_merge($progress_lessons, dfh_get_ordered_lesson_tree($progress_root_id));
+                    }
+                }
+            }
+            $progress_lessons = array_values(array_unique($progress_lessons));
+            $progress_completed = array_map('intval', dfh_get_completed_lessons());
+            $progress_total = count($progress_lessons);
+            $progress_count = count(array_intersect($progress_completed, $progress_lessons));
+            $progress_percent = $progress_total > 0 ? round(($progress_count / $progress_total) * 100) : 0;
+            ?>
+            <div class="progress-panel__course-progress">
+                <h3 class="progress-panel__course-progress-heading">Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h3>
+                <div class="progress-bar-container">
+                    <progress class="progress-bar" max="100" value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
+                </div>
+            </div>
+            
             <div class="lesson-list__container">
                 <?php
                 // If we have a course, get its roots; otherwise leave null to render top-level lessons
@@ -160,8 +194,8 @@ get_header();
                 ?>
             </div>
         </nav>
-        <footer class="progress-panel-footer">
-            <a href="https://designforhumans.blog" class="progress-panel-brand">
+        <footer class="progress-panel__footer">
+            <a href="https://designforhumans.blog" class="progress-panel__brand">
                 Design for Humans
             </a>
         </footer>
