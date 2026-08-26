@@ -136,6 +136,12 @@ $lesson-bp: 60em;
     @media screen and (width > #{$lesson-bp}) {
         grid-column: span 2; // content spans two columns on wide screens
     }
+
+    // WP-specific styles for video
+    figure.wp-embed-aspect-16-9.wp-has-aspect-ratio {
+        --embed-aspect-ratio: 16/9;
+        .wp-block-embed__wrapper iframe { height: auto; aspect-ratio: var(--embed-aspect-ratio); }
+    }
 }
 
 // ================================
