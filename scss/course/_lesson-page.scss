@@ -140,7 +140,15 @@ $lesson-bp: 60em;
     // WP-specific styles for video
     figure.wp-embed-aspect-16-9.wp-has-aspect-ratio {
         --embed-aspect-ratio: 16/9;
-        .wp-block-embed__wrapper iframe { height: auto; aspect-ratio: var(--embed-aspect-ratio); }
+        .wp-block-embed__wrapper {
+            font-size: 0;
+            iframe {
+                aspect-ratio: var(--embed-aspect-ratio);
+                height: auto;
+                inline-size: 100%;
+                max-width: initial;
+            }
+        }
     }
 }
 
