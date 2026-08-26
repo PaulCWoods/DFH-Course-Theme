@@ -92,7 +92,7 @@ get_header();
     </div>
 
 </header>
-<main id="primary" class="site-main lesson-page" id="main">
+<main class="site-main lesson-page" id="main">
     <!-- Syllabus overlay panel (hidden by default) -->
     <aside id="lesson-progress" class="lesson-progress progress-panel" popover>
         <?php
