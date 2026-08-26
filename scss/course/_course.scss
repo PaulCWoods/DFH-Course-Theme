@@ -1,3 +1,8 @@
+// ================================
+// Course page — layout and small utilities
+
+$course-bp: 60em;
+
 .course-landing.site-main {
     padding: 0;
 }
@@ -7,15 +12,37 @@
     flex-direction: column;
 }
 
+.course-landing__article {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (width > #{$course-bp}) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 :where(.course-landing__main, .course-landing__intro, .course-landing__header, .course-landing__access, .course-landing__syllabus) {
     padding-block: var(--site-block-padding, var(--spacing-fluid-x2));
     padding-inline-start: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
     padding-inline-end: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
 }
 
+:where(.course-landing__main, .course-landing__intro, .course-landing__header, .course-landing__access) {
+    @media screen and (width > #{$course-bp}) {
+        padding-inline-start: var(--site-block-padding, var(--spacing-fluid-x2));
+    }
+}
+
 .course-landing__poster {
     font-size: 0;
+    grid-row: span 4;
     margin: 0;
+
+    @media screen and (width > #{$course-bp}) {
+        aspect-ratio: auto;
+        position: relative;
+    }
     img {
         aspect-ratio: 5/1;
         block-size: auto;
@@ -25,6 +52,12 @@
         @media screen and (aspect-ratio < 1/1) {
             aspect-ratio: 16/9;
         }
+
+        @media screen and (width > #{$course-bp}) {
+            block-size: 100%;
+            aspect-ratio: auto;
+            position: absolute;
+        }
     }
 }
 
@@ -32,6 +65,7 @@
     background-color: var(--ui-color-background-accent-strong);
     color: var(--ui-color-foreground-inverted);
     margin-block-end: 0;
+    padding-block-end: calc(var(--site-block-padding, var(--spacing-fluid))/2);
     h1 {
         margin-block-end: 0;
     }
@@ -50,10 +84,10 @@
 }
 
 .course-landing__intro {
-    background-color: var(--ui-color-background-base);
-    color: var(--ui-color-foreground-base);
-    color-scheme: dark;
-    p {
+    background-color: var(--ui-color-background-accent-strong);
+    color: var(--ui-color-foreground-inverted);
+    padding-block-start: calc(var(--site-block-padding, var(--spacing-fluid))/2);
+   p {
         font-weight: var(--ui-typography-body-strong-font-weight);
 
         &:last-child {
