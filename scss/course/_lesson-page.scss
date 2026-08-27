@@ -132,6 +132,32 @@ $lesson-bp: 60em;
         grid-column: span 2; // content spans two columns on wide screens
     }
 
+
+    ul.check-list {
+        li::marker {
+            color: var(--ui-color-foreground-positive);
+            content: "✓ ";
+        }
+    }
+
+    aside {
+        background-color: var(--ui-color-background-surface);
+        padding-block: 1em;
+        padding: 1.5em;
+    }
+
+    pre:has(code) {
+        background-color: var(--ui-color-background-surface);
+        color: var(--ui-color-foreground-base);
+        color-scheme: dark;
+        code {
+            background-color: transparent;
+        }
+    }
+
+    // ============================
+    // WP SPECIFIC STYLES
+    // ============================
     // WP-specific styles for video
     figure.wp-embed-aspect-16-9.wp-has-aspect-ratio {
         --embed-aspect-ratio: 16/9;
@@ -181,25 +207,19 @@ $lesson-bp: 60em;
         }
     }
 
-    ul.check-list {
-        li::marker {
-            color: var(--ui-color-foreground-positive);
-            content: "✓ ";
+    .wp-block-table {
+        td, th {
+            border: 0 !important;
+            border-block-end: var(--ui-border-subtle) !important;
+            padding-left: 0;
         }
-    }
-
-    aside {
-        background-color: var(--ui-color-background-surface);
-        padding-block: 1em;
-        padding: 1.5em;
-    }
-
-    pre:has(code) {
-        background-color: var(--ui-color-background-surface);
-        color: var(--ui-color-foreground-base);
-        color-scheme: dark;
-        code {
-            background-color: transparent;
+        tbody {
+            td:last-child {
+                border-block-end: 0 !important;
+            }
+        }
+        thead {
+            border-block-end: var(--ui-border) !important;
         }
     }
 }
