@@ -117,11 +117,6 @@ $lesson-bp: 60em;
 // ================================
 // Main and body
 
-// Main grid: content + optional side column for stats
-.lesson-content {
-    flex-grow: 1;
-}
-
 .lesson-main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -193,6 +188,10 @@ $lesson-bp: 60em;
 :is(.lesson-resources,
 .lesson-bookmark) {
     margin-block-end: var(--spacing-fluid-x2);
+
+    &:last-child {
+        margin-block-end: 0;
+    }
 }
 
 .lesson-bookmark {
@@ -242,7 +241,6 @@ $lesson-bp: 60em;
 
 .lesson-explore {
     background: var(--ui-color-background-surface);
-    box-shadow: var(--ui-shadow-inset);
     display: flex;
     flex-direction: column;
     flex-grow: 1;
