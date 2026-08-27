@@ -214,7 +214,7 @@ $lesson-bp: 60em;
             padding-left: 0;
         }
         tbody {
-            td:last-child {
+            tr:last-child :is(td, th) {
                 border-block-end: 0 !important;
             }
         }
