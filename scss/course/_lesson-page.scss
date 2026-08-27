@@ -142,13 +142,13 @@ $lesson-bp: 60em;
 
     aside {
         background-color: var(--ui-color-background-surface);
-        padding-block: 1em;
-        padding: 1.5em;
+        padding-block: var(--spacing-fluid);
+        padding-inline: var(--spacing-fluid-x2);
 
         &.emoji {
             &:before {
                 display: block;
-                font-size: 2em;
+                font-size: 1.5em;
                 margin-block-end: 1em;
             }
             &.idea:before { content: "💡" / "";}
@@ -185,8 +185,8 @@ $lesson-bp: 60em;
     .wp-block-quote {
         &.\+bold {
             background-color: var(--ui-color-background-surface);
-            padding-block: 1em;
-            padding: 1.5em;
+            padding-block: var(--spacing-fluid);
+            padding-inline: var(--spacing-fluid-x2);
             p {
                 font-weight: var(--lesson-quote-bold-font-weight);
                 &:last-child {
