@@ -156,7 +156,7 @@ $lesson-bp: 60em;
             background-color: var(--ui-color-background-surface);
             padding: 1.5em;
             p {
-                font-weight: bold;
+                font-weight: var(--lesson-quote-bold-font-weight);
                 &:last-child {
                     margin-block-end: 0;
                 }

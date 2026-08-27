@@ -1,6 +1,7 @@
 :root {
     --lesson-header-height: var(--site-header-height);
     --lesson-aside-sticky-top: var(--lesson-header-height); // Calculate the top offset for sticky positioning of the lesson stats column, based on the height of the masthead.
+    --lesson-quote-bold-font-weight: var(--typography-font-weight-600);
     --lesson-syllabus-transition: var(--ui-duration-md);
     
     --prose-body-font-family: var(--ui-typography-body-font-family);
