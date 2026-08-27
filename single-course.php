@@ -18,12 +18,12 @@ get_template_part('content', 'course-header');
         </figure>
         <header class="article-header course-landing__header prose">
             
-            <div class="container">
+            <div class="container +2/3 +start">
                 <h1><?php the_title(); ?></h1>
             </div>
         </header>
         <div class="course-landing__intro prose">
-            <div class="container">
+            <div class="container +2/3 +start">
                 <?php the_excerpt(); ?>
             </div>
         </div>
@@ -47,69 +47,69 @@ get_template_part('content', 'course-header');
     $welcome_back_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome back, ' . esc_html($user_name) . '</span>';
     ?>
 
-    <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
-        <div class="container">
-            <?php if (!is_user_logged_in()): ?>
-                <!-- State 0: Guest Visitor -->
-                <?php $welcome_back_msg; ?>
-                <h2>Ready to start learning?</h2>
-                <p class="small-text tc-muted">Log in or enroll to access the course syllabus and track your progress.</p>
-                <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log in to access
-                    course</a>
+        <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
+            <div class="container +2/3 +start">
+                <?php if (!is_user_logged_in()): ?>
+                    <!-- State 0: Guest Visitor -->
+                    <?php $welcome_back_msg; ?>
+                    <h2>Ready to start learning?</h2>
+                    <p class="small-text tc-muted">Log in or enroll to access the course syllabus and track your progress.</p>
+                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log in to access
+                        course</a>
 
-            <?php elseif ('completed' === $active_lesson_status): ?>
-                <!-- State 3: Course Completed -->
-                <div class="course-landing__completion">
-                    <h2>🎉 Course completed!</h2>
-                    <p>Congratulations! You have finished all lessons in this course.</p>
-                    <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review
-                        from beginning</a>
-                </div>
+                <?php elseif ('completed' === $active_lesson_status): ?>
+                    <!-- State 3: Course Completed -->
+                    <div class="course-landing__completion">
+                        <h2>🎉 Course completed!</h2>
+                        <p>Congratulations! You have finished all lessons in this course.</p>
+                        <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review
+                            from beginning</a>
+                    </div>
 
-            <?php elseif ($completed_count > 0): ?>
-                <!-- State 2: In-Progress (Resume) -->
-                <?php echo $welcome_back_msg; ?>
-                <h2>Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h2>
-                <div class="progress-bar-container course-landing__progress">
-                    <progress class="progress-bar" max="100"
-                        value="<?php echo esc_html($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
-                </div>
+                <?php elseif ($completed_count > 0): ?>
+                    <!-- State 2: In-Progress (Resume) -->
+                    <?php echo $welcome_back_msg; ?>
+                    <h2>Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h2>
+                    <div class="progress-bar-container course-landing__progress">
+                        <progress class="progress-bar" max="100"
+                            value="<?php echo esc_html($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
+                    </div>
 
-                <?php
-                $resume_title = get_the_title($active_lesson_status);
-                $resume_url = get_permalink($active_lesson_status);
-                ?>
-                <p class="small-text tc-muted">Pick up where you left off:</p>
-                <a href="<?php echo esc_url($resume_url); ?>" class="button resume-btn">
-                    Resume: <?php echo esc_html($resume_title); ?>
-                    <svg class="icon dir" width="32" height="32" aria-hidden="true">
-                        <use href="#ArrowRight" />
-                    </svg>
-                </a>
-
-            <?php else: ?>
-                <!-- State 1: Brand New (Not Started) -->
-                <?php echo $welcome_msg; ?>
-                <h2>Ready to Begin?</h2>
-                <p class="small-text tc-muted">Jump straight into the first lesson of the course.</p>
-                <?php if (!empty($all_lessons)):
-                    $first_lesson_url = get_permalink($all_lessons[0]);
+                    <?php
+                    $resume_title = get_the_title($active_lesson_status);
+                    $resume_url = get_permalink($active_lesson_status);
                     ?>
-                    <a href="<?php echo esc_url($first_lesson_url); ?>" class="button strong start-btn">
-                        Start course
+                    <p class="small-text tc-muted">Pick up where you left off:</p>
+                    <a href="<?php echo esc_url($resume_url); ?>" class="button resume-btn">
+                        Resume: <?php echo esc_html($resume_title); ?>
                         <svg class="icon dir" width="32" height="32" aria-hidden="true">
                             <use href="#ArrowRight" />
                         </svg>
                     </a>
-                <?php else: ?>
-                    <p>Course syllabus is currently being built. <em>Check back soon!</em></p>
-                <?php endif; ?>
 
-            <?php endif; ?>
-        </div>
-    </section>
-    <div class="course-landing__main prose">
-            <div class="container">
+                <?php else: ?>
+                    <!-- State 1: Brand New (Not Started) -->
+                    <?php echo $welcome_msg; ?>
+                    <h2>Ready to Begin?</h2>
+                    <p class="small-text tc-muted">Jump straight into the first lesson of the course.</p>
+                    <?php if (!empty($all_lessons)):
+                        $first_lesson_url = get_permalink($all_lessons[0]);
+                        ?>
+                        <a href="<?php echo esc_url($first_lesson_url); ?>" class="button strong start-btn">
+                            Start course
+                            <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                                <use href="#ArrowRight" />
+                            </svg>
+                        </a>
+                    <?php else: ?>
+                        <p>Course syllabus is currently being built. <em>Check back soon!</em></p>
+                    <?php endif; ?>
+
+                <?php endif; ?>
+            </div>
+        </section>
+        <div class="course-landing__main prose">
+            <div class="container +2/3 +start">
                 <?php the_content(); ?>
             </div>
         </div>

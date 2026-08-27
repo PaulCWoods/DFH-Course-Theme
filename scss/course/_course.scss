@@ -18,7 +18,7 @@ $course-bp: 60em;
 
     @media screen and (width > #{$course-bp}) {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 2fr;
     }
 }
 
