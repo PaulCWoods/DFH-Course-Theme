@@ -142,6 +142,7 @@ $lesson-bp: 60em;
 
     aside {
         background-color: var(--ui-color-background-surface);
+        box-shadow: var(--ui-shadow-short);
         padding-block: var(--spacing-fluid);
         padding-inline: var(--spacing-fluid-x2);
 
@@ -158,6 +159,7 @@ $lesson-bp: 60em;
 
     pre:has(code) {
         background-color: var(--ui-color-background-surface);
+        box-shadow: var(--ui-shadow-inset);
         color: var(--ui-color-foreground-base);
         color-scheme: dark;
         code {
