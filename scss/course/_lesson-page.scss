@@ -152,7 +152,7 @@ $lesson-bp: 60em;
     }
 
     .wp-block-quote {
-        &.bold {
+        &.\+bold {
             background-color: var(--ui-color-background-surface);
             padding: 1.5em;
             p {
