@@ -151,6 +151,19 @@ $lesson-bp: 60em;
         }
     }
 
+    .wp-block-quote {
+        &.bold {
+            background-color: var(--ui-color-background-surface);
+            padding: 1.5em;
+            p {
+                font-weight: bold;
+                &:last-child {
+                    margin-block-end: 0;
+                }
+            }
+        }
+    }
+
     // Needed to override WP styles
     .wp-block-pullquote {
         background-color: var(--ui-color-background-fade);
