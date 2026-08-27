@@ -154,6 +154,7 @@ $lesson-bp: 60em;
     // Needed to override WP styles
     .wp-block-pullquote {
         background-color: var(--ui-color-background-fade);
+        // !important needed to override stubborn classes in WP
         font-size: inherit !important;
         line-height: inherit !important;
         padding: 2em !important;
@@ -165,6 +166,7 @@ $lesson-bp: 60em;
                 font-family: var(--ui-typography-pullquote-font-family);
                 font-size: var(--ui-typography-pullquote-font-size);
                 line-height: var(--ui-typography-pullquote-line-height);
+                text-wrap: balance;
             }
         }
     }
