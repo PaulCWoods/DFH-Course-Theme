@@ -144,6 +144,16 @@ $lesson-bp: 60em;
         background-color: var(--ui-color-background-surface);
         padding-block: 1em;
         padding: 1.5em;
+
+        &.emoji {
+            &:before {
+                display: block;
+                font-size: 2em;
+                margin-block-end: 1em;
+            }
+            &.idea:before { content: "💡" / "";}
+            &.warning:before { content: "⚠️" / ""; }
+        }
     }
 
     pre:has(code) {
