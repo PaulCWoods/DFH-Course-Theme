@@ -179,6 +179,14 @@ $lesson-bp: 60em;
             }
         }
     }
+
+    ul.check-list {
+        li::marker {
+            color: var(--ui-color-foreground-positive);
+            content: "✓";
+            font-size: 1.2em;
+        }
+    }
 }
 
 
