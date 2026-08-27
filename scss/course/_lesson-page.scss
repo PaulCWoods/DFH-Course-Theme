@@ -149,6 +149,7 @@ $lesson-bp: 60em;
     .wp-block-quote {
         &.\+bold {
             background-color: var(--ui-color-background-surface);
+            padding-block: 1em;
             padding: 1.5em;
             p {
                 font-weight: var(--lesson-quote-bold-font-weight);
@@ -171,7 +172,7 @@ $lesson-bp: 60em;
         blockquote {
             box-shadow: none;
             padding-inline-start: 0;
-            P {
+            p {
                 font-family: var(--ui-typography-pullquote-font-family);
                 font-size: var(--ui-typography-pullquote-font-size);
                 line-height: var(--ui-typography-pullquote-line-height);
@@ -184,6 +185,21 @@ $lesson-bp: 60em;
         li::marker {
             color: var(--ui-color-foreground-positive);
             content: "✓ ";
+        }
+    }
+
+    aside {
+        background-color: var(--ui-color-background-surface);
+        padding-block: 1em;
+        padding: 1.5em;
+    }
+
+    pre:has(code) {
+        background-color: var(--ui-color-background-surface);
+        color: var(--ui-color-foreground-base);
+        color-scheme: dark;
+        code {
+            background-color: transparent;
         }
     }
 }
