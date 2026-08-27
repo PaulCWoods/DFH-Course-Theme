@@ -183,7 +183,7 @@ $lesson-bp: 60em;
     ul.check-list {
         li::marker {
             color: var(--ui-color-foreground-positive);
-            content: "☑ ";
+            content: "✓ ";
         }
     }
 }
