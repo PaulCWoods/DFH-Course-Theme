@@ -211,7 +211,7 @@ $lesson-bp: 60em;
         td, th {
             border: 0 !important;
             border-block-end: var(--ui-border-subtle) !important;
-            padding-left: 0;
+            padding-inline-start: 0 !important;
         }
         tbody {
             tr:last-child :is(td, th) {
