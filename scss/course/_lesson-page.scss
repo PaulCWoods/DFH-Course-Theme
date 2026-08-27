@@ -154,13 +154,9 @@ $lesson-bp: 60em;
     // Needed to override WP styles
     .wp-block-pullquote {
         background-color: var(--ui-color-background-fade);
-        box-sizing: border-box;
-        font-size: inherit;
-        line-height: inherit;
-        margin: 1em 0;
-        overflow-wrap: break-word;
+        font-size: inherit !important;
+        line-height: inherit !important;
         padding: 2em !important;
-        text-align: center;
 
         blockquote {
             box-shadow: none;
