@@ -150,6 +150,25 @@ $lesson-bp: 60em;
             }
         }
     }
+
+    figure.wp-block-pullquote {
+        background-color: var(--ui-color-background-fade);
+        box-sizing: border-box;
+        font-size: inherit;
+        line-height: inherit;
+        margin: 1em 0;
+        overflow-wrap: break-word;
+        padding: 2em;
+        text-align: center;
+
+        blockquote {
+            box-shadow: none;
+            font-family: var(--ui-typography-pullquote-font-family);
+            font-size: var(--ui-typography-pullquote-font-size);
+            line-height: var(--ui-typography-pullquote-line-height);
+            padding-inline-start: 0;
+        }
+    }
 }
 
 // ================================
