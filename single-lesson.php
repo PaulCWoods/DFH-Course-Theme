@@ -426,6 +426,7 @@ get_header();
     </aside>
 </main><!-- #primary -->
 
+<script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 <!-- Tiny Inline JS for AJAX Progression -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -19,7 +19,7 @@
     }
     ?>
     <title><?php echo esc_html($page_title); ?> | Design for Humans Courses</title>
-    
+
     <?php wp_head(); ?>
 
     <!-- Shared Design Tokens & Styles from your main blog -->
@@ -38,7 +38,6 @@
     <!-- Web Manifest -->
     <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/site.webmanifest">
 
-    <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 </head>
 <?php
 // Compute a top-level syllabus index for lesson pages (1-based). Defaults to 0.
