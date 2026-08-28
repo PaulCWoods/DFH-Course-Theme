@@ -94,112 +94,6 @@ get_header();
 </header>
 <main class="site-main lesson-page" id="main">
     <!-- Syllabus overlay panel (hidden by default) -->
-    <aside id="lesson-progress" class="lesson-progress progress-panel" popover>
-        <?php
-        // Determine a course to display in the panel: prefer any already-found $course_id,
-        // otherwise check the current lesson and its ancestors for a course that lists them as roots.
-        $panel_course_id = isset($course_id) && $course_id ? $course_id : null;
-        if (empty($panel_course_id)) {
-            $ancestors = get_post_ancestors(get_the_ID());
-            array_unshift($ancestors, get_the_ID());
-
-            $all_courses = get_posts(array('post_type' => 'course', 'posts_per_page' => -1, 'fields' => 'ids'));
-            if (!empty($all_courses)) {
-                foreach ($all_courses as $c_id) {
-                    $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
-                    if (is_string($roots)) {
-                        $maybe = @unserialize($roots);
-                        if ($maybe !== false)
-                            $roots = $maybe;
-                    }
-                    if (!empty($roots)) {
-                        foreach ($ancestors as $anc) {
-                            if (in_array($anc, (array) $roots)) {
-                                $panel_course_id = $c_id;
-                                break 2;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        ?>
-        <header class="progress-panel__header">
-            <a class="link-button syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
-                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
-                Courses Home
-            </a>
-
-            <button class="syllabus-close button subtle" command="hide-popover" commandfor="lesson-progress" title="Close navigation">
-                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Close" /></svg>
-                <span class="sr">Close Navigation</span>
-            </button>
-        </header>
-        <nav class="progress-panel__course" aria-label="Course syllabus">
-
-            <?php
-            // Show the current Course title and link when available
-            $display_course_id = !empty($panel_course_id) ? $panel_course_id : (!empty($course_id) ? $course_id : null);
-            if ($display_course_id): ?>
-                <h2 class="heading progress-panel__course-name"><a class="link"
-                        href="<?php echo esc_url(get_permalink($display_course_id)); ?>"><?php echo esc_html(get_the_title($display_course_id)); ?></a>
-                </h2>
-            <?php else: ?>
-                <h2 class="heading progress-panel__course-name">Course</h2>
-            <?php endif; ?>
-
-            <?php
-            $progress_roots = !empty($panel_course_id)
-                ? (function_exists('get_field') ? get_field('course_root_lessons', $panel_course_id) : get_post_meta($panel_course_id, 'course_root_lessons', true))
-                : array();
-            if (!is_array($progress_roots)) {
-                $progress_roots = empty($progress_roots) ? array() : array((int) $progress_roots);
-            }
-
-            $progress_lessons = array();
-            if (empty($panel_course_id)) {
-                $progress_lessons = dfh_get_ordered_lesson_tree(0);
-            } else {
-                foreach ($progress_roots as $progress_root) {
-                    $progress_root_id = is_object($progress_root) ? (int) $progress_root->ID : (int) $progress_root;
-                    if ($progress_root_id) {
-                        $progress_lessons[] = $progress_root_id;
-                        $progress_lessons = array_merge($progress_lessons, dfh_get_ordered_lesson_tree($progress_root_id));
-                    }
-                }
-            }
-            $progress_lessons = array_values(array_unique($progress_lessons));
-            $progress_completed = array_map('intval', dfh_get_completed_lessons());
-            $progress_total = count($progress_lessons);
-            $progress_count = count(array_intersect($progress_completed, $progress_lessons));
-            $progress_percent = $progress_total > 0 ? round(($progress_count / $progress_total) * 100) : 0;
-            ?>
-            <div class="progress-panel__course-progress">
-                <h3 class="progress-panel__course-progress-heading">Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h3>
-                <div class="progress-bar-container">
-                    <progress class="progress-bar" max="100" value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
-                </div>
-            </div>
-            
-            <div class="lesson-list__container">
-                <?php
-                // If we have a course, get its roots; otherwise leave null to render top-level lessons
-                $roots = null;
-                if (!empty($course_id)) {
-                    $roots = function_exists('get_field') ? get_field('course_root_lessons', $course_id) : get_post_meta($course_id, 'course_root_lessons', true);
-                }
-
-                echo dfh_render_lesson_tree($roots, 1);
-                ?>
-            </div>
-        </nav>
-        <footer class="progress-panel__footer">
-            <a href="https://designforhumans.blog" class="progress-panel__brand">
-                Design for Humans
-            </a>
-        </footer>
-    </aside>
     <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article'); ?>>
 
         <header class="lesson-header prose">
@@ -423,6 +317,113 @@ get_header();
 
 
     </article><!-- #post-<?php the_ID(); ?> -->
+
+    <aside id="lesson-progress" class="lesson-progress progress-panel" popover>
+        <?php
+        // Determine a course to display in the panel: prefer any already-found $course_id,
+        // otherwise check the current lesson and its ancestors for a course that lists them as roots.
+        $panel_course_id = isset($course_id) && $course_id ? $course_id : null;
+        if (empty($panel_course_id)) {
+            $ancestors = get_post_ancestors(get_the_ID());
+            array_unshift($ancestors, get_the_ID());
+
+            $all_courses = get_posts(array('post_type' => 'course', 'posts_per_page' => -1, 'fields' => 'ids'));
+            if (!empty($all_courses)) {
+                foreach ($all_courses as $c_id) {
+                    $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
+                    if (is_string($roots)) {
+                        $maybe = @unserialize($roots);
+                        if ($maybe !== false)
+                            $roots = $maybe;
+                    }
+                    if (!empty($roots)) {
+                        foreach ($ancestors as $anc) {
+                            if (in_array($anc, (array) $roots)) {
+                                $panel_course_id = $c_id;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        ?>
+        <header class="progress-panel__header">
+            <a class="link-button syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
+                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
+                Courses Home
+            </a>
+
+            <button class="syllabus-close button subtle" command="hide-popover" commandfor="lesson-progress" title="Close navigation">
+                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Close" /></svg>
+                <span class="sr">Close Navigation</span>
+            </button>
+        </header>
+        <nav class="progress-panel__course" aria-label="Course syllabus">
+
+            <?php
+            // Show the current Course title and link when available
+            $display_course_id = !empty($panel_course_id) ? $panel_course_id : (!empty($course_id) ? $course_id : null);
+            if ($display_course_id): ?>
+                <h2 class="heading progress-panel__course-name"><a class="link"
+                        href="<?php echo esc_url(get_permalink($display_course_id)); ?>"><?php echo esc_html(get_the_title($display_course_id)); ?></a>
+                </h2>
+            <?php else: ?>
+                <h2 class="heading progress-panel__course-name">Course</h2>
+            <?php endif; ?>
+
+            <?php
+            $progress_roots = !empty($panel_course_id)
+                ? (function_exists('get_field') ? get_field('course_root_lessons', $panel_course_id) : get_post_meta($panel_course_id, 'course_root_lessons', true))
+                : array();
+            if (!is_array($progress_roots)) {
+                $progress_roots = empty($progress_roots) ? array() : array((int) $progress_roots);
+            }
+
+            $progress_lessons = array();
+            if (empty($panel_course_id)) {
+                $progress_lessons = dfh_get_ordered_lesson_tree(0);
+            } else {
+                foreach ($progress_roots as $progress_root) {
+                    $progress_root_id = is_object($progress_root) ? (int) $progress_root->ID : (int) $progress_root;
+                    if ($progress_root_id) {
+                        $progress_lessons[] = $progress_root_id;
+                        $progress_lessons = array_merge($progress_lessons, dfh_get_ordered_lesson_tree($progress_root_id));
+                    }
+                }
+            }
+            $progress_lessons = array_values(array_unique($progress_lessons));
+            $progress_completed = array_map('intval', dfh_get_completed_lessons());
+            $progress_total = count($progress_lessons);
+            $progress_count = count(array_intersect($progress_completed, $progress_lessons));
+            $progress_percent = $progress_total > 0 ? round(($progress_count / $progress_total) * 100) : 0;
+            ?>
+            <div class="progress-panel__course-progress">
+                <h3 class="progress-panel__course-progress-heading">Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h3>
+                <div class="progress-bar-container">
+                    <progress class="progress-bar" max="100" value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
+                </div>
+            </div>
+            
+            <div class="lesson-list__container">
+                <?php
+                // If we have a course, get its roots; otherwise leave null to render top-level lessons
+                $roots = null;
+                if (!empty($course_id)) {
+                    $roots = function_exists('get_field') ? get_field('course_root_lessons', $course_id) : get_post_meta($course_id, 'course_root_lessons', true);
+                }
+
+                echo dfh_render_lesson_tree($roots, 1);
+                ?>
+            </div>
+        </nav>
+        <footer class="progress-panel__footer">
+            <a href="https://designforhumans.blog" class="progress-panel__brand">
+                Design for Humans
+            </a>
+        </footer>
+    </aside>
 </main><!-- #primary -->
 
 <!-- Tiny Inline JS for AJAX Progression -->
