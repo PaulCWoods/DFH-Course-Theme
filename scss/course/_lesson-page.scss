@@ -233,11 +233,6 @@ $lesson-bp: 60em;
         }
     }
 
-    .wp-block-embed__wrapper.wp-block-cp-codepen-gutenberg-embed-block {
-        box-shadow: var(--ui-shadow-short);
-        font-size: 0;
-    }
-
     .wp-block-table {
         td, th {
             border: 0 !important;
@@ -252,6 +247,13 @@ $lesson-bp: 60em;
         thead {
             border-block-end: var(--ui-border) !important;
         }
+    }
+
+
+    // Codepen block
+    .wp-block-cp-codepen-gutenberg-embed-block {
+        box-shadow: var(--ui-shadow-short);
+        font-size: 0;
     }
 }
 
