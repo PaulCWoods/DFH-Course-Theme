@@ -1023,3 +1023,23 @@ function dfh_hide_admin_bar_for_students( $show ) {
     return $show;
 }
 add_filter( 'show_admin_bar', 'dfh_hide_admin_bar_for_students' );
+
+/**
+ * Add a meta description using the current post excerpt when available.
+ */
+function dfh_add_meta_description() {
+    $description = '';
+
+    if ( is_singular() ) {
+        $description = get_post_field( 'post_excerpt', get_queried_object_id() );
+        $description = preg_replace( '/\s+/', ' ', wp_strip_all_tags( $description ) );
+        $description = trim( $description );
+    }
+
+    if ( empty( $description ) ) {
+        $description = 'Example meta description';
+    }
+
+    echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+}
+add_action( 'wp_head', 'dfh_add_meta_description', 1 );

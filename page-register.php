@@ -14,7 +14,7 @@ get_template_part('content', 'course-header');
         if (is_user_logged_in()) {
             echo '<div class="login-message"><p>You are already logged in!</p>
                 <p><a href="' . esc_url(home_url()) . '" class="button strong">
-                    Go to your course
+                    Go to Your Course
                     <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
                 </a>
                 </p></div>';

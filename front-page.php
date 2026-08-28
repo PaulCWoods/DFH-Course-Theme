@@ -18,6 +18,7 @@ get_header();
                 <?php
                 // Determine the target URL for the hero button: prefer the user's active course when available.
                 $hero_target = home_url('/course/');
+                $has_resume_course = false;
                 if (is_user_logged_in() && function_exists('dfh_get_student_current_lesson')) {
                     $active_lesson = dfh_get_student_current_lesson();
                     $current_user = wp_get_current_user();
@@ -29,6 +30,7 @@ get_header();
                         $courses = dfh_get_courses_for_lesson($active_lesson);
                         if (!empty($courses)) {
                             $hero_target = get_permalink((int) $courses[0]);
+                            $has_resume_course = !empty($hero_target);
                         }
                     }
                 }
@@ -36,12 +38,14 @@ get_header();
                 if (is_user_logged_in()): ?>
                 <p class="home__logged-in title">Welcome back, <?php echo esc_html($user_name); ?></p>
                 <div class="home__access">
+                    <?php if ($has_resume_course): ?>
                     <a href="<?php echo esc_url($hero_target); ?>" class="button strong">
-                        Resume your course
+                        Resume Your Course
                         <svg class="icon dir" width="32" height="32" aria-hidden="true">
                             <use href="#ArrowRight" />
                         </svg>
                     </a>
+                    <?php endif; ?>
                     <a class="button" href="<?php echo esc_url(wp_logout_url(home_url())); ?>">Log Out</a>
                 </div>
                 <?php else: ?>
@@ -83,7 +87,12 @@ get_header();
                                         <div class="index-card__content">
                                             <a class="index-card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                             <?php the_excerpt(); ?>
-                                            <?php if (function_exists('dfh_user_has_course_access') && dfh_user_has_course_access()): ?>
+                                                <?php
+                                                $course_completed_at = get_user_meta(get_current_user_id(), 'dfh_course_completed_at', true);
+                                                $is_course_completed = is_array($course_completed_at) && !empty($course_completed_at[get_the_ID()]);
+                                                if ($is_course_completed): ?>
+                                                    <span class="course-card__badge completed badge">Completed</span>
+                                                <?php elseif (function_exists('dfh_user_has_course_access') && dfh_user_has_course_access()): ?>
                                                     <span class="course-card__badge enrolled badge">Enroled</span>
                                             <?php endif; ?>
                                     

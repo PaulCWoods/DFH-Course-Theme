@@ -19,6 +19,7 @@
     }
     ?>
     <title><?php echo esc_html($page_title); ?> | Design for Humans Courses</title>
+    
     <?php wp_head(); ?>
 
     <!-- Shared Design Tokens & Styles from your main blog -->
