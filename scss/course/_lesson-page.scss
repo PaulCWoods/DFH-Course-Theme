@@ -279,10 +279,13 @@ $lesson-bp: 60em;
 
 // Stats column (renders as a definition list in markup)
 .lesson-aside {
+    --focus-margin: calc(var(--ui-focus-ring-outline) + var(--ui-focus-ring-outline-offset));
     align-self: start;
     grid-column: 1 / -1;
-    position: sticky;
     inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-4)) + var(--ui-spacing-unit));
+    margin: calc(var(--focus-margin) * -1);
+    padding: var(--focus-margin);
+    position: sticky;
 
     @media screen and (width > #{$lesson-bp}) {
         grid-column: span 1; // occupy the third column on wide screens
