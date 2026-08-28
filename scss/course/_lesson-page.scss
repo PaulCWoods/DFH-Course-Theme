@@ -233,6 +233,10 @@ $lesson-bp: 60em;
         }
     }
 
+    .wp-block-embed__wrapper.wp-block-cp-codepen-gutenberg-embed-block {
+        box-shadow: var(--ui-shadow-short);
+    }
+
     .wp-block-table {
         td, th {
             border: 0 !important;
