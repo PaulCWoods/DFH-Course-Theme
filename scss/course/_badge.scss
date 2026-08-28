@@ -6,4 +6,17 @@
     padding-block: 0.25em;
     padding-inline: 0.5em;
     text-transform: uppercase;
+
+    &.\+accent {
+        background-color: var(--ui-color-foreground-accent);
+    }
+    &.\+success {
+        background-color: var(--ui-color-foreground-success);
+    }
+    &.\+danger {
+        background-color: var(--ui-color-foreground-danger);
+    }
+    &.\+warning {
+        background-color: var(--ui-color-foreground-warning);
+    }
 }

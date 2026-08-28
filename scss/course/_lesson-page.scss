@@ -135,7 +135,7 @@ $lesson-bp: 60em;
 
     ul.check-list {
         li::marker {
-            color: var(--ui-color-foreground-positive);
+            color: var(--ui-color-foreground-success);
             content: "✓ ";
         }
         ul li:marker {
