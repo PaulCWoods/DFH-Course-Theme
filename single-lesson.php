@@ -238,8 +238,8 @@ get_header();
                                 <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
                                     data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>"
                                     class="<?php echo esc_attr($bookmark_class); ?>">
-                                    <svg class="icon" width="32" height="32" title="Bookmark" aria-hidden="true"><use href="<?php echo esc_attr($bookmark_icon); ?>" /></svg>
                                     <span class="bookmark-label"><?php echo esc_html($bookmark_text); ?></span>
+                                    <svg class="icon" width="32" height="32" title="Bookmark" aria-hidden="true"><use href="<?php echo esc_attr($bookmark_icon); ?>" /></svg>
                                 </button>
                             </div>
                     <?php
