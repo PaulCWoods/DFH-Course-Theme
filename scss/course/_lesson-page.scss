@@ -147,6 +147,7 @@ $lesson-bp: 60em;
     aside {
         background-color: var(--ui-color-background-surface);
         box-shadow: var(--ui-shadow-short);
+        margin-block: 1em;
         padding-block: var(--spacing-fluid);
         padding-inline: var(--spacing-fluid-x2);
 
@@ -154,7 +155,7 @@ $lesson-bp: 60em;
             &:before {
                 display: block;
                 font-size: 1.5em;
-                margin-block-end: 1em;
+                margin-block-end: var(--spacing-fluid-x2);
             }
             &.idea:before { content: "💡" / "";}
             &.warning:before { content: "⚠️" / ""; }
@@ -166,7 +167,7 @@ $lesson-bp: 60em;
         box-shadow: var(--ui-shadow-inset);
         color: var(--ui-color-foreground-base);
         color-scheme: dark;
-        margin-block: 1em;
+        margin-block: var(--spacing-fluid);
         code {
             background-color: transparent;
         }
