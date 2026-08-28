@@ -144,6 +144,7 @@ $lesson-bp: 60em;
         }
     }
 
+    .callout-box,
     aside {
         background-color: var(--ui-color-background-surface);
         box-shadow: var(--ui-shadow-short);
@@ -177,8 +178,15 @@ $lesson-bp: 60em;
     // WP SPECIFIC STYLES
     // ============================
     // WP-specific styles for video
-    figure.wp-embed-aspect-16-9.wp-has-aspect-ratio {
+    figure.wp-embed-aspect-16-9 {
         --embed-aspect-ratio: 16/9;
+    }
+
+    figure.wp-embed-aspect-4-3 {
+        --embed-aspect-ratio: 4/3;
+    }
+
+    figure.wp-has-aspect-ratio {
         .wp-block-embed__wrapper {
             font-size: 0;
             iframe {
