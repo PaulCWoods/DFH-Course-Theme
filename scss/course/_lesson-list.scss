@@ -55,6 +55,11 @@
     a {
         text-decoration: none;
 
+        .lesson-item__label {
+            text-decoration-color: var(--link-underline-color);
+            text-decoration-thickness: var(--link-underline-thickness);
+        }
+
         @media (hover: hover) {
             &:hover {
                 text-decoration: none;
@@ -83,8 +88,6 @@
     font-size: var(--label-font-size);
     font-weight: var(--label-font-weight);
     line-height: var(--label-line-height);
-    text-decoration-color: var(--link-underline-color);
-    text-decoration-thickness: var(--link-underline-thickness);
     text-transform: var(--label-text-transform);
     text-underline-offset: var(--link-underline-offset);
     text-wrap: balance;
