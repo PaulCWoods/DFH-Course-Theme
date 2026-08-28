@@ -254,12 +254,12 @@ $lesson-bp: 60em;
     text-align: end;
 
     .button {
-        padding-inline-end: 2.25em;
+        padding-inline-end: calc(var(--button-inner-gap) + var(--button-padding-inline) + 1em);
         position: relative;
         .icon {
             position: absolute;
             inset-block-start: 0;
-            inset-inline-end: .25em;
+            inset-inline-end: .5em;
             font-size: 1.5em;
         }
     }
