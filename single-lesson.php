@@ -306,8 +306,7 @@ get_header();
                             ?>
                             <button id="dfh-complete-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
                                 data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_progress_nonce')); ?>"
-                                class="<?php echo esc_attr($button_class); ?>"
-                                style="padding: 10px 20px; font-weight: 600; cursor: pointer;">
+                                class="<?php echo esc_attr($button_class); ?>">
                                 <span class="progress-label"><?php echo esc_html($display_button_label); ?></span>
                                 <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="<?php echo esc_attr($complete_icon); ?>" /></svg>
                             </button>
