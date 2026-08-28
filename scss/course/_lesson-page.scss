@@ -147,7 +147,7 @@ $lesson-bp: 60em;
     aside {
         background-color: var(--ui-color-background-surface);
         box-shadow: var(--ui-shadow-short);
-        margin-block: 1em;
+        margin-block: calc(var(--spacing-fluid) * 2);
         padding-block: var(--spacing-fluid);
         padding-inline: var(--spacing-fluid-x2);
 
