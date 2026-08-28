@@ -55,11 +55,6 @@
     a {
         text-decoration: none;
 
-        .lesson-item__label {
-            text-decoration-color: var(--link-underline-color);
-            text-decoration-thickness: var(--link-underline-thickness);
-        }
-
         @media (hover: hover) {
             &:hover {
                 text-decoration: none;
@@ -67,6 +62,8 @@
                 .lesson-item__label {
                     color: var(--link-hover-color);
                     text-decoration: underline;
+                    text-decoration-color: var(--link-underline-color);
+                    text-decoration-thickness: var(--link-underline-thickness);
                 }
             }
         }
@@ -77,6 +74,8 @@
             .lesson-item__label {
                 color: var(--link-active-color);
                 text-decoration: underline;
+                text-decoration-color: var(--link-underline-color);
+                text-decoration-thickness: var(--link-underline-thickness);
             }
         }
     }
