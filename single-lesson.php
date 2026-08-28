@@ -133,7 +133,7 @@ get_header();
 
             <button class="syllabus-close button subtle" command="hide-popover" commandfor="lesson-progress" title="Close navigation">
                 <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Close" /></svg>
-                <span class="sr">Close navigation</span>
+                <span class="sr">Close Navigation</span>
             </button>
         </header>
         <nav class="progress-panel__course" aria-label="Course syllabus">
@@ -378,16 +378,16 @@ get_header();
                 $is_last_lesson = empty($adjacent['next']);
             }
 
-            $button_label = $is_last_lesson ? 'Complete course' : 'Next lesson';
+            $button_label = $is_last_lesson ? 'Complete Course' : 'Next Lesson';
             $button_class = $is_last_lesson ? 'button course-complete' : 'button next-lesson';
 
             // Compute the label shown to the user when the lesson is already completed.
             if ($is_completed) {
                 if ($is_last_lesson) {
-                    $display_button_label = 'Course home';
+                    $display_button_label = 'Course Home';
                     $button_class = 'button course-home';
                 } else {
-                    $display_button_label = 'Next lesson';
+                    $display_button_label = 'Next Lesson';
                 }
             } else {
                 $display_button_label = $button_label;

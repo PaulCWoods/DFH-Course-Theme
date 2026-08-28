@@ -138,6 +138,10 @@ $lesson-bp: 60em;
             color: var(--ui-color-foreground-positive);
             content: "✓ ";
         }
+        ul li:marker {
+            color: revert;
+            content: revert;
+        }
     }
 
     aside {
