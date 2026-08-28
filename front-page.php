@@ -91,7 +91,7 @@ get_header();
                                                 $course_completed_at = get_user_meta(get_current_user_id(), 'dfh_course_completed_at', true);
                                                 $is_course_completed = is_array($course_completed_at) && !empty($course_completed_at[get_the_ID()]);
                                                 if ($is_course_completed): ?>
-                                                    <span class="course-card__badge completed badge success">Completed</span>
+                                                    <span class="course-card__badge completed badge +success">Completed</span>
                                                 <?php elseif (function_exists('dfh_user_has_course_access') && dfh_user_has_course_access()): ?>
                                                     <span class="course-card__badge enrolled badge">Enroled</span>
                                             <?php endif; ?>
