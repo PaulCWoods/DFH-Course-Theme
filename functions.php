@@ -1037,7 +1037,7 @@ function dfh_add_meta_description() {
     }
 
     if ( empty( $description ) ) {
-        $description = 'Example meta description';
+        $description = 'Learn to design and build digital products that work better for the people who use them.';
     }
 
     echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
