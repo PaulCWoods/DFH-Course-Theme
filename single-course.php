@@ -54,8 +54,8 @@ get_template_part('content', 'course-header');
                     <?php $welcome_back_msg; ?>
                     <h2>Ready to start learning?</h2>
                     <p class="small-text tc-muted">Log in or enroll to access the course syllabus and track your progress.</p>
-                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log in to access
-                        course</a>
+                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In to Access
+                        Course</a>
 
                 <?php elseif ('completed' === $active_lesson_status): ?>
                     <!-- State 3: Course Completed -->
@@ -63,7 +63,7 @@ get_template_part('content', 'course-header');
                         <h2>🎉 Course completed!</h2>
                         <p>Congratulations! You have finished all lessons in this course.</p>
                         <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review
-                            from beginning</a>
+                            from Beginning</a>
                     </div>
 
                 <?php elseif ($completed_count > 0): ?>
@@ -96,7 +96,7 @@ get_template_part('content', 'course-header');
                         $first_lesson_url = get_permalink($all_lessons[0]);
                         ?>
                         <a href="<?php echo esc_url($first_lesson_url); ?>" class="button strong start-btn">
-                            Start course
+                            Start Course
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />
                             </svg>

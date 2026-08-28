@@ -402,7 +402,7 @@ get_header();
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
                             class="link-button prev-lesson">
                             <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowLeft" /></svg>
-                            Previous lesson
+                            <span class="sr@<sm">Previous Lesson</span>
                         </a>
                     <?php endif; ?>
 
