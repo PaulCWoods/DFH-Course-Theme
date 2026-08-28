@@ -49,6 +49,10 @@ $course-bp: 60em;
         inline-size: 100%;
         object-fit: cover;
 
+        @media (prefers-color-scheme: dark) {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
         @media screen and (aspect-ratio < 1/1) {
             aspect-ratio: 16/9;
         }
