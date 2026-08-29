@@ -51,54 +51,6 @@
     --syllabus-width: var(--spacing-28);
 
     list-style: none;
-
-    a {
-        text-decoration: none;
-
-        @media (hover: hover) {
-            &:hover {
-                text-decoration: none;
-
-                .lesson-item__label {
-                    color: var(--link-hover-color);
-                    text-decoration: underline;
-                    text-decoration-color: var(--link-underline-color);
-                    text-decoration-thickness: var(--link-underline-thickness);
-                }
-            }
-        }
-
-        &:active {
-            text-decoration: none;
-
-            .lesson-item__label {
-                color: var(--link-active-color);
-                text-decoration: underline;
-                text-decoration-color: var(--link-underline-color);
-                text-decoration-thickness: var(--link-underline-thickness);
-            }
-        }
-    }
-}
-
-.lesson-item__label {
-    flex-grow: 1;
-    font-family: var(--label-font-family);
-    font-size: var(--label-font-size);
-    font-weight: var(--label-font-weight);
-    line-height: var(--label-line-height);
-    text-transform: var(--label-text-transform);
-    text-underline-offset: var(--link-underline-offset);
-    text-wrap: balance;
-}
-
-.lesson-item__code {
-    font-family: var(--code-font-family);
-    font-size: var(--code-font-size);
-    font-weight: var(--code-font-weight);
-    font-variant-numeric: tabular-nums;
-    line-height: var(--code-line-height);
-    text-transform: var(--code-text-transform);
 }
 
 .lesson-list__container {
@@ -165,22 +117,19 @@
     display: flex;
     gap: var(--ui-spacing-unit, 1rem);
     justify-content: space-between;
+    position: relative;
 
-    .progress-panel & {
-        position: relative;
-
-        &.current {
-            &:before {
-                content: "";
-                background-color: var(--ui-color-border-accent);
-                border-radius: 50%;
-                position: absolute;
-                block-size: 0.75rem;
-                inline-size: 0.75rem;
-                inset-inline-start: calc((var(--l1-box-padding) + var(--l1-box-border-width) / 2) * -1);
-                inset-block-start: 50%;
-                translate: -50% -50%;
-            }
+    .progress-panel &.current {
+        &:before {
+            content: "";
+            background-color: var(--ui-color-border-accent);
+            border-radius: 50%;
+            position: absolute;
+            block-size: 0.75rem;
+            inline-size: 0.75rem;
+            inset-inline-start: calc((var(--l1-box-padding) + var(--l1-box-border-width) / 2) * -1);
+            inset-block-start: 50%;
+            translate: -50% -50%;
         }
     }
 
@@ -193,9 +142,37 @@
     }
 }
 
-span.lesson-item {
-    cursor: not-allowed;
-    opacity: var(--ui-opacity-disabled, 0.7);
+.lesson-item__label {
+    flex-grow: 1;
+    font-family: var(--label-font-family);
+    font-size: var(--label-font-size);
+    font-weight: var(--label-font-weight);
+    line-height: var(--label-line-height);
+    text-transform: var(--label-text-transform);
+    text-underline-offset: var(--link-underline-offset);
+    text-wrap: balance;
+
+    &:not(a[href]) {
+        cursor: not-allowed;
+        opacity: var(--ui-opacity-disabled, 0.7);
+    }
+}
+
+a.lesson-item__label {
+    &:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+    }
+}
+
+.lesson-item__code {
+    font-family: var(--code-font-family);
+    font-size: var(--code-font-size);
+    font-weight: var(--code-font-weight);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--code-line-height);
+    text-transform: var(--code-text-transform);
 }
 
 .lesson-item__bookmark {
