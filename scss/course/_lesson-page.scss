@@ -206,7 +206,7 @@ $lesson-bp: 60em;
     }
 
     figure.wp-block-image {
-        margin-block: calc(var(--spacing-fluid) * 2) !important;
+        margin-block: var(--spacing-fluid) !important;
         &:first-child {
             margin-block-start: 0 !important;
         }
