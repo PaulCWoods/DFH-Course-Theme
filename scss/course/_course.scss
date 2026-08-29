@@ -125,6 +125,7 @@ $course-bp: 60em;
     background-color: var(--ui-color-background-accent-muted);
     border: var(--ui-border);
     border-color: var(--ui-color-border-accent);
+    box-shadow: var(--shadow-reset);
     color: var(--ui-color-foreground-base);
     padding: var(--site-block-padding, var(--spacing-fluid-x2));
     text-align: center;
@@ -132,8 +133,8 @@ $course-bp: 60em;
     @media (prefers-reduced-motion: no-preference) {
         animation:
             --course-complete-pop 0.25s both,
-            --course-complete-shimmer 1s;
-        animation-delay: 0s, 0.2s;
+            --course-complete-shimmer 2s;
+        animation-delay: 0s, 0.5s;
     }
 
     &:before {
@@ -152,17 +153,22 @@ $course-bp: 60em;
 
 @keyframes --course-complete-pop {
     0% {
-        opacity: 0.7;
-        scale: 0.9;
+        opacity: 0;
+        scale: 0.5;
     }
     80% {
+        box-shadow: var(--shadow-reset);
         opacity: 1;
         scale: 1.05;
     }
     90% {
-        scale: 0.975;
+        box-shadow: var(--shadow-inset);
+        opacity: 0.7;
+        scale: 0.95;
     }
     100% {
+        box-shadow: var(--shadow-reset);
+        opacity: 1;
         scale: 1;
     }
 }
