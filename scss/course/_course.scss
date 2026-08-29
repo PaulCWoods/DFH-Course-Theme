@@ -144,6 +144,11 @@ $course-bp: 60em;
         line-height: 1;
         margin-block-end: calc(var(--ui-spacing-unit) / 2);
         text-align: center;
+
+        @media (prefers-reduced-motion: no-preference) {
+            animation: --course-complete-pop 0.5s both;
+            animation-delay: 0.5s;
+        }
     }
 
     p {
