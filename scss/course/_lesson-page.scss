@@ -21,6 +21,7 @@ $lesson-bp: 60em;
     align-items: stretch;
     min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
     border-block-end: 0;
+    position: relative;
 }
 
 .lesson-head__inner {
@@ -30,7 +31,7 @@ $lesson-bp: 60em;
     inline-size: 100%;
 }
 
-.lesson-code-badge {
+.lesson-head__code-badge {
     align-self: stretch;
     align-items: center;
     background-color: var(--ui-color-background-accent);
@@ -45,7 +46,7 @@ $lesson-bp: 60em;
     }
 }
 
-.lesson-nav {
+.lesson-head__nav {
     flex-grow: 1;
     font-size: var(--typography-font-size-fluid-base);
     overflow: hidden;
@@ -53,13 +54,33 @@ $lesson-bp: 60em;
     white-space: nowrap;
 }
 
-.lesson-breadcrumb {
+.lesson-head__breadcrumb {
     flex-grow: 1;
     font-weight: bold;
 }
 
-.lesson-progress-toggle {
-    flex-shrink: 0;
+@supports (animation-timeline: scroll()) {
+    .lesson-head__progress {
+        animation: --article-progress auto linear;
+        animation-timeline: scroll();
+        background-color: var(--ui-color-foreground-accent);
+        block-size: var(--ui-border-width);
+        inline-size: 100%;
+        inset-block-end: 0;
+        inset-inline-start: 0;
+        position: absolute;
+    }
+}
+
+
+
+@keyframes --article-progress {
+    from {
+        scale: 0 1;
+    }
+    to {
+        scale: 1 1;
+    }
 }
 
 // Shared surface for header and video areas
@@ -80,7 +101,7 @@ $lesson-bp: 60em;
     padding-inline-end: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
 }
 
-.lesson-title {
+.lesson-header__title {
     align-items: center;
     display: flex;
     gap: 1rem;
@@ -88,7 +109,7 @@ $lesson-bp: 60em;
     margin-block-end: 0; // keep title snug to content
 }
 
-.lesson-kicker {
+.lesson-header__kicker {
     display: block;
     font-weight: bold;
     margin-block-start: var(--spacing-05);

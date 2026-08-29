@@ -37,22 +37,23 @@ get_header();
 ?>
 
 <header class="lesson-head site-header" aria-label="Lesson navigation">
+    <div class="lesson-head__progress" aria-hidden="true"></div>
     <div class="lesson-head__inner container">
         <?php
         $lesson_code = dfh_get_lesson_hierarchy_number();
         if ($lesson_code):
             ?>
-            <span class="lesson-code-badge" title="Lesson code"><span class="sr">Lesson
+            <span class="lesson-head__code-badge" title="Lesson code"><span class="sr">Lesson
                     code:</span><?php echo esc_html($lesson_code); ?></span>
         <?php endif; ?>
-        <nav class="lesson-nav">
+        <nav class="lesson-head__nav">
             <?php
             $post_id = get_the_ID();
             $parent_id = wp_get_post_parent_id($post_id);
 
             // Breadcrumb: parent lesson when available; otherwise try to find parent Course
             if ($parent_id): ?>
-                <a class="lesson-breadcrumb link" title="<?php echo esc_html(get_the_title($parent_id)); ?>"
+                <a class="lesson-head__breadcrumb link" title="<?php echo esc_html(get_the_title($parent_id)); ?>"
                     href="<?php echo esc_url(get_permalink($parent_id)); ?>"><?php echo esc_html(get_the_title($parent_id)); ?></a>
             <?php else:
                 // Attempt to find a Course that references this lesson as a root (ACF or postmeta)
@@ -74,18 +75,18 @@ get_header();
                 }
 
                 if ($course_id): ?>
-                    <a class="lesson-breadcrumb link" title="<?php echo esc_html(get_the_title($course_id)); ?>"
+                    <a class="lesson-head__breadcrumb link" title="<?php echo esc_html(get_the_title($course_id)); ?>"
                         href="<?php echo esc_url(get_permalink($course_id)); ?>"><?php echo esc_html(get_the_title($course_id)); ?></a>
                 <?php else: ?>
-                    <a class="lesson-breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
+                    <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
                 <?php endif;
             endif; ?>
 
             <!-- Syllabus overlay toggle -->
 
         </nav>
-        <button class="progress-toggle lesson-progress-toggle button subtle" command="toggle-popover"
-            commandfor="lesson-progress">
+        <button class="progress-toggle course-progress__toggle button subtle" command="toggle-popover"
+            commandfor="course-progress">
             <span class="sr@<sm">Progress</span>
             <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Navigation" /></svg>
         </button>
@@ -98,11 +99,11 @@ get_header();
 
         <header class="lesson-header prose">
             <div class="container">
-                <h1 class="lesson-title">
+                <h1 class="lesson-header__title">
                     <?php the_title(); ?>
                 </h1>
                 <?php if ($is_completed): ?>
-                    <span class="lesson-kicker small-heading">Complete</span>
+                    <span class="lesson-header__kicker small-heading">Complete</span>
                 <?php endif; ?>
             </div>
         </header>
@@ -317,7 +318,7 @@ get_header();
 
     </article><!-- #post-<?php the_ID(); ?> -->
 
-    <aside id="lesson-progress" class="lesson-progress progress-panel" popover>
+    <aside id="course-progress" class="course-progress progress-panel" popover>
         <?php
         // Determine a course to display in the panel: prefer any already-found $course_id,
         // otherwise check the current lesson and its ancestors for a course that lists them as roots.
@@ -354,7 +355,7 @@ get_header();
                 Courses Home
             </a>
 
-            <button class="syllabus-close button subtle" command="hide-popover" commandfor="lesson-progress" title="Close navigation">
+            <button class="syllabus-close button subtle" command="hide-popover" commandfor="course-progress" title="Close navigation">
                 <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Close" /></svg>
                 <span class="sr">Close Navigation</span>
             </button>
