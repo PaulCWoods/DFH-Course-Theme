@@ -236,6 +236,9 @@ $lesson-bp: 60em;
                 filter: invert(1) hue-rotate(180deg);
             }
         }
+        :where(figcaption) {
+            margin-block-end: calc(var(--ui-spacing-unit) * 2) !important;
+        }
     }
 
     .wp-block-quote {
