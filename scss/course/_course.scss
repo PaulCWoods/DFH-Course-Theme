@@ -129,6 +129,13 @@ $course-bp: 60em;
     padding: var(--site-block-padding, var(--spacing-fluid-x2));
     text-align: center;
 
+    @media (prefers-reduced-motion: no-preference) {
+        animation:
+            --course-complete-pop 0.25s both,
+            --course-complete-shimmer 1s;
+        animation-delay: 0s, 0.2s;
+    }
+
     &:before {
         content: "🎉" / "";
         display: block;
@@ -140,5 +147,31 @@ $course-bp: 60em;
 
     p {
         max-inline-size: none;
+    }
+}
+
+@keyframes --course-complete-pop {
+    0% {
+        opacity: 0.7;
+        scale: 0.9;
+    }
+    80% {
+        opacity: 1;
+        scale: 1.05;
+    }
+    90% {
+        scale: 0.975;
+    }
+    100% {
+        scale: 1;
+    }
+}
+
+@keyframes --course-complete-shimmer {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
     }
 }
