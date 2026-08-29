@@ -210,6 +210,11 @@ $lesson-bp: 60em;
         &:first-child {
             margin-block-start: 0 !important;
         }
+        &.\+scheme-adapt img {
+            @media (prefers-color-scheme: dark) {
+                filter: invert(1) hue-rotate(180deg);
+            }
+        }
     }
 
     .wp-block-quote {
