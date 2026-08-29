@@ -410,7 +410,7 @@ function dfh_render_lesson_children($parent_id, $level = 1)
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
             $chip_class = $completed ? 'chip complete' : 'chip in-progress';
-            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</span>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></a>';
+            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($child->ID, $lvl + 1);
         $output .= '</li>';
@@ -473,7 +473,7 @@ function dfh_render_lesson_tree($roots = null, $level = 1)
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
             $chip_class = $completed ? 'chip complete' : 'chip in-progress';
-            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<span href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></a>';
+            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<span href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</a>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($r_id, $lvl + 1);
         $output .= '</li>';
