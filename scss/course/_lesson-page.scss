@@ -149,6 +149,10 @@ $lesson-bp: 60em;
     grid-column: 1 / -1;    
     padding-block-end: var(--spacing-fluid-x2);
 
+    &:empty {
+        display: none;
+    }
+
     @media screen and (width > #{$lesson-bp}) {
         grid-column: span 2; // content spans two columns on wide screens
     }

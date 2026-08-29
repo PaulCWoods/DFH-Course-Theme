@@ -123,11 +123,7 @@ get_header();
         <div class="lesson-content">
 
             <div class="container lesson-main">
-                <div class="lesson-body prose">
-                    <?php
-                    the_content();
-                    ?>
-                </div>
+                <div class="lesson-body prose"><?php the_content(); ?></div>
                 <aside class="lesson-aside">
                             <div class="lesson-bookmark">
                                 <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
