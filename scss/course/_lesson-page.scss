@@ -354,7 +354,7 @@ $lesson-bp: 60em;
     position: sticky;
 
     @media screen and (width > #{$lesson-bp}) {
-        grid-column: span 1; // occupy the third column on wide screens
+        grid-column: 3; // occupy the third column on wide screens
         max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--ui-spacing-unit) * 2); // overflow kicks in if the height of the aside can break the container.
         overflow: auto;
     }
