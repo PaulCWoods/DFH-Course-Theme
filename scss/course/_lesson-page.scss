@@ -144,14 +144,21 @@ $lesson-bp: 60em;
         }
     }
 
-    .callout-box,
-    aside {
+    :is(aside, .callout-box) {
         background-color: var(--ui-color-background-surface);
         box-shadow: var(--ui-shadow-short);
         margin-block: calc(var(--spacing-fluid) * 2);
         padding-block: var(--spacing-fluid);
         padding-inline: var(--spacing-fluid-x2);
+    }
 
+    section {
+        border-block-start: var(--ui-border);
+        margin-block-start: calc(var(--spacing-fluid) * 2);
+        padding-block-start: var(--spacing-fluid);
+    }
+    
+    :is(aside, section, .callout-box) {
         &.emoji {
             &:before {
                 display: block;
