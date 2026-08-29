@@ -237,7 +237,7 @@ $lesson-bp: 60em;
             }
         }
         :where(figcaption) {
-            margin-block-end: calc(var(--ui-spacing-unit) * 2) !important;
+            margin-block-end: 1.5em !important;
         }
     }
 
