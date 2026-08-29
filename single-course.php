@@ -60,7 +60,7 @@ get_template_part('content', 'course-header');
                 <?php elseif ('completed' === $active_lesson_status): ?>
                     <!-- State 3: Course Completed -->
                     <div class="course-landing__completion">
-                        <h2>🎉 Course completed!</h2>
+                        <h2>Course completed!</h2>
                         <p>Congratulations! You have finished all lessons in this course.</p>
                         <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review
                             from Beginning</a>

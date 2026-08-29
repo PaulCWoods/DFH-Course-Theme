@@ -122,12 +122,21 @@ $course-bp: 60em;
 }
 
 .course-landing__completion {
-    background-color: var(--ui-color-background-accent);
+    background-color: var(--ui-color-background-accent-muted);
     border: var(--ui-border);
-    box-shadow: var(--ui-shadow);
+    border-color: var(--ui-color-border-accent);
     color: var(--ui-color-foreground-base);
     padding: var(--site-block-padding, var(--spacing-fluid-x2));
     text-align: center;
+
+    &:before {
+        content: "🎉" / "";
+        display: block;
+        font-size: 3em;
+        line-height: 1;
+        margin-block-end: calc(var(--ui-spacing-unit) / 2);
+        text-align: center;
+    }
 
     p {
         max-inline-size: none;
