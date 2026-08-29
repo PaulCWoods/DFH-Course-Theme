@@ -199,9 +199,9 @@ $lesson-bp: 60em;
     }
 
     figure.wp-block-image {
-        margin-block-start: var(--spacing-fluid-x2);
+        margin-block: calc(var(--spacing-fluid) * 2) !important;
         &:first-child {
-            margin-block-start: 0;
+            margin-block-start: 0 !important;
         }
     }
 
