@@ -21,7 +21,6 @@ $lesson-bp: 60em;
     align-items: stretch;
     min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
     border-block-end: 0;
-    position: relative;
 }
 
 .lesson-head__inner {
@@ -66,9 +65,9 @@ $lesson-bp: 60em;
         background-color: var(--ui-color-foreground-accent);
         block-size: var(--ui-border-width);
         inline-size: 100%;
-        inset-block-end: 0;
+        inset-block-start: 0;
         inset-inline-start: 0;
-        position: absolute;
+        position: fixed;
     }
 }
 
