@@ -132,7 +132,7 @@ $course-bp: 60em;
 
     @media (prefers-reduced-motion: no-preference) {
         animation:
-            --course-complete-pop 0.25s both,
+            --course-complete-pop 0.5s both,
             --course-complete-shimmer 2s;
         animation-delay: 0s, 0.5s;
     }
@@ -156,12 +156,12 @@ $course-bp: 60em;
         opacity: 0;
         scale: 0.5;
     }
-    80% {
+    70% {
         box-shadow: var(--shadow-reset);
         opacity: 1;
         scale: 1.05;
     }
-    90% {
+    85% {
         box-shadow: var(--shadow-inset);
         opacity: 0.7;
         scale: 0.95;
