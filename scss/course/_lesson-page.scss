@@ -153,9 +153,9 @@ $lesson-bp: 60em;
     }
 
     section {
-        border-block-start: var(--ui-border);
+        border-block-start: var(--ui-border-quiet);
         margin-block-start: calc(var(--spacing-fluid) * 2);
-        padding-block-start: var(--spacing-fluid);
+        padding-block-start: calc(var(--spacing-fluid) * 2);
     }
     
     :is(aside, section, .callout-box) {
