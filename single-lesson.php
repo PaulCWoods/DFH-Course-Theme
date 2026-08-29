@@ -17,7 +17,7 @@ if (!dfh_user_has_course_access()) {
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
             <?php if (!is_user_logged_in()): ?>
-                <p><a href="<?php echo esc_url(wp_login_url(get_permalink())); ?>" class="button">Log in</a></p>
+                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log in</a></p>
             <?php endif; ?>
         </article>
     </main>
