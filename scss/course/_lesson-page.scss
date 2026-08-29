@@ -198,6 +198,13 @@ $lesson-bp: 60em;
         }
     }
 
+    figure.wp-block-image {
+        margin-block-start: var(--spacing-fluid-x2);
+        &:first-child {
+            margin-block-start: 0;
+        }
+    }
+
     .wp-block-quote {
         &.\+bold {
             background-color: var(--ui-color-background-surface);
