@@ -314,7 +314,7 @@ get_header();
 
     </article><!-- #post-<?php the_ID(); ?> -->
 
-    <aside id="course-progress" class="course-progress progress-panel" popover>
+    <aside id="course-progress" class="panel progress-panel course-progress" popover>
         <?php
         // Determine a course to display in the panel: prefer any already-found $course_id,
         // otherwise check the current lesson and its ancestors for a course that lists them as roots.
@@ -345,7 +345,7 @@ get_header();
         }
 
         ?>
-        <header class="progress-panel__header">
+        <header class="panel__head progress-panel__header">
             <a class="link-button syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
                 <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
                 Courses Home
@@ -414,7 +414,7 @@ get_header();
                 ?>
             </div>
         </nav>
-        <footer class="progress-panel__footer">
+        <footer class="panel__head progress-panel__footer">
             <a href="https://designforhumans.blog" class="progress-panel__brand">
                 Design for Humans
             </a>
