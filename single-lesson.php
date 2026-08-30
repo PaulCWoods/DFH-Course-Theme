@@ -414,7 +414,7 @@ get_header();
                 ?>
             </div>
         </nav>
-        <footer class="panel__head progress-panel__footer">
+        <footer class="panel__foot progress-panel__footer">
             <a href="https://designforhumans.blog" class="progress-panel__brand">
                 Design for Humans
             </a>
