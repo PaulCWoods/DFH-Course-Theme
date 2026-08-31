@@ -1,6 +1,6 @@
 .home__hero {
     border-block-start: var(--ui-border-subtle);
-    padding-block: var(--spacing-fluid-x2);
+    padding-block: var(--ui-spacing-cushion);
 }
 
 .home__title-highlight {
@@ -19,8 +19,8 @@
 
 .home__section {
     border-block-start: var(--ui-border-subtle);
-    margin-block-end: var(--spacing-fluid-x2);
-    padding-block-start: var(--spacing-fluid-x2);
+    margin-block-end: var(--ui-spacing-cushion);
+    padding-block-start: var(--ui-spacing-cushion);
 
     h2 {
         margin-block-end: var(--ui-spacing-unit);

@@ -57,7 +57,7 @@
     >.lesson-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(var(--syllabus-width, 28rem), 100%), 1fr));
-        gap: var(--spacing-fluid);
+        gap: var(--ui-spacing-breathe);
 
         .lesson-list {
             --label-font-family: var(--l2-label-font-family);

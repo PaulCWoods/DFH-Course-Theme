@@ -1,7 +1,6 @@
 .progress-panel {
     --progress-panel__width: var(--spacing-32);
 
-    background: var(--ui-color-background-surface);
     block-size: 100%;
     box-shadow: var(--ui-shadow-ambient);
     display: none;
@@ -42,25 +41,27 @@
     }
 }
 
+:is(.progress-panel__header, .progress-panel__footer, .progress-panel__course)
+
+:is(.progress-panel__header, .progress-panel__footer) {
+    background: color-mix(in srgb, var(--panel-background-color), transparent 10%);
+    backdrop-filter: blur(2px);
+    padding-inline: var(--site-block-padding, var(--ui-spacing-cushion));
+}
+
 .progress-panel__header {
     align-items: center;
-    background: color-mix(in srgb, var(--ui-color-background-surface), transparent 10%);
-    backdrop-filter: blur(2px);
     display: flex;
     gap: var(--ui-spacing-unit, 1rem);
     justify-content: space-between;
     min-block-size: var(--site-header-height);
     padding-block: .5rem;
-    padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
 
 }
 
 .progress-panel__footer {
-    background: color-mix(in srgb, var(--ui-color-background-surface), transparent 10%);
-    backdrop-filter: blur(2px);
-    padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
-    padding-block-end: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-bottom));
-    padding-block-start: calc(var(--site-block-padding, var(--spacing-fluid-x2)) / 2);
+    padding-block-end: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-bottom));
+    padding-block-start: calc(var(--site-block-padding, var(--ui-spacing-cushion)) / 2);
 }
 
 .progress-panel__brand {
@@ -89,8 +90,7 @@ a.progress-panel__brand {
 
 .progress-panel__course {
     flex-grow: 1;
-    padding-block: calc(var(--site-block-padding, var(--spacing-fluid-x2)) / 2);
-    padding-inline: var(--site-block-padding, var(--spacing-fluid-x2));
+    padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion)) / 2);
     z-index: 0;
 }
 

@@ -5,6 +5,6 @@
 
 .course-card__badge {
     align-self: start;
-    margin-block-start: calc(var(--spacing-fluid) * -1);
+    margin-block-start: calc(var(--ui-spacing-breathe) * -1);
     order: -1;
 }

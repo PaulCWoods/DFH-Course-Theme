@@ -43,11 +43,11 @@
 }
 
 .login-extras {
-    margin-block-start: var(--spacing-fluid);
+    margin-block-start: var(--ui-spacing-breathe);
 }
 
 .login-info {
-    margin-block-end: var(--spacing-fluid);
+    margin-block-end: var(--ui-spacing-breathe);
 }
 
 .login-page form,
@@ -55,6 +55,6 @@
     background-color: var(--ui-color-background-fade);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-fluid);
-    padding: var(--spacing-fluid-x2);
+    gap: var(--ui-spacing-breathe);
+    padding: var(--ui-spacing-cushion);
 }

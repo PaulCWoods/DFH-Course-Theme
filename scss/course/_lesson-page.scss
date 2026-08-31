@@ -38,7 +38,7 @@ $lesson-bp: 60em;
     font-size: var(--typography-font-size-fluid-upper-1);
     font-weight: bold;
     margin-inline-start: calc(var(--site-block-padding) * -1);
-    padding-inline: var(--spacing-fluid);
+    padding-inline: var(--ui-spacing-breathe);
 
     @media screen and (width > #{$lesson-bp}) {
         margin-inline-start: 0;
@@ -96,9 +96,9 @@ $lesson-bp: 60em;
 :where(.lesson-header,
 .lesson-content,
 .lesson-explore) {
-    padding-block: var(--site-block-padding, var(--spacing-fluid-x2));
-    padding-inline-start: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
-    padding-inline-end: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
+    padding-block: var(--site-block-padding, var(--ui-spacing-cushion));
+    padding-inline-start: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
+    padding-inline-end: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
 }
 
 .lesson-header__title {
@@ -141,13 +141,13 @@ $lesson-bp: 60em;
 .lesson-main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-fluid-x2);
+    gap: var(--ui-spacing-cushion);
 }
 
 // Lesson body (article content)
 .lesson-body {
     grid-column: 1 / -1;    
-    padding-block-end: var(--spacing-fluid-x2);
+    padding-block-end: var(--ui-spacing-cushion);
 
     &:empty {
         display: none;
@@ -171,16 +171,16 @@ $lesson-bp: 60em;
 
     :is(aside, .callout-box) {
         background-color: var(--ui-color-background-surface);
-        box-shadow: var(--ui-shadow-short);
-        margin-block: calc(var(--spacing-fluid) * 2);
-        padding-block: var(--spacing-fluid);
-        padding-inline: var(--spacing-fluid-x2);
+        box-shadow: var(--ui-shadow);
+        margin-block: calc(var(--ui-spacing-breathe) * 2);
+        padding-block: var(--ui-spacing-breathe);
+        padding-inline: var(--ui-spacing-cushion);
     }
 
     section {
         border-block-start: var(--ui-border-quiet);
-        margin-block-start: calc(var(--spacing-fluid) * 2);
-        padding-block-start: calc(var(--spacing-fluid) * 2);
+        margin-block-start: calc(var(--ui-spacing-breathe) * 2);
+        padding-block-start: calc(var(--ui-spacing-breathe) * 2);
     }
     
     :is(aside, section, .callout-box) {
@@ -188,7 +188,7 @@ $lesson-bp: 60em;
             &:before {
                 display: block;
                 font-size: 1.5em;
-                margin-block-end: var(--spacing-fluid-x2);
+                margin-block-end: var(--ui-spacing-cushion);
             }
             &.idea:before { content: "💡" / "";}
             &.warning:before { content: "⚠️" / ""; }
@@ -200,7 +200,7 @@ $lesson-bp: 60em;
         box-shadow: var(--ui-shadow-inset);
         color: var(--ui-color-foreground-base);
         color-scheme: dark;
-        margin-block: var(--spacing-fluid);
+        margin-block: var(--ui-spacing-breathe);
         code {
             background-color: transparent;
         }
@@ -231,7 +231,7 @@ $lesson-bp: 60em;
     }
 
     figure.wp-block-image {
-        margin-block: var(--spacing-fluid) !important;
+        margin-block: var(--ui-spacing-breathe) !important;
         &:first-child {
             margin-block-start: 0 !important;
         }
@@ -248,8 +248,8 @@ $lesson-bp: 60em;
     .wp-block-quote {
         &.\+bold {
             background-color: var(--ui-color-background-surface);
-            padding-block: var(--spacing-fluid);
-            padding-inline: var(--spacing-fluid-x2);
+            padding-block: var(--ui-spacing-breathe);
+            padding-inline: var(--ui-spacing-cushion);
             p {
                 font-weight: var(--lesson-quote-bold-font-weight);
                 &:last-child {
@@ -299,7 +299,7 @@ $lesson-bp: 60em;
 
     // Codepen block
     .wp-block-cp-codepen-gutenberg-embed-block {
-        box-shadow: var(--ui-shadow-short);
+        box-shadow: var(--ui-shadow);
         font-size: 0;
     }
 }
@@ -310,7 +310,7 @@ $lesson-bp: 60em;
 
 :is(.lesson-resources,
 .lesson-bookmark) {
-    margin-block-end: var(--spacing-fluid-x2);
+    margin-block-end: var(--ui-spacing-cushion);
 
     &:last-child {
         margin-block-end: 0;
@@ -334,11 +334,11 @@ $lesson-bp: 60em;
 
 .lesson-resources {
     border-block-start: var(--ui-border-subtle);
-    padding-block-start: var(--spacing-fluid-x2);
+    padding-block-start: var(--ui-spacing-cushion);
 }
 
 .lesson-resources__heading {
-    margin-block-end: var(--spacing-fluid, 1em);
+    margin-block-end: var(--ui-spacing-breathe, 1em);
 }
 
 // ================================
@@ -381,8 +381,8 @@ $lesson-bp: 60em;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: calc(var(--site-block-padding, var(--spacing-fluid-x2))*2);
-    padding-block: calc(var(--site-block-padding, var(--spacing-fluid-x2))*2);
+    gap: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
+    padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
 
     .heading {
         margin-block-end: var(--ui-spacing-unit);

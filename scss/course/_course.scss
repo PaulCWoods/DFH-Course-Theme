@@ -23,14 +23,14 @@ $course-bp: 60em;
 }
 
 :where(.course-landing__main, .course-landing__intro, .course-landing__header, .course-landing__access, .course-landing__syllabus) {
-    padding-block: var(--site-block-padding, var(--spacing-fluid-x2));
-    padding-inline-start: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
-    padding-inline-end: calc(var(--site-block-padding, var(--spacing-fluid-x2)) + env(safe-area-inset-left));
+    padding-block: var(--site-block-padding, var(--ui-spacing-cushion));
+    padding-inline-start: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
+    padding-inline-end: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
 }
 
 :where(.course-landing__main, .course-landing__intro, .course-landing__header, .course-landing__access) {
     @media screen and (width > #{$course-bp}) {
-        padding-inline-start: var(--site-block-padding, var(--spacing-fluid-x2));
+        padding-inline-start: var(--site-block-padding, var(--ui-spacing-cushion));
     }
 }
 
@@ -69,28 +69,28 @@ $course-bp: 60em;
     background-color: var(--ui-color-background-accent-strong);
     color: var(--ui-color-foreground-inverted);
     margin-block-end: 0;
-    padding-block-end: calc(var(--site-block-padding, var(--spacing-fluid))/2);
+    padding-block-end: calc(var(--site-block-padding, var(--ui-spacing-breathe))/2);
     h1 {
         margin-block-end: 0;
     }
 }
 
 .course-landing__access {
-    padding-block: calc(var(--site-block-padding, var(--spacing-fluid-x2))*2);
+    padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
 
     h2 {
         margin-block-start: 0;
     }
 
     .course-landing__progress {
-        margin-block: var(--spacing-fluid);
+        margin-block: var(--ui-spacing-breathe);
     }
 }
 
 .course-landing__intro {
     background-color: var(--ui-color-background-accent-strong);
     color: var(--ui-color-foreground-inverted);
-    padding-block-start: calc(var(--site-block-padding, var(--spacing-fluid))/2);
+    padding-block-start: calc(var(--site-block-padding, var(--ui-spacing-breathe))/2);
    p {
         font-weight: var(--ui-typography-body-strong-font-weight);
 
@@ -108,8 +108,8 @@ $course-bp: 60em;
     background: var(--ui-color-background-surface);
     box-shadow: var(--ui-shadow-inset);
     flex-grow: 1;
-    gap: calc(var(--site-block-padding, var(--spacing-fluid-x2))*2);
-    padding-block: calc(var(--site-block-padding, var(--spacing-fluid-x2))*2);
+    gap: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
+    padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
 
     .heading {
         margin-block-end: var(--ui-spacing-unit);
@@ -127,7 +127,7 @@ $course-bp: 60em;
     border-color: var(--ui-color-border-accent);
     box-shadow: var(--shadow-reset);
     color: var(--ui-color-foreground-base);
-    padding: var(--site-block-padding, var(--spacing-fluid-x2));
+    padding: var(--site-block-padding, var(--ui-spacing-cushion));
     text-align: center;
 
     @media (prefers-reduced-motion: no-preference) {
