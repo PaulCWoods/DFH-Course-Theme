@@ -115,7 +115,7 @@ get_header();
             <div class="lesson-video">
                 <div class="lesson-video__container container">
                     <mux-player playback-id="<?php echo esc_attr($playback_id); ?>" accent-color="#2eab93"
-                        metadata-video-title="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:auto;" thumbnail-time="10">
+                        metadata-video-title="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:auto;" thumbnail-time="5">
                     </mux-player>
                 </div>
             </div>
