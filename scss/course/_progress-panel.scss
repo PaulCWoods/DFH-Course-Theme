@@ -41,12 +41,13 @@
     }
 }
 
-:is(.progress-panel__header, .progress-panel__footer, .progress-panel__course)
+:is(.progress-panel__header, .progress-panel__footer, .progress-panel__course) {
+    padding-inline: var(--site-block-padding, var(--ui-spacing-cushion));
+}
 
 :is(.progress-panel__header, .progress-panel__footer) {
     background: color-mix(in srgb, var(--panel-background-color), transparent 10%);
     backdrop-filter: blur(2px);
-    padding-inline: var(--site-block-padding, var(--ui-spacing-cushion));
 }
 
 .progress-panel__header {
