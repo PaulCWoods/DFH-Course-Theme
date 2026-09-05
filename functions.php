@@ -256,6 +256,29 @@ if (function_exists('acf_add_local_field_group')) {
             ),
         ),
     ));
+
+    acf_add_local_field_group(array(
+        'key' => 'group_lesson_header',
+        'title' => 'Lesson Header',
+        'fields' => array(
+            array(
+                'key' => 'field_lesson_subtitle',
+                'label' => 'Subtitle',
+                'name' => 'subtitle',
+                'type' => 'text',
+                'instructions' => 'Optional subtitle displayed beneath the lesson title.',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'lesson',
+                ),
+            ),
+        ),
+    ));
 }
 
 /**

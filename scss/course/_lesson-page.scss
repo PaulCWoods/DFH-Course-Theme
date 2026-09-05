@@ -109,6 +109,13 @@ $lesson-bp: 60em;
     margin-block-end: 0; // keep title snug to content
 }
 
+.lesson-header__subtitle {
+    font-family: var(--ui-typography-subheading-font-family);
+    font-size: var(--ui-typography-subheading-font-size);
+    font-weight: var(--ui-typography-subheading-font-weight);
+    line-height: var(--ui-typography-subheading-line-height);
+}
+
 .lesson-header__kicker {
     display: block;
     font-weight: bold;

@@ -102,6 +102,13 @@ get_header();
                 <h1 class="lesson-header__title">
                     <?php the_title(); ?>
                 </h1>
+                <?php
+                $lesson_subtitle = function_exists('get_field') ? get_field('subtitle') : get_post_meta(get_the_ID(), 'subtitle', true);
+                if ($lesson_subtitle):
+                    ?>
+                    <p class="lesson-header__subtitle"><?php echo esc_html($lesson_subtitle); ?></p>
+                <?php endif; ?>
+                
                 <?php if ($is_completed): ?>
                     <span class="lesson-header__kicker small-heading">Complete</span>
                 <?php endif; ?>
