@@ -3,9 +3,17 @@ get_header();
 
 // Fetch the roots selected in ACF (safe when ACF is not active)
 $root_lessons = function_exists('get_field') ? get_field('course_root_lessons') : get_post_meta(get_the_ID(), 'course_root_lessons', true);
-if (!$root_lessons) {
-    $root_lessons = array();
+if (!is_array($root_lessons)) {
+    $root_lessons = empty($root_lessons) ? array() : array($root_lessons);
 }
+$root_lesson_ids = array();
+foreach ($root_lessons as $root_lesson) {
+    $root_lesson_id = is_object($root_lesson) ? (int) $root_lesson->ID : (int) $root_lesson;
+    if ($root_lesson_id) {
+        $root_lesson_ids[] = $root_lesson_id;
+    }
+}
+$root_lesson_ids = array_values(array_unique($root_lesson_ids));
 
 get_template_part('content', 'course-header');
 ?>
@@ -30,11 +38,29 @@ get_template_part('content', 'course-header');
 
     <?php
     $user_id = get_current_user_id();
-    $active_lesson_status = dfh_get_student_current_lesson($user_id);
-    $all_lessons = dfh_get_ordered_lesson_tree(0);
+    $all_lessons = array();
+    foreach ($root_lesson_ids as $root_lesson_id) {
+        $all_lessons[] = $root_lesson_id;
+        $all_lessons = array_merge($all_lessons, dfh_get_ordered_lesson_tree($root_lesson_id));
+    }
+    $all_lessons = array_values(array_unique(array_map('intval', $all_lessons)));
     $total_lessons = count($all_lessons);
     $completed_lessons = dfh_get_completed_lessons($user_id);
+    $completed_lessons = array_map('intval', $completed_lessons);
     $completed_count = count(array_intersect($completed_lessons, $all_lessons));
+
+    $active_lesson_status = false;
+    if (is_user_logged_in()) {
+        foreach ($all_lessons as $lesson_id) {
+            if (!in_array($lesson_id, $completed_lessons, true)) {
+                $active_lesson_status = $lesson_id;
+                break;
+            }
+        }
+        if (!$active_lesson_status && $total_lessons > 0) {
+            $active_lesson_status = 'completed';
+        }
+    }
 
     // Calculate progress percentage for a subtle progress bar
     $progress_percent = ($total_lessons > 0) ? round(($completed_count / $total_lessons) * 100) : 0;
@@ -123,7 +149,7 @@ get_template_part('content', 'course-header');
             <p class="small-text course-landing__note">Note: Access to lessons will be granted as you progress through the course.</p>
             <?php if ($root_lessons): ?>
                 <div class="lesson-list__container">
-                    <?php echo dfh_render_lesson_tree($root_lessons, 1); ?>
+                    <?php echo dfh_render_lesson_tree($root_lesson_ids, 1, $active_lesson_status); ?>
                 </div>
             <?php endif; ?>
         </div>

@@ -396,7 +396,7 @@ function dfh_get_adjacent_lesson( $current_lesson_id ) {
     return $result;
 }
 
-function dfh_render_lesson_children($parent_id, $level = 1)
+function dfh_render_lesson_children($parent_id, $level = 1, $active_lesson = null)
 {
     $children = get_posts(array(
         'post_type' => 'lesson',
@@ -408,6 +408,10 @@ function dfh_render_lesson_children($parent_id, $level = 1)
 
     if (!$children)
         return '';
+
+    if (null === $active_lesson) {
+        $active_lesson = function_exists('dfh_get_student_current_lesson') ? dfh_get_student_current_lesson() : null;
+    }
 
     function_exists('dfh_is_lesson_completed') ? '' : null;
 
@@ -423,9 +427,8 @@ function dfh_render_lesson_children($parent_id, $level = 1)
         $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($child->ID) : false;
         $bookmarked = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($child->ID) : false;
         $bookmark_html = $bookmarked ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="sr">Bookmarked</span></span>' : '';
-        $active = function_exists('dfh_get_student_current_lesson') ? dfh_get_student_current_lesson() : null;
         // A lesson is considered "started" if it's completed or it's the user's current active lesson.
-        $started = $completed || ($active && ((int) $active === (int) $child->ID));
+        $started = $completed || ($active_lesson && ((int) $active_lesson === (int) $child->ID));
 
         if ( ! $started ) {
             // Not started: render as non-clickable span and omit the progress chip.
@@ -435,7 +438,7 @@ function dfh_render_lesson_children($parent_id, $level = 1)
             $chip_class = $completed ? 'chip complete' : 'chip in-progress';
             $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
-        $output .= dfh_render_lesson_children($child->ID, $lvl + 1);
+        $output .= dfh_render_lesson_children($child->ID, $lvl + 1, $active_lesson);
         $output .= '</li>';
     }
     $output .= '</ul>';
@@ -443,10 +446,10 @@ function dfh_render_lesson_children($parent_id, $level = 1)
     return $output;
 }
 
-function dfh_render_lesson_tree($roots = null, $level = 1)
+function dfh_render_lesson_tree($roots = null, $level = 1, $active_lesson = null)
 {
     if (empty($roots)) {
-        return dfh_render_lesson_children(0, $level);
+        return dfh_render_lesson_children(0, $level, $active_lesson);
     }
 
     if (!is_array($roots)) {
@@ -475,6 +478,9 @@ function dfh_render_lesson_tree($roots = null, $level = 1)
     }
 
     $lvl = intval($level);
+    if (null === $active_lesson) {
+        $active_lesson = function_exists('dfh_get_student_current_lesson') ? dfh_get_student_current_lesson() : null;
+    }
     $output = '<ul class="lesson-list l' . $lvl . '">';
     foreach ($filtered_roots as $r_id) {
         $is_current = ($r_id === get_the_ID());
@@ -486,9 +492,8 @@ function dfh_render_lesson_tree($roots = null, $level = 1)
         $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($r_id) : false;
         $bookmarked_root = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($r_id) : false;
         $bookmark_html_root = $bookmarked_root ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="sr">Bookmarked</span></span>' : '';
-        $active = function_exists('dfh_get_student_current_lesson') ? dfh_get_student_current_lesson() : null;
         // A lesson is considered "started" if it's completed or it's the user's current active lesson.
-        $started = $completed || ($active && ((int) $active === (int) $r_id));
+        $started = $completed || ($active_lesson && ((int) $active_lesson === (int) $r_id));
 
         if ( ! $started ) {
             // Not started: render as non-clickable span and omit the progress chip.
@@ -498,7 +503,7 @@ function dfh_render_lesson_tree($roots = null, $level = 1)
             $chip_class = $completed ? 'chip complete' : 'chip in-progress';
             $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</a>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
-        $output .= dfh_render_lesson_children($r_id, $lvl + 1);
+        $output .= dfh_render_lesson_children($r_id, $lvl + 1, $active_lesson);
         $output .= '</li>';
     }
     $output .= '</ul>';
