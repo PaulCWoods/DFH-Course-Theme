@@ -7,6 +7,7 @@ $is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
 $bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
 $bookmark_class = $is_bookmarked ? 'button bookmark-btn active strong' : 'button bookmark-btn';
 $bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
+$playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 // Gate check at the very top of single-lesson.php or single-course.php
 if (!dfh_user_has_course_access()) {
     get_header();
@@ -85,11 +86,22 @@ get_header();
             <!-- Syllabus overlay toggle -->
 
         </nav>
-        <button class="progress-toggle course-progress__toggle button subtle" command="toggle-popover"
-            commandfor="course-progress">
-            <span class="sr@<sm">Progress</span>
-            <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Navigation" /></svg>
-        </button>
+        <div class="lesson-head__controls">
+        
+            <?php if ($playback_id): ?>
+                <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-stick"
+                    aria-controls="lesson-video-player" aria-pressed="true">
+                    <span class="sr">Unstick video</span>
+                    <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Unlock" /></svg>
+                </button>
+            <?php endif; ?>
+
+            <button class="progress-toggle course-progress__toggle button subtle" command="toggle-popover"
+                commandfor="course-progress">
+                <span class="sr@<sm">Progress</span>
+                <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Navigation" /></svg>
+            </button>
+        </div>
     </div>
 
 </header>
@@ -117,11 +129,10 @@ get_header();
 
         <?php
         // Video playback: Mux only (legacy fallback removed)
-        $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
         if ($playback_id): ?>
             <div class="lesson-video">
                 <div class="lesson-video__container container">
-                    <mux-player playback-id="<?php echo esc_attr($playback_id); ?>" accent-color="#2eab93"
+                    <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>" accent-color="#2eab93"
                         metadata-video-title="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:auto;" thumbnail-time="2">
                     </mux-player>
                 </div>
@@ -433,6 +444,20 @@ get_header();
 <!-- Tiny Inline JS for AJAX Progression -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const videoStickToggle = document.getElementById('video-stick-toggle');
+
+        if (videoStickToggle) {
+            videoStickToggle.addEventListener('click', function () {
+                const isSticky = videoStickToggle.classList.contains('video-stick');
+
+                videoStickToggle.classList.toggle('video-stick', !isSticky);
+                videoStickToggle.classList.toggle('video-unstick', isSticky);
+                videoStickToggle.setAttribute('aria-pressed', String(!isSticky));
+                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Stick video' : 'Unstick video';
+                videoStickToggle.querySelector('use').setAttribute('href', isSticky ? '#Lock' : '#Unlock');
+            });
+        }
+
         const btn = document.getElementById('dfh-complete-btn');
         if (!btn) return;
 

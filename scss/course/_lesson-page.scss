@@ -30,6 +30,13 @@ $lesson-bp: 60em;
     inline-size: 100%;
 }
 
+.lesson-head__controls {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    gap: 0;
+}
+
 .lesson-head__code-badge {
     align-self: stretch;
     align-items: center;
@@ -128,10 +135,21 @@ $lesson-bp: 60em;
 .lesson-video {
     padding-inline-start: calc(0px + env(safe-area-inset-left));
     padding-inline-end: calc(0px + env(safe-area-inset-left));
-    @media (width < #{$lesson-bp}) and (aspect-ratio < 1/1) {
-        position: sticky;
-        inset-block-start: var(--lesson-aside-sticky-top, var(--spacing-4));
-        z-index: 1;
+    
+
+    .site:has(.video-stick) & {
+        @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) {
+            position: sticky;
+            inset-block-start: var(--lesson-aside-sticky-top, var(--spacing-4));
+            z-index: 1;
+        }
+    }
+}
+
+.lesson-video__toggle.button {
+    display: none;
+    @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) {
+        display: inline-flex;
     }
 }
 
