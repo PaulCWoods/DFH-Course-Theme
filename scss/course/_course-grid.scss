@@ -1,6 +1,10 @@
 
 .course-card-list {
     --index-card-width: var(--spacing-20);
+
+    li:first-child {
+        grid-column: 1 / -1;
+    }
 }
 
 .course-card__badge {
