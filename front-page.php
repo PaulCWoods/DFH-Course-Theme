@@ -114,7 +114,7 @@ get_header();
         const card = e.target.closest('.index-card');
         if (card) {
             card.classList.add('is-loading');
-        }
+            card.setAttribute('aria-busy', 'true');        }
     });
 </script>
 <?php
