@@ -149,7 +149,9 @@ $lesson-bp: 60em;
 .lesson-video__toggle.button {
     display: none;
     @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) {
-        display: inline-flex;
+        .site:has(.lesson-video) & {
+            display: inline-flex;
+        }
     }
 }
 
