@@ -138,7 +138,7 @@ $lesson-bp: 60em;
     
 
     .site:has(.video-stick) & {
-        @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) {
+        @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
             position: sticky;
             inset-block-start: var(--lesson-aside-sticky-top, var(--spacing-4));
             z-index: 1;
@@ -148,7 +148,7 @@ $lesson-bp: 60em;
 
 .lesson-video__toggle.button {
     display: none;
-    @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) {
+    @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
         .site:has(.lesson-video) & {
             display: inline-flex;
         }
