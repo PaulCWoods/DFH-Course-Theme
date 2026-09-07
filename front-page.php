@@ -109,5 +109,13 @@ get_header();
         </div>
     </section>
 </main>
+<script >
+    document.addEventListener('click', function(e) {
+        const card = e.target.closest('.index-card');
+        if (card) {
+            card.classList.add('is-loading');
+        }
+    });
+</script>
 <?php
 get_footer();
