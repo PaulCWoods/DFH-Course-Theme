@@ -108,15 +108,18 @@ get_template_part('content', 'course-header');
                 <?php endif; ?>
             </div>
         </section>
-        <div class="course-landing__main prose">
-            <div class="container +2/3 +start">
+    </article>
+    <section class="course-landing__section course-landing__about" aria-describedby="course-about-heading">
+        <article class="container">
+            <h2 id="course-about-heading" class="heading">About this course</h2>
+            <div class="prose">
                 <?php the_content(); ?>
             </div>
-        </div>
-    </article>
-    <section class="course-landing__syllabus" aria-describedby="course-permissions-heading">
+        </article>
+    </section>
+    <section class="course-landing__section course-landing__syllabus" aria-describedby="course-plan-heading">
         <div class="container">
-            <h2 id="course-permissions-heading" class="heading">Course Plan</h2>
+            <h2 id="course-plan-heading" class="heading">Course plan</h2>
             <p class="small-text course-landing__note">Note: Access to lessons will be granted as you progress through the course.</p>
             <?php if ($root_lessons): ?>
                 <div class="lesson-list__container">

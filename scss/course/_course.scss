@@ -22,13 +22,13 @@ $course-bp: 60em;
     }
 }
 
-:where(.course-landing__main, .course-landing__intro, .course-landing__header, .course-landing__access, .course-landing__syllabus) {
+:where(.course-landing__intro, .course-landing__header, .course-landing__access, .course-landing__section) {
     padding-block: var(--site-block-padding, var(--ui-spacing-cushion));
     padding-inline-start: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
     padding-inline-end: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
 }
 
-:where(.course-landing__main, .course-landing__intro, .course-landing__header, .course-landing__access) {
+:where(.course-landing__intro, .course-landing__header, .course-landing__access) {
     @media screen and (width > #{$course-bp}) {
         padding-inline-start: var(--site-block-padding, var(--ui-spacing-cushion));
     }
@@ -100,19 +100,20 @@ $course-bp: 60em;
     }
 }
 
-.course-landing__main {
-    border-block-start: var(--ui-border-subtle);
-}
-
-.course-landing__syllabus {
+.course-landing__section {
     background: var(--ui-color-background-surface);
-    box-shadow: var(--ui-shadow-inset);
+    border-block-start: var(--ui-border);
     flex-grow: 1;
     gap: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
     padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
 
     .heading {
         margin-block-end: var(--ui-spacing-unit);
+    }
+
+    + .course-landing__section {
+        border-block-start: var(--ui-border-subtle);
+        box-shadow: none;
     }
 }
 
