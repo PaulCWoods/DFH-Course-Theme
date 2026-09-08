@@ -1,0 +1,144 @@
+.products {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    margin-block: var(--ui-spacing-cushion);
+    max-inline-size: none;
+    padding: 0;
+}
+
+.product {
+    align-items: center;
+    border-block-end: var(--ui-border-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    font-size: 1em;
+    gap: var(--ui-spacing-unit);
+    padding-block: var(--ui-spacing-unit);
+
+    h2 {
+        font-size: 1em;
+        margin: 0;
+    }
+}
+
+a.woocommerce-loop-product__link {
+    align-items: center;
+    display: flex;
+    font-weight: inherit;
+    text-decoration: none;
+    flex-grow: 1;
+    flex-direction: row;
+    gap: var(--ui-spacing-unit);
+
+    img {
+        aspect-ratio: 1 / 1;
+        inline-size: var(--spacing-4);
+        object-fit: cover;
+
+        @media screen and (width > 48em) {
+            aspect-ratio: 4 / 3;
+            inline-size: var(--spacing-8);
+        }
+    }
+
+
+    .woocommerce-loop-product__title {
+        text-decoration: underline;
+        text-decoration-color: var(--link-underline-color);
+        text-decoration-thickness: var(--link-underline-thickness);
+        text-underline-offset: var(--link-underline-offset);
+        flex-grow: 1;
+    }
+
+    @media (hover:hover) {
+        &:hover {
+            color: inherit;
+
+            .woocommerce-loop-product__title {
+                color: var(--link-hover-color);
+            }
+        }
+    }
+
+    &:active {
+        color: inherit;
+
+        .woocommerce-loop-product__title {
+            color: var(--link-active-color);
+        }
+    }
+
+    .price {
+        text-align: end;
+    }
+}
+
+.single-product {
+
+    :is(.product,
+        .woocommerce-notices-wrapper) {
+        max-inline-size: var(--ui-site-width);
+        margin-inline: auto;
+    }
+
+    .woocommerce-message {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .images {
+        position: relative;
+    }
+
+    .woocommerce-product-gallery__trigger {
+        align-items: center;
+        background-color: var(--ui-color-background-dark);
+        display: flex;
+        inset-block-start: 0;
+        inset-inline-start: 0;
+        justify-content: center;
+        min-block-size: var(--ui-spacing-target);
+        min-inline-size: var(--ui-spacing-target);
+        position: absolute;
+        z-index: 1;
+    }
+
+    .summary {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        gap: var(--ui-spacing-unit);
+        flex: 1;
+    }
+
+    .price {
+        font-size: var(--ui-typography-subheading-font-size);
+        font-family: var(--ui-typography-subheading-font-family);
+        font-weight: var(--ui-typography-subheading-font-weight);
+        line-height: var(--ui-typography-subheading-line-height);
+    }
+
+    .cart {
+        display: flex;
+        flex-direction: row;
+        gap: var(--ui-spacing-unit);
+    }
+
+    .quantity {
+        flex: 1;
+    }
+}
+
+.wp-block-woocommerce-empty-cart-block {
+    border: var(--ui-border-subtle);
+    padding: var(--ui-spacing-cushion);
+}
+
+.wc-block-grid__products {
+    max-inline-size: none;
+}

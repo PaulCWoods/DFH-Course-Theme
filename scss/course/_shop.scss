@@ -1,0 +1,63 @@
+.shop_table {
+    inline-size: 100%;
+
+    td,
+    th {
+        padding: calc(var(--ui-spacing-unit)/2);
+        padding-inline-start: 0;
+
+        &:has(.amount) {
+            text-align: end;
+        }
+
+        a {
+            color: var(--link-color);
+            font-weight: bold;
+            text-decoration-color: var(--link-underline-color);
+            text-decoration-thickness: var(--link-underline-thickness);
+            text-underline-offset: var(--link-underline-offset);
+
+            @media (hover:hover) {
+                &:hover {
+                    color: var(--link-hover-color);
+                }
+            }
+
+            &:active {
+                color: var(--link-active-color);
+            }
+        }
+    }
+
+    thead {
+        border-block-end: var(--ui-border);
+
+        th {
+            font-weight: bold;
+
+            &.product-total {
+                inline-size: 1px;
+                text-align: end;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border-block-end: var(--ui-border-subtle);
+        }
+    }
+
+    tfoot {
+        border-block-start: var(--ui-border);
+
+        tr+tr {
+            border-block-start: var(--ui-border-subtle);
+        }
+
+        th[scope="row"] {
+            font-weight: bold;
+        }
+    }
+}

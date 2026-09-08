@@ -1,7 +1,7 @@
 .resource-list {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: calc(var(--ui-spacing-unit)/2);
     list-style: none;
     max-inline-size: var(--spacing-32);
 
@@ -9,6 +9,6 @@
         display: block;
         background-color: var(--ui-color-background-surface);
         font-weight: bold;
-        padding: 0.5rem 1rem;
+        padding: calc(var(--ui-spacing-unit)/2) var(--ui-spacing-unit);
     }
 }

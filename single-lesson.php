@@ -87,19 +87,23 @@ get_header();
 
         </nav>
         <div class="lesson-head__controls">
-        
+
             <?php if ($playback_id): ?>
                 <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-stick"
                     aria-controls="lesson-video-player" aria-pressed="true">
                     <span class="sr">Unstick video</span>
-                    <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Unlock" /></svg>
+                    <svg class="icon" width="32" height="32" aria-hidden="true">
+                        <use href="#Unlock" />
+                    </svg>
                 </button>
             <?php endif; ?>
 
             <button class="progress-toggle course-progress__toggle button subtle" command="toggle-popover"
                 commandfor="course-progress">
                 <span class="sr@<sm">Progress</span>
-                <svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Navigation" /></svg>
+                <svg class="icon" width="32" height="32" aria-hidden="true">
+                    <use href="#Navigation" />
+                </svg>
             </button>
         </div>
     </div>
@@ -120,7 +124,7 @@ get_header();
                     ?>
                     <p class="lesson-header__subtitle"><?php echo esc_html($lesson_subtitle); ?></p>
                 <?php endif; ?>
-                
+
                 <?php if ($is_completed): ?>
                     <span class="lesson-header__kicker small-heading">Complete</span>
                 <?php endif; ?>
@@ -132,8 +136,9 @@ get_header();
         if ($playback_id): ?>
             <div class="lesson-video">
                 <div class="lesson-video__container container">
-                    <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>" accent-color="#2eab93"
-                        metadata-video-title="<?php echo esc_attr(get_the_title()); ?>" style="width:100%;height:auto;" thumbnail-time="2">
+                    <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>"
+                        accent-color="#2eab93" metadata-video-title="<?php echo esc_attr(get_the_title()); ?>"
+                        style="width:100%;height:auto;" thumbnail-time="2">
                     </mux-player>
                 </div>
             </div>
@@ -143,14 +148,16 @@ get_header();
             <div class="container lesson-main">
                 <div class="lesson-body prose"><?php the_content(); ?></div>
                 <aside class="lesson-aside">
-                            <div class="lesson-bookmark">
-                                <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
-                                    data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>"
-                                    class="<?php echo esc_attr($bookmark_class); ?>">
-                                    <span class="bookmark-label"><?php echo esc_html($bookmark_text); ?></span>
-                                    <svg class="icon" width="32" height="32" title="Bookmark" aria-hidden="true"><use href="<?php echo esc_attr($bookmark_icon); ?>" /></svg>
-                                </button>
-                            </div>
+                    <div class="lesson-bookmark">
+                        <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
+                            data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>"
+                            class="<?php echo esc_attr($bookmark_class); ?>">
+                            <span class="bookmark-label"><?php echo esc_html($bookmark_text); ?></span>
+                            <svg class="icon" width="32" height="32" title="Bookmark" aria-hidden="true">
+                                <use href="<?php echo esc_attr($bookmark_icon); ?>" />
+                            </svg>
+                        </button>
+                    </div>
                     <?php
                     // Gather stats and external links; render aside only if either exists
                     $stats_meta = get_post_meta(get_the_ID(), 'lesson_stats', true);
@@ -191,29 +198,69 @@ get_header();
                         if (!empty($external_links)):
                             ?>
                             <section class="lesson-resources lesson-links" aria-describedby="lesson-links-heading">
-                                <div class="container">
-                                    <h2 class="subheading lesson-resources__heading" id="lesson-links-heading">Further reading &
-                                        links</h2>
-                                    <ul class="resource-list">
-                                        <?php
-                                        $lines = explode("\n", $external_links);
-                                        foreach ($lines as $line) {
-                                            $line = trim($line);
-                                            if (empty($line))
-                                                continue;
-                                            $parts = explode('|', $line);
-                                            $link_title = trim($parts[0]);
-                                            $link_url = isset($parts[1]) ? trim($parts[1]) : '#';
-                                            echo '<li><a href="' . esc_url($link_url) . '" target="_blank" class="link" rel="noopener noreferrer">' . esc_html($link_title) . '</a></li>';
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
+                                <h2 class="subheading lesson-resources__heading" id="lesson-links-heading">Further reading &
+                                    links</h2>
+                                <ul class="resource-list">
+                                    <?php
+                                    $lines = explode("\n", $external_links);
+                                    foreach ($lines as $line) {
+                                        $line = trim($line);
+                                        if (empty($line))
+                                            continue;
+                                        $parts = explode('|', $line);
+                                        $link_title = trim($parts[0]);
+                                        $link_url = isset($parts[1]) ? trim($parts[1]) : '#';
+                                        echo '<li><a href="' . esc_url($link_url) . '" target="_blank" class="link" rel="noopener noreferrer">' . esc_html($link_title) . '</a></li>';
+                                    }
+                                    ?>
+                                </ul>
                             </section>
                             <?php
                         endif;
                         ?>
                     <?php endif; ?>
+
+                    <?php
+$lesson_id = get_the_ID();
+$download_ids = get_post_meta($lesson_id, '_dfh_linked_download_ids', true);
+
+if (!empty($download_ids) && is_array($download_ids)):
+    echo '<section class="lesson-resources lesson-downloads" aria-describedby="lesson-downloads-heading"><h2 class="subheading lesson-resources__heading" id="lesson-downloads-heading">Lesson downloads</h2><ul>';
+    
+    foreach ($download_ids as $download_id) {
+        $download_post = get_post($download_id);
+        $attachment_id = get_post_meta($download_id, '_dfh_download_attachment_id', true);
+        $pdf_url = $attachment_id ? wp_get_attachment_url($attachment_id) : '';
+        
+        if ($download_post && $pdf_url) {
+            ?>
+            <li>
+            <div class="lesson-download">
+                <?php if (has_post_thumbnail($download_id)): ?>
+                    <div class="lesson-download__thumb">
+                        <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>
+                    </div>
+                <?php endif; ?>
+                <div class="lesson-download__info">
+                    <h3>
+                        <a class="link" href="<?php echo esc_url($pdf_url); ?>" download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
+                        <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                            <use href="#Download" />
+                        </svg>
+                    </h3>
+                    <?php if (trim($download_post->post_excerpt) !== ''): ?>
+                        <p class="tc-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                    <?php endif; ?>
+                </div>
+            </div>
+            </li>
+            <?php
+        }
+    }
+    
+    echo '</ul></section>';
+endif;
+?>
                 </aside>
             </div>
         </div>
@@ -233,8 +280,8 @@ get_header();
             <?php
             $children_html = dfh_render_lesson_children($parent_id, $child_level);
             if (!empty(trim($children_html))): ?>
-                <section class="container lesson-explore__section lesson-children" aria-describedby="lesson-children-heading"
-                    data-level="<?php echo esc_attr($child_level); ?>">
+                <section class="container lesson-explore__section lesson-children"
+                    aria-describedby="lesson-children-heading" data-level="<?php echo esc_attr($child_level); ?>">
                     <h2 class="heading" id="lesson-children-heading">Lessons in this section</h2>
                     <div class="lesson-list__container">
                         <?php echo $children_html; ?>
@@ -310,21 +357,25 @@ get_header();
                     <?php if ($adjacent['previous']): ?>
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
                             class="link-button prev-lesson">
-                            <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowLeft" /></svg>
+                            <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                                <use href="#ArrowLeft" />
+                            </svg>
                             <span class="sr@<sm">Previous Lesson</span>
                         </a>
                     <?php endif; ?>
 
-                            <?php
-                            // Choose an icon id for the progress button
-                            $complete_icon = $is_last_lesson ? '#Check' : '#ArrowRight';
-                            ?>
-                            <button id="dfh-complete-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
-                                data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_progress_nonce')); ?>"
-                                class="<?php echo esc_attr($button_class); ?>">
-                                <span class="progress-label"><?php echo esc_html($display_button_label); ?></span>
-                                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="<?php echo esc_attr($complete_icon); ?>" /></svg>
-                            </button>
+                    <?php
+                    // Choose an icon id for the progress button
+                    $complete_icon = $is_last_lesson ? '#Check' : '#ArrowRight';
+                    ?>
+                    <button id="dfh-complete-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
+                        data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_progress_nonce')); ?>"
+                        class="<?php echo esc_attr($button_class); ?>">
+                        <span class="progress-label"><?php echo esc_html($display_button_label); ?></span>
+                        <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                            <use href="<?php echo esc_attr($complete_icon); ?>" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -365,12 +416,17 @@ get_header();
         ?>
         <header class="panel__head progress-panel__header">
             <a class="link-button syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
-                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Home" /></svg>
+                <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                    <use href="#Home" />
+                </svg>
                 Courses Home
             </a>
 
-            <button class="syllabus-close button subtle" command="hide-popover" commandfor="course-progress" title="Close navigation">
-                <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#Close" /></svg>
+            <button class="syllabus-close button subtle" command="hide-popover" commandfor="course-progress"
+                title="Close navigation">
+                <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                    <use href="#Close" />
+                </svg>
                 <span class="sr">Close Navigation</span>
             </button>
         </header>
@@ -414,12 +470,15 @@ get_header();
             $progress_percent = $progress_total > 0 ? round(($progress_count / $progress_total) * 100) : 0;
             ?>
             <div class="progress-panel__course-progress">
-                <h3 class="progress-panel__course-progress-heading">Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h3>
+                <h3 class="progress-panel__course-progress-heading">Your progress:
+                    <?php echo esc_html($progress_percent); ?>% Complete
+                </h3>
                 <div class="progress-bar-container">
-                    <progress class="progress-bar" max="100" value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
+                    <progress class="progress-bar" max="100"
+                        value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
                 </div>
             </div>
-            
+
             <div class="lesson-list__container">
                 <?php
                 // If we have a course, get its roots; otherwise leave null to render top-level lessons
@@ -482,13 +541,13 @@ get_header();
             })
                 .then(response => response.json())
                 .then(data => {
-                        if (data.success && data.data.next_url) {
-                            window.location.href = data.data.next_url;
-                        } else {
-                            alert('Error updating progress. Please try again.');
-                            btn.disabled = false;
-                            if (progressLabel) progressLabel.textContent = '<?php echo esc_js( $display_button_label ); ?>';
-                        }
+                    if (data.success && data.data.next_url) {
+                        window.location.href = data.data.next_url;
+                    } else {
+                        alert('Error updating progress. Please try again.');
+                        btn.disabled = false;
+                        if (progressLabel) progressLabel.textContent = '<?php echo esc_js($display_button_label); ?>';
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -520,23 +579,23 @@ get_header();
             })
                 .then(response => response.json())
                 .then(data => {
-                        if (data.success) {
-                            const label = bookmarkBtn.querySelector('.bookmark-label');
-                            const useEl = bookmarkBtn.querySelector('use');
-                            if (data.data.is_bookmarked) {
-                                if (label) label.textContent = 'Bookmarked';
-                                bookmarkBtn.classList.add('active');
-                                bookmarkBtn.classList.add('strong');
-                                if (useEl) useEl.setAttribute('href', '#Bookmarked');
-                            } else {
-                                if (label) label.textContent = 'Bookmark Lesson';
-                                bookmarkBtn.classList.remove('active');
-                                bookmarkBtn.classList.remove('strong');
-                                if (useEl) useEl.setAttribute('href', '#Bookmark');
-                            }
+                    if (data.success) {
+                        const label = bookmarkBtn.querySelector('.bookmark-label');
+                        const useEl = bookmarkBtn.querySelector('use');
+                        if (data.data.is_bookmarked) {
+                            if (label) label.textContent = 'Bookmarked';
+                            bookmarkBtn.classList.add('active');
+                            bookmarkBtn.classList.add('strong');
+                            if (useEl) useEl.setAttribute('href', '#Bookmarked');
                         } else {
-                            alert('Could not update bookmark.');
+                            if (label) label.textContent = 'Bookmark Lesson';
+                            bookmarkBtn.classList.remove('active');
+                            bookmarkBtn.classList.remove('strong');
+                            if (useEl) useEl.setAttribute('href', '#Bookmark');
                         }
+                    } else {
+                        alert('Could not update bookmark.');
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);

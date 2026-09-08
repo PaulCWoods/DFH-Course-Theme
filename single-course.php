@@ -38,10 +38,26 @@ get_template_part('content', 'course-header');
 
     <?php
     $user_id = get_current_user_id();
+    $course_id = get_the_ID();
+
+    // 1. Check if user has course access (requires access function and product linkage)
+    $has_access = true; // Default fallback if access functions aren't restricted
+    if (function_exists('dfh_user_has_course_access')) {
+        $has_access = dfh_user_has_course_access($user_id, $course_id);
+    }
+
+    // Get linked WooCommerce product
+    $woo_product_id = get_post_meta($course_id, '_dfh_product_id', true);
+    $product = $woo_product_id ? wc_get_product($woo_product_id) : false;
+
+    // Gather lesson tree data...
     $all_lessons = array();
-    foreach ($root_lesson_ids as $root_lesson_id) {
-        $all_lessons[] = $root_lesson_id;
-        $all_lessons = array_merge($all_lessons, dfh_get_ordered_lesson_tree($root_lesson_id));
+    foreach ($root_lessons as $root_lesson) {
+        $current_root_id = is_object($root_lesson) ? (int) $root_lesson->ID : (int) $root_lesson;
+        if ($current_root_id) {
+            $all_lessons[] = $current_root_id;
+            $all_lessons = array_merge($all_lessons, dfh_get_ordered_lesson_tree($current_root_id));
+        }
     }
     $all_lessons = array_values(array_unique(array_map('intval', $all_lessons)));
     $total_lessons = count($all_lessons);
@@ -50,7 +66,7 @@ get_template_part('content', 'course-header');
     $completed_count = count(array_intersect($completed_lessons, $all_lessons));
 
     $active_lesson_status = false;
-    if (is_user_logged_in()) {
+    if (is_user_logged_in() && $has_access) {
         foreach ($all_lessons as $lesson_id) {
             if (!in_array($lesson_id, $completed_lessons, true)) {
                 $active_lesson_status = $lesson_id;
@@ -62,7 +78,6 @@ get_template_part('content', 'course-header');
         }
     }
 
-    // Calculate progress percentage for a subtle progress bar
     $progress_percent = ($total_lessons > 0) ? round(($completed_count / $total_lessons) * 100) : 0;
     $current_user = wp_get_current_user();
     $user_name = '';
@@ -75,21 +90,48 @@ get_template_part('content', 'course-header');
 
         <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
             <div class="container +2/3 +start">
-                <?php if (!is_user_logged_in()): ?>
-                    <!-- State 0: Guest Visitor -->
-                    <?php $welcome_back_msg; ?>
+                <?php if (!is_user_logged_in() && $product && !$has_access): ?>
+                    <!-- State 0A: Logged-out Visitor needing purchase -->
                     <h2>Ready to start learning?</h2>
-                    <p class="small-text tc-muted">Log in or enroll to access the course syllabus and track your progress.</p>
-                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In to Access
-                        Course</a>
+                    <p class="small-text tc-muted">Enroll now or log in to your account to get started.</p>
+                    <div class="course-purchase-actions" style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
+                        <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
+                            <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
+                            <button type="submit" class="button strong buy-button">
+                                <span>
+                                    Enroll Now (<?php echo $product->get_price_html(); ?>)
+                                </span>
+                            </button>
+                        </form>
+                        <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In</a>
+                    </div>
+
+                <?php elseif (!is_user_logged_in()): ?>
+                    <!-- State 0B: Standard Guest Visitor (No product linked) -->
+                    <h2>Ready to start learning?</h2>
+                    <p class="small-text tc-muted">Log in or register to access the course syllabus.</p>
+                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In to Access Course</a>
+
+                <?php elseif (!$has_access && $product): ?>
+                    <!-- State 0C: Logged-in User without purchase -->
+                    <?php echo $welcome_msg; ?>
+                    <h2>Unlock Full Course Access</h2>
+                    <p class="small-text tc-muted">Purchase the course to unlock all lessons and track your progress.</p>
+                    <div class="course-purchase-actions" style="margin-top: 1.5rem;">
+                        <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
+                            <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
+                            <button type="submit" class="button strong buy-button">
+                                <span>Buy Course — <?php echo $product->get_price_html(); ?></span>
+                            </button>
+                        </form>
+                    </div>
 
                 <?php elseif ('completed' === $active_lesson_status): ?>
                     <!-- State 3: Course Completed -->
                     <div class="course-landing__completion">
                         <h2>Course completed!</h2>
                         <p>Congratulations! You have finished all lessons in this course.</p>
-                        <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review
-                            from Beginning</a>
+                        <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review from Beginning</a>
                     </div>
 
                 <?php elseif ($completed_count > 0): ?>
@@ -97,8 +139,7 @@ get_template_part('content', 'course-header');
                     <?php echo $welcome_back_msg; ?>
                     <h2>Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h2>
                     <div class="progress-bar-container course-landing__progress">
-                        <progress class="progress-bar" max="100"
-                            value="<?php echo esc_html($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
+                        <progress class="progress-bar" max="100" value="<?php echo esc_html($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
                     </div>
 
                     <?php
@@ -114,7 +155,7 @@ get_template_part('content', 'course-header');
                     </a>
 
                 <?php else: ?>
-                    <!-- State 1: Brand New (Not Started) -->
+                    <!-- State 1: Brand New (Not Started / Has Access) -->
                     <?php echo $welcome_msg; ?>
                     <h2>Ready to Begin?</h2>
                     <p class="small-text tc-muted">Jump straight into the first lesson of the course.</p>

@@ -1,0 +1,181 @@
+@mixin prose {
+    // ========================================================================
+    // Block rhythm
+    // ========================================================================
+
+    // Block rhythm: shared spacing keeps the reading flow predictable.
+    :where(h1, h2, h3, h4, h5, h6, p, dl, ul, ol, blockquote) {
+        margin-block-end: var(--ui-spacing-breathe);
+        &:last-child {
+            margin-block-end: 0;
+        }
+    }
+
+    // ========================================================================
+    // Headings
+    // ========================================================================
+
+    // Headings use the typography scale defined by the design system.
+    :where(h1) {
+        font-size: var(--ui-typography-title-font-size);
+        font-family: var(--ui-typography-title-font-family);
+        font-weight: var(--ui-typography-title-font-weight);
+        letter-spacing: var(--ui-typography-title-letter-spacing);
+        line-height: var(--ui-typography-title-line-height);
+        text-transform: var(--ui-typography-title-text-transform);
+    }
+
+    :where(h2) {
+        font-size: var(--ui-typography-heading-font-size);
+        font-family: var(--ui-typography-heading-font-family);
+        font-weight: var(--ui-typography-heading-font-weight);
+        line-height: var(--ui-typography-heading-line-height);
+    }
+
+    :where(h3) {
+        font-size: var(--ui-typography-subheading-font-size);
+        font-family: var(--ui-typography-subheading-font-family);
+        font-weight: var(--ui-typography-subheading-font-weight);
+        line-height: var(--ui-typography-subheading-line-height);
+    }
+
+    :where(h4, h5, h6) {
+        font-size: var(--ui-typography-body-font-size);
+        font-family: var(--ui-typography-body-font-family);
+        font-weight: var(--ui-typography-body-strong-font-weight);
+        line-height: var(--ui-typography-body-line-height);
+    }
+
+    // Keep headings visually grouped and avoid extra space at the start of a prose block.
+    :where(h1, h2, h3, h4, h5, h6) {
+        margin-block-start: 1.5em;
+        text-wrap: balance;
+
+        + :where(h1, h2, h3, h4, h5, h6),
+        &:first-child {
+            margin-block-start: 0;
+        }
+    }
+
+    // ========================================================================
+    // Lists
+    // ========================================================================
+
+    // Lists use logical indentation and progressively varied markers.
+    :is(blockquote, ul, ol) {
+        padding-inline-start: 1.5em;
+    }
+
+    :is(ul, ol) {
+        :is(ul, ol) {
+            font-size: 1em;
+        }
+    }
+
+    :where(li) {
+        margin-block-end: calc(var(--ui-spacing-breathe) / 2);
+
+        &:last-child {
+            margin-block-end: 0;
+        }
+
+        ol {
+            list-style: lower-latin;
+
+            ol {
+                list-style: lower-roman;
+            }
+        }
+
+        ul {
+            list-style: disc;
+        }
+    }
+
+
+
+    // ========================================================================
+    // Links
+    // ========================================================================
+
+    // Links inherit their color but gain a consistent underline treatment.
+    :where(h1, h2, h3, h4, h5, h6, p, dl, ul, ol) {
+        a {
+            font-weight: var(--prose-link-font-weight);
+            text-decoration: var(--prose-link-underline);
+            text-decoration-color: var(--prose-link-underline-color);
+            text-decoration-thickness: var(--prose-link-underline-thickness);
+            text-underline-offset: var(--prose-link-underline-offset);
+
+            &:hover {
+                color: var(--link-hover-color);
+                text-decoration-color: currentColor;
+            }
+
+            &:active {
+                color: var(--link-active-color);
+            }
+        }
+    }
+
+
+
+    // ========================================================================
+    // Inline semantics
+    // ========================================================================
+
+    // Inline semantics use the body scale and shared decoration settings.
+    :where(strong, b) {
+        font-weight: var(--ui-typography-body-strong-font-weight);
+    }
+
+    :where(u, del, ins, s, b strong, strong b) {
+        text-decoration-color: var(--prose-underline-color);
+        text-decoration-thickness: var(--prose-underline-thickness);
+        text-underline-offset: var(--prose-underline-offset);
+    }
+
+    :where(u, ins, b strong, strong b) {
+        text-decoration: underline;
+    }
+
+    :where(del, s) {
+        text-decoration: line-through;
+    }
+
+    :where(ins) {
+        text-decoration-style: dashed;
+    }
+
+    // Emphasis is kept distinct from strong text by using an italic style.
+    :where(em, i) {
+        font-style: italic;
+
+        // If em or i is inside another em or i, revert font-style to normal.
+        :where(em, i) {
+            font-style: normal;
+        }
+    }
+
+    // Smaller text is useful for side comments and smallprint.
+    :where(small) {
+        font-size: var(--prose-small-font-size);
+        line-height: var(--ui-typography-body-small-line-height);
+    }
+
+    // Subscript and superscript text share a compact typographic treatment.
+    :where(sub, sup) {
+        font-size: var(--ui-typography-script-font-size);
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+    }
+
+    :where(sub) {
+        inset-block-end: -.25em;
+    }
+
+    :where(sup) {
+        inset-block-start: -.5em;
+    }
+}

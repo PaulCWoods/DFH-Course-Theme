@@ -1071,3 +1071,281 @@ function dfh_add_meta_description() {
     echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
 }
 add_action( 'wp_head', 'dfh_add_meta_description', 1 );
+
+/**
+ * Register a meta box for linking a WooCommerce Product ID to a Course.
+ */
+function dfh_register_course_product_meta_box() {
+    add_meta_box(
+        'dfh_course_product_id_box',
+        __('WooCommerce Product ID', 'dfh'),
+        'dfh_render_course_product_meta_box',
+        'course',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'dfh_register_course_product_meta_box');
+
+/**
+ * Render the meta box input field.
+ */
+function dfh_render_course_product_meta_box($post) {
+    // Add a nonce field for security
+    wp_nonce_field('dfh_save_course_product_meta', 'dfh_course_product_nonce');
+
+    // Retrieve current value if it exists
+    $product_id = get_post_meta($post->ID, '_dfh_product_id', true);
+    ?>
+    <p>
+        <label for="dfh_product_id_field">Enter the WooCommerce Product ID for this course:</label>
+    </p>
+    <p>
+        <input type="number" id="dfh_product_id_field" name="dfh_product_id" value="<?php echo esc_attr($product_id); ?>" style="width: 100%;" />
+    </p>
+    <?php
+}
+
+/**
+ * Save the meta box value when the course is saved.
+ */
+function dfh_save_course_product_meta($post_id) {
+    // Check nonce
+    if (!isset($_POST['dfh_course_product_nonce']) || !wp_verify_nonce($_POST['dfh_course_product_nonce'], 'dfh_save_course_product_meta')) {
+        return;
+    }
+
+    // Check user permissions
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // Save or delete the product ID meta
+    if (isset($_POST['dfh_product_id'])) {
+        $product_id = sanitize_text_field($_POST['dfh_product_id']);
+        if (!empty($product_id)) {
+            update_post_meta($post_id, '_dfh_product_id', $product_id);
+        } else {
+            delete_post_meta($post_id, '_dfh_product_id');
+        }
+    }
+}
+add_action('save_post_course', 'dfh_save_course_product_meta');
+
+/**
+ * Automatically grant course access when a WooCommerce order is completed.
+ */
+function dfh_grant_course_access_on_purchase( $order_id ) {
+    $order = wc_get_order( $order_id );
+    if ( ! $order ) {
+        return;
+    }
+
+    $user_id = $order->get_user_id();
+    if ( ! $user_id ) {
+        return; 
+    }
+
+    foreach ( $order->get_items() as $item ) {
+        $product_id = $item->get_product_id();
+
+        // Check if this product is linked to any course
+        $courses = get_posts( array(
+            'post_type'   => 'course',
+            'meta_key'    => '_dfh_product_id',
+            'meta_value'  => $product_id,
+            'numberposts' => 1,
+        ) );
+
+        if ( ! empty( $courses ) ) {
+            // Set the exact user meta your function looks for
+            update_user_meta( $user_id, 'dfh_course_enrolled', '1' );
+        }
+    }
+}
+add_action( 'woocommerce_order_status_completed', 'dfh_grant_course_access_on_purchase' );
+
+/**
+ * Completely disable WooCommerce default stylesheets.
+ */
+add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+
+/**
+ * Register Downloadable Resources Custom Post Type.
+ */
+function dfh_register_download_post_type() {
+    register_post_type('download', array(
+        'labels' => array(
+            'name'          => __('Downloads', 'dfh'),
+            'singular_name' => __('Download', 'dfh'),
+            'add_new_item'  => __('Add New Download', 'dfh'),
+        ),
+        'public'        => true,
+        'has_archive'   => false,
+        'supports'      => array('title', 'editor', 'thumbnail'),
+        'show_in_rest'  => true, // Enables the Gutenberg block editor
+        'menu_icon'     => 'dashicons-media-document',
+    ));
+}
+add_action('init', 'dfh_register_download_post_type');
+
+function dfh_register_download_file_meta_box() {
+    add_meta_box(
+        'dfh_download_file_box',
+        __('PDF Attachment', 'dfh'),
+        'dfh_render_download_file_meta_box',
+        'download',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'dfh_register_download_file_meta_box');
+
+function dfh_render_download_file_meta_box($post) {
+    wp_nonce_field('dfh_save_download_file', 'dfh_download_file_nonce');
+    
+    // We store the Attachment ID instead of a raw URL
+    $attachment_id = get_post_meta($post->ID, '_dfh_download_attachment_id', true);
+    $pdf_url = $attachment_id ? wp_get_attachment_url($attachment_id) : '';
+    ?>
+    <div class="dfh-media-upload-wrapper">
+        <input type="hidden" id="dfh_download_attachment_id" name="dfh_download_attachment_id" value="<?php echo esc_attr($attachment_id); ?>" />
+        
+        <div id="dfh-pdf-preview" style="margin-bottom: 1rem; font-weight: 500;">
+            <?php echo $pdf_url ? 'Selected File: <a href="' . esc_url($pdf_url) . '" target="_blank">' . esc_url($pdf_url) . '</a>' : 'No PDF selected.'; ?>
+        </div>
+
+        <button type="button" class="button" id="dfh_upload_pdf_button">Select or Upload PDF</button>
+        <button type="button" class="button" id="dfh_remove_pdf_button" style="color: #a00; <?php echo $pdf_url ? '' : 'display:none;'; ?>">Remove PDF</button>
+    </div>
+
+    <script>
+    jQuery(document).ready(function($){
+        var file_frame;
+        $('#dfh_upload_pdf_button').on('click', function(e){
+            e.preventDefault();
+            if (file_frame) {
+                file_frame.open();
+                return;
+            }
+            file_frame = wp.media.frames.file_frame = wp.media({
+                title: 'Select PDF for Download',
+                button: { text: 'Use this PDF' },
+                library: { type: 'application/pdf' },
+                multiple: false
+            });
+            file_frame.on('select', function(){
+                var attachment = file_frame.state().get('selection').first().toJSON();
+                $('#dfh_download_attachment_id').val(attachment.id);
+                $('#dfh-pdf-preview').html('Selected File: <a href="' + attachment.url + '" target="_blank">' + attachment.url + '</a>');
+                $('#dfh_remove_pdf_button').show();
+            });
+            file_frame.open();
+        });
+
+        $('#dfh_remove_pdf_button').on('click', function(e){
+            e.preventDefault();
+            $('#dfh_download_attachment_id').val('');
+            $('#dfh-pdf-preview').text('No PDF selected.');
+            $(this).hide();
+        });
+    });
+    </script>
+    <?php
+}
+
+function dfh_save_download_file($post_id) {
+    if (!isset($_POST['dfh_download_file_nonce']) || !wp_verify_nonce($_POST['dfh_download_file_nonce'], 'dfh_save_download_file')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['dfh_download_attachment_id'])) {
+        $attachment_id = absint($_POST['dfh_download_attachment_id']);
+        if ($attachment_id) {
+            update_post_meta($post_id, '_dfh_download_attachment_id', $attachment_id);
+        } else {
+            delete_post_meta($post_id, '_dfh_download_attachment_id');
+        }
+    }
+}
+add_action('save_post_download', 'dfh_save_download_file');
+
+function dfh_enqueue_admin_media_scripts($hook) {
+    global $post;
+    if (($hook == 'post.new.php' || $hook == 'post.php') && 'download' === $post->post_type) {
+        wp_enqueue_media();
+    }
+}
+add_action('admin_enqueue_scripts', 'dfh_enqueue_admin_media_scripts');
+
+/**
+ * Register a meta box on the Lesson post type to link a Download resource.
+ */
+function dfh_register_lesson_download_meta_box() {
+    add_meta_box(
+        'dfh_lesson_download_box',
+        __('Linked Download Resource', 'dfh'),
+        'dfh_render_lesson_download_meta_box',
+        'lesson', // Adjust if your lesson post type slug is different
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'dfh_register_lesson_download_meta_box');
+
+/**
+ * Render the dropdown selector of published Download posts.
+ */
+function dfh_render_lesson_download_meta_box($post) {
+    wp_nonce_field('dfh_save_lesson_download', 'dfh_lesson_download_nonce');
+    
+    // Retrieve currently linked download IDs (stored as an array)
+    $linked_download_ids = get_post_meta($post->ID, '_dfh_linked_download_ids', true);
+    if (!is_array($linked_download_ids)) {
+        $linked_download_ids = $linked_download_ids ? array($linked_download_ids) : array();
+    }
+
+    // Fetch all published download posts
+    $downloads = get_posts(array(
+        'post_type'      => 'download',
+        'posts_per_page' => -1,
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+    ));
+    ?>
+    <p>
+        <label for="dfh_linked_download_ids">Select resources for this lesson (hold Cmd/Ctrl to select multiple):</label>
+    </p>
+    <p>
+        <select name="dfh_linked_download_ids[]" id="dfh_linked_download_ids" multiple style="width: 100%; height: 120px;">
+            <?php foreach ($downloads as $download): ?>
+                <option value="<?php echo esc_attr($download->ID); ?>" <?php selected(in_array($download->ID, $linked_download_ids)); ?>>
+                    <?php echo esc_html($download->post_title); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </p>
+    <?php
+}
+
+function dfh_save_lesson_download($post_id) {
+    if (!isset($_POST['dfh_lesson_download_nonce']) || !wp_verify_nonce($_POST['dfh_lesson_download_nonce'], 'dfh_save_lesson_download')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['dfh_linked_download_ids']) && is_array($_POST['dfh_linked_download_ids'])) {
+        $download_ids = array_map('absint', $_POST['dfh_linked_download_ids']);
+        update_post_meta($post_id, '_dfh_linked_download_ids', $download_ids);
+    } else {
+        delete_post_meta($post_id, '_dfh_linked_download_ids');
+    }
+}
+add_action('save_post_lesson', 'dfh_save_lesson_download');

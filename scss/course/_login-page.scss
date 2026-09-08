@@ -16,7 +16,7 @@
         p {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: calc(var(--ui-spacing-unit) / 2);
         }
 
         input:is([type="button"], [type="submit"]) {
@@ -36,8 +36,8 @@
 
     input:is([type="checkbox"], [type="radio"]) {
         all: revert;
-        block-size: 20px;
-        inline-size: 20px;
+        block-size: var(--form-check-size);
+        inline-size: var(--form-check-size);
         margin: 0;
     }
 }
@@ -50,6 +50,7 @@
     margin-block-end: var(--ui-spacing-breathe);
 }
 
+.woocommerce-form.login,
 .login-page form,
 .login-message {
     background-color: var(--ui-color-background-fade);

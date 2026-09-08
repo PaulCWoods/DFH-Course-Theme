@@ -1,9 +1,10 @@
 // ================================
-// Lesson page — layout and small utilities
+// Lesson page layout and component styles
 
 $lesson-bp: 60em;
 
-// Root container
+// ================================
+// Page shell
 .site-main.lesson-page {
     padding: 0;
 }
@@ -15,7 +16,8 @@ $lesson-bp: 60em;
 }
 
 // ================================
-// Head and Navigation
+// ================================
+// Lesson navigation header
 
 .lesson-head.site-header {
     align-items: stretch;
@@ -31,6 +33,7 @@ $lesson-bp: 60em;
 }
 
 .lesson-head__controls {
+    // Keep header actions together without allowing them to shrink.
     align-items: center;
     display: flex;
     flex-shrink: 0;
@@ -66,6 +69,7 @@ $lesson-bp: 60em;
 }
 
 @supports (animation-timeline: scroll()) {
+    // Show reading progress when the browser supports scroll-driven animation.
     .lesson-head__progress {
         animation: --article-progress auto linear;
         animation-timeline: scroll();
@@ -90,7 +94,7 @@ $lesson-bp: 60em;
     }
 }
 
-// Shared surface for header and video areas
+// Shared dark surface for the navigation, title, and video regions.
 :is(.lesson-head, .lesson-header, .lesson-video) {
     background-color: var(--ui-color-background-base);
     color: var(--ui-color-foreground-base);
@@ -98,7 +102,7 @@ $lesson-bp: 60em;
 }
 
 // ================================
-// Title row: badge + title
+// Lesson title and metadata
 
 :where(.lesson-header,
 .lesson-content,
@@ -130,13 +134,14 @@ $lesson-bp: 60em;
 }
 
 // ================================
-// Video container: collapse inline whitespace around <mux-player>
+// Video player and mobile pinning
 
 .lesson-video {
     padding-inline-start: calc(0px + env(safe-area-inset-left));
     padding-inline-end: calc(0px + env(safe-area-inset-left));
     
 
+    // Pin the player only when the header toggle is in its sticky state.
     .site:has(.video-stick) & {
         @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
             position: sticky;
@@ -147,6 +152,7 @@ $lesson-bp: 60em;
 }
 
 .lesson-video__toggle.button {
+    // The control is only useful where the player can become sticky.
     display: none;
     @media (24em < width < #{$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
         .site:has(.lesson-video) & {
@@ -163,7 +169,7 @@ $lesson-bp: 60em;
 
 
 // ================================
-// Main and body
+// Lesson content layout
 
 .lesson-main {
     display: grid;
@@ -171,7 +177,7 @@ $lesson-bp: 60em;
     gap: var(--ui-spacing-cushion);
 }
 
-// Lesson body (article content)
+// Article content and WordPress block overrides
 .lesson-body {
     grid-column: 1 / -1;    
     padding-block-end: var(--ui-spacing-cushion);
@@ -234,9 +240,10 @@ $lesson-bp: 60em;
     }
 
     // ============================
-    // WP SPECIFIC STYLES
+    // WordPress block overrides
     // ============================
-    // WP-specific styles for video
+
+    // Embedded media
     figure.wp-embed-aspect-16-9 {
         --embed-aspect-ratio: 16/9;
     }
@@ -324,7 +331,7 @@ $lesson-bp: 60em;
     }
 
 
-    // Codepen block
+    // CodePen embeds
     .wp-block-cp-codepen-gutenberg-embed-block {
         box-shadow: var(--ui-shadow);
         font-size: 0;
@@ -333,7 +340,7 @@ $lesson-bp: 60em;
 
 
 // ================================
-// Resources
+// Lesson resources and bookmark
 
 :is(.lesson-resources,
 .lesson-bookmark) {
@@ -369,9 +376,9 @@ $lesson-bp: 60em;
 }
 
 // ================================
-// Stats
+// Lesson statistics and sticky aside
 
-// Stats column (renders as a definition list in markup)
+// Resource column, including the stats definition list.
 .lesson-aside {
     align-self: start;
     grid-column: 1 / -1;
@@ -400,7 +407,7 @@ $lesson-bp: 60em;
 }
 
 // ================================
-// Explore area (Child lessons and progression to next statge
+// Explore area: child lessons and progression
 
 .lesson-explore {
     background: var(--ui-color-background-surface);
@@ -425,6 +432,7 @@ $lesson-bp: 60em;
 }
 
 .lesson-progression__buttons {
+    // Keep previous navigation at the start and primary progression at the end.
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -433,5 +441,53 @@ $lesson-bp: 60em;
 
     .prev-lesson {
         margin-inline-end: auto;
+    }
+}
+
+.lesson-downloads ul {
+    // Stack download entries and remove default list decoration.
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--ui-spacing-unit)/2);
+    list-style: none;
+}
+
+.lesson-download {
+    // Make the full card surface act as the download link.
+    display: flex;
+    position: relative;
+
+    a:before {
+        content: "";
+        inset: 0;
+        position: absolute;
+    }
+}
+
+.lesson-download__thumb {
+    // Reserve a stable thumbnail column for each download card.
+    display: flex;
+    font-size: 0;
+    inline-size: var(--spacing-8);
+    position: relative;
+
+    img {
+        block-size: 100%;
+        inline-size: 100%;
+        object-fit: cover;
+        position: absolute;
+    }
+}
+
+.lesson-download__info {
+    background-color: var(--ui-color-background-surface);
+    flex: 1;
+    padding: var(--ui-spacing-unit);
+    h3 {
+        align-items: center;
+        display: flex;
+        font-weight: bold;
+        gap: calc(var(--ui-spacing-unit) / 2);
+        justify-content: space-between;
     }
 }

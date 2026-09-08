@@ -55,6 +55,13 @@ if (function_exists('is_singular') && is_singular('lesson')) {
 <body <?php body_class(); ?> data-syllabus="<?php echo esc_attr($syllabus_index); ?>">
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="Download" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <g>
+                <rect width="15" height="78.75" x="52.5"></rect>
+                <polygon points="60 96.86 2.2 39.05 12.8 28.45 60 75.64 107.2 28.45 117.8 39.05 60 96.86"></polygon>
+            </g>
+            <rect width="105" height="15" x="7.5" y="105"></rect>
+        </symbol>
         <symbol id="Unlock" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <path d="M97.5 37.5h-15C82.5 25.09 72.41 15 60 15S37.5 25.09 37.5 37.5h-15C22.5 16.82 39.32 0 60 0s37.5 16.82 37.5 37.5z"></path>
             <path d="M108.75 120h-97.5V56.25h97.5zM26.25 105h67.5V71.25h-67.5z"></path>

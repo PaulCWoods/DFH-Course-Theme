@@ -1,0 +1,7 @@
+@use "../theme/sassvars" as var;
+
+.my-account-header__nav-toggle {
+    @media screen and (width > #{var.$account-bp}) {
+        display: none;
+    }
+}
