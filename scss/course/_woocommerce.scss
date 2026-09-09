@@ -52,9 +52,6 @@
 
         li {
             >input:is([type="checkbox"], [type="radio"]) {
-                all: revert;
-                block-size: var(--form-check-size);
-                inline-size: var(--form-check-size);
                 margin: 0;
                 vertical-align: middle;
             }
@@ -132,13 +129,6 @@
 .woocommerce-form {
     button {
         align-self: start;
-    }
-
-    input:is([type="checkbox"], [type="radio"]) {
-        all: revert;
-        block-size: var(--form-check-size);
-        inline-size: var(--form-check-size);
-        margin: 0;
     }
 }
 
