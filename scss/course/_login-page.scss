@@ -33,13 +33,6 @@
             gap: 1em;
         }
     }
-
-    input:is([type="checkbox"], [type="radio"]) {
-        all: revert;
-        block-size: var(--form-check-size);
-        inline-size: var(--form-check-size);
-        margin: 0;
-    }
 }
 
 .login-extras {
