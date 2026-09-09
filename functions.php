@@ -1041,7 +1041,7 @@ function dfh_redirect_student_after_login( $redirect_to, $requested_redirect_to,
     if ( isset( $user->roles ) && is_array( $user->roles ) ) {
         // If they are a course student (and NOT an administrator), redirect to the course
         if ( in_array( 'course_student', $user->roles, true ) && ! in_array( 'administrator', $user->roles, true ) ) {
-            return home_url( '/course/' ); // Adjust if your course archive/slug differs
+            return home_url(); // Adjust if your course archive/slug differs
         }
     }
     
