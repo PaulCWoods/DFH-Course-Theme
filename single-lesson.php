@@ -509,11 +509,11 @@ endif;
             videoStickToggle.addEventListener('click', function () {
                 const isSticky = videoStickToggle.classList.contains('video-stick');
 
-                videoStickToggle.classList.toggle('video-stick', !isSticky);
-                videoStickToggle.classList.toggle('video-unstick', isSticky);
+                videoStickToggle.classList.toggle('video-unstuck', !isSticky);
+                videoStickToggle.classList.toggle('video-stuck', isSticky);
                 videoStickToggle.setAttribute('aria-pressed', String(!isSticky));
-                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Stick video' : 'Unstick video';
-                videoStickToggle.querySelector('use').setAttribute('href', isSticky ? '#Lock' : '#Unlock');
+                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Unstick video' : 'Stick video';
+                videoStickToggle.querySelector('use').setAttribute('href', isSticky ? '#Unlock' : '#Lock');
             });
         }
 

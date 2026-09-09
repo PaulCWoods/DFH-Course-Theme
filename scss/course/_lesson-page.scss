@@ -164,6 +164,10 @@ $lesson-bp: 60em;
             display: inline-flex;
         }
     }
+
+    &.video-unstuck {
+        color: var(--ui-color-foreground-muted);
+    }
 }
 
 .lesson-video__container {
