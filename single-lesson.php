@@ -241,12 +241,12 @@ if (!empty($download_ids) && is_array($download_ids)):
                         <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>
                     </div>
                 <?php endif; ?>
+                <svg class="icon dir lesson-download__icon" width="32" height="32" aria-hidden="true">
+                    <use href="#Download" />
+                </svg>
                 <div class="lesson-download__info">
                     <h3>
                         <a class="link" href="<?php echo esc_url($pdf_url); ?>" download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
-                        <svg class="icon dir" width="32" height="32" aria-hidden="true">
-                            <use href="#Download" />
-                        </svg>
                     </h3>
                     <?php if (trim($download_post->post_excerpt) !== ''): ?>
                         <p class="tc-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>

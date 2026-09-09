@@ -61,7 +61,7 @@ get_template_part('content', 'course-header');
             <div class="fl fl-col gp-breathe">
                 <p>Your account has been successfully created and you are now logged in.</p>
                 <p style="margin-top: 1.5rem;">
-                    <a href="<?php echo esc_url(home_url('/course/')); ?>" class="button strong">
+                    <a href="<?php echo esc_url(home_url()); ?>" class="button strong">
                         Start Learning
                         <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
                     </a>

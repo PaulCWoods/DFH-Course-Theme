@@ -1358,3 +1358,171 @@ function dfh_save_lesson_download($post_id) {
     }
 }
 add_action('save_post_lesson', 'dfh_save_lesson_download');
+
+/**
+ * Handle certificate generation and download request.
+ */
+function dfh_handle_certificate_download() {
+    if (isset($_GET['action']) && 'download_certificate' === $_GET['action']) {
+        $course_id = isset($_GET['course_id']) ? absint($_GET['course_id']) : 0;
+        $user_id   = get_current_user_id();
+
+        // Security validation
+        if (!$user_id || !wp_verify_nonce($_GET['nonce'], 'dfh_cert_' . $course_id)) {
+            wp_die('Access denied or security check failed.', 'Error', array('response' => 403));
+        }
+
+        // Verify user actually completed the course
+        $root_lessons = function_exists('get_field') ? get_field('course_root_lessons', $course_id) : get_post_meta($course_id, 'course_root_lessons', true);
+        if (!is_array($root_lessons)) {
+            $root_lessons = empty($root_lessons) ? array() : array($root_lessons);
+        }
+        $all_lessons = array();
+        foreach ($root_lessons as $root_lesson) {
+            $current_root_id = is_object($root_lesson) ? (int) $root_lesson->ID : (int) $root_lesson;
+            if ($current_root_id) {
+                $all_lessons[] = $current_root_id;
+                $all_lessons = array_merge($all_lessons, dfh_get_ordered_lesson_tree($current_root_id));
+            }
+        }
+        $all_lessons = array_values(array_unique(array_map('intval', $all_lessons)));
+        $completed_lessons = dfh_get_completed_lessons($user_id);
+        $completed_count = count(array_intersect(array_map('intval', $completed_lessons), $all_lessons));
+
+        if ($completed_count < count($all_lessons) || count($all_lessons) === 0) {
+            wp_die('You must complete all lessons before downloading your certificate.', 'Incomplete', array('response' => 403));
+        }
+
+        $user = get_userdata($user_id);
+        $student_name = $user->display_name ? $user->display_name : $user->user_login;
+        $course_title = get_the_title($course_id);
+        $completion_date = date_i18n(get_option('date_format'));
+
+        // Render a clean, print-ready certificate markup that automatically triggers print-to-PDF dialog
+        ?>
+        <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      Certificate of Completion - <?php echo esc_html($course_title); ?>
+    </title>
+    <link
+      rel="stylesheet"
+      href="https://designforhumans.blog/styles/css/dfh-shared.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--typography-font-family-sans, sans-serif);
+        background-image: repeating-linear-gradient(
+  45deg,
+  var(--color-muted-100),
+  var(--color-muted-100) 1cm,
+  var(--color-muted-200) 1cm,
+  var(--color-muted-200) 2cm
+);
+        color: var(--color-muted-900);
+        display: flex;
+        flex-direction: column;
+        gap: 5cm;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 1cm;
+      }
+      .certificate-wrapper {
+        width: 1000px;
+        padding: 4rem;
+        border: 8px solid var(--color-muted-900);
+        text-align: center;
+        background: #fff;
+        box-sizing: border-box;
+      }
+      h1 {
+        font-family: var(--typography-font-family-display, sans-serif);
+        font-size: 3.5rem;
+        text-transform: uppercase;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+        font-weight: normal;
+        margin-bottom: 2rem;
+        color: #555;
+      }
+      .student-name {
+        font-family: var(--typography-font-family-mono, monospace);
+        font-size: 2.2rem;
+        font-weight: bold;
+        border-bottom: 2px solid var(--color-muted-900);
+        display: inline-block;
+        padding: 0 2rem 0.5rem;
+        margin: 1.5rem 0;
+      }
+      .course-title {
+         font-family: var(--typography-font-family-mono, monospace);
+       font-size: 1.8rem;
+        font-weight: bold;
+        margin: 1rem 0 2rem;
+      }
+      .meta-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4rem;
+        font-size: 1rem;
+        border-top: 1px solid var(--color-muted-600);
+        padding-top: 1.5rem;
+      }
+
+      .logo {
+        border: 0.13em solid currentColor;
+        display: inline-block;
+        font-family: var(--typography-font-family-display, sans-serif);
+        font-size: 2rem;
+        letter-spacing: var(--ui-typography-display-title-letter-spacing);
+        line-height: 1;
+        padding: 0.13em;
+        text-box: trim-both cap alphabetic;
+        text-transform: uppercase;
+        word-spacing: var(--ui-typography-display-title-word-spacing);
+      }
+      @media print {
+        .no-print {
+          display: none;
+        }
+        .certificate-wrapper {
+          border: 4px solid var(--color-muted-900);
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body onload="window.print();">
+    <div class="certificate-wrapper">
+      <h1>Certificate of Completion</h1>
+      <h2>This is proudly presented to</h2>
+      <div class="student-name"><?php echo esc_html($student_name); ?></div>
+      <p>for successfully completing the course requirements for</p>
+      <div class="course-title"><?php echo esc_html($course_title); ?></div>
+
+      <div class="meta-footer">
+        <div>
+          <strong>Date:</strong>
+          <?php echo esc_html($completion_date); ?>
+        </div>
+        <div><strong>Design for Humans</strong></div>
+      </div>
+    </div>
+    <span class="logo">Design for Humans</span>
+  </body>
+</html>
+
+        <?php
+        exit;
+    }
+}
+add_action('init', 'dfh_handle_certificate_download');

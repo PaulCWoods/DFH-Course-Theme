@@ -139,7 +139,16 @@ get_template_part('content', 'course-header');
                     <div class="course-landing__completion">
                         <h2>Course completed!</h2>
                         <p>Congratulations! You have finished all lessons in this course.</p>
-                        <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review from Beginning</a>
+                        <div class="course-landing__completion-buttons">
+                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review from Beginning</a>
+                            <!-- Certificate Download Link -->
+                            <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>" class="button strong cert-btn" target="_blank">
+                                Download Certificate (PDF)
+                                <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                                    <use href="#Download" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
 
                 <?php elseif ($completed_count > 0): ?>

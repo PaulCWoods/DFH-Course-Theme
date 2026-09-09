@@ -157,6 +157,17 @@ $course-bp: 60em;
     }
 }
 
+.course-landing__completion-buttons {
+    align-items: center;
+    border-block-start: var(--ui-border-subtle);
+    border-color: inherti;
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--ui-spacing-unit) / 2);
+    justify-content: center;
+    padding-block-start: var(--ui-spacing-unit);
+}
+
 @keyframes --course-complete-pop {
     0% {
         opacity: 0;
