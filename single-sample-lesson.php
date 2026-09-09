@@ -78,7 +78,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 <?php else: ?>
     <a href="<?php echo esc_url(home_url()); ?>">purchasing</a>
 <?php endif; ?>
-                        this lesson.
+                        this course.
                         </span>
                     </p>
                 </div>
