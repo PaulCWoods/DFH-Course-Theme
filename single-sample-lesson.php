@@ -28,7 +28,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
         </nav>
         <div class="lesson-head__controls">
             <?php if ($playback_id): ?>
-                <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-stick"
+                <button type="button" id="video-stuck-toggle" class="button subtle lesson-video__toggle video-stuck"
                     aria-controls="lesson-video-player" aria-pressed="true">
                     <span class="sr">Unstick video</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
@@ -194,17 +194,17 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const videoStickToggle = document.getElementById('video-stick-toggle');
+        const videoStickToggle = document.getElementById('video-stuck-toggle');
 
         if (videoStickToggle) {
             videoStickToggle.addEventListener('click', function () {
-                const isSticky = videoStickToggle.classList.contains('video-stick');
+                const isSticky = videoStickToggle.classList.contains('video-stuck');
 
-                videoStickToggle.classList.toggle('video-stick', !isSticky);
-                videoStickToggle.classList.toggle('video-unstick', isSticky);
+                videoStickToggle.classList.toggle('video-unstuck', !isSticky);
+                videoStickToggle.classList.toggle('video-stuck', isSticky);
                 videoStickToggle.setAttribute('aria-pressed', String(!isSticky));
-                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Stick video' : 'Unstick video';
-                videoStickToggle.querySelector('use').setAttribute('href', isSticky ? '#Lock' : '#Unlock');
+                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Unstick video' : 'Stick video';
+                videoStickToggle.querySelector('use').setAttribute('href', isSticky ? '#Unlock' : '#Lock');
             });
         }
     });
