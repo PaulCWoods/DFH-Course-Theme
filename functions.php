@@ -101,17 +101,19 @@ add_action('init', 'dfh_register_course_cpt', 0);
  * -------------------------------------------------------------------------
  */
 
-// 1. Mux Meta Box Registration
+// 1. Mux Meta Box Registration (for Lessons & Sample Lessons)
 function dfh_add_lesson_mux_meta_box()
 {
-    add_meta_box(
-        'dfh_mux_playback_id_box',
-        'Mux Video Settings',
-        'dfh_render_mux_meta_box_html',
-        'lesson',
-        'normal',
-        'high'
-    );
+    foreach (array('lesson', 'sample-lesson') as $screen) {
+        add_meta_box(
+            'dfh_mux_playback_id_box',
+            'Mux Video Settings',
+            'dfh_render_mux_meta_box_html',
+            $screen,
+            'normal',
+            'high'
+        );
+    }
 }
 add_action('add_meta_boxes', 'dfh_add_lesson_mux_meta_box');
 
@@ -129,17 +131,19 @@ function dfh_render_mux_meta_box_html($post)
     <?php
 }
 
-// 2. External Links Meta Box Registration
+// 2. External Links Meta Box Registration (for Lessons & Sample Lessons)
 function dfh_add_lesson_links_meta_box()
 {
-    add_meta_box(
-        'dfh_lesson_links_box',
-        'Lesson External Links',
-        'dfh_render_links_meta_box_html',
-        'lesson',
-        'normal',
-        'high'
-    );
+    foreach (array('lesson', 'sample-lesson') as $screen) {
+        add_meta_box(
+            'dfh_lesson_links_box',
+            'Lesson External Links',
+            'dfh_render_links_meta_box_html',
+            $screen,
+            'normal',
+            'high'
+        );
+    }
 }
 add_action('add_meta_boxes', 'dfh_add_lesson_links_meta_box');
 
@@ -157,17 +161,19 @@ function dfh_render_links_meta_box_html($post)
     <?php
 }
 
-// 3. Lesson Stats Meta Box Registration
+// 3. Lesson Stats Meta Box Registration (for Lessons & Sample Lessons)
 function dfh_add_lesson_stats_meta_box()
 {
-    add_meta_box(
-        'dfh_lesson_stats_box',
-        'Lesson Stats',
-        'dfh_render_stats_meta_box_html',
-        'lesson',
-        'normal',
-        'default'
-    );
+    foreach (array('lesson', 'sample-lesson') as $screen) {
+        add_meta_box(
+            'dfh_lesson_stats_box',
+            'Lesson Stats',
+            'dfh_render_stats_meta_box_html',
+            $screen,
+            'normal',
+            'default'
+        );
+    }
 }
 add_action('add_meta_boxes', 'dfh_add_lesson_stats_meta_box');
 
@@ -184,8 +190,50 @@ function dfh_render_stats_meta_box_html($post)
     <?php
 }
 
+// 4. Associated Course Meta Box Registration (Sample Lessons Only)
+function dfh_add_sample_lesson_course_meta_box()
+{
+    add_meta_box(
+        'dfh_sample_lesson_course_box',
+        'Associated Course',
+        'dfh_render_sample_lesson_course_meta_box',
+        'sample-lesson',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'dfh_add_sample_lesson_course_meta_box');
+
+function dfh_render_sample_lesson_course_meta_box($post)
+{
+    wp_nonce_field('dfh_save_sample_lesson_course', 'dfh_sample_lesson_course_nonce');
+    $associated_course_id = get_post_meta($post->ID, 'sample_lesson_course', true);
+    $courses = get_posts(array(
+        'post_type'      => 'course',
+        'posts_per_page' => -1,
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+    ));
+    ?>
+    <p>
+        <label for="sample_lesson_course">Link this sample lesson to a course:</label>
+    </p>
+    <p>
+        <select name="sample_lesson_course" id="sample_lesson_course" style="width: 100%;">
+            <option value="">— Select Course —</option>
+            <?php foreach ($courses as $course): ?>
+                <option value="<?php echo esc_attr($course->ID); ?>" <?php selected($associated_course_id, $course->ID); ?>>
+                    <?php echo esc_html($course->post_title); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </p>
+    <p class="description">The course page will be displayed as the back link.</p>
+    <?php
+}
+
 /**
- * Unified Save Routine for Lesson Meta Boxes (Mux, Links, Stats, Downloads)
+ * Unified Save Routine for Lesson & Sample Lesson Meta Boxes
  */
 function dfh_save_lesson_meta_boxes($post_id)
 {
@@ -193,6 +241,11 @@ function dfh_save_lesson_meta_boxes($post_id)
         return;
     }
     if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    $post_type = get_post_type($post_id);
+    if (!in_array($post_type, array('lesson', 'sample-lesson'), true)) {
         return;
     }
 
@@ -217,14 +270,20 @@ function dfh_save_lesson_meta_boxes($post_id)
         }
     }
 
-    // Save Downloads Placeholder
-    if (isset($_POST['dfh_downloads_nonce']) && wp_verify_nonce($_POST['dfh_downloads_nonce'], 'dfh_save_downloads_meta')) {
-        if (isset($_POST['lesson_downloads'])) {
-            update_post_meta($post_id, 'lesson_downloads', sanitize_textarea_field($_POST['lesson_downloads']));
+    // Save Associated Course (Sample Lesson)
+    if (isset($_POST['dfh_sample_lesson_course_nonce']) && wp_verify_nonce($_POST['dfh_sample_lesson_course_nonce'], 'dfh_save_sample_lesson_course')) {
+        if (isset($_POST['sample_lesson_course'])) {
+            $course_id = absint($_POST['sample_lesson_course']);
+            if ($course_id) {
+                update_post_meta($post_id, 'sample_lesson_course', $course_id);
+            } else {
+                delete_post_meta($post_id, 'sample_lesson_course');
+            }
         }
     }
 }
-add_action('save_post', 'dfh_save_lesson_meta_boxes');
+add_action('save_post_lesson', 'dfh_save_lesson_meta_boxes');
+add_action('save_post_sample-lesson', 'dfh_save_lesson_meta_boxes');
 
 /**
  * -------------------------------------------------------------------------
@@ -267,8 +326,8 @@ if (function_exists('acf_add_local_field_group')) {
     ));
 
     acf_add_local_field_group(array(
-        'key' => 'group_lesson_header',
-        'title' => 'Lesson Header',
+        'key' => 'group_lesson_configuration',
+        'title' => 'Lesson Configuration',
         'fields' => array(
             array(
                 'key' => 'field_lesson_subtitle',
@@ -276,6 +335,39 @@ if (function_exists('acf_add_local_field_group')) {
                 'name' => 'subtitle',
                 'type' => 'text',
                 'instructions' => 'Optional subtitle displayed beneath the lesson title.',
+            ),
+            array(
+                'key' => 'field_mux_playback_id',
+                'label' => 'Mux Playback ID',
+                'name' => 'mux_playback_id',
+                'type' => 'text',
+                'instructions' => 'Enter the Mux playback ID for the video player.',
+            ),
+            array(
+                'key' => 'field_lesson_external_links',
+                'label' => 'External Links',
+                'name' => 'lesson_external_links',
+                'type' => 'textarea',
+                'instructions' => 'Enter one link per line. Format: Link Title | URL',
+                'rows' => 4,
+            ),
+            array(
+                'key' => 'field_lesson_stats',
+                'label' => 'Lesson Stats',
+                'name' => 'lesson_stats',
+                'type' => 'textarea',
+                'instructions' => 'Enter one stat per line. Format: Label | Value | Percentage (optional)',
+                'rows' => 4,
+            ),
+            array(
+                'key' => 'field_sample_lesson_course',
+                'label' => 'Associated Course',
+                'name' => 'sample_lesson_course',
+                'type' => 'post_object',
+                'instructions' => 'Link this sample lesson to a course. The course page will be displayed as the back link.',
+                'post_type' => array('course'),
+                'return_format' => 'id',
+                'allow_null' => 1,
             ),
         ),
         'location' => array(
@@ -1526,3 +1618,75 @@ function dfh_handle_certificate_download() {
     }
 }
 add_action('init', 'dfh_handle_certificate_download');
+
+/**
+ * Register Sample Lesson Custom Post Type.
+ */
+function dfh_register_sample_lesson_post_type() {
+    register_post_type('sample-lesson', array(
+        'labels' => array(
+            'name'          => __('Sample Lessons', 'dfh'),
+            'singular_name' => __('Sample Lesson', 'dfh'),
+            'add_new_item'  => __('Add New Sample Lesson', 'dfh'),
+        ),
+        'public'        => true,
+        'has_archive'   => false,
+        'supports'      => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'show_in_rest'  => true,
+        'menu_icon'     => 'dashicons-welcome-view-site',
+        'rewrite'       => array('slug' => 'sample-lesson'),
+    ));
+}
+add_action('init', 'dfh_register_sample_lesson_post_type');
+
+function dfh_register_course_sample_meta_box() {
+    add_meta_box(
+        'dfh_course_sample_box',
+        __('Featured Sample Lesson', 'dfh'),
+        'dfh_render_course_sample_meta_box',
+        'course',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'dfh_register_course_sample_meta_box');
+
+function dfh_render_course_sample_meta_box($post) {
+    wp_nonce_field('dfh_save_course_sample', 'dfh_course_sample_nonce');
+    $linked_sample_id = get_post_meta($post->ID, '_dfh_linked_sample_id', true);
+
+    $samples = get_posts(array(
+        'post_type'      => 'sample-lesson',
+        'posts_per_page' => -1,
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+    ));
+    ?>
+    <p>
+        <select name="dfh_linked_sample_id" style="width: 100%;">
+            <option value="">— None —</option>
+            <?php foreach ($samples as $sample): ?>
+                <option value="<?php echo esc_attr($sample->ID); ?>" <?php selected($linked_sample_id, $sample->ID); ?>>
+                    <?php echo esc_html($sample->post_title); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </p>
+    <?php
+}
+
+function dfh_save_course_sample($post_id) {
+    if (!isset($_POST['dfh_course_sample_nonce']) || !wp_verify_nonce($_POST['dfh_course_sample_nonce'], 'dfh_save_course_sample')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['dfh_linked_sample_id'])) {
+        $sample_id = absint($_POST['dfh_linked_sample_id']);
+        if ($sample_id) {
+            update_post_meta($post_id, '_dfh_linked_sample_id', $sample_id);
+        } else {
+            delete_post_meta($post_id, '_dfh_linked_sample_id');
+        }
+    }
+}
+add_action('save_post_course', 'dfh_save_course_sample');

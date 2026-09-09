@@ -130,6 +130,10 @@
     button {
         align-self: start;
     }
+
+    a {
+        @include prose.link;
+    }
 }
 
 .woocommerce-form__label-for-checkbox {

@@ -21,11 +21,11 @@ get_template_part('content', 'course-header');
 <main class="course-landing site-main" id="main">
     <article class="article course-landing__article">
         <figure class="course-landing__poster">
-<?php if (has_post_thumbnail())
+            <?php if (has_post_thumbnail())
                 the_post_thumbnail(); ?>
         </figure>
         <header class="article-header course-landing__header prose">
-            
+
             <div class="container +2/3 +start">
                 <h1><?php the_title(); ?></h1>
             </div>
@@ -36,61 +36,61 @@ get_template_part('content', 'course-header');
             </div>
         </div>
 
-    <?php
-    $user_id = get_current_user_id();
-    $course_id = get_the_ID();
-    $course_closed = function_exists('get_field')
-        ? get_field('course_closed', $course_id)
-        : get_post_meta($course_id, 'course_closed', true);
-    $course_closed = in_array($course_closed, array(true, 1, '1', 'true'), true);
+        <?php
+        $user_id = get_current_user_id();
+        $course_id = get_the_ID();
+        $course_closed = function_exists('get_field')
+            ? get_field('course_closed', $course_id)
+            : get_post_meta($course_id, 'course_closed', true);
+        $course_closed = in_array($course_closed, array(true, 1, '1', 'true'), true);
 
-    // 1. Check if user has course access (requires access function and product linkage)
-    $has_access = true; // Default fallback if access functions aren't restricted
-    if (function_exists('dfh_user_has_course_access')) {
-        $has_access = dfh_user_has_course_access($user_id, $course_id);
-    }
-
-    // Get linked WooCommerce product
-    $woo_product_id = get_post_meta($course_id, '_dfh_product_id', true);
-    $product = $woo_product_id ? wc_get_product($woo_product_id) : false;
-
-    // Gather lesson tree data...
-    $all_lessons = array();
-    foreach ($root_lessons as $root_lesson) {
-        $current_root_id = is_object($root_lesson) ? (int) $root_lesson->ID : (int) $root_lesson;
-        if ($current_root_id) {
-            $all_lessons[] = $current_root_id;
-            $all_lessons = array_merge($all_lessons, dfh_get_ordered_lesson_tree($current_root_id));
+        // 1. Check if user has course access (requires access function and product linkage)
+        $has_access = true; // Default fallback if access functions aren't restricted
+        if (function_exists('dfh_user_has_course_access')) {
+            $has_access = dfh_user_has_course_access($user_id, $course_id);
         }
-    }
-    $all_lessons = array_values(array_unique(array_map('intval', $all_lessons)));
-    $total_lessons = count($all_lessons);
-    $completed_lessons = dfh_get_completed_lessons($user_id);
-    $completed_lessons = array_map('intval', $completed_lessons);
-    $completed_count = count(array_intersect($completed_lessons, $all_lessons));
 
-    $active_lesson_status = false;
-    if (is_user_logged_in() && $has_access) {
-        foreach ($all_lessons as $lesson_id) {
-            if (!in_array($lesson_id, $completed_lessons, true)) {
-                $active_lesson_status = $lesson_id;
-                break;
+        // Get linked WooCommerce product
+        $woo_product_id = get_post_meta($course_id, '_dfh_product_id', true);
+        $product = $woo_product_id ? wc_get_product($woo_product_id) : false;
+
+        // Gather lesson tree data...
+        $all_lessons = array();
+        foreach ($root_lessons as $root_lesson) {
+            $current_root_id = is_object($root_lesson) ? (int) $root_lesson->ID : (int) $root_lesson;
+            if ($current_root_id) {
+                $all_lessons[] = $current_root_id;
+                $all_lessons = array_merge($all_lessons, dfh_get_ordered_lesson_tree($current_root_id));
             }
         }
-        if (!$active_lesson_status && $total_lessons > 0) {
-            $active_lesson_status = 'completed';
-        }
-    }
+        $all_lessons = array_values(array_unique(array_map('intval', $all_lessons)));
+        $total_lessons = count($all_lessons);
+        $completed_lessons = dfh_get_completed_lessons($user_id);
+        $completed_lessons = array_map('intval', $completed_lessons);
+        $completed_count = count(array_intersect($completed_lessons, $all_lessons));
 
-    $progress_percent = ($total_lessons > 0) ? round(($completed_count / $total_lessons) * 100) : 0;
-    $current_user = wp_get_current_user();
-    $user_name = '';
-    if ($current_user && $current_user->ID) {
-        $user_name = $current_user->display_name ? $current_user->display_name : $current_user->user_login;
-    }
-    $welcome_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome, ' . esc_html($user_name) . '!</span>';
-    $welcome_back_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome back, ' . esc_html($user_name) . '</span>';
-    ?>
+        $active_lesson_status = false;
+        if (is_user_logged_in() && $has_access) {
+            foreach ($all_lessons as $lesson_id) {
+                if (!in_array($lesson_id, $completed_lessons, true)) {
+                    $active_lesson_status = $lesson_id;
+                    break;
+                }
+            }
+            if (!$active_lesson_status && $total_lessons > 0) {
+                $active_lesson_status = 'completed';
+            }
+        }
+
+        $progress_percent = ($total_lessons > 0) ? round(($completed_count / $total_lessons) * 100) : 0;
+        $current_user = wp_get_current_user();
+        $user_name = '';
+        if ($current_user && $current_user->ID) {
+            $user_name = $current_user->display_name ? $current_user->display_name : $current_user->user_login;
+        }
+        $welcome_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome, ' . esc_html($user_name) . '!</span>';
+        $welcome_back_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome back, ' . esc_html($user_name) . '</span>';
+        ?>
 
         <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
             <div class="container +2/3 +start">
@@ -102,7 +102,8 @@ get_template_part('content', 'course-header');
                     <!-- State 0A: Logged-out Visitor needing purchase -->
                     <h2>Ready to start learning?</h2>
                     <p class="small-text tc-muted">Enroll now or log in to your account to get started.</p>
-                    <div class="course-purchase-actions" style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
+                    <div class="course-purchase-actions"
+                        style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
                             <button type="submit" class="button strong buy-button">
@@ -140,9 +141,11 @@ get_template_part('content', 'course-header');
                         <h2>Course completed!</h2>
                         <p>Congratulations! You have finished all lessons in this course.</p>
                         <div class="course-landing__completion-buttons">
-                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button secondary-button">Review from Beginning</a>
+                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>"
+                                class="button secondary-button">Review from Beginning</a>
                             <!-- Certificate Download Link -->
-                            <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>" class="button strong cert-btn" target="_blank">
+                            <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>"
+                                class="button strong cert-btn" target="_blank">
                                 Download Certificate (PDF)
                                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                     <use href="#Download" />
@@ -156,7 +159,8 @@ get_template_part('content', 'course-header');
                     <?php echo $welcome_back_msg; ?>
                     <h2>Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h2>
                     <div class="progress-bar-container course-landing__progress">
-                        <progress class="progress-bar" max="100" value="<?php echo esc_html($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
+                        <progress class="progress-bar" max="100"
+                            value="<?php echo esc_html($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
                     </div>
 
                     <?php
@@ -199,12 +203,29 @@ get_template_part('content', 'course-header');
             <div class="prose">
                 <?php the_content(); ?>
             </div>
+            <?php
+            $sample_id = get_post_meta($course_id, '_dfh_linked_sample_id', true);
+
+            if ($sample_id && !$has_access):
+                $sample_url = get_permalink($sample_id);
+                $sample_title = get_the_title($sample_id);
+                ?>
+                <div class="course-sample-preview" style="margin-top: 1.5rem;">
+                    <a href="<?php echo esc_url($sample_url); ?>" class="button secondary-button">
+                        <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                            <use href="#Search" />
+                        </svg>
+                        Read a Free Sample
+                    </a>
+                </div>
+            <?php endif; ?>
         </article>
     </section>
     <section class="course-landing__section course-landing__syllabus" aria-describedby="course-plan-heading">
         <div class="container">
             <h2 id="course-plan-heading" class="heading">Course plan</h2>
-            <p class="small-text course-landing__note">Note: Access to lessons will be granted as you progress through the course.</p>
+            <p class="small-text course-landing__note">Note: Access to lessons will be granted as you progress through
+                the course.</p>
             <?php if ($root_lessons): ?>
                 <div class="lesson-list__container">
                     <?php echo dfh_render_lesson_tree($root_lesson_ids, 1, $active_lesson_status); ?>
