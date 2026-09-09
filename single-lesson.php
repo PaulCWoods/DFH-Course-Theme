@@ -89,11 +89,11 @@ get_header();
         <div class="lesson-head__controls">
 
             <?php if ($playback_id): ?>
-                <button type="button" id="video-stuck-toggle" class="button subtle lesson-video__toggle video-stuck"
+                <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-stick"
                     aria-controls="lesson-video-player" aria-pressed="true">
                     <span class="sr">Unstick video</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
-                        <use href="#Unlock" />
+                        <use href="#Lock" />
                     </svg>
                 </button>
             <?php endif; ?>
@@ -503,16 +503,16 @@ endif;
 <!-- Tiny Inline JS for AJAX Progression -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const videoStickToggle = document.getElementById('video-stuck-toggle');
+        const videoStickToggle = document.getElementById('video-stick-toggle');
 
         if (videoStickToggle) {
             videoStickToggle.addEventListener('click', function () {
-                const isSticky = videoStickToggle.classList.contains('video-stuck');
+                const isSticky = videoStickToggle.classList.contains('video-stick');
 
-                videoStickToggle.classList.toggle('video-unstuck', !isSticky);
-                videoStickToggle.classList.toggle('video-stuck', isSticky);
+                videoStickToggle.classList.toggle('video-stick', !isSticky);
+                videoStickToggle.classList.toggle('video-unstick', isSticky);
                 videoStickToggle.setAttribute('aria-pressed', String(!isSticky));
-                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Unstick video' : 'Stick video';
+                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Stick video' : 'Unstick video';
                 videoStickToggle.querySelector('use').setAttribute('href', isSticky ? '#Unlock' : '#Lock');
             });
         }
