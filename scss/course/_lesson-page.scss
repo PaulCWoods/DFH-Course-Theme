@@ -117,7 +117,7 @@ $lesson-bp: 60em;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    margin-block-end: 0; // keep title snug to content
+    margin-block: 0; // keep title snug to content
 }
 
 .lesson-header__subtitle {
@@ -131,6 +131,11 @@ $lesson-bp: 60em;
     display: block;
     font-weight: bold;
     margin-block-start: var(--spacing-05);
+
+    &.\+pre {
+        margin-block-end: var(--spacing-05);
+        margin-block-start: 0;
+    }
 }
 
 // ================================

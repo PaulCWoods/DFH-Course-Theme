@@ -45,15 +45,10 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 
         <header class="lesson-header prose">
             <div class="container">
+                <span class="lesson-header__kicker +pre small-heading">Free sample</span>
                 <h1 class="lesson-header__title">
                     <?php the_title(); ?>
                 </h1>
-                <?php
-                $lesson_subtitle = function_exists('get_field') ? get_field('subtitle') : get_post_meta(get_the_ID(), 'subtitle', true);
-                if ($lesson_subtitle):
-                    ?>
-                    <p class="lesson-header__subtitle"><?php echo esc_html($lesson_subtitle); ?></p>
-                <?php endif; ?>
             </div>
         </header>
 
