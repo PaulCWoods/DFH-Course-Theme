@@ -16,7 +16,7 @@
                             </li>
                         </ul>
                     </nav>
-                    <p>&copy; <?php echo date('Y'); ?> Design For Humans. All rights reserved.</p>
+                    <p class="site-footer__copyright">&copy; <?php echo date('Y'); ?> Design For Humans. All rights reserved.</p>
                 </div>
             </footer>
         </div>
