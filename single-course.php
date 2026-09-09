@@ -39,6 +39,10 @@ get_template_part('content', 'course-header');
     <?php
     $user_id = get_current_user_id();
     $course_id = get_the_ID();
+    $course_closed = function_exists('get_field')
+        ? get_field('course_closed', $course_id)
+        : get_post_meta($course_id, 'course_closed', true);
+    $course_closed = in_array($course_closed, array(true, 1, '1', 'true'), true);
 
     // 1. Check if user has course access (requires access function and product linkage)
     $has_access = true; // Default fallback if access functions aren't restricted
@@ -90,7 +94,11 @@ get_template_part('content', 'course-header');
 
         <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
             <div class="container +2/3 +start">
-                <?php if (!is_user_logged_in() && $product && !$has_access): ?>
+                <?php if ($course_closed): ?>
+                    <h2>Coming soon</h2>
+                    <p class="small-text tc-muted">This course is not available yet. Check back soon.</p>
+
+                <?php elseif (!is_user_logged_in() && $product && !$has_access): ?>
                     <!-- State 0A: Logged-out Visitor needing purchase -->
                     <h2>Ready to start learning?</h2>
                     <p class="small-text tc-muted">Enroll now or log in to your account to get started.</p>

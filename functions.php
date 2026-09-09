@@ -245,6 +245,15 @@ if (function_exists('acf_add_local_field_group')) {
                 'post_type' => array('lesson'),
                 'return_format' => 'id',
             ),
+            array(
+                'key' => 'field_course_closed',
+                'label' => 'Course closed',
+                'name' => 'course_closed',
+                'type' => 'true_false',
+                'message' => 'Show this course as coming soon and hide access buttons.',
+                'default_value' => 0,
+                'ui' => 1,
+            ),
         ),
         'location' => array(
             array(
