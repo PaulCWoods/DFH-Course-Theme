@@ -67,7 +67,21 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 
         <div class="lesson-content">
             <div class="container lesson-main">
-                <div class="lesson-body prose"><?php the_content(); ?></div>
+                <div class="lesson-body prose +sample">
+                    <?php the_content(); ?>
+                    <hr class="sr" />
+                    <p class="lesson-body__sample-text">
+                        <span>
+                            To read more, consider
+<?php if ($associated_course_id && get_post($associated_course_id)): ?>
+    <a href="<?php echo esc_url(get_permalink($associated_course_id)); ?>">purchasing</a>
+<?php else: ?>
+    <a href="<?php echo esc_url(home_url()); ?>">purchasing</a>
+<?php endif; ?>
+                        this lesson.
+                        </span>
+                    </p>
+                </div>
                 <aside class="lesson-aside">
                     <?php
                     // Gather stats, external links, and downloads; render aside only if any exist

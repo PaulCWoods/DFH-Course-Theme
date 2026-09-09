@@ -191,6 +191,29 @@ $lesson-bp: 60em;
         display: none;
     }
 
+    &.\+sample {
+        position: relative;
+        .lesson-body__sample-text {
+            background-image: linear-gradient( transparent, var(--ui-color-background-base) 50% );
+            align-items: flex-end;
+            display: flex;
+            position: absolute;
+            inset-block-end: 0;
+            inset-inline: 0;
+            justify-content: center;
+            min-block-size: var(--spacing-12);
+            max-inline-size: none;
+            padding: var(--ui-spacing-cushion);
+            text-align: center;
+            text-wrap: balance;
+
+            span {
+                border: var(--ui-border);
+                padding: calc(var(--ui-spacing-unit));
+            }
+        }
+    }
+
     @media screen and (width > #{$lesson-bp}) {
         grid-column: span 2; // content spans two columns on wide screens
     }
