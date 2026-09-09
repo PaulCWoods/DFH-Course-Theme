@@ -20,11 +20,23 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
     <div class="lesson-head__inner container">
         <nav class="lesson-head__nav">
             <?php if ($associated_course_id && get_post($associated_course_id)): ?>
-                <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
+                <a class="lesson-head__breadcrumb link"
+                    href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
             <?php else: ?>
                 <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
             <?php endif; ?>
         </nav>
+        <div class="lesson-head__controls">
+            <?php if ($playback_id): ?>
+                <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-stick"
+                    aria-controls="lesson-video-player" aria-pressed="true">
+                    <span class="sr">Unstick video</span>
+                    <svg class="icon" width="32" height="32" aria-hidden="true">
+                        <use href="#Unlock" />
+                    </svg>
+                </button>
+            <?php endif; ?>
+        </div>
     </div>
 </header>
 
@@ -103,7 +115,8 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                         if (!empty($external_links)):
                             ?>
                             <section class="lesson-resources lesson-links" aria-describedby="lesson-links-heading">
-                                <h2 class="subheading lesson-resources__heading" id="lesson-links-heading">Further reading & links</h2>
+                                <h2 class="subheading lesson-resources__heading" id="lesson-links-heading">Further reading &
+                                    links</h2>
                                 <ul class="resource-list">
                                     <?php
                                     $lines = explode("\n", $external_links);
@@ -125,38 +138,39 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                         // Downloads
                         if (!empty($download_ids) && is_array($download_ids)):
                             echo '<section class="lesson-resources lesson-downloads" aria-describedby="lesson-downloads-heading"><h2 class="subheading lesson-resources__heading" id="lesson-downloads-heading">Lesson downloads</h2><ul>';
-                            
+
                             foreach ($download_ids as $download_id) {
                                 $download_post = get_post($download_id);
                                 $attachment_id = get_post_meta($download_id, '_dfh_download_attachment_id', true);
                                 $pdf_url = $attachment_id ? wp_get_attachment_url($attachment_id) : '';
-                                
+
                                 if ($download_post && $pdf_url) {
                                     ?>
                                     <li>
-                                    <div class="lesson-download">
-                                        <?php if (has_post_thumbnail($download_id)): ?>
-                                            <div class="lesson-download__thumb">
-                                                <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <svg class="icon dir lesson-download__icon" width="32" height="32" aria-hidden="true">
-                                            <use href="#Download" />
-                                        </svg>
-                                        <div class="lesson-download__info">
-                                            <h3>
-                                                <a class="link" href="<?php echo esc_url($pdf_url); ?>" download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
-                                            </h3>
-                                            <?php if (trim($download_post->post_excerpt) !== ''): ?>
-                                                <p class="tc-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                                        <div class="lesson-download">
+                                            <?php if (has_post_thumbnail($download_id)): ?>
+                                                <div class="lesson-download__thumb">
+                                                    <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>
+                                                </div>
                                             <?php endif; ?>
+                                            <svg class="icon dir lesson-download__icon" width="32" height="32" aria-hidden="true">
+                                                <use href="#Download" />
+                                            </svg>
+                                            <div class="lesson-download__info">
+                                                <h3>
+                                                    <a class="link" href="<?php echo esc_url($pdf_url); ?>"
+                                                        download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
+                                                </h3>
+                                                <?php if (trim($download_post->post_excerpt) !== ''): ?>
+                                                    <p class="tc-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
-                                    </div>
                                     </li>
                                     <?php
                                 }
                             }
-                            
+
                             echo '</ul></section>';
                         endif;
                         ?>
@@ -169,6 +183,23 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 </main><!-- #primary -->
 
 <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const videoStickToggle = document.getElementById('video-stick-toggle');
+
+        if (videoStickToggle) {
+            videoStickToggle.addEventListener('click', function () {
+                const isSticky = videoStickToggle.classList.contains('video-stick');
+
+                videoStickToggle.classList.toggle('video-stick', !isSticky);
+                videoStickToggle.classList.toggle('video-unstick', isSticky);
+                videoStickToggle.setAttribute('aria-pressed', String(!isSticky));
+                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Stick video' : 'Unstick video';
+                videoStickToggle.querySelector('use').setAttribute('href', isSticky ? '#Lock' : '#Unlock');
+            });
+        }
+    });
+</script>
 
 <?php
 get_footer();
