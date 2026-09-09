@@ -3,6 +3,9 @@
                     <nav class="site-footer__nav" aria-label="Footer">
                         <ul>
                             <li>
+                                <a class="link" href="<?php echo esc_url(home_url()); ?>">Courses Home</a>
+                            </li>
+                            <li>
                                 <a class="link" href="<?php echo esc_url(home_url( "/privacy-policy" )); ?>">Privacy Policy</a>
                             </li>
                             <li>
