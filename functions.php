@@ -326,8 +326,8 @@ if (function_exists('acf_add_local_field_group')) {
     ));
 
     acf_add_local_field_group(array(
-        'key' => 'group_lesson_configuration',
-        'title' => 'Lesson Configuration',
+        'key' => 'group_lesson_header',
+        'title' => 'Lesson Header',
         'fields' => array(
             array(
                 'key' => 'field_lesson_subtitle',
@@ -335,39 +335,6 @@ if (function_exists('acf_add_local_field_group')) {
                 'name' => 'subtitle',
                 'type' => 'text',
                 'instructions' => 'Optional subtitle displayed beneath the lesson title.',
-            ),
-            array(
-                'key' => 'field_mux_playback_id',
-                'label' => 'Mux Playback ID',
-                'name' => 'mux_playback_id',
-                'type' => 'text',
-                'instructions' => 'Enter the Mux playback ID for the video player.',
-            ),
-            array(
-                'key' => 'field_lesson_external_links',
-                'label' => 'External Links',
-                'name' => 'lesson_external_links',
-                'type' => 'textarea',
-                'instructions' => 'Enter one link per line. Format: Link Title | URL',
-                'rows' => 4,
-            ),
-            array(
-                'key' => 'field_lesson_stats',
-                'label' => 'Lesson Stats',
-                'name' => 'lesson_stats',
-                'type' => 'textarea',
-                'instructions' => 'Enter one stat per line. Format: Label | Value | Percentage (optional)',
-                'rows' => 4,
-            ),
-            array(
-                'key' => 'field_sample_lesson_course',
-                'label' => 'Associated Course',
-                'name' => 'sample_lesson_course',
-                'type' => 'post_object',
-                'instructions' => 'Link this sample lesson to a course. The course page will be displayed as the back link.',
-                'post_type' => array('course'),
-                'return_format' => 'id',
-                'allow_null' => 1,
             ),
         ),
         'location' => array(
