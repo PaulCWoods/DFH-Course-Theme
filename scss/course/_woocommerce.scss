@@ -15,6 +15,21 @@
     line-height: var(--ui-typography-subheading-line-height);
 }
 
+@mixin link {
+    color: var(--link-color);
+    text-decoration-color: var(--link-underline-color);
+    text-decoration-thickness: var(--link-underline-thickness);
+    text-underline-offset: var(--link-underline-offset);
+
+    &:hover {
+        color: var(--link-hover-color);
+    }
+
+    &:active {
+        color: var(--link-active-color);
+    }
+}
+
 .my-account .woocommerce {
     display: flex;
     flex-direction: column;
@@ -36,18 +51,7 @@
     }
 
     a.edit {
-        color: var(--link-color);
-        text-decoration-color: var(--link-underline-color);
-        text-decoration-thickness: var(--link-underline-thickness);
-        text-underline-offset: var(--link-underline-offset);
-
-        &:hover {
-            color: var(--link-hover-color);
-        }
-
-        &:active {
-            color: var(--link-active-color);
-        }
+        @include link;
     }
 
     .u-columns {
@@ -430,8 +434,7 @@
     }
 }
 
-.wc-block-components-form .wc-block-components-text-input
-    :is([type="email"],
+.wc-block-components-form .wc-block-components-text-input :is([type="email"],
     [type="password"],
     [type="email"],
     [type="number"],
@@ -442,4 +445,40 @@
 .wc-block-components-textarea {
     background-color: var(--form-control-background-color) !important;
     color: inherit !important;
+}
+
+// Tabs
+
+.wc-tabs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wc-tabs {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+
+    li {
+        a {
+            @include link;
+        }
+
+        &.active {
+            a {
+                color: inherit;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.woocommerce-Tabs-panel {
+    padding: var(--ui-spacing-cushion);
+
+    h2 {
+        @include subheading;
+        margin-block-end: var(--ui-spacing-unit);
+    }
 }

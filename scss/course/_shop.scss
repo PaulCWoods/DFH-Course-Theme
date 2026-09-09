@@ -35,9 +35,12 @@
         th {
             font-weight: bold;
 
-            &.product-total {
-                inline-size: 1px;
+            &:is(.product-total, .woocommerce-orders-table__header-order-total) {
                 text-align: end;
+            }
+
+            &.woocommerce-orders-table__header-order-actions {
+                inline-size: 1px;
                 white-space: nowrap;
             }
         }
