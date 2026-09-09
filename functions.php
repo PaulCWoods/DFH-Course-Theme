@@ -1544,7 +1544,7 @@ function dfh_handle_certificate_download() {
         font-size: 2rem;
         letter-spacing: var(--ui-typography-display-title-letter-spacing);
         line-height: 1;
-        padding: 0.13em;
+        padding: 0.169em 0.13em;
         text-box: trim-both cap alphabetic;
         text-transform: uppercase;
         word-spacing: var(--ui-typography-display-title-word-spacing);
