@@ -1,3 +1,5 @@
+@use "../mixins/prose" as prose;
+
 .products {
     display: flex;
     flex-direction: column;
@@ -141,4 +143,53 @@ a.woocommerce-loop-product__link {
 
 .wc-block-grid__products {
     max-inline-size: none;
+}
+
+
+// Tabs
+
+.wc-tabs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wc-tabs {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+
+    li {
+        a {
+            @include prose.link;
+        }
+
+        &.active {
+            a {
+                color: inherit;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.woocommerce-Tabs-panel {
+    padding: var(--ui-spacing-cushion);
+
+    h2 {
+        @include prose.subheading;
+        margin-block-end: var(--ui-spacing-unit);
+    }
+}
+
+// Product meta
+
+.product_meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    a {
+        @include prose.link;
+    }
 }

@@ -1,35 +1,6 @@
 @use "../theme/sassvars" as var;
 @use "../mixins/prose" as prose;
 
-@mixin heading {
-    font-size: var(--ui-typography-heading-font-size);
-    font-family: var(--ui-typography-heading-font-family);
-    font-weight: var(--ui-typography-heading-font-weight);
-    line-height: var(--ui-typography-heading-line-height);
-}
-
-@mixin subheading {
-    font-size: var(--ui-typography-subheading-font-size);
-    font-family: var(--ui-typography-subheading-font-family);
-    font-weight: var(--ui-typography-subheading-font-weight);
-    line-height: var(--ui-typography-subheading-line-height);
-}
-
-@mixin link {
-    color: var(--link-color);
-    text-decoration-color: var(--link-underline-color);
-    text-decoration-thickness: var(--link-underline-thickness);
-    text-underline-offset: var(--link-underline-offset);
-
-    &:hover {
-        color: var(--link-hover-color);
-    }
-
-    &:active {
-        color: var(--link-active-color);
-    }
-}
-
 .my-account .woocommerce {
     display: flex;
     flex-direction: column;
@@ -51,7 +22,7 @@
     }
 
     a.edit {
-        @include link;
+        @include prose.link;
     }
 
     .u-columns {
@@ -152,7 +123,7 @@
         }
 
         h2 {
-            @include heading;
+            @include prose.heading;
             margin-block-end: var(--ui-spacing-breathe);
         }
     }
@@ -255,7 +226,7 @@
         padding-block-start: var(--ui-spacing-cushion);
 
         h2 {
-            @include heading;
+            @include prose.heading;
             margin-block-end: var(--ui-spacing-breathe);
         }
     }
@@ -418,7 +389,7 @@
     }
 
     legend {
-        @include subheading;
+        @include prose.subheading;
         float: left;
         inline-size: 100%;
         margin: 0;
@@ -445,40 +416,4 @@
 .wc-block-components-textarea {
     background-color: var(--form-control-background-color) !important;
     color: inherit !important;
-}
-
-// Tabs
-
-.wc-tabs-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.wc-tabs {
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-
-    li {
-        a {
-            @include link;
-        }
-
-        &.active {
-            a {
-                color: inherit;
-                font-weight: bold;
-            }
-        }
-    }
-}
-
-.woocommerce-Tabs-panel {
-    padding: var(--ui-spacing-cushion);
-
-    h2 {
-        @include subheading;
-        margin-block-end: var(--ui-spacing-unit);
-    }
 }

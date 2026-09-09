@@ -1,3 +1,32 @@
+@mixin heading {
+    font-size: var(--ui-typography-heading-font-size);
+    font-family: var(--ui-typography-heading-font-family);
+    font-weight: var(--ui-typography-heading-font-weight);
+    line-height: var(--ui-typography-heading-line-height);
+}
+
+@mixin subheading {
+    font-size: var(--ui-typography-subheading-font-size);
+    font-family: var(--ui-typography-subheading-font-family);
+    font-weight: var(--ui-typography-subheading-font-weight);
+    line-height: var(--ui-typography-subheading-line-height);
+}
+
+@mixin link {
+    color: var(--link-color);
+    text-decoration-color: var(--link-underline-color);
+    text-decoration-thickness: var(--link-underline-thickness);
+    text-underline-offset: var(--link-underline-offset);
+
+    &:hover {
+        color: var(--link-hover-color);
+    }
+
+    &:active {
+        color: var(--link-active-color);
+    }
+}
+
 @mixin prose {
     // ========================================================================
     // Block rhythm
@@ -26,17 +55,11 @@
     }
 
     :where(h2) {
-        font-size: var(--ui-typography-heading-font-size);
-        font-family: var(--ui-typography-heading-font-family);
-        font-weight: var(--ui-typography-heading-font-weight);
-        line-height: var(--ui-typography-heading-line-height);
+        @include heading;
     }
 
     :where(h3) {
-        font-size: var(--ui-typography-subheading-font-size);
-        font-family: var(--ui-typography-subheading-font-family);
-        font-weight: var(--ui-typography-subheading-font-weight);
-        line-height: var(--ui-typography-subheading-line-height);
+        @include subheading;
     }
 
     :where(h4, h5, h6) {
