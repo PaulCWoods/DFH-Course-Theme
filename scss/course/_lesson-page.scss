@@ -19,9 +19,12 @@
 // ================================
 // Lesson navigation header
 
+.lesson-head__container {
+    min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
+}
+
 .lesson-head.site-header {
     align-items: stretch;
-    min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
     border-block-end: 0;
 }
 

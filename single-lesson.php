@@ -66,7 +66,7 @@ $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 get_header();
 ?>
 
-<header class="site-header__container" aria-label="Lesson navigation">
+<header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
     <div class="lesson-head site-header">
         <div class="lesson-head__progress" aria-hidden="true"></div>
         <div class="lesson-head__inner container">

@@ -16,7 +16,7 @@ $associated_course_id = function_exists('get_field') ? get_field('sample_lesson_
 $associated_course_id = !empty($associated_course_id) ? absint($associated_course_id) : 0;
 ?>
 
-<header class="site-header__container" aria-label="Lesson navigation">
+<header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
     <div class="lesson-head site-header">
         <div class="lesson-head__inner container">
             <nav class="lesson-head__nav">
