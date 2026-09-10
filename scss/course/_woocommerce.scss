@@ -28,7 +28,7 @@
     .u-columns {
         display: grid;
         gap: var(--ui-spacing-unit);
-        grid-template-columns: repeat(auto-fill, minmax(min(var(--address-card-width, 16rem), 100%), 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(min(var(--cart-address-card-width, 16rem), 100%), 1fr));
 
         [class^="u-column"] {
             border: var(--ui-border-subtle);

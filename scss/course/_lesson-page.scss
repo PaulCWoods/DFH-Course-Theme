@@ -496,6 +496,19 @@ $lesson-bp: 60em;
         inset: 0;
         position: absolute;
     }
+    @media (hover:hover) {
+        &:hover {
+            img {
+                box-shadow: var(--ui-shadow-raised);
+            }
+        }
+    }
+    &:active {
+        img {
+            box-shadow: var(--ui-shadow-reset);
+            opacity: 0;
+        }
+    }
 }
 
 .lesson-download__icon {
@@ -520,10 +533,15 @@ $lesson-bp: 60em;
     margin-block-end: 0;
 
     img {
+        box-shadow: var(--ui-shadow);
         block-size: 100%;
         inline-size: 100%;
         object-fit: cover;
+        opacity: 1;
         position: absolute;
+        transition:
+            box-shadow var(--lesson-download-transition),
+            opacity var(--lesson-download-transition);
     }
 }
 
