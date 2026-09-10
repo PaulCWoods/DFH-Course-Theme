@@ -125,6 +125,50 @@ get_header();
 
         </div>
     </section>
+
+    <?php
+    $testimonials = get_posts(array(
+        'post_type' => 'testimonial',
+        'posts_per_page' => 3, // Show top 3
+        'orderby' => 'date',
+        'order' => 'DESC',
+    ));
+
+    if (!empty($testimonials)):
+        ?>
+        <section class="home__section" aria-labelledby="testimonials-heading">
+            <div class="container">
+                <h2 id="testimonials-heading" class="title">What students are saying</h2>
+                <div class="testimonials-grid">
+                    <?php foreach ($testimonials as $t):
+                        $title = get_the_title($t->ID);
+                        $quote = apply_filters('the_content', $t->post_content);
+                        $author_title = get_post_meta($t->ID, '_dfh_testimonial_author_title', true);
+                        $author_url = get_post_meta($t->ID, '_dfh_testimonial_author_url', true);
+                        ?>
+                        <blockquote class="testimonial-card">
+                            <div class="testimonial-card__content prose">
+                                <?php echo $quote; ?>
+                            </div>
+                            <footer>
+                                <cite class="testimonial-card__author">
+                                    <strong><?php echo esc_html($title); ?></strong>
+                                    <?php if ($author_title): ?>
+                                        <?php if ($author_url): ?>
+                                            <a href="<?php echo esc_url($author_url); ?>" class="link" target="_blank"
+                                                rel="noopener"><?php echo esc_html($author_title); ?></a>
+                                        <?php else: ?>
+                                            <span class="tc-muted"><?php echo esc_html($author_title); ?></span>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </cite>
+                            </footer>
+                        </blockquote>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>
 </main>
 <script>
     document.addEventListener('click', function (e) {
