@@ -12,6 +12,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['dfh_register_nonce'])
         $username = sanitize_user($_POST['user_login']);
         $email    = sanitize_email($_POST['user_email']);
         $password = $_POST['user_pass'];
+        $display_name = isset($_POST['dfh_student_name']) ? sanitize_text_field($_POST['dfh_student_name']) : '';
 
         // Basic validation
         if (empty($username) || empty($email) || empty($password)) {
@@ -27,6 +28,11 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['dfh_register_nonce'])
             if (is_wp_error($user_id)) {
                 $registration_error = $user_id->get_error_message();
             } else {
+                // Save the display name if provided
+                if (!empty($display_name)) {
+                    update_user_meta($user_id, 'dfh_student_name', $display_name);
+                }
+                
                 // Success: Automatically log the user in
                 $registration_success = true;
                 wp_set_current_user($user_id);
@@ -80,6 +86,10 @@ get_template_part('content', 'course-header');
             <form name="registerform" id="registerform" method="post">
                 <?php wp_nonce_field('dfh_register_action', 'dfh_register_nonce'); ?>
                 
+                <p>
+                    <label for="dfh_student_name">Your name (optional)</label>
+                    <input type="text" name="dfh_student_name" id="dfh_student_name" value="<?php echo isset($_POST['dfh_student_name']) ? esc_attr($_POST['dfh_student_name']) : ''; ?>" size="25" />
+                </p>
                 <p>
                     <label for="user_login">Username</label>
                     <input type="text" name="user_login" id="user_login" value="<?php echo isset($_POST['user_login']) ? esc_attr($_POST['user_login']) : ''; ?>" size="20" autocapitalize="off" required />

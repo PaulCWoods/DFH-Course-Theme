@@ -602,7 +602,7 @@ function dfh_add_student_role() {
 add_action( 'init', 'dfh_add_student_role' );
 
 /**
- * 2. Add Manual Enrollment Checkbox to User Profile Admin Screen
+ * 2. Add User Profile Fields to Admin Screen
  */
 function dfh_show_extra_user_profile_fields( $user ) {
     if ( ! current_user_can( 'administrator' ) ) {
@@ -610,9 +610,17 @@ function dfh_show_extra_user_profile_fields( $user ) {
     }
     
     $is_enrolled = get_user_meta( $user->ID, 'dfh_course_enrolled', true );
+    $student_name = get_user_meta( $user->ID, 'dfh_student_name', true );
     ?>
     <h3>Course Access Control</h3>
     <table class="form-table">
+        <tr>
+            <th><label for="dfh_student_name">Student Display Name</label></th>
+            <td>
+                <input type="text" name="dfh_student_name" id="dfh_student_name" value="<?php echo esc_attr( $student_name ); ?>" class="regular-text" />
+                <p class="description">Custom name to display on certificates. If empty, will use Display Name or username.</p>
+            </td>
+        </tr>
         <tr>
             <th><label for="dfh_course_enrolled">Course Enrollment</label></th>
             <td>
@@ -630,13 +638,24 @@ add_action( 'show_user_profile', 'dfh_show_extra_user_profile_fields' );
 add_action( 'edit_user_profile', 'dfh_show_extra_user_profile_fields' );
 
 /**
- * 3. Save Enrollment Checkbox Data
+ * 3. Save User Profile Fields Data
  */
 function dfh_save_extra_user_profile_fields( $user_id ) {
     if ( ! current_user_can( 'edit_user', $user_id ) ) {
         return;
     }
 
+    // Save student name
+    if ( isset( $_POST['dfh_student_name'] ) ) {
+        $student_name = sanitize_text_field( $_POST['dfh_student_name'] );
+        if ( ! empty( $student_name ) ) {
+            update_user_meta( $user_id, 'dfh_student_name', $student_name );
+        } else {
+            delete_user_meta( $user_id, 'dfh_student_name' );
+        }
+    }
+
+    // Save enrollment status
     if ( isset( $_POST['dfh_course_enrolled'] ) && '1' === $_POST['dfh_course_enrolled'] ) {
         update_user_meta( $user_id, 'dfh_course_enrolled', '1' );
     } else {
@@ -1453,7 +1472,11 @@ function dfh_handle_certificate_download() {
         }
 
         $user = get_userdata($user_id);
-        $student_name = $user->display_name ? $user->display_name : $user->user_login;
+        // Use custom student name, fallback to display_name, then user_login
+        $student_name = get_user_meta($user_id, 'dfh_student_name', true);
+        if (empty($student_name)) {
+            $student_name = $user->display_name ? $user->display_name : $user->user_login;
+        }
         $course_title = get_the_title($course_id);
         $completion_date = date_i18n(get_option('date_format'));
 
