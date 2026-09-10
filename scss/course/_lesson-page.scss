@@ -506,7 +506,7 @@ $lesson-bp: 60em;
     &:active {
         img {
             box-shadow: var(--ui-shadow-reset);
-            opacity: 0;
+            opacity: var(--ui-opacity-muted);
         }
     }
 }
