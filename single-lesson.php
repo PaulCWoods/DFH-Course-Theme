@@ -1,14 +1,8 @@
 <?php
-
 $lesson_id = get_the_ID();
-$adjacent = dfh_get_adjacent_lesson($lesson_id);
-$is_completed = dfh_is_lesson_completed($lesson_id);
-$is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
-$bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
-$bookmark_class = $is_bookmarked ? 'button bookmark-btn active strong' : 'button bookmark-btn';
-$bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
-$playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
-// Gate check at the very top of single-lesson.php or single-course.php
+$user_id   = get_current_user_id();
+
+// 1. Gate check: Verify course access first
 if (!dfh_user_has_course_access()) {
     get_header();
     get_template_part('content', 'course-header');
@@ -24,8 +18,43 @@ if (!dfh_user_has_course_access()) {
     </main>
     <?php
     get_footer();
-    exit; // Stop loading the rest of the page
+    exit;
 }
+
+// 2. Progression Gate Check: Prevent URL manipulation skipping ahead
+// Administrators bypass this check so you can freely test or review any page.
+if (!user_can($user_id, 'administrator')) {
+    $is_completed = dfh_is_lesson_completed($lesson_id, $user_id);
+    $current_allowed_lesson = dfh_get_student_current_lesson($user_id);
+
+    // If the lesson is NOT completed AND is not their current active lesson, block access
+    // (If all lessons are complete, $current_allowed_lesson returns 'completed', meaning future direct URLs are locked)
+    if (!$is_completed && (int) $current_allowed_lesson !== (int) $lesson_id) {
+        // Find where they are supposed to be (fallback to course archive or active lesson)
+        $redirect_url = home_url();
+        if (is_numeric($current_allowed_lesson)) {
+            $redirect_url = get_permalink($current_allowed_lesson);
+        } else {
+            // If course is fully completed, send them back to the first course page or home
+            $courses = dfh_get_courses_for_lesson($lesson_id);
+            if (!empty($courses)) {
+                $redirect_url = get_permalink($courses[0]);
+            }
+        }
+
+        wp_redirect($redirect_url);
+        exit;
+    }
+}
+
+// Proceed with standard lesson variables...
+$adjacent = dfh_get_adjacent_lesson($lesson_id);
+$is_completed = dfh_is_lesson_completed($lesson_id);
+$is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
+$bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
+$bookmark_class = $is_bookmarked ? 'button bookmark-btn active strong' : 'button bookmark-btn';
+$bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
+$playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 
 /**
  * Template Name: Single Lesson
