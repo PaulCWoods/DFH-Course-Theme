@@ -15,7 +15,7 @@
                                 <a target="_blank" class="link" href="https://designforhumans.blog">Blog</a>
                             </li>
                             <li>
-                                <a target="_blank" class="link" href="https://designforhumans.blog/contact">Contact</a>
+                                <a target="_blank" class="link" href="https://designforhumans.blog/contact">Contact me</a>
                             </li>
                         </ul>
                     </nav>
