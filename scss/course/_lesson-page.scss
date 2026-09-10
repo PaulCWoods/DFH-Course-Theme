@@ -244,8 +244,7 @@ $lesson-bp: 60em;
 
     section {
         border-block-start: var(--ui-border-quiet);
-        margin-block-start: calc(var(--ui-spacing-breathe) * 2);
-        padding-block-start: calc(var(--ui-spacing-breathe) * 2);
+        padding-block: calc(var(--ui-spacing-breathe) * 2);
     }
     
     :is(aside, section, .callout-box) {
