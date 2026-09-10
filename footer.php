@@ -14,6 +14,9 @@
                             <li>
                                 <a target="_blank" class="link" href="https://designforhumans.blog">Blog</a>
                             </li>
+                            <li>
+                                <a target="_blank" class="link" href="https://designforhumans.blog/contact">Contact</a>
+                            </li>
                         </ul>
                     </nav>
                     <p class="site-footer__copyright">&copy; <?php echo date('Y'); ?> Design For Humans. All rights reserved.</p>
