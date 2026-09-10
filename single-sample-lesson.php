@@ -16,26 +16,28 @@ $associated_course_id = function_exists('get_field') ? get_field('sample_lesson_
 $associated_course_id = !empty($associated_course_id) ? absint($associated_course_id) : 0;
 ?>
 
-<header class="lesson-head site-header" aria-label="Lesson navigation">
-    <div class="lesson-head__inner container">
-        <nav class="lesson-head__nav">
-            <?php if ($associated_course_id && get_post($associated_course_id)): ?>
-                <a class="lesson-head__breadcrumb link"
-                    href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
-            <?php else: ?>
-                <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
-            <?php endif; ?>
-        </nav>
-        <div class="lesson-head__controls">
-            <?php if ($playback_id): ?>
-                <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-unstick"
-                    aria-controls="lesson-video-player" aria-pressed="true">
-                    <span class="sr">Stick video</span>
-                    <svg class="icon" width="32" height="32" aria-hidden="true">
-                        <use href="#Unlock" />
-                    </svg>
-                </button>
-            <?php endif; ?>
+<header class="site-header__container" aria-label="Lesson navigation">
+    <div class="lesson-head site-header">
+        <div class="lesson-head__inner container">
+            <nav class="lesson-head__nav">
+                <?php if ($associated_course_id && get_post($associated_course_id)): ?>
+                    <a class="lesson-head__breadcrumb link"
+                        href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
+                <?php else: ?>
+                    <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
+                <?php endif; ?>
+            </nav>
+            <div class="lesson-head__controls">
+                <?php if ($playback_id): ?>
+                    <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-unstick"
+                        aria-controls="lesson-video-player" aria-pressed="true">
+                        <span class="sr">Stick video</span>
+                        <svg class="icon" width="32" height="32" aria-hidden="true">
+                            <use href="#Unlock" />
+                        </svg>
+                    </button>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </header>
@@ -73,12 +75,12 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                     <p class="lesson-body__sample-text">
                         <span>
                             To read more, consider
-<?php if ($associated_course_id && get_post($associated_course_id)): ?>
-    <a href="<?php echo esc_url(get_permalink($associated_course_id)); ?>">purchasing</a>
-<?php else: ?>
-    <a href="<?php echo esc_url(home_url()); ?>">purchasing</a>
-<?php endif; ?>
-                        this course.
+                            <?php if ($associated_course_id && get_post($associated_course_id)): ?>
+                                <a href="<?php echo esc_url(get_permalink($associated_course_id)); ?>">purchasing</a>
+                            <?php else: ?>
+                                <a href="<?php echo esc_url(home_url()); ?>">purchasing</a>
+                            <?php endif; ?>
+                            this course.
                         </span>
                     </p>
                 </div>

@@ -1,6 +1,6 @@
 <?php
 $lesson_id = get_the_ID();
-$user_id   = get_current_user_id();
+$user_id = get_current_user_id();
 
 // 1. Gate check: Verify course access first
 if (!dfh_user_has_course_access()) {
@@ -66,77 +66,78 @@ $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 get_header();
 ?>
 
-<header class="lesson-head site-header" aria-label="Lesson navigation">
-    <div class="lesson-head__progress" aria-hidden="true"></div>
-    <div class="lesson-head__inner container">
-        <?php
-        $lesson_code = dfh_get_lesson_hierarchy_number();
-        if ($lesson_code):
-            ?>
-            <span class="lesson-head__code-badge" title="Lesson code"><span class="sr">Lesson
-                    code:</span><?php echo esc_html($lesson_code); ?></span>
-        <?php endif; ?>
-        <nav class="lesson-head__nav">
+<header class="site-header__container" aria-label="Lesson navigation">
+    <div class="lesson-head site-header">
+        <div class="lesson-head__progress" aria-hidden="true"></div>
+        <div class="lesson-head__inner container">
             <?php
-            $post_id = get_the_ID();
-            $parent_id = wp_get_post_parent_id($post_id);
+            $lesson_code = dfh_get_lesson_hierarchy_number();
+            if ($lesson_code):
+                ?>
+                <span class="lesson-head__code-badge" title="Lesson code"><span class="sr">Lesson
+                        code:</span><?php echo esc_html($lesson_code); ?></span>
+            <?php endif; ?>
+            <nav class="lesson-head__nav">
+                <?php
+                $post_id = get_the_ID();
+                $parent_id = wp_get_post_parent_id($post_id);
 
-            // Breadcrumb: parent lesson when available; otherwise try to find parent Course
-            if ($parent_id): ?>
-                <a class="lesson-head__breadcrumb link" title="<?php echo esc_html(get_the_title($parent_id)); ?>"
-                    href="<?php echo esc_url(get_permalink($parent_id)); ?>"><?php echo esc_html(get_the_title($parent_id)); ?></a>
-            <?php else:
-                // Attempt to find a Course that references this lesson as a root (ACF or postmeta)
-                $course_id = null;
-                $all_courses = get_posts(array('post_type' => 'course', 'posts_per_page' => -1, 'fields' => 'ids'));
-                if (!empty($all_courses)) {
-                    foreach ($all_courses as $c_id) {
-                        $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
-                        if (is_string($roots)) {
-                            $maybe = @unserialize($roots);
-                            if ($maybe !== false)
-                                $roots = $maybe;
-                        }
-                        if (!empty($roots) && in_array($post_id, (array) $roots)) {
-                            $course_id = $c_id;
-                            break;
+                // Breadcrumb: parent lesson when available; otherwise try to find parent Course
+                if ($parent_id): ?>
+                    <a class="lesson-head__breadcrumb link" title="<?php echo esc_html(get_the_title($parent_id)); ?>"
+                        href="<?php echo esc_url(get_permalink($parent_id)); ?>"><?php echo esc_html(get_the_title($parent_id)); ?></a>
+                <?php else:
+                    // Attempt to find a Course that references this lesson as a root (ACF or postmeta)
+                    $course_id = null;
+                    $all_courses = get_posts(array('post_type' => 'course', 'posts_per_page' => -1, 'fields' => 'ids'));
+                    if (!empty($all_courses)) {
+                        foreach ($all_courses as $c_id) {
+                            $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
+                            if (is_string($roots)) {
+                                $maybe = @unserialize($roots);
+                                if ($maybe !== false)
+                                    $roots = $maybe;
+                            }
+                            if (!empty($roots) && in_array($post_id, (array) $roots)) {
+                                $course_id = $c_id;
+                                break;
+                            }
                         }
                     }
-                }
 
-                if ($course_id): ?>
-                    <a class="lesson-head__breadcrumb link" title="<?php echo esc_html(get_the_title($course_id)); ?>"
-                        href="<?php echo esc_url(get_permalink($course_id)); ?>"><?php echo esc_html(get_the_title($course_id)); ?></a>
-                <?php else: ?>
-                    <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
-                <?php endif;
-            endif; ?>
+                    if ($course_id): ?>
+                        <a class="lesson-head__breadcrumb link" title="<?php echo esc_html(get_the_title($course_id)); ?>"
+                            href="<?php echo esc_url(get_permalink($course_id)); ?>"><?php echo esc_html(get_the_title($course_id)); ?></a>
+                    <?php else: ?>
+                        <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
+                    <?php endif;
+                endif; ?>
 
-            <!-- Syllabus overlay toggle -->
+                <!-- Syllabus overlay toggle -->
 
-        </nav>
-        <div class="lesson-head__controls">
+            </nav>
+            <div class="lesson-head__controls">
 
-            <?php if ($playback_id): ?>
-                <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-unstick"
-                    aria-controls="lesson-video-player" aria-pressed="true">
-                    <span class="sr">Stick video</span>
+                <?php if ($playback_id): ?>
+                    <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-unstick"
+                        aria-controls="lesson-video-player" aria-pressed="true">
+                        <span class="sr">Stick video</span>
+                        <svg class="icon" width="32" height="32" aria-hidden="true">
+                            <use href="#Unlock" />
+                        </svg>
+                    </button>
+                <?php endif; ?>
+
+                <button class="progress-toggle course-progress__toggle button subtle" command="toggle-popover"
+                    commandfor="course-progress">
+                    <span class="sr@<sm">Progress</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
-                        <use href="#Unlock" />
+                        <use href="#Navigation" />
                     </svg>
                 </button>
-            <?php endif; ?>
-
-            <button class="progress-toggle course-progress__toggle button subtle" command="toggle-popover"
-                commandfor="course-progress">
-                <span class="sr@<sm">Progress</span>
-                <svg class="icon" width="32" height="32" aria-hidden="true">
-                    <use href="#Navigation" />
-                </svg>
-            </button>
+            </div>
         </div>
     </div>
-
 </header>
 <main class="site-main lesson-page" id="main">
     <!-- Syllabus overlay panel (hidden by default) -->
@@ -250,46 +251,47 @@ get_header();
                     <?php endif; ?>
 
                     <?php
-$lesson_id = get_the_ID();
-$download_ids = get_post_meta($lesson_id, '_dfh_linked_download_ids', true);
+                    $lesson_id = get_the_ID();
+                    $download_ids = get_post_meta($lesson_id, '_dfh_linked_download_ids', true);
 
-if (!empty($download_ids) && is_array($download_ids)):
-    echo '<section class="lesson-resources lesson-downloads" aria-describedby="lesson-downloads-heading"><h2 class="subheading lesson-resources__heading" id="lesson-downloads-heading">Lesson downloads</h2><ul>';
-    
-    foreach ($download_ids as $download_id) {
-        $download_post = get_post($download_id);
-        $attachment_id = get_post_meta($download_id, '_dfh_download_attachment_id', true);
-        $pdf_url = $attachment_id ? wp_get_attachment_url($attachment_id) : '';
-        
-        if ($download_post && $pdf_url) {
-            ?>
-            <li>
-            <div class="lesson-download">
-                <?php if (has_post_thumbnail($download_id)): ?>
-                    <div class="lesson-download__thumb">
-                        <?php echo get_the_post_thumbnail($download_id, 'medium_large'); ?>
-                    </div>
-                <?php endif; ?>
-                <svg class="icon dir lesson-download__icon" width="32" height="32" aria-hidden="true">
-                    <use href="#Download" />
-                </svg>
-                <div class="lesson-download__info">
-                    <h3>
-                        <a class="link" href="<?php echo esc_url($pdf_url); ?>" download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
-                    </h3>
-                    <?php if (trim($download_post->post_excerpt) !== ''): ?>
-                        <p class="tc-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            </li>
-            <?php
-        }
-    }
-    
-    echo '</ul></section>';
-endif;
-?>
+                    if (!empty($download_ids) && is_array($download_ids)):
+                        echo '<section class="lesson-resources lesson-downloads" aria-describedby="lesson-downloads-heading"><h2 class="subheading lesson-resources__heading" id="lesson-downloads-heading">Lesson downloads</h2><ul>';
+
+                        foreach ($download_ids as $download_id) {
+                            $download_post = get_post($download_id);
+                            $attachment_id = get_post_meta($download_id, '_dfh_download_attachment_id', true);
+                            $pdf_url = $attachment_id ? wp_get_attachment_url($attachment_id) : '';
+
+                            if ($download_post && $pdf_url) {
+                                ?>
+                                <li>
+                                    <div class="lesson-download">
+                                        <?php if (has_post_thumbnail($download_id)): ?>
+                                            <div class="lesson-download__thumb">
+                                                <?php echo get_the_post_thumbnail($download_id, 'medium_large'); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <svg class="icon dir lesson-download__icon" width="32" height="32" aria-hidden="true">
+                                            <use href="#Download" />
+                                        </svg>
+                                        <div class="lesson-download__info">
+                                            <h3>
+                                                <a class="link" href="<?php echo esc_url($pdf_url); ?>"
+                                                    download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
+                                            </h3>
+                                            <?php if (trim($download_post->post_excerpt) !== ''): ?>
+                                                <p class="tc-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </li>
+                                <?php
+                            }
+                        }
+
+                        echo '</ul></section>';
+                    endif;
+                    ?>
                 </aside>
             </div>
         </div>

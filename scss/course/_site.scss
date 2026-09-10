@@ -1,0 +1,11 @@
+@use "../theme/sassvars" as var;
+
+.site:has(.video-stick) {
+    @media (24em < width < #{var.$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
+        .site-header {
+            @container scroll-state(stuck: top) {
+                box-shadow: var(--ui-shadow-reset);
+            }
+        }
+    }
+}
