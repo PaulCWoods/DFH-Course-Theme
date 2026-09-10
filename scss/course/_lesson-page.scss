@@ -479,7 +479,7 @@ $lesson-bp: 60em;
 .lesson-downloads ul {
     // Stack download entries and remove default list decoration.
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(10rem, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
     gap: calc(var(--ui-spacing-unit)/2);
     list-style: none;
 }
@@ -498,11 +498,15 @@ $lesson-bp: 60em;
 }
 
 .lesson-download__icon {
+    background-color: var(--ui-color-background-dark);
+    box-sizing: content-box;
     color: var(--ui-color-foreground-on-dark);
-    filter: drop-shadow(var(--ui-shadow));
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    opacity: var(--ui-opacity-muted);
+    padding: calc(var(--ui-spacing-unit)/2);
+    pointer-events: none;
     position: absolute;
-    inset-block-start: calc(var(--ui-spacing-unit)/2);
-    inset-inline-end: calc(var(--ui-spacing-unit)/2);
 }
 
 .lesson-download__thumb {

@@ -267,7 +267,7 @@ if (!empty($download_ids) && is_array($download_ids)):
             <div class="lesson-download">
                 <?php if (has_post_thumbnail($download_id)): ?>
                     <div class="lesson-download__thumb">
-                        <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>
+                        <?php echo get_the_post_thumbnail($download_id, 'medium'); ?>
                     </div>
                 <?php endif; ?>
                 <svg class="icon dir lesson-download__icon" width="32" height="32" aria-hidden="true">
