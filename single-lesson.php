@@ -89,11 +89,11 @@ get_header();
         <div class="lesson-head__controls">
 
             <?php if ($playback_id): ?>
-                <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-stick"
+                <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-unstick"
                     aria-controls="lesson-video-player" aria-pressed="true">
-                    <span class="sr">Unstick video</span>
+                    <span class="sr">Stick video</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
-                        <use href="#Lock" />
+                        <use href="#Unlock" />
                     </svg>
                 </button>
             <?php endif; ?>
