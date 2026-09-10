@@ -10,7 +10,7 @@ get_template_part('content', 'course-header');
 ?>
 
 <main class="site-main error-404-page" id="main">
-    <article class="article prose container +1/2">
+    <article class="article prose container +1/2 +middle">
         <h1>Page not found</h1>
         <p>
             The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
