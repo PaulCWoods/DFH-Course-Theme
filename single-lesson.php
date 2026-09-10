@@ -119,7 +119,7 @@ get_header();
             <div class="lesson-head__controls">
 
                 <?php if ($playback_id): ?>
-                    <button type="button" id="video-stick-toggle" class="button subtle lesson-video__toggle video-unstick"
+                    <button type="button" id="video-stick-toggle" class="button  +subtle lesson-video__toggle video-unstick"
                         aria-controls="lesson-video-player" aria-pressed="true">
                         <span class="sr">Stick video</span>
                         <svg class="icon" width="32" height="32" aria-hidden="true">
@@ -128,7 +128,7 @@ get_header();
                     </button>
                 <?php endif; ?>
 
-                <button class="progress-toggle course-progress__toggle button subtle" command="toggle-popover"
+                <button class="progress-toggle course-progress__toggle button +subtle" command="toggle-popover"
                     commandfor="course-progress">
                     <span class="sr@<sm">Progress</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
@@ -453,7 +453,7 @@ get_header();
                 Courses Home
             </a>
 
-            <button class="syllabus-close button subtle" command="hide-popover" commandfor="course-progress"
+            <button class="syllabus-close button +subtle" command="hide-popover" commandfor="course-progress"
                 title="Close navigation">
                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                     <use href="#Close" />

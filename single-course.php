@@ -106,7 +106,7 @@ get_template_part('content', 'course-header');
                         style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
-                            <button type="submit" class="button strong buy-button">
+                            <button type="submit" class="button +strongbuy-button">
                                 <span>
                                     Enroll Now (<?php echo $product->get_price_html(); ?>)
                                 </span>
@@ -129,7 +129,7 @@ get_template_part('content', 'course-header');
                     <div class="course-purchase-actions" style="margin-top: 1.5rem;">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
-                            <button type="submit" class="button strong buy-button">
+                            <button type="submit" class="button +strongbuy-button">
                                 <span>Buy Course — <?php echo $product->get_price_html(); ?></span>
                             </button>
                         </form>
@@ -145,7 +145,7 @@ get_template_part('content', 'course-header');
                                 class="button secondary-button">Review from Beginning</a>
                             <!-- Certificate Download Link -->
                             <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>"
-                                class="button strong cert-btn" target="_blank">
+                                class="button +strongcert-btn" target="_blank">
                                 Download Certificate (PDF)
                                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                     <use href="#Download" />
@@ -183,7 +183,7 @@ get_template_part('content', 'course-header');
                     <?php if (!empty($all_lessons)):
                         $first_lesson_url = get_permalink($all_lessons[0]);
                         ?>
-                        <a href="<?php echo esc_url($first_lesson_url); ?>" class="button strong start-btn">
+                        <a href="<?php echo esc_url($first_lesson_url); ?>" class="button +strongstart-btn">
                             Start Course
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />
