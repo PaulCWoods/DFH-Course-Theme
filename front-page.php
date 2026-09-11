@@ -41,7 +41,7 @@ get_header();
             }
 
             if (is_user_logged_in()): ?>
-                <p class="home__logged-in title">Welcome back, <?php echo esc_html($user_name); ?></p>
+                <p class="home__logged-in title">Welcome back, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
                         <a href="<?php echo esc_url($hero_target); ?>" class="button +strong">
