@@ -124,28 +124,21 @@ get_template_part('content', 'course-header');
                         <a href="<?php echo esc_url(get_permalink()); ?>" class="button +strong">Refresh Page</a>
                     </p>
 
-                <?php elseif (!is_user_logged_in() && $product && !$has_access): ?>
-                    <!-- State 0A: Logged-out Visitor needing purchase -->
-                    <h2>Ready to start learning?</h2>
-                    <p class="small-text tc-muted">Enroll now or log in to your account to get started.</p>
-                    <div class="course-purchase-actions"
-                        style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
-                        <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
-                            <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
-                            <button type="submit" class="button +strong buy-button">
-                                <span>
-                                    Enroll Now (<?php echo $product->get_price_html(); ?>)
-                                </span>
-                            </button>
-                        </form>
-                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="button">Log In</a>
-                    </div>
-
                 <?php elseif (!is_user_logged_in()): ?>
-                    <!-- State 0B: Standard Guest Visitor (No product linked) -->
+                    <!-- State 0: Logged-out Visitor -->
                     <h2>Ready to start learning?</h2>
-                    <p class="small-text tc-muted">Log in or register to access the course syllabus.</p>
-                    <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="button">Log In to Access Course</a>
+                    <p class="small-text tc-muted">
+                        <?php if ($product): ?>
+                            Log in or create an account to enroll (<?php echo $product->get_price_html(); ?>).
+                        <?php else: ?>
+                            Log in or register to access the course syllabus.
+                        <?php endif; ?>
+                    </p>
+                    <div class="course-purchase-actions" style="margin-top: 1.5rem;">
+                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="button +strong">
+                            Log In to Enroll
+                        </a>
+                    </div>
 
                 <?php elseif (!$has_access && $product): ?>
                     <!-- State 0C: Logged-in User without purchase -->

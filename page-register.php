@@ -54,7 +54,7 @@ get_template_part('content', 'course-header');
 
 
         <?php if (is_user_logged_in() && !$registration_success): ?>
-                <h1 class="heading">You are already logged in!</h1>
+                <h1 class="title">You are already logged in!</h1>
             <div class="fl fl-col gp-breathe">
                 <p>
                     <a href="<?php echo esc_url(home_url()); ?>" class="button +strong">
@@ -65,7 +65,7 @@ get_template_part('content', 'course-header');
             </div>
 
         <?php elseif ($registration_success): ?>
-                <h1 class="heading">Welcome aboard!</h1>
+                <h1 class="title">Welcome aboard!</h1>
             <div class="fl fl-col gp-breathe">
                 <p>Your account has been successfully created and you are now logged in.</p>
                 <p style="margin-top: 1.5rem;">
@@ -83,7 +83,7 @@ get_template_part('content', 'course-header');
             </script>
 
         <?php else: ?>
-        <h1 class="heading">Create an Account</h1>
+        <h1 class="title">Create an Account</h1>
 
             <?php if (!empty($registration_error)): ?>
                 <div class="login-message error-message" style="border-left: 4px solid #cc0000; padding-left: 1rem; margin-bottom: 1.5rem; color: #cc0000;">

@@ -7,7 +7,7 @@ get_template_part('content', 'course-header');
 ?>
 <main class="site-main login-page" id="main">
     <div class="container">
-    <h1 class="heading">Log in to your account</h1>
+    <h1 class="title">Log in to your account</h1>
     
     <?php
     if ( is_user_logged_in() ) {
