@@ -13,7 +13,10 @@
                     </li>
                     <?php if (is_user_logged_in()): ?>
                         <li>
-                            <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>">My Account</a>
+                            <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>">Account</a>
+                        </li>
+                        <li>
+                            <a class="link" href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">Log Out</a>
                         </li>
                     <?php elseif (!is_page('login')): ?>
                         <li>

@@ -19,19 +19,24 @@ get_header();
             // Determine the target URL for the hero button: prefer the user's active course when available.
             $hero_target = home_url('/course/');
             $has_resume_course = false;
-            if (is_user_logged_in() && function_exists('dfh_get_student_current_lesson')) {
+            if (is_user_logged_in() && function_exists('dfh_get_student_current_lesson') && function_exists('dfh_get_completed_lessons')) {
                 $active_lesson = dfh_get_student_current_lesson();
-                $current_user = wp_get_current_user();
-                $user_name = '';
-                if ($current_user && $current_user->ID) {
-                    $user_name = $current_user->display_name ? $current_user->display_name : $current_user->user_login;
-                }
-                if (is_int($active_lesson) && $active_lesson > 0 && function_exists('dfh_get_courses_for_lesson')) {
+                $user_id = get_current_user_id();
+                $completed_lessons = dfh_get_completed_lessons($user_id);
+                
+                // Only show resume button if user has actually started (completed at least one lesson)
+                if (!empty($completed_lessons) && is_int($active_lesson) && $active_lesson > 0 && function_exists('dfh_get_courses_for_lesson')) {
                     $courses = dfh_get_courses_for_lesson($active_lesson);
                     if (!empty($courses)) {
                         $hero_target = get_permalink((int) $courses[0]);
                         $has_resume_course = !empty($hero_target);
                     }
+                }
+                
+                $current_user = wp_get_current_user();
+                $user_name = '';
+                if ($current_user && $current_user->ID) {
+                    $user_name = $current_user->display_name ? $current_user->display_name : $current_user->user_login;
                 }
             }
 

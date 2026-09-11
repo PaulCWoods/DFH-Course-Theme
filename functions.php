@@ -1342,6 +1342,45 @@ add_action( 'woocommerce_thankyou', 'dfh_auto_complete_virtual_orders' );
 add_action( 'woocommerce_payment_complete', 'dfh_auto_complete_virtual_orders' );
 
 /**
+ * Add a "Return to Course" link on the WooCommerce Order Received (Thank You) page.
+ */
+function dfh_add_return_to_course_link( $order_id ) {
+    // Convert order ID to order object
+    $order = wc_get_order( $order_id );
+    if ( ! $order ) {
+        return;
+    }
+    
+    // Find if the order contains a course product
+    $course_url = home_url(); // Fallback to home
+    
+    foreach ( $order->get_items() as $item ) {
+        $product_id = $item->get_product_id();
+        $courses = get_posts( array(
+            'post_type'   => 'course',
+            'meta_key'    => '_dfh_product_id',
+            'meta_value'  => $product_id,
+            'numberposts' => 1,
+        ) );
+        if ( ! empty( $courses ) ) {
+            $course_url = get_permalink( $courses[0]->ID );
+            break;
+        }
+    }
+    ?>
+    <div class="woocommerce-order-course-return" style="margin: 2rem 0; text-align: center;">
+        <a href="<?php echo esc_url( $course_url ); ?>" class="button +strong">
+            Go to Your Course
+            <svg class="icon dir" width="32" height="32" aria-hidden="true" style="margin-left: 0.5rem; vertical-align: middle;">
+                <use href="#ArrowRight" />
+            </svg>
+        </a>
+    </div>
+    <?php
+}
+add_action( 'woocommerce_thankyou', 'dfh_add_return_to_course_link', 20 );
+
+/**
  * Register Downloadable Resources Custom Post Type.
  */
 function dfh_register_download_post_type()
