@@ -304,6 +304,9 @@
         &:first-child {
             margin-block-start: 0 !important;
         }
+        &.\+half {
+            img { max-inline-size: 50%; }
+        }
         &.\+scheme-adapt img {
             @media (prefers-color-scheme: dark) {
                 filter: invert(1) hue-rotate(180deg);
