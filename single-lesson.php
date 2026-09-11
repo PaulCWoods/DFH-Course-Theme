@@ -615,13 +615,13 @@ get_header();
                         const useEl = bookmarkBtn.querySelector('use');
                         if (data.data.is_bookmarked) {
                             if (label) label.textContent = 'Bookmarked';
-                            bookmarkBtn.classList.add('active');
-                            bookmarkBtn.classList.add('strong');
+                            bookmarkBtn.classList.add('+active');
+                            bookmarkBtn.classList.add('+strong');
                             if (useEl) useEl.setAttribute('href', '#Bookmarked');
                         } else {
                             if (label) label.textContent = 'Bookmark Lesson';
-                            bookmarkBtn.classList.remove('active');
-                            bookmarkBtn.classList.remove('strong');
+                            bookmarkBtn.classList.remove('+active');
+                            bookmarkBtn.classList.remove('+strong');
                             if (useEl) useEl.setAttribute('href', '#Bookmark');
                         }
                     } else {
