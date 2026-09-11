@@ -377,16 +377,11 @@
 // ================================
 // Lesson resources and bookmark
 
-:is(.lesson-resources,
-.lesson-bookmark) {
-    margin-block-end: var(--ui-spacing-cushion);
-
-    &:last-child {
-        margin-block-end: 0;
-    }
-}
-
 .lesson-bookmark {
+    border-block-start: var(--ui-border-subtle);
+    margin-block-start: var(--ui-spacing-cushion);
+    padding-block-start: var(--ui-spacing-cushion);
+    order: 4;
     text-align: end;
 
     .button {
@@ -399,11 +394,27 @@
             font-size: 1.5em;
         }
     }
+    @media screen and (width > #{var.$lesson-bp}) {
+        border-block-start: none;
+        margin-block-start: 0;
+        padding-block-start: 0;
+        margin-block-end: var(--ui-spacing-cushion);
+        order: 0;
+
+        &:last-child {
+            margin-block-end: 0;
+        }
+    }
 }
 
 .lesson-resources {
     border-block-start: var(--ui-border-subtle);
+    margin-block-end: var(--ui-spacing-cushion);
     padding-block-start: var(--ui-spacing-cushion);
+
+    &:last-child {
+        margin-block-end: 0;
+    }
 }
 
 .lesson-resources__heading {
@@ -416,11 +427,14 @@
 // Resource column, including the stats definition list.
 .lesson-aside {
     align-self: start;
+    display: flex;
+    flex-direction: column;
     grid-column: 1 / -1;
     inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-4)) + var(--ui-spacing-unit));
     margin: calc(var(--ui-focus-ring-clearance) * -1);
     padding: var(--ui-focus-ring-clearance);
     position: sticky;
+    reading-flow: flex-visual;
 
     @media screen and (width > #{var.$lesson-bp}) {
         grid-column: 3; // occupy the third column on wide screens
