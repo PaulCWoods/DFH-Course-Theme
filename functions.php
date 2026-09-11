@@ -1307,6 +1307,41 @@ add_action( 'woocommerce_order_status_completed', 'dfh_grant_course_access_on_pu
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
 /**
+ * Automatically complete orders for virtual products.
+ */
+function dfh_auto_complete_virtual_orders( $order_id ) {
+    if ( ! $order_id ) {
+        return;
+    }
+
+    $order = wc_get_order( $order_id );
+    if ( ! $order ) {
+        return;
+    }
+
+    // Only affect orders that are currently processing
+    if ( 'processing' !== $order->get_status() ) {
+        return;
+    }
+
+    $has_downloadable_or_virtual = false;
+
+    foreach ( $order->get_items() as $item ) {
+        $product = $item->get_product();
+        if ( $product && ( $product->is_virtual() || $product->is_downloadable() ) ) {
+            $has_downloadable_or_virtual = true;
+            break;
+        }
+    }
+
+    if ( $has_downloadable_or_virtual ) {
+        $order->update_status( 'completed' );
+    }
+}
+add_action( 'woocommerce_thankyou', 'dfh_auto_complete_virtual_orders' );
+add_action( 'woocommerce_payment_complete', 'dfh_auto_complete_virtual_orders' );
+
+/**
  * Register Downloadable Resources Custom Post Type.
  */
 function dfh_register_download_post_type()
