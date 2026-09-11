@@ -280,7 +280,7 @@ get_header();
                                                     download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
                                             </h3>
                                             <?php if (trim($download_post->post_excerpt) !== ''): ?>
-                                                <p class="tc-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                                                <p class="tc-muted fs-sm"><?php echo esc_html($download_post->post_excerpt); ?></p>
                                             <?php endif; ?>
                                         </div>
                                     </div>
