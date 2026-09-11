@@ -1393,7 +1393,7 @@ function dfh_register_download_post_type()
         ),
         'public' => true,
         'has_archive' => false,
-        'supports' => array('title', 'editor', 'thumbnail'),
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
         'show_in_rest' => true, // Enables the Gutenberg block editor
         'menu_icon' => 'dashicons-media-document',
     ));
