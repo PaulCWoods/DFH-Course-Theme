@@ -305,7 +305,9 @@
             margin-block-start: 0 !important;
         }
         &.\+half {
-            img { max-inline-size: 50%; }
+            img {
+                max-inline-size: 50% !important;
+            }
         }
         &.\+scheme-adapt img {
             @media (prefers-color-scheme: dark) {
