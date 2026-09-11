@@ -26,7 +26,8 @@ get_template_part('content', 'course-header');
         ));
 
         echo '<p class="login-extras" class="login-forgotpassword"><a class="link" href="' . esc_url( wp_lostpassword_url() ) . '">Forgot your password?</a></p>';
-        echo '<p class="login-extras">Already have an account? <a class="link" href="' . esc_url( home_url( '/register/' ) ) . '">Register here.</a></p>';
+        $register_url = isset($_REQUEST['redirect_to']) ? add_query_arg('redirect_to', esc_url_raw(wp_unslash($_REQUEST['redirect_to'])), home_url('/register/')) : home_url('/register/');
+        echo '<p class="login-extras">Don\'t have an account? <a class="link" href="' . esc_url( $register_url ) . '">Register here.</a></p>';
     }
     ?>
     </div>

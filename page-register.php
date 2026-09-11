@@ -13,6 +13,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['dfh_register_nonce'])
         $email    = sanitize_email($_POST['user_email']);
         $password = $_POST['user_pass'];
         $display_name = isset($_POST['dfh_student_name']) ? sanitize_text_field($_POST['dfh_student_name']) : '';
+        $redirect_to = isset($_POST['redirect_to']) ? esc_url_raw(wp_unslash($_POST['redirect_to'])) : home_url();
 
         // Basic validation
         if (empty($username) || empty($email) || empty($password)) {
@@ -33,10 +34,11 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['dfh_register_nonce'])
                     update_user_meta($user_id, 'dfh_student_name', $display_name);
                 }
                 
-                // Success: Automatically log the user in
+                // Success: Automatically log the user in and redirect
                 $registration_success = true;
                 wp_set_current_user($user_id);
                 wp_set_auth_cookie($user_id);
+                // Redirect will happen after page output
             }
         }
     } else {
@@ -55,7 +57,7 @@ get_template_part('content', 'course-header');
                 <h1 class="heading">You are already logged in!</h1>
             <div class="fl fl-col gp-breathe">
                 <p>
-                    <a href="<?php echo esc_url(home_url()); ?>" class="button strong">
+                    <a href="<?php echo esc_url(home_url()); ?>" class="button +strong">
                         Go to Your Course
                         <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
                     </a>
@@ -67,12 +69,18 @@ get_template_part('content', 'course-header');
             <div class="fl fl-col gp-breathe">
                 <p>Your account has been successfully created and you are now logged in.</p>
                 <p style="margin-top: 1.5rem;">
-                    <a href="<?php echo esc_url(home_url()); ?>" class="button strong">
+                    <a href="<?php echo esc_url($redirect_to); ?>" class="button +strong">
                         Start Learning
                         <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
                     </a>
                 </p>
             </div>
+            <script>
+                // Redirect after brief delay to show success message
+                setTimeout(function() {
+                    window.location.href = '<?php echo esc_url($redirect_to); ?>';
+                }, 2000);
+            </script>
 
         <?php else: ?>
         <h1 class="heading">Create an Account</h1>
@@ -85,6 +93,11 @@ get_template_part('content', 'course-header');
 
             <form name="registerform" id="registerform" method="post">
                 <?php wp_nonce_field('dfh_register_action', 'dfh_register_nonce'); ?>
+                
+                <!-- Preserve redirect_to parameter from course page -->
+                <?php if (isset($_GET['redirect_to'])): ?>
+                    <input type="hidden" name="redirect_to" value="<?php echo esc_attr(esc_url_raw(wp_unslash($_GET['redirect_to']))); ?>" />
+                <?php endif; ?>
                 
                 <p>
                     <label for="dfh_student_name">Your name (optional)</label>
@@ -106,11 +119,11 @@ get_template_part('content', 'course-header');
                 <?php do_action('register_form'); ?>
 
                 <p class="submit">
-                    <input type="submit" name="wp-submit" id="wp-submit" class="button strong" value="Register Account" />
+                    <input type="submit" name="wp-submit" id="wp-submit" class="button +strong" value="Register Account" />
                 </p>
             </form>
 
-            <p class="login-extras">Already have an account? <a class="link" href="<?php echo esc_url(home_url('/login/')); ?>">Log in</a></p>
+            <p class="login-extras">Already have an account? <a class="link" href="<?php echo isset($_GET['redirect_to']) ? esc_url(add_query_arg('redirect_to', esc_url_raw(wp_unslash($_GET['redirect_to'])), home_url('/login/'))) : esc_url(home_url('/login/')); ?>">Log in</a></p>
 
         <?php endif; ?>
 

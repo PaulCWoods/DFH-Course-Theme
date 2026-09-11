@@ -44,15 +44,32 @@ get_template_part('content', 'course-header');
             : get_post_meta($course_id, 'course_closed', true);
         $course_closed = in_array($course_closed, array(true, 1, '1', 'true'), true);
 
-        // 1. Check if user has course access (requires access function and product linkage)
-        $has_access = true; // Default fallback if access functions aren't restricted
+        // Get linked WooCommerce product first so we can check pending orders
+        $woo_product_id = get_post_meta($course_id, '_dfh_product_id', true);
+        $product = $woo_product_id ? wc_get_product($woo_product_id) : false;
+
+        // Check if user has course access (requires access function and product linkage)
+        $has_access = false; 
         if (function_exists('dfh_user_has_course_access')) {
             $has_access = dfh_user_has_course_access($user_id, $course_id);
         }
 
-        // Get linked WooCommerce product
-        $woo_product_id = get_post_meta($course_id, '_dfh_product_id', true);
-        $product = $woo_product_id ? wc_get_product($woo_product_id) : false;
+        // Check for pending/processing orders so users don't see a buy button while payment clears
+        $has_pending_order = false;
+        if ($user_id && !empty($woo_product_id) && !$has_access) {
+            $pending_orders = wc_get_orders(array(
+                'customer_id' => $user_id,
+                'status'      => array('processing', 'on-hold'),
+                'limit'       => 1,
+                'product_id'  => $woo_product_id,
+            ));
+            if (!empty($pending_orders)) {
+                $has_pending_order = true;
+                // Self-heal: auto-grant enrollment meta so they gain access seamlessly
+                update_user_meta($user_id, 'dfh_course_enrolled', '1');
+                $has_access = true;
+            }
+        }
 
         // Gather lesson tree data...
         $all_lessons = array();
@@ -98,6 +115,15 @@ get_template_part('content', 'course-header');
                     <h2>Coming soon</h2>
                     <p class="small-text tc-muted">This course is not available yet. Check back soon.</p>
 
+                <?php elseif ($has_pending_order && !$has_access): ?>
+                    <!-- State 0D: Order Processing / Payment Clearing -->
+                    <?php echo $welcome_msg; ?>
+                    <h2>Payment received!</h2>
+                    <p class="small-text tc-muted">Your payment is processing. Your course access will unlock automatically in a moment.</p>
+                    <p style="margin-top: 1.5rem;">
+                        <a href="<?php echo esc_url(get_permalink()); ?>" class="button +strong">Refresh Page</a>
+                    </p>
+
                 <?php elseif (!is_user_logged_in() && $product && !$has_access): ?>
                     <!-- State 0A: Logged-out Visitor needing purchase -->
                     <h2>Ready to start learning?</h2>
@@ -106,20 +132,20 @@ get_template_part('content', 'course-header');
                         style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
-                            <button type="submit" class="button +strongbuy-button">
+                            <button type="submit" class="button +strong buy-button">
                                 <span>
                                     Enroll Now (<?php echo $product->get_price_html(); ?>)
                                 </span>
                             </button>
                         </form>
-                        <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In</a>
+                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="button">Log In</a>
                     </div>
 
                 <?php elseif (!is_user_logged_in()): ?>
                     <!-- State 0B: Standard Guest Visitor (No product linked) -->
                     <h2>Ready to start learning?</h2>
                     <p class="small-text tc-muted">Log in or register to access the course syllabus.</p>
-                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In to Access Course</a>
+                    <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="button">Log In to Access Course</a>
 
                 <?php elseif (!$has_access && $product): ?>
                     <!-- State 0C: Logged-in User without purchase -->
@@ -129,7 +155,7 @@ get_template_part('content', 'course-header');
                     <div class="course-purchase-actions" style="margin-top: 1.5rem;">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
-                            <button type="submit" class="button +strongbuy-button">
+                            <button type="submit" class="button +strong buy-button">
                                 <span>Buy Course — <?php echo $product->get_price_html(); ?></span>
                             </button>
                         </form>
@@ -183,7 +209,7 @@ get_template_part('content', 'course-header');
                     <?php if (!empty($all_lessons)):
                         $first_lesson_url = get_permalink($all_lessons[0]);
                         ?>
-                        <a href="<?php echo esc_url($first_lesson_url); ?>" class="button +strongstart-btn">
+                        <a href="<?php echo esc_url($first_lesson_url); ?>" class="button +strong start-btn">
                             Start Course
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />

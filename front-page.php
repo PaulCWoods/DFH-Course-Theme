@@ -39,7 +39,7 @@ get_header();
                 <p class="home__logged-in title">Welcome back, <?php echo esc_html($user_name); ?></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
-                        <a href="<?php echo esc_url($hero_target); ?>" class="button strong">
+                        <a href="<?php echo esc_url($hero_target); ?>" class="button +strong">
                             Resume Your Course
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />
@@ -51,7 +51,7 @@ get_header();
             <?php else: ?>
 
                 <div class="home__access">
-                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button strong">Get Started</a>
+                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button +strong">Get Started</a>
                     <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In</a>
                 </div>
             <?php endif; ?>

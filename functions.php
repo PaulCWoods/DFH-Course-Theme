@@ -1268,38 +1268,38 @@ function dfh_save_course_product_meta($post_id)
 add_action('save_post_course', 'dfh_save_course_product_meta');
 
 /**
- * Automatically grant course access when a WooCommerce order is completed.
+ * Automatically grant course access when a WooCommerce order is processing or completed.
  */
-function dfh_grant_course_access_on_purchase($order_id)
-{
-    $order = wc_get_order($order_id);
-    if (!$order) {
+function dfh_grant_course_access_on_purchase( $order_id ) {
+    $order = wc_get_order( $order_id );
+    if ( ! $order ) {
         return;
     }
 
     $user_id = $order->get_user_id();
-    if (!$user_id) {
-        return;
+    if ( ! $user_id ) {
+        return; 
     }
 
-    foreach ($order->get_items() as $item) {
+    foreach ( $order->get_items() as $item ) {
         $product_id = $item->get_product_id();
 
         // Check if this product is linked to any course
-        $courses = get_posts(array(
-            'post_type' => 'course',
-            'meta_key' => '_dfh_product_id',
-            'meta_value' => $product_id,
+        $courses = get_posts( array(
+            'post_type'   => 'course',
+            'meta_key'    => '_dfh_product_id',
+            'meta_value'  => $product_id,
             'numberposts' => 1,
-        ));
+        ) );
 
-        if (!empty($courses)) {
-            // Set the exact user meta your function looks for
-            update_user_meta($user_id, 'dfh_course_enrolled', '1');
+        if ( ! empty( $courses ) ) {
+            update_user_meta( $user_id, 'dfh_course_enrolled', '1' );
         }
     }
 }
-add_action('woocommerce_order_status_completed', 'dfh_grant_course_access_on_purchase');
+// Listen to both processing and completed states so the user gets instant access
+add_action( 'woocommerce_order_status_processing', 'dfh_grant_course_access_on_purchase' );
+add_action( 'woocommerce_order_status_completed', 'dfh_grant_course_access_on_purchase' );
 
 /**
  * Completely disable WooCommerce default stylesheets.
