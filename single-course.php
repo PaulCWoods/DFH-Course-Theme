@@ -134,18 +134,21 @@ get_template_part('content', 'course-header');
                             Log in or register to access the course syllabus.
                         <?php endif; ?>
                     </p>
-                    <div class="course-purchase-actions" style="margin-top: 1.5rem;">
-                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="button +strong">
-                            Log In to Enroll
+                    <div class="course-purchase-actions">
+                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/register/'))); ?>" class="button +strong">
+                            Register to Enroll
                         </a>
                     </div>
+                    <p class="small-text tc-muted mt">Already have an account? <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="link">
+                            log in
+                        </a> to enroll in the course.</p>
 
                 <?php elseif (!$has_access && $product): ?>
                     <!-- State 0C: Logged-in User without purchase -->
                     <?php echo $welcome_msg; ?>
                     <h2>Unlock Full Course Access</h2>
                     <p class="small-text tc-muted">Purchase the course to unlock all lessons and track your progress.</p>
-                    <div class="course-purchase-actions" style="margin-top: 1.5rem;">
+                    <div class="course-purchase-actions">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
                             <button type="submit" class="button +strong buy-button">

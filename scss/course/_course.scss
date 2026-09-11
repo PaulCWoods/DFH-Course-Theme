@@ -157,6 +157,14 @@ $course-bp: 60em;
     }
 }
 
+.course-purchase-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-block-start: var(--ui-spacing-cushion);
+}
+
 .course-landing__completion-buttons {
     align-items: center;
     border-block-start: var(--ui-border-subtle);
