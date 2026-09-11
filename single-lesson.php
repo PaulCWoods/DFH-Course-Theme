@@ -52,7 +52,7 @@ $adjacent = dfh_get_adjacent_lesson($lesson_id);
 $is_completed = dfh_is_lesson_completed($lesson_id);
 $is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
 $bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
-$bookmark_class = $is_bookmarked ? 'button bookmark-btn active strong' : 'button bookmark-btn';
+$bookmark_class = $is_bookmarked ? 'button bookmark-btn +active +strong' : 'button bookmark-btn';
 $bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
 $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 
