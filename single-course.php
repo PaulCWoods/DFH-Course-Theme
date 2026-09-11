@@ -171,7 +171,7 @@ get_template_part('content', 'course-header');
                                 class="button secondary-button">Review from Beginning</a>
                             <!-- Certificate Download Link -->
                             <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>"
-                                class="button +strongcert-btn" target="_blank">
+                                class="button +strong cert-btn" target="_blank">
                                 Download Certificate (PDF)
                                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                     <use href="#Download" />
