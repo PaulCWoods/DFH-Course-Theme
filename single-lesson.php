@@ -77,14 +77,14 @@ get_header();
                 <span class="lesson-head__code-badge" title="Lesson code"><span class="sr">Lesson
                         code:</span><?php echo esc_html($lesson_code); ?></span>
             <?php endif; ?>
-            <nav class="lesson-head__nav">
+            <nav class="lesson-head__nav" role="breadcrumb" aria-label="Breadcrumb">
                 <?php
                 $post_id = get_the_ID();
                 $parent_id = wp_get_post_parent_id($post_id);
 
                 // Breadcrumb: parent lesson when available; otherwise try to find parent Course
                 if ($parent_id): ?>
-                    <a class="lesson-head__breadcrumb link" title="<?php echo esc_html(get_the_title($parent_id)); ?>"
+                    <a class="lesson-head__nav-parent link" title="<?php echo esc_html(get_the_title($parent_id)); ?>"
                         href="<?php echo esc_url(get_permalink($parent_id)); ?>"><?php echo esc_html(get_the_title($parent_id)); ?></a>
                 <?php else:
                     // Attempt to find a Course that references this lesson as a root (ACF or postmeta)
@@ -106,12 +106,14 @@ get_header();
                     }
 
                     if ($course_id): ?>
-                        <a class="lesson-head__breadcrumb link" title="<?php echo esc_html(get_the_title($course_id)); ?>"
+                        <a class="lesson-head__nav-parent link" title="<?php echo esc_html(get_the_title($course_id)); ?>"
                             href="<?php echo esc_url(get_permalink($course_id)); ?>"><?php echo esc_html(get_the_title($course_id)); ?></a>
                     <?php else: ?>
-                        <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
+                        <a class="lesson-head__nav-parent link" href="<?php echo esc_url(home_url()); ?>">Home</a>
                     <?php endif;
                 endif; ?>
+
+                <span class="lesson-head__nav-current" aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
 
                 <!-- Syllabus overlay toggle -->
 

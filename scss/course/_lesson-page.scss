@@ -24,15 +24,15 @@
 }
 
 .lesson-head.site-header {
-    align-items: stretch;
     border-block-end: 0;
 }
 
 .lesson-head__inner {
     align-items: center;
     display: flex;
-    gap: var(--ui-spacing-unit);
     inline-size: 100%;
+    max-inline-size: var(--ui-site-width);
+    padding-inline-end: calc(var(--site-block-padding) - var(--button-padding-inline));
 }
 
 .lesson-head__controls {
@@ -51,28 +51,64 @@
     font-size: var(--typography-font-size-fluid-base);
     font-variant-numeric: tabular-nums;
     font-weight: bold;
-    margin-inline-start: calc(var(--site-block-padding) * -1);
     padding-inline: var(--ui-spacing-breathe);
-
-    @media screen and (width > #{var.$lesson-bp}) {
-        margin-inline-start: 0;
-    }
 }
 
 .lesson-head__nav {
+    --height: var(--site-header-height);
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     font-size: var(--typography-font-size-fluid-base);
-    overflow: hidden;
-    text-overflow: ellipsis;
+    justify-content: center;
+    position: relative;
+    min-inline-size: 1px;
     white-space: nowrap;
 }
 
-.lesson-head__breadcrumb {
-    flex-grow: 1;
+:is(.lesson-head__nav-parent, .lesson-head__nav-current) {
     font-weight: bold;
+    max-inline-size: 100%;
+    overflow: hidden;
+    padding-inline: var(--ui-spacing-unit);
+    text-overflow: ellipsis;
+}
+
+.lesson-head__nav-parent {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity var(--site-header-transition) ease,
+        transform var(--site-header-transition) ease,
+        visibility var(--site-header-transition) ease;
+
+    @supports (animation-timeline: scroll()) {
+        animation: --hide-parent linear both;
+        animation-timeline: scroll(root block);
+        animation-range: var(--height) calc(var(--height) * 2);
+
+    }
+}
+
+.lesson-head__nav-current {
+    opacity: 0;
+    transform: translateY(50%);
+    position: absolute;
+    pointer-events: none;
+    transition:
+        opacity var(--site-header-transition) ease,
+        transform var(--site-header-transition) ease;
+
+    @supports (animation-timeline: scroll()) {
+        animation: --show-current linear both;
+        animation-timeline: scroll(root block);
+        animation-range: calc(var(--height) + var(--ui-spacing-cushion)) calc(var(--height) * 2 + var(--ui-spacing-cushion));
+    }
 }
 
 @supports (animation-timeline: scroll()) {
+
     // Show reading progress when the browser supports scroll-driven animation.
     .lesson-head__progress {
         animation: --article-progress auto linear;
@@ -85,16 +121,42 @@
         position: fixed;
         transform-origin: left;
     }
-}
 
+    @keyframes --article-progress {
+        from {
+            scale: 0 1;
+        }
 
-
-@keyframes --article-progress {
-    from {
-        scale: 0 1;
+        to {
+            scale: 1 1;
+        }
     }
-    to {
-        scale: 1 1;
+
+
+    @keyframes --hide-parent {
+        to {
+            opacity: 0;
+            transform: translateY(-50%);
+            visibility: hidden;
+            position: absolute;
+            pointer-events: none;
+        }
+    }
+
+    @keyframes --show-current {
+        from {
+            opacity: 0;
+            transform: translateY(50%);
+            position: absolute;
+            pointer-events: none;
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+            position: static;
+            pointer-events: auto;
+        }
     }
 }
 
@@ -109,8 +171,8 @@
 // Lesson title and metadata
 
 :where(.lesson-header,
-.lesson-content,
-.lesson-explore) {
+    .lesson-content,
+    .lesson-explore) {
     padding-block: var(--site-block-padding, var(--ui-spacing-cushion));
     padding-inline-start: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
     padding-inline-end: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
@@ -148,7 +210,7 @@
 .lesson-video {
     padding-inline-start: calc(0px + env(safe-area-inset-left));
     padding-inline-end: calc(0px + env(safe-area-inset-left));
-    
+
 
     // Pin the player only when the header toggle is in its sticky state.
     .site:has(.video-stick) & {
@@ -163,6 +225,7 @@
 .lesson-video__toggle.button {
     // The control is only useful where the player can become sticky.
     display: none;
+
     @media (24em < width < #{var.$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
         .site:has(.lesson-video) & {
             display: inline-flex;
@@ -192,7 +255,7 @@
 
 // Article content and WordPress block overrides
 .lesson-body {
-    grid-column: 1 / -1;    
+    grid-column: 1 / -1;
     padding-block-end: var(--ui-spacing-cushion);
 
     &:empty {
@@ -201,8 +264,9 @@
 
     &.\+sample {
         position: relative;
+
         .lesson-body__sample-text {
-            background-image: linear-gradient( transparent, var(--ui-color-background-base) 50% );
+            background-image: linear-gradient(transparent, var(--ui-color-background-base) 50%);
             align-items: flex-end;
             display: flex;
             position: absolute;
@@ -232,6 +296,7 @@
             color: var(--ui-color-foreground-success);
             content: "✓ ";
         }
+
         ul li:marker {
             color: revert;
             content: revert;
@@ -250,7 +315,7 @@
         border-block-start: var(--ui-border-quiet);
         padding-block: calc(var(--ui-spacing-breathe) * 2);
     }
-    
+
     :is(aside, section, .callout-box) {
         &.emoji {
             &:before {
@@ -258,8 +323,14 @@
                 font-size: 1.5em;
                 margin-block-end: var(--ui-spacing-cushion);
             }
-            &.idea:before { content: "💡" / "";}
-            &.warning:before { content: "⚠️" / ""; }
+
+            &.idea:before {
+                content: "💡" / "";
+            }
+
+            &.warning:before {
+                content: "⚠️" / "";
+            }
         }
     }
 
@@ -269,6 +340,7 @@
         color: var(--ui-color-foreground-base);
         color-scheme: dark;
         margin-block: var(--ui-spacing-breathe);
+
         code {
             background-color: transparent;
         }
@@ -290,6 +362,7 @@
     figure.wp-has-aspect-ratio {
         .wp-block-embed__wrapper {
             font-size: 0;
+
             iframe {
                 aspect-ratio: var(--embed-aspect-ratio);
                 height: auto;
@@ -301,19 +374,23 @@
 
     figure.wp-block-image {
         margin-block: var(--ui-spacing-breathe) !important;
+
         &:first-child {
             margin-block-start: 0 !important;
         }
+
         &.\+half {
             img {
                 max-inline-size: 50% !important;
             }
         }
+
         &.\+scheme-adapt img {
             @media (prefers-color-scheme: dark) {
                 filter: invert(1) hue-rotate(180deg);
             }
         }
+
         :where(figcaption) {
             margin-block-end: 1.5em !important;
         }
@@ -324,8 +401,10 @@
             background-color: var(--ui-color-background-surface);
             padding-block: var(--ui-spacing-breathe);
             padding-inline: var(--ui-spacing-cushion);
+
             p {
                 font-weight: var(--lesson-quote-bold-font-weight);
+
                 &:last-child {
                     margin-block-end: 0;
                 }
@@ -345,6 +424,7 @@
         blockquote {
             box-shadow: none;
             padding-inline-start: 0;
+
             p {
                 font-family: var(--ui-typography-pullquote-font-family);
                 font-size: var(--ui-typography-pullquote-font-size);
@@ -355,16 +435,20 @@
     }
 
     .wp-block-table {
-        td, th {
+
+        td,
+        th {
             border: 0 !important;
             border-block-end: var(--ui-border-subtle) !important;
             padding-inline-start: 0 !important;
         }
+
         tbody {
             tr:last-child :is(td, th) {
                 border-block-end: 0 !important;
             }
         }
+
         thead {
             border-block-end: var(--ui-border) !important;
         }
@@ -392,6 +476,7 @@
     .button {
         padding-inline-end: calc(var(--button-inner-gap) + var(--button-padding-inline) + 1em);
         position: relative;
+
         .icon {
             position: absolute;
             inset-block-start: calc(var(--button-border-width) * -1);
@@ -399,6 +484,7 @@
             font-size: 1.5em;
         }
     }
+
     @media screen and (width > #{var.$lesson-bp}) {
         border-block-start: none;
         margin-block-start: 0;
@@ -477,7 +563,7 @@
     }
 }
 
-.lesson-explore__section  {
+.lesson-explore__section {
     inline-size: 100%;
 }
 
@@ -518,6 +604,7 @@
         inset: 0;
         position: absolute;
     }
+
     @media (hover:hover) {
         &:hover {
             img {
@@ -525,6 +612,7 @@
             }
         }
     }
+
     &:active {
         img {
             box-shadow: var(--ui-shadow-reset);
@@ -570,6 +658,7 @@
 .lesson-download__info {
     flex: 1;
     padding: var(--ui-spacing-unit);
+
     h3 {
         align-items: center;
         display: flex;
