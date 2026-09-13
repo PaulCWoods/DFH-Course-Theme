@@ -1,9 +1,9 @@
 @use "../theme/sassvars" as var;
 
-// ================================
-// Lesson page layout and component styles
+// Lesson page layout and component styles.
+// Sections follow the page from shell to header, content, and supporting areas.
 
-// ================================
+// -----------------------------------------------------------------------------
 // Page shell
 .site-main.lesson-page {
     padding: 0;
@@ -15,8 +15,7 @@
     min-block-size: 100%;
 }
 
-// ================================
-// ================================
+// -----------------------------------------------------------------------------
 // Lesson navigation header
 
 .lesson-head__container {
@@ -62,8 +61,8 @@
     flex-grow: 1;
     font-size: var(--typography-font-size-fluid-base);
     justify-content: center;
-    position: relative;
     min-inline-size: 1px;
+    position: relative;
     white-space: nowrap;
 }
 
@@ -107,12 +106,14 @@
     }
 }
 
-@supports (animation-timeline: scroll()) {
+    // Scroll-driven effects are progressive enhancements; the static header
+    // remains usable when animation-timeline is unavailable.
+    @supports (animation-timeline: scroll()) {
 
-    // Show reading progress when the browser supports scroll-driven animation.
+        // Show reading progress when the browser supports scroll-driven animation.
     .lesson-head__progress {
         animation: --article-progress auto linear;
-        animation-timeline: scroll();
+        animation-timeline: scroll(root block);
         background-color: var(--ui-color-foreground-accent);
         block-size: var(--ui-border-width);
         inline-size: 100%;
@@ -133,7 +134,7 @@
     }
 
 
-    @keyframes --hide-parent {
+        @keyframes --hide-parent {
         to {
             opacity: 0;
             transform: translateY(-50%);
@@ -143,7 +144,7 @@
         }
     }
 
-    @keyframes --show-current {
+        @keyframes --show-current {
         from {
             opacity: 0;
             transform: translateY(50%);
@@ -157,7 +158,7 @@
             position: static;
             pointer-events: auto;
         }
-    }
+        }
 }
 
 // Shared dark surface for the navigation, title, and video regions.
@@ -167,7 +168,7 @@
     color-scheme: dark;
 }
 
-// ================================
+// -----------------------------------------------------------------------------
 // Lesson title and metadata
 
 :where(.lesson-header,
@@ -204,15 +205,15 @@
     }
 }
 
-// ================================
+// -----------------------------------------------------------------------------
 // Video player and mobile pinning
 
 .lesson-video {
     padding-inline-start: calc(0px + env(safe-area-inset-left));
     padding-inline-end: calc(0px + env(safe-area-inset-left));
 
-
-    // Pin the player only when the header toggle is in its sticky state.
+    // Pinning is limited to the narrow, touch layout where the toggle exposes
+    // the sticky-player state.
     .site:has(.video-stick) & {
         @media (24em < width < #{var.$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
             position: sticky;
@@ -238,13 +239,12 @@
 }
 
 .lesson-video__container {
-    font-size: 0;
     aspect-ratio: 16 / 9;
+    font-size: 0;
     overflow: hidden;
 }
 
-
-// ================================
+// -----------------------------------------------------------------------------
 // Lesson content layout
 
 .lesson-main {
@@ -253,7 +253,9 @@
     gap: var(--ui-spacing-cushion);
 }
 
-// Article content and WordPress block overrides
+// Article content and WordPress block overrides.
+// Keep these rules nested under .lesson-body so they win over editor defaults
+// without leaking into unrelated post content.
 .lesson-body {
     grid-column: 1 / -1;
     padding-block-end: var(--ui-spacing-cushion);
@@ -346,9 +348,9 @@
         }
     }
 
-    // ============================
+    // -------------------------------------------------------------------------
     // WordPress block overrides
-    // ============================
+    // -------------------------------------------------------------------------
 
     // Embedded media
     figure.wp-embed-aspect-16-9 {
@@ -463,7 +465,7 @@
 }
 
 
-// ================================
+// -----------------------------------------------------------------------------
 // Lesson resources and bookmark
 
 .lesson-bookmark {
@@ -512,10 +514,11 @@
     margin-block-end: var(--ui-spacing-breathe, 1em);
 }
 
-// ================================
+// -----------------------------------------------------------------------------
 // Lesson statistics and sticky aside
 
-// Resource column, including the stats definition list.
+// Resource column, including the stats definition list. The negative margin
+// preserves the focus-ring clearance while keeping the visible column aligned.
 .lesson-aside {
     align-self: start;
     display: flex;
@@ -528,8 +531,9 @@
     reading-flow: flex-visual;
 
     @media screen and (width > #{var.$lesson-bp}) {
-        grid-column: 3; // occupy the third column on wide screens
-        max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--ui-spacing-unit) * 2); // overflow kicks in if the height of the aside can break the container.
+        grid-column: 3; // Occupy the third column on wide screens.
+        // Prevent a tall resource list from pushing the lesson content out of view.
+        max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--ui-spacing-unit) * 2);
         overflow: auto;
     }
 }
@@ -546,7 +550,7 @@
     gap: var(--spacing-05);
 }
 
-// ================================
+// -----------------------------------------------------------------------------
 // Explore area: child lessons and progression
 
 .lesson-explore {
