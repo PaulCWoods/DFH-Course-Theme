@@ -47,7 +47,11 @@
     display: flex;
     flex-shrink: 0;
     gap: 0;
-    padding-inline-end: var(--site-block-padding, var(--ui-spacing-cushion))
+    padding-inline-end: var(--site-block-padding, var(--ui-spacing-cushion));
+    
+    @media screen and (width > #{var.$lesson-bp}) {
+        padding-inline-end: 0;
+    }
 }
 
 .lesson-head__code-badge {
