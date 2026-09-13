@@ -17,15 +17,16 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 ?>
 
 <header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
-    <div class="lesson-head site-header">
+    <div class="lesson-head site-header +sample">
         <div class="lesson-head__inner container">
-            <nav class="lesson-head__nav">
+            <nav class="lesson-head__nav" aria-label="Breadcrumb">
                 <?php if ($associated_course_id && get_post($associated_course_id)): ?>
-                    <a class="lesson-head__breadcrumb link"
+                    <a class="lesson-head__nav-parent link"
                         href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
                 <?php else: ?>
-                    <a class="lesson-head__breadcrumb link" href="<?php echo esc_url(home_url()); ?>">Home</a>
+                    <a class="lesson-head__nav-parent link" href="<?php echo esc_url(home_url()); ?>">Home</a>
                 <?php endif; ?>
+                <span class="lesson-head__nav-current" aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
             </nav>
             <div class="lesson-head__controls">
                 <?php if ($playback_id): ?>

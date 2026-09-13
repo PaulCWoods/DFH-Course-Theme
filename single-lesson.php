@@ -77,7 +77,7 @@ get_header();
                 <span class="lesson-head__code-badge" title="Lesson code"><span class="sr">Lesson
                         code:</span><?php echo esc_html($lesson_code); ?></span>
             <?php endif; ?>
-            <nav class="lesson-head__nav" role="breadcrumb" aria-label="Breadcrumb">
+            <nav class="lesson-head__nav" aria-label="Breadcrumb">
                 <?php
                 $post_id = get_the_ID();
                 $parent_id = wp_get_post_parent_id($post_id);
