@@ -48,8 +48,8 @@
     flex-shrink: 0;
     gap: 0;
     padding-inline-end: var(--site-block-padding, var(--ui-spacing-cushion));
-    
-    @media screen and (width > #{var.$lesson-bp}) {
+
+    @media screen and (width > #{var.$site-width}) {
         padding-inline-end: 0;
     }
 }
