@@ -1,3 +1,9 @@
+// Login page
+// -----------------------------------------------------------------------------
+// Login form layout, supporting messages, and shared authentication surfaces.
+
+// -----------------------------------------------------------------------------
+// Login form layout
 .login-page {
     align-items: center;
     display: flex;
@@ -7,16 +13,17 @@
     }
 
     .container {
-        max-inline-size: calc(var(--ui-site-width) / 2);
         inline-size: 100%;
+        max-inline-size: calc(var(--ui-site-width) / 2);
     }
 
     form {
-
         p {
             display: flex;
             flex-direction: column;
             gap: calc(var(--ui-spacing-unit) / 2);
+
+            // Required fields receive a visual marker without changing markup.
             &:has(input:required) {
                 label::after {
                     content: " * ";
@@ -40,6 +47,8 @@
     }
 }
 
+// -----------------------------------------------------------------------------
+// Supporting login content
 .login-extras {
     margin-block-start: var(--ui-spacing-breathe);
 }
@@ -48,6 +57,7 @@
     margin-block-end: var(--ui-spacing-breathe);
 }
 
+// Shared surface for native and WooCommerce login forms and messages.
 .woocommerce-form.login,
 .login-page form,
 .login-message {

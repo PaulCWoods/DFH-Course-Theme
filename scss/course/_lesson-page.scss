@@ -21,6 +21,7 @@
 // Lesson navigation header
 
 .lesson-head__container {
+    background-color: var(--ui-color-background-dark);
     min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
 }
 
@@ -30,6 +31,7 @@
 
 .lesson-head__inner {
     align-items: center;
+    color-scheme: dark;
     display: flex;
     inline-size: 100%;
     max-inline-size: var(--ui-site-width);
@@ -165,9 +167,8 @@
 
 // Shared dark surface for the navigation, title, and video regions.
 :is(.lesson-head, .lesson-header, .lesson-video) {
-    background-color: var(--ui-color-background-base);
-    color: var(--ui-color-foreground-base);
-    color-scheme: dark;
+    background-color: var(--ui-color-background-dark);
+    color: var(--ui-color-foreground-on-dark);
 }
 
 // -----------------------------------------------------------------------------
@@ -339,10 +340,9 @@
     }
 
     pre:has(code) {
-        background-color: var(--ui-color-background-surface);
+        background-color: var(--ui-color-background-dark);
         box-shadow: var(--ui-shadow-inset);
-        color: var(--ui-color-foreground-base);
-        color-scheme: dark;
+        color: var(--ui-color-foreground-on-dark);
         margin-block: var(--ui-spacing-breathe);
 
         code {
