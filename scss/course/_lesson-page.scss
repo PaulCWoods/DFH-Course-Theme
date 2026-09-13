@@ -35,11 +35,9 @@
     display: flex;
     inline-size: 100%;
     max-inline-size: var(--ui-site-width);
-    padding-inline-end: calc(var(--site-block-padding) - var(--button-padding-inline));
-
 
     .lesson-head.\+sample & {
-        max-inline-size: calc(var(--ui-site-width) + var(--site-block-padding) * 2);
+        max-inline-size: calc(var(--ui-site-width) + var(--site-block-padding, var(--ui-spacing-cushion)) * 2);
     }
 }
 
@@ -49,6 +47,7 @@
     display: flex;
     flex-shrink: 0;
     gap: 0;
+    padding-inline-end: var(--site-block-padding, var(--ui-spacing-cushion))
 }
 
 .lesson-head__code-badge {
@@ -79,7 +78,7 @@
     font-weight: bold;
     max-inline-size: 100%;
     overflow: hidden;
-    padding-inline: var(--site-block-padding);
+    padding-inline: var(--site-block-padding, var(--ui-spacing-cushion));
     text-overflow: ellipsis;
 }
 
