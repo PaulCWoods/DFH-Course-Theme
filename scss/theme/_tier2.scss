@@ -1,3 +1,8 @@
+// Tier-two theme tokens
+// -----------------------------------------------------------------------------
+// Contextual interface colors shared by the root theme and lesson variants.
+
+// Base theme tokens
 :root {
     --ui-color-background-accent: light-dark(var(--color-blue-200), var(--color-blue-700));
     --ui-color-background-accent-dark: var(--color-blue-800);
@@ -14,6 +19,7 @@
     --ui-border-subtle: var(--border-width-sm) dashed color-mix(in srgb, currentColor, transparent 70%);
 }
 
+// Lesson 1 and syllabus 1 tokens
 :is([data-lesson="1"], [data-syllabus="1"]) {
     --ui-color-background-accent: light-dark(var(--color-blue-200), var(--color-blue-700));
     --ui-color-background-accent-dark: var(--color-blue-800);
@@ -28,6 +34,7 @@
     --ui-color-border-accent-strong: light-dark(var(--color-blue-600), var(--color-blue-400));
 }
 
+// Lesson 2 and syllabus 2 tokens
 :is([data-lesson="2"], [data-syllabus="2"]) {
     --ui-color-background-accent: light-dark(var(--color-aqua-200), var(--color-aqua-700));
     --ui-color-background-accent-dark: var(--color-aqua-800);
@@ -42,6 +49,7 @@
     --ui-color-border-accent-strong: light-dark(var(--color-aqua-600), var(--color-aqua-400));
 }
 
+// Lesson 3 and syllabus 3 tokens
 :is([data-lesson="3"], [data-syllabus="3"]) {
     --ui-color-background-accent: light-dark(var(--color-purple-200), var(--color-purple-700));
     --ui-color-background-accent-dark: var(--color-purple-800);
@@ -56,6 +64,7 @@
     --ui-color-border-accent-strong: light-dark(var(--color-purple-600), var(--color-purple-400));
 }
 
+// Lesson 4 and syllabus 4 tokens
 :is([data-lesson="4"], [data-syllabus="4"]) {
     --ui-color-background-accent: light-dark(var(--color-olive-200), var(--color-olive-700));
     --ui-color-background-accent-dark: var(--color-olive-800);

@@ -11,6 +11,7 @@
 ## Formatting
 
 - Use four spaces for indentation and preserve the existing brace style.
+- Start each utility or component file with a short title comment, an underline made of hyphens, and a brief description; include a usage example when helpful.
 - Order declarations consistently: layout/display, sizing, spacing, typography, color, positioning, then interaction/animation details where practical.
 - Use logical properties such as `inline-size`, `block-size`, `margin-block`, and `padding-inline` for writing-mode and responsive safety.
 - Prefer existing design tokens (`var(--ui-...)`, `var(--spacing-...)`, and Sass variables) over new literal values.

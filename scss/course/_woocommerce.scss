@@ -1,13 +1,12 @@
-// ============================================================================
-// WooCommerce Styling
-// ============================================================================
+// WooCommerce
+// -----------------------------------------------------------------------------
+// Account, checkout, notification, order, and form styling for WooCommerce.
 
 @use "../theme/sassvars" as var;
 @use "../mixins/prose" as prose;
 
-// ============================================================================
-// My Account Layout & Navigation
-// ============================================================================
+// -----------------------------------------------------------------------------
+// My account layout and navigation
 
 .my-account .woocommerce {
     display: flex;
@@ -36,8 +35,8 @@
     // Account details grid layout for address cards
     .u-columns {
         display: grid;
-        gap: var(--ui-spacing-unit);
         grid-template-columns: repeat(auto-fill, minmax(min(var(--cart-address-card-width, 16rem), 100%), 1fr));
+        gap: var(--ui-spacing-unit);
 
         [class^="u-column"] {
             border: var(--ui-border-subtle);
@@ -52,25 +51,24 @@
         gap: calc(var(--ui-spacing-unit) / 2);
     }
 
-    // ========================================================================
-    // Payment Methods & Payment Boxes
-    // ========================================================================
+    // -------------------------------------------------------------------------
+    // Payment methods and payment boxes
 
     .payment_methods {
         list-style: none;
-        margin-inline-start: 0;
         margin-block-end: var(--ui-spacing-cushion);
+        margin-inline-start: 0;
         padding: 0;
 
         li {
             // Payment method radio/checkbox inputs
-            >input:is([type="checkbox"], [type="radio"]) {
+            > input:is([type="checkbox"], [type="radio"]) {
                 margin: 0;
                 vertical-align: middle;
             }
 
             // Payment method labels
-            >label {
+            > label {
                 margin-inline-start: calc(var(--ui-spacing-unit) / 2);
                 vertical-align: middle;
             }
@@ -80,15 +78,15 @@
     // Expandable payment method details
     .payment_box {
         background-color: var(--ui-color-background-surface);
-        padding: var(--ui-spacing-unit);
         margin-block-start: var(--ui-spacing-unit);
+        padding: var(--ui-spacing-unit);
     }
 
     // Payment method table actions column
     .payment-method-actions {
         inline-size: 1px;
-        white-space: nowrap;
         padding-inline: 0;
+        white-space: nowrap;
     }
 
     .account-payment-methods-table {
@@ -103,9 +101,8 @@
         text-align: center;
     }
 
-    // ========================================================================
-    // Password Input with Visibility Toggle
-    // ========================================================================
+    // -------------------------------------------------------------------------
+    // Password input with visibility toggle
 
     .password-input {
         display: block;
@@ -116,10 +113,10 @@
             align-items: center;
             block-size: 100%;
             display: flex;
-            position: absolute;
             padding-inline: var(--ui-spacing-unit);
-            inset-inline-end: 0;
             inset-block-start: 0;
+            inset-inline-end: 0;
+            position: absolute;
 
             &:before {
                 color: var(--ui-color-foreground-muted);
@@ -147,9 +144,9 @@
         }
     }
 }
-// ============================================================================
-// Form Styles
-// ============================================================================
+
+// -----------------------------------------------------------------------------
+// Form styles
 
 .woocommerce-form {
     button {
@@ -174,9 +171,8 @@
 }
 
 
-// ============================================================================
-// Notifications & Messages
-// ============================================================================
+// -----------------------------------------------------------------------------
+// Notifications and messages
 
 // Default focus state for error and message containers
 .woocommerce-error,
@@ -224,8 +220,8 @@
 // Notice wrapper container with contextual styling
 .woocommerce-notices-wrapper:not(:empty) {
     border: var(--ui-border-subtle);
-    padding: var(--ui-spacing-unit);
     margin-block-end: var(--ui-spacing-breathe);
+    padding: var(--ui-spacing-unit);
 
     // Focus state for wrapper
     &:has(:focus-visible) {
@@ -257,9 +253,8 @@
 }
 
 
-// ============================================================================
-// Order Styles
-// ============================================================================
+// -----------------------------------------------------------------------------
+// Order styles
 
 .woocommerce-order {
     section {
@@ -284,8 +279,8 @@
 .woocommerce-order-overview {
     background-color: var(--ui-color-background-surface);
     list-style: none;
-    padding: var(--ui-spacing-cushion);
     margin-block-end: var(--ui-spacing-cushion);
+    padding: var(--ui-spacing-cushion);
 
     li {
         align-items: center;
@@ -302,7 +297,7 @@
         }
 
         // Divider between list items
-        +li {
+        + li {
             border-block-start: var(--ui-border-subtle);
             margin-block-start: calc(var(--ui-spacing-unit) / 2);
             padding-block-start: calc(var(--ui-spacing-unit) / 2);
@@ -321,10 +316,10 @@
     block-size: 0;
     box-shadow: var(--ui-shadow-reset);
     display: none;
+    margin: calc(var(--site-block-padding) * -1);
     padding: var(--ui-spacing-cushion);
     opacity: 0;
     overflow: hidden;
-    margin: calc(var(--site-block-padding) * -1);
     transition:
         display var(--my-account-nav-transition) ease-in-out allow-discrete,
         block-size var(--my-account-nav-transition) ease-in-out,
@@ -336,7 +331,7 @@
         block-size: auto;
         box-shadow: var(--ui-shadow);
         display: block;
-        margin-block-end: calc(var(--ui-spacing-cushion)*2);
+        margin-block-end: calc(var(--ui-spacing-cushion) * 2);
         opacity: 1;
 
         @starting-style {
@@ -352,8 +347,8 @@
         block-size: auto;
         box-shadow: none;
         display: block;
-        padding: 0;
         margin: 0;
+        padding: 0;
         opacity: 1;
         transition: none;
     }
@@ -393,7 +388,7 @@
 }
 
 .woocommerce-address-fields {
-    .address-field:has(+#billing_address_2_field) {
+    .address-field:has(+ #billing_address_2_field) {
         margin-block-end: calc(var(--ui-spacing-unit) / 2);
     }
 }
