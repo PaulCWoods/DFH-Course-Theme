@@ -79,12 +79,8 @@
     font-weight: bold;
     max-inline-size: 100%;
     overflow: hidden;
-    padding-inline: var(--ui-spacing-unit);
-    text-overflow: ellipsis;
-
-    .lesson-head.\+sample & {
     padding-inline: var(--site-block-padding);
-    }
+    text-overflow: ellipsis;
 }
 
 .lesson-head__nav-parent {
