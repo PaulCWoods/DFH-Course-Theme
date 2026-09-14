@@ -4,7 +4,7 @@
 get_header();
 ?>
 <main class="home site-main" id="main">
-    <article class="prose container">
+    <article class="prose container home__content">
         <header class="article-header">
             <h1 class="display-title">Design for Humans: <span class="home__title-highlight">Courses</span></h1>
         </header>
@@ -13,7 +13,8 @@ get_header();
 
 
     <!-- Hero Section -->
-    <section class="home__hero">
+    <section class="home__hero index-section +strong" aria-describedby="home-hero-heading">
+        <h2 class="sr" id="home-hero-heading">Welcome to Design for Humans Courses</h2>
         <div class="container">
             <?php
             // Determine the target URL for the hero button: prefer the user's active course when available.
@@ -41,7 +42,7 @@ get_header();
             }
 
             if (is_user_logged_in()): ?>
-                <p class="home__logged-in title">Welcome back, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
+                <p class="home__logged-in index-section__title">Welcome back, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
                         <a href="<?php echo esc_url($hero_target); ?>" class="button +strong">
@@ -64,9 +65,9 @@ get_header();
     </section>
 
     <!-- Courses Grid Section -->
-    <section class="home__section">
+    <section class="index-section +strong +strong-1st home__section">
         <div class="container">
-            <h2 class="title">Available courses</h2>
+            <h2 class="index-section__title">Available courses</h2>
 
             <?php
             // 1. Fetch all courses once with optimized WP_Query parameters
@@ -141,9 +142,9 @@ get_header();
 
     if (!empty($testimonials)):
         ?>
-        <section class="home__section" aria-labelledby="testimonials-heading">
+        <section class="home__section index-section +strong" aria-labelledby="testimonials-heading">
             <div class="container">
-                <h2 id="testimonials-heading" class="title">What students are saying</h2>
+                <h2 id="testimonials-heading" class="index-section__title">What students are saying</h2>
                 <div class="testimonials-grid">
                     <?php foreach ($testimonials as $t):
                         $title = get_the_title($t->ID);
