@@ -177,9 +177,9 @@ get_header();
         <?php endif; ?>
         <div class="lesson-content">
 
-            <div class="container lesson-main">
-                <div class="lesson-body prose"><?php the_content(); ?></div>
-                <aside class="lesson-aside">
+            <div class="container lesson-main article__main">
+                <div class="lesson-body article__body prose"><?php the_content(); ?></div>
+                <aside class="lesson-aside article__aside">
                     <div class="lesson-bookmark">
                         <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
                             data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>"

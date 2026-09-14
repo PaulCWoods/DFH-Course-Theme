@@ -259,18 +259,10 @@
 // -----------------------------------------------------------------------------
 // Lesson content layout
 
-.lesson-main {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--ui-spacing-cushion);
-}
-
 // Article content and WordPress block overrides.
 // Keep these rules nested under .lesson-body so they win over editor defaults
 // without leaking into unrelated post content.
 .lesson-body {
-    grid-column: 1 / -1;
-    padding-block-end: var(--ui-spacing-cushion);
 
     &:empty {
         display: none;
@@ -298,10 +290,6 @@
                 padding: calc(var(--ui-spacing-unit));
             }
         }
-    }
-
-    @media screen and (width > #{var.$bp-lesson}) {
-        grid-column: span 2; // content spans two columns on wide screens
     }
 
 
@@ -534,7 +522,6 @@
     align-self: start;
     display: flex;
     flex-direction: column;
-    grid-column: 1 / -1;
     inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-4)) + var(--ui-spacing-unit));
     margin: calc(var(--ui-focus-ring-clearance) * -1);
     padding: var(--ui-focus-ring-clearance);
@@ -542,7 +529,6 @@
     reading-flow: flex-visual;
 
     @media screen and (width > #{var.$bp-lesson}) {
-        grid-column: 3; // Occupy the third column on wide screens.
         // Prevent a tall resource list from pushing the lesson content out of view.
         max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--ui-spacing-unit) * 2);
         overflow: auto;

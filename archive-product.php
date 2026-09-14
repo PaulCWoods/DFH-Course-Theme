@@ -4,11 +4,11 @@ get_header();
 
 <main class="site-main shop-archive" id="main">
     <article class="container">
-        <header class="article-header">
+        <header class="article__header">
             <h1 class="display-title"><?php woocommerce_page_title(); ?></h1>
         </header>
 
-        <div class="article-content">
+        <div class="article__content">
             <?php
             if ( have_posts() ) {
                 // WooCommerce loop container wrapper

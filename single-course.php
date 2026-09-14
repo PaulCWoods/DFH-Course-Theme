@@ -24,7 +24,7 @@ get_template_part('content', 'course-header');
             <?php if (has_post_thumbnail())
                 the_post_thumbnail(); ?>
         </figure>
-        <header class="article-header course-landing__header prose">
+        <header class="article__header course-landing__header prose">
 
             <div class="container +2/3 +start">
                 <h1><?php the_title(); ?></h1>
