@@ -623,12 +623,10 @@
 }
 
 .lesson-download__icon {
-    background-color: var(--ui-color-background-dark);
+    background-color: var(--ui-color-background-surface);
     box-sizing: content-box;
-    color: var(--ui-color-foreground-on-dark);
     inset-block-start: 0;
     inset-inline-end: 0;
-    opacity: var(--ui-opacity-muted);
     padding: var(--ui-spacing-unit);
     pointer-events: none;
     position: absolute;
