@@ -3,7 +3,7 @@
         <nav class="container site-header__inner">
             <ul class="site-breadcrumb">
                 <li class="+home">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="link title site-breadcrumb__home">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-title site-breadcrumb__home link">
                         <svg class="icon" width="32" height="32" aria-hidden="true">
                             <use href="#DesignForHumans" />
                         </svg>
