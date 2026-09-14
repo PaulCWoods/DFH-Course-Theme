@@ -629,7 +629,7 @@
     inset-block-start: 0;
     inset-inline-end: 0;
     opacity: var(--ui-opacity-muted);
-    padding: calc(var(--ui-spacing-unit)/2);
+    padding: var(--ui-spacing-unit);
     pointer-events: none;
     position: absolute;
 }
@@ -640,7 +640,7 @@
     font-size: 0;
     block-size: var(--spacing-8);
     position: relative;
-    margin: calc(var(--ui-spacing-unit) / 4);
+    margin: calc(var(--ui-spacing-unit) / 2);
     margin-block-end: 0;
 
     img {
