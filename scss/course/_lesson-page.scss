@@ -311,6 +311,10 @@
         margin-block: calc(var(--ui-spacing-breathe) * 2);
         padding-block: var(--ui-spacing-breathe);
         padding-inline: var(--ui-spacing-cushion);
+
+        &:last-child {
+            margin-block-end: 0;
+        }
     }
 
     section {
