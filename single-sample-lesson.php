@@ -19,7 +19,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 <header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
     <div class="lesson-head site-header +sample">
         <div class="lesson-head__inner container">
-            <nav class="lesson-head__nav" aria-label="Breadcrumb">
+            <nav class="lesson-head__nav stack +no-gap" aria-label="Breadcrumb">
                 <?php if ($associated_course_id && get_post($associated_course_id)): ?>
                     <a class="lesson-head__nav-parent link"
                         href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
@@ -44,7 +44,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 </header>
 
 <main class="site-main lesson-page" id="main">
-    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article'); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack +no-gap'); ?>>
 
         <header class="lesson-header prose">
             <div class="container">
@@ -85,7 +85,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                         </span>
                     </p>
                 </div>
-                <aside class="lesson-aside article__aside">
+                <aside class="lesson-aside article__aside stack +no-gap">
                     <?php
                     // Gather stats, external links, and downloads; render aside only if any exist
                     $stats_meta = function_exists('get_field') ? get_field('lesson_stats') : get_post_meta(get_the_ID(), 'lesson_stats', true);
@@ -101,7 +101,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                             ?>
                             <section class="lesson-resources lesson-stats" aria-describedby="lesson-stats__heading">
                                 <h2 class="subheading lesson-resources__heading" id="lesson-stats__heading">Key statistics</h2>
-                                <dl class="lesson-stats__list">
+                                <dl class="lesson-stats__list stack">
                                     <?php foreach ($slines as $sline) {
                                         $sline = trim($sline);
                                         if (empty($sline))
@@ -129,7 +129,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                             <section class="lesson-resources lesson-links" aria-describedby="lesson-links-heading">
                                 <h2 class="subheading lesson-resources__heading" id="lesson-links-heading">Further reading &
                                     links</h2>
-                                <ul class="resource-list">
+                                <ul class="resource-list stack">
                                     <?php
                                     $lines = explode("\n", $external_links);
                                     foreach ($lines as $line) {
@@ -159,7 +159,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                                 if ($download_post && $pdf_url) {
                                     ?>
                                     <li>
-                                        <div class="lesson-download">
+                                        <div class="lesson-download stack +no-gap">
                                             <?php if (has_post_thumbnail($download_id)): ?>
                                                 <div class="lesson-download__thumb">
                                                     <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>

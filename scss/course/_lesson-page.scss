@@ -12,8 +12,6 @@
 }
 
 .lesson-article {
-    display: flex;
-    flex-direction: column;
     min-block-size: 100%;
 }
 
@@ -68,8 +66,6 @@
 .lesson-head__nav {
     --height: var(--site-header-height);
     align-self: stretch;
-    display: flex;
-    flex-direction: column;
     flex-grow: 1;
     font-size: var(--typography-font-size-fluid-base);
     justify-content: center;
@@ -532,8 +528,6 @@
 // preserves the focus-ring clearance while keeping the visible column aligned.
 .lesson-aside {
     align-self: start;
-    display: flex;
-    flex-direction: column;
     inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-4)) + var(--ui-spacing-unit));
     margin: calc(var(--ui-focus-ring-clearance) * -1);
     padding: var(--ui-focus-ring-clearance);
@@ -554,21 +548,17 @@
 
 // Stats list layout helper — default small-vertical list
 .lesson-stats__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-05);
+    --gap: calc(var(--ui-spacing-unit)/2);
 }
 
 // -----------------------------------------------------------------------------
 // Explore area: child lessons and progression
 
 .lesson-explore {
+    --gap: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
     background: var(--ui-color-background-surface);
     box-shadow: var(--ui-shadow-inset);
-    display: flex;
-    flex-direction: column;
     flex-grow: 1;
-    gap: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
     padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
 
     .heading {
@@ -608,8 +598,6 @@
 .lesson-download {
     // Make the full card surface act as the download link.
     background-color: var(--ui-color-background-surface);
-    display: flex;
-    flex-direction: column;
     position: relative;
 
     a:before {

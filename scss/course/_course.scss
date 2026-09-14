@@ -12,13 +12,11 @@ $course-bp: 60em;
 }
 
 .course-landing {
-    display: flex;
-    flex-direction: column;
+    --gap: 0;
 }
 
 .course-landing__article {
-    display: flex;
-    flex-direction: column;
+    --gap: 0;
     padding-block-end: 0;
 
     @media screen and (width > #{$course-bp}) {

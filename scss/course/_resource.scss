@@ -1,8 +1,5 @@
 .resource-list {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--ui-spacing-unit)/2);
-    list-style: none;
+    --gap: calc(var(--ui-spacing-unit)/2);
     max-inline-size: var(--spacing-32);
 
     a {

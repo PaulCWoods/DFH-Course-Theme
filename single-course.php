@@ -18,8 +18,8 @@ $root_lesson_ids = array_values(array_unique($root_lesson_ids));
 get_template_part('content', 'course-header');
 ?>
 
-<main class="course-landing site-main" id="main">
-    <article class="article course-landing__article">
+<main class="course-landing site-main stack" id="main">
+    <article class="course-landing__article stack article">
         <figure class="course-landing__poster">
             <?php if (has_post_thumbnail())
                 the_post_thumbnail(); ?>

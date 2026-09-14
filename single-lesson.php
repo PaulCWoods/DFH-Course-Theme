@@ -77,7 +77,7 @@ get_header();
                 <span class="lesson-head__code-badge" title="Lesson code"><span class="sr">Lesson
                         code:</span><?php echo esc_html($lesson_code); ?></span>
             <?php endif; ?>
-            <nav class="lesson-head__nav" aria-label="Breadcrumb">
+            <nav class="lesson-head__nav stack +no-gap" aria-label="Breadcrumb">
                 <?php
                 $post_id = get_the_ID();
                 $parent_id = wp_get_post_parent_id($post_id);
@@ -143,7 +143,7 @@ get_header();
 </header>
 <main class="site-main lesson-page" id="main">
     <!-- Syllabus overlay panel (hidden by default) -->
-    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article'); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack +no-gap'); ?>>
 
         <header class="lesson-header prose">
             <div class="container">
@@ -179,7 +179,7 @@ get_header();
 
             <div class="container lesson-main article__main">
                 <div class="lesson-body article__body prose"><?php the_content(); ?></div>
-                <aside class="lesson-aside article__aside">
+                <aside class="lesson-aside article__aside stack +no-gap">
                     <div class="lesson-bookmark">
                         <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
                             data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>"
@@ -204,7 +204,7 @@ get_header();
                             ?>
                             <section class="lesson-resources lesson-stats" aria-describedby="lesson-stats__heading">
                                 <h2 class="subheading lesson-resources__heading" id="lesson-stats__heading">Key statistics</h2>
-                                <dl class="lesson-stats__list">
+                                <dl class="lesson-stats__list stack">
                                     <?php foreach ($slines as $sline) {
                                         $sline = trim($sline);
                                         if (empty($sline))
@@ -232,7 +232,7 @@ get_header();
                             <section class="lesson-resources lesson-links" aria-describedby="lesson-links-heading">
                                 <h2 class="subheading lesson-resources__heading" id="lesson-links-heading">Further reading &
                                     links</h2>
-                                <ul class="resource-list">
+                                <ul class="resource-list stack">
                                     <?php
                                     $lines = explode("\n", $external_links);
                                     foreach ($lines as $line) {
@@ -267,7 +267,7 @@ get_header();
                             if ($download_post && $pdf_url) {
                                 ?>
                                 <li>
-                                    <div class="lesson-download">
+                                    <div class="lesson-download stack +no-gap">
                                         <?php if (has_post_thumbnail($download_id)): ?>
                                             <div class="lesson-download__thumb">
                                                 <?php echo get_the_post_thumbnail($download_id, 'medium_large'); ?>
@@ -300,7 +300,7 @@ get_header();
 
 
         <!-- Child lessons -->
-        <div class="lesson-explore">
+        <div class="lesson-explore stack">
             <?php
             // Render child lessons for this lesson (if any).
             $parent_id = get_the_ID();

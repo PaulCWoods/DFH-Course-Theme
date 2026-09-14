@@ -146,17 +146,17 @@ get_header();
 
     if (!empty($testimonials)):
         ?>
-        <section class="home__section index-section +strong" aria-labelledby="testimonials-heading">
+        <section class="home__section grid-list__container index-section +strong +scroll@<lg" aria-labelledby="testimonials-heading">
             <div class="container">
                 <h2 id="testimonials-heading" class="index-section__title">What students are saying</h2>
-                <div class="testimonials-grid">
+                <div class="testimonials-grid grid-list">
                     <?php foreach ($testimonials as $t):
                         $title = get_the_title($t->ID);
                         $quote = apply_filters('the_content', $t->post_content);
                         $author_title = get_post_meta($t->ID, '_dfh_testimonial_author_title', true);
                         $author_url = get_post_meta($t->ID, '_dfh_testimonial_author_url', true);
                         ?>
-                        <blockquote class="testimonial-card">
+                        <blockquote class="testimonial-card stack">
                             <div class="testimonial-card__content prose">
                                 <?php echo $quote; ?>
                             </div>
