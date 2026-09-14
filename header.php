@@ -55,6 +55,28 @@ if (function_exists('is_singular') && is_singular('lesson')) {
 <body <?php body_class(); ?> data-syllabus="<?php echo esc_attr($syllabus_index); ?>">
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="Email" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M120 109.1H0V11.6h10.96L60 60.64 109.04 11.6H120zM15 94.1h90V36.86l-45 45-45-45z"></path>
+            <polygon points="60 81.86 2.55 24.4 13.15 13.8 60 60.64 106.85 13.8 117.45 24.4 60 81.86"></polygon>
+            <rect width="105" height="15" x="7.5" y="11.6"></rect>
+        </symbol>
+        <symbol id="Medium" viewBox="0 0 24 24" fill="currentColor" data-name="Layer 1">
+            <path d="M4.21 0C1.89 0 0 1.87 0 4.19c0 0 0 0.01 0 0.02v15.58C0 22.11 1.87 24 4.19 24c0 0 0.01 0 0.02 0h15.58c2.32 0 4.21-1.87 4.21-4.19 0 0 0-0.01 0-0.02V18.7c-0.14 0.01-0.28 0.02-0.42 0.02-2.58 0-4.03-2.15-4.09-4.83 0-0.24 0-0.47 0.02-0.71 0.09-1.19 0.48-2.24 1.1-3.02 0.37-0.47 0.85-0.85 1.4-1.1 0.47-0.24 1.13-0.37 1.66-0.37h0.02c0.1 0 0.2 0 0.3 0.01V4.21C24.01 1.89 22.13 0 19.81 0c0 0-0.01 0-0.02 0zM4.41 5.58h4.16l3.59 8.44 3.59-8.44h3.86v0.15h-0.02c-0.7 0.16-1.06 0.4-1.06 1.26v0 10.27c0.06 0.68 0.43 0.89 1.07 1.03h0.02v0.15H14.7v-0.15h0.02c0.64-0.15 0.99-0.36 1.05-1.03V7.27l-4.74 11.15h-0.26L6.15 7.57v9.45c0 0.86 0.36 1.09 1.06 1.25h0.02v0.15H4.4v-0.15h0.02c0.7-0.16 1.07-0.4 1.07-1.26V6.99c0-0.86-0.36-1.09-1.06-1.25H4.41c0 0 0-0.15 0-0.16zM23.66 9.25c-1.09 0.02-1.73 1.32-1.81 3.12H24V9.29c-0.11-0.03-0.23-0.05-0.34-0.04zM21.8 12.88c-0.1 1.76 0.86 3.24 2.2 3.63v-3.63z"></path>
+        </symbol>
+        <symbol id="LinkedIn" viewBox="0 0 24 24" fill="currentColor" data-name="Layer 1">
+            <path class="cls-1" d="M21.33 0H2.67C1.19 0 0 1.19 0 2.67v18.67C0 22.81 1.19 24 2.67 24h18.67c1.47 0 2.67-1.19 2.67-2.67V2.67C24.01 1.2 22.82 0 21.33 0zM7.26 20.67H3.68V9.11h3.58zM5.45 7.6c-1.17 0-2.12-0.95-2.12-2.13s0.95-2.13 2.12-2.13 2.12 0.95 2.12 2.13S6.62 7.6 5.45 7.6zM20.67 20.67h-3.56V14.6c0-1.66-0.63-2.59-1.95-2.59-1.43 0-2.18 0.97-2.18 2.59v6.07H9.55V9.11h3.43v1.56c0 0 1.03-1.91 3.48-1.91s4.21 1.5 4.21 4.59v7.32z" fill-rule="evenodd"></path>
+        </symbol>
+        <symbol id="Bluesky" viewBox="0 0 24 24" fill="currentColor" data-name="Layer 1">
+            <path d="M5.2 2.86c2.75 2.06 5.71 6.25 6.8 8.5 1.09-2.25 4.05-6.44 6.8-8.5 1.99-1.49 5.2-2.64 5.2 1.03 0 0.73-0.42 6.16-0.67 7.04-0.86 3.06-3.98 3.84-6.76 3.37 4.85 0.83 6.09 3.56 3.42 6.3-5.07 5.2-7.28-1.3-7.85-2.97-0.1-0.31-0.15-0.45-0.15-0.33 0-0.12-0.05 0.02-0.15 0.33-0.57 1.67-2.78 8.17-7.85 2.97-2.67-2.74-1.43-5.47 3.42-6.3-2.78 0.47-5.9-0.31-6.76-3.37-0.25-0.88-0.67-6.31-0.67-7.04C0 0.21 3.22 1.37 5.2 2.86"></path>
+        </symbol>
+        <symbol id="ArrowUpRight" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <rect transform="rotate(-45 57.348589 62.645436)" width="97.5" height="15" x="8.6" y="55.15"></rect>
+            <polygon points="104.62 97.12 89.62 97.12 89.62 30.38 22.88 30.38 22.88 15.38 104.62 15.38 104.62 97.12"></polygon>
+        </symbol>
+        <symbol id="ArrowUpLeft" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <rect transform="rotate(-45 62.65024 62.649421)" width="15" height="97.5" x="55.15" y="13.9"></rect>
+            <polygon points="30.38 97.12 15.38 97.12 15.38 15.38 97.12 15.38 97.12 30.38 30.38 30.38 30.38 97.12"></polygon>
+        </symbol>
         <symbol id="Download" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <g>
                 <rect width="15" height="78.75" x="52.5"></rect>

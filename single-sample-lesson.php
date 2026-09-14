@@ -69,8 +69,8 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
         <?php endif; ?>
 
         <div class="lesson-content">
-            <div class="container lesson-main">
-                <div class="lesson-body prose +sample">
+            <div class="container lesson-main article__main">
+                <div class="lesson-body article__body prose +sample">
                     <?php the_content(); ?>
                     <hr class="sr" />
                     <p class="lesson-body__sample-text">
@@ -85,7 +85,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                         </span>
                     </p>
                 </div>
-                <aside class="lesson-aside">
+                <aside class="lesson-aside article__aside">
                     <?php
                     // Gather stats, external links, and downloads; render aside only if any exist
                     $stats_meta = function_exists('get_field') ? get_field('lesson_stats') : get_post_meta(get_the_ID(), 'lesson_stats', true);
