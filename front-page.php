@@ -41,8 +41,12 @@ get_header();
                 }
             }
 
+            $welcome_message = isset($_GET['registered']) && '1' === sanitize_text_field(wp_unslash($_GET['registered']))
+                ? 'Welcome'
+                : 'Welcome back';
+
             if (is_user_logged_in()): ?>
-                <p class="home__logged-in index-section__title">Welcome back, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
+                <p class="home__logged-in index-section__title"><?php echo esc_html($welcome_message); ?>, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
                         <a href="<?php echo esc_url($hero_target); ?>" class="button +strong">

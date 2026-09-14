@@ -38,6 +38,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['dfh_register_nonce'])
                 $registration_success = true;
                 wp_set_current_user($user_id);
                 wp_set_auth_cookie($user_id);
+                $redirect_to = add_query_arg('registered', '1', $redirect_to);
                 // Redirect will happen after page output
             }
         }
