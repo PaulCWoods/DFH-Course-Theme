@@ -192,6 +192,12 @@ $course-bp: 60em;
     padding-block-start: var(--ui-spacing-unit);
 }
 
+.course-landing__completion-feedback {
+    display: block;
+    margin-block-start: var(--ui-spacing-unit);
+    text-align: center;
+}
+
 @keyframes --course-complete-pop {
     0% {
         opacity: 0;

@@ -174,6 +174,10 @@ get_template_part('content', 'course-header');
                                 </svg>
                             </a>
                         </div>
+                        <div class="course-landing__completion-feedback">
+                            What did you think of this course?
+                            <a class="link" href="https://designforhumans.blog/contact?subject=Course Feedback"> Let me know.</a>
+                        </div>
                     </div>
 
                 <?php elseif ($completed_count > 0): ?>
