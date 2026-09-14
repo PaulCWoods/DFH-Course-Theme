@@ -268,6 +268,10 @@
         display: none;
     }
 
+    sup.fn {
+        margin-inline: 0.25em;
+    }
+
     &.\+sample {
         position: relative;
 
@@ -460,6 +464,14 @@
     .wp-block-cp-codepen-gutenberg-embed-block {
         box-shadow: var(--ui-shadow);
         font-size: 0;
+    }
+
+    .wp-block-footnotes {
+        font-size: var(--ui-typography-body-small-font-size);
+        line-height: var(--ui-typography-body-small-line-height);
+        margin-block-start: var(--ui-spacing-cushion);
+        padding-block-start: var(--ui-spacing-cushion);
+        border-block-start: var(--ui-border-subtle);
     }
 }
 

@@ -48,7 +48,7 @@ function dfh_register_lesson_cpt()
         'show_in_rest' => true, // Enables Gutenberg block editor support
         'hierarchical' => true, // Enables parent/child lesson nesting
         'menu_icon' => 'dashicons-welcome-learn-more',
-        'supports' => array('title', 'editor', 'thumbnail', 'revisions', 'page-attributes'), // page-attributes adds Parent Lesson dropdown
+        'supports' => array('title', 'editor', 'thumbnail', 'revisions', 'page-attributes', 'custom-fields'), // page-attributes adds Parent Lesson dropdown; custom-fields enables the Footnotes block.
         'rewrite' => array('slug' => 'lesson', 'with_front' => false),
     );
 
@@ -1762,7 +1762,7 @@ function dfh_register_sample_lesson_post_type()
         ),
         'public' => true,
         'has_archive' => false,
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'), // Custom fields enable the Footnotes block.
         'show_in_rest' => true,
         'menu_icon' => 'dashicons-welcome-view-site',
         'rewrite' => array('slug' => 'sample-lesson'),
