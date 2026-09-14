@@ -1,7 +1,7 @@
 @use "../theme/sassvars" as var;
 
 .site:has(.video-stick) {
-    @media (24em < width < #{var.$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
+    @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
         .site-header {
             @container scroll-state(stuck: top) {
                 box-shadow: var(--ui-shadow-reset);
@@ -13,7 +13,7 @@
 .site-header__nav-toggle.button {
     display: inline-flex;
 
-    @media screen and (width > #{var.$account-bp}) {
+    @media screen and (width > #{var.$bp-account}) {
         display: none;
     }
 }

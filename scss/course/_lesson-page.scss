@@ -227,7 +227,7 @@
     // Pinning is limited to the narrow, touch layout where the toggle exposes
     // the sticky-player state.
     .site:has(.video-stick) & {
-        @media (24em < width < #{var.$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
+        @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
             position: sticky;
             inset-block-start: var(--lesson-aside-sticky-top, var(--spacing-4));
             z-index: 1;
@@ -239,7 +239,7 @@
     // The control is only useful where the player can become sticky.
     display: none;
 
-    @media (24em < width < #{var.$lesson-bp}) and (aspect-ratio < 1/1) and (pointer: coarse) {
+    @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
         .site:has(.lesson-video) & {
             display: inline-flex;
         }
@@ -300,7 +300,7 @@
         }
     }
 
-    @media screen and (width > #{var.$lesson-bp}) {
+    @media screen and (width > #{var.$bp-lesson}) {
         grid-column: span 2; // content spans two columns on wide screens
     }
 
@@ -498,7 +498,7 @@
         }
     }
 
-    @media screen and (width > #{var.$lesson-bp}) {
+    @media screen and (width > #{var.$bp-lesson}) {
         border-block-start: none;
         margin-block-start: 0;
         padding-block-start: 0;
@@ -541,7 +541,7 @@
     position: sticky;
     reading-flow: flex-visual;
 
-    @media screen and (width > #{var.$lesson-bp}) {
+    @media screen and (width > #{var.$bp-lesson}) {
         grid-column: 3; // Occupy the third column on wide screens.
         // Prevent a tall resource list from pushing the lesson content out of view.
         max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--ui-spacing-unit) * 2);

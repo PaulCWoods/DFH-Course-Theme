@@ -1,14 +1,17 @@
+@use "../theme/sassvars" as var;
+
 .testimonials-grid {
     display: grid;
     gap: var(--ui-spacing-breathe);
     grid-template-columns: repeat(auto-fill, minmax(min(var(--testimonial-width, 28rem), 100%), 1fr));
 
-    @media screen and (width < 60em) and (hover: none) {
+    @media screen and (width < #{var.$bp-testimonials}) and (hover: none) {
         display: flex;
         inline-size: 100vw;
         overflow: auto;
         overscroll-behavior-x: contain;
         margin-inline: calc(var(--ui-spacing-cushion) * -1);
+        padding-block-end: var(--ui-spacing-unit);
         padding-inline: var(--ui-spacing-cushion);
         scroll-snap-type: x mandatory;
 
