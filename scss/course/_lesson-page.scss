@@ -340,17 +340,6 @@
         }
     }
 
-    pre:has(code) {
-        background-color: var(--ui-color-background-dark);
-        box-shadow: var(--ui-shadow-inset);
-        color: var(--ui-color-foreground-on-dark);
-        margin-block: var(--ui-spacing-breathe);
-
-        code {
-            background-color: transparent;
-        }
-    }
-
     // -------------------------------------------------------------------------
     // WordPress block overrides
     // -------------------------------------------------------------------------
