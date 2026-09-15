@@ -111,7 +111,7 @@ get_header();
                                         <?php the_post_thumbnail('medium_large'); ?>
                                     </div>
                                 <?php endif; ?>
-                                <div class="index-card__content">
+                                <div class="index-card__content stack">
                                     <a class="index-card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                     <?php the_excerpt(); ?>
                                     <?php
