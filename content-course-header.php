@@ -4,10 +4,10 @@
             <ul class="site-breadcrumb">
                 <li class="+home">
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-title site-breadcrumb__home link">
-                        <svg class="icon" width="32" height="32" aria-hidden="true">
+                        <svg class="site-title__icon icon" width="32" height="32" aria-hidden="true">
                             <use href="#DesignForHumans" />
                         </svg>
-                        Courses
+                        <span class="site-title__text">Courses</span>
                     </a>
                 </li>
                 <?php if (is_user_logged_in()): ?>
