@@ -1,5 +1,5 @@
             <footer class="site-footer">
-                <div class="container site-footer__inner">
+                <div class="site-footer__inner stack container">
                     <nav class="site-footer__nav" aria-label="Footer">
                         <ul>
                             <li>
