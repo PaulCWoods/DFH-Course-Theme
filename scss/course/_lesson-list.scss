@@ -28,13 +28,13 @@
     --l1-label-text-transform: none;
 
     --l2-label-font-family: var(--ui-typography-subheading-font-family);
-    --l2-label-font-size: var(--typography-font-size-lower-1);
+    --l2-label-font-size: var(--typography-font-size--1);
     --l2-label-font-weight: var(--ui-typography-subheading-font-weight);
     --l2-label-line-height: var(--ui-typography-subheading-line-height);
     --l2-label-text-transform: uppercase;
 
     --l3-label-font-family: var(--ui-typography-body-font-family);
-    --l3-label-font-size: var(--typography-font-size-base);
+    --l3-label-font-size: var(--typography-font-size-0);
     --l3-label-font-weight: var(--ui-typography-body-font-weight);
     --l3-label-line-height: var(--ui-typography-subheading-line-height);
     --l3-label-text-transform: none;
@@ -46,7 +46,7 @@
     --label-text-transform: var(--l1-label-text-transform);
 
     --code-font-family: var(--ui-typography-subheading-font-family);
-    --code-font-size: var(--typography-font-size-lower-1);
+    --code-font-size: var(--typography-font-size--1);
     --code-font-weight: normal;
     --code-line-height: var(--ui-typography-subheading-line-height);
     --code-text-transform: uppercase;

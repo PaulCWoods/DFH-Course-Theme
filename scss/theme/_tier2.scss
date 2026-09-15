@@ -17,6 +17,9 @@
     --ui-color-border-accent-strong: light-dark(var(--color-blue-600), var(--color-blue-400));
 
     --ui-border-subtle: var(--border-width-sm) dashed color-mix(in srgb, currentColor, transparent 70%);
+
+    --ui-typography-title-font-size: var(--typography-font-size-fluid-4);
+    --ui-typography-display-title-font-size: var(--typography-font-size-fluid-6);
 }
 
 // Lesson 1 and syllabus 1 tokens

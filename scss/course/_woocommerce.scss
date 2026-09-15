@@ -121,7 +121,7 @@
             &:before {
                 color: var(--ui-color-foreground-muted);
                 content: attr(aria-label);
-                font-size: var(--typography-font-size-lower-1);
+                font-size: var(--typography-font-size--1);
                 text-box: trim-both cap alphabetic;
                 text-transform: uppercase;
             }

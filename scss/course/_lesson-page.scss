@@ -57,7 +57,7 @@
     align-items: center;
     background-color: var(--ui-color-background-accent);
     display: flex;
-    font-size: var(--typography-font-size-fluid-base);
+    font-size: var(--typography-font-size-fluid-0);
     font-variant-numeric: tabular-nums;
     font-weight: bold;
     padding-inline: var(--ui-spacing-breathe);
@@ -67,7 +67,7 @@
     --height: var(--site-header-height);
     align-self: stretch;
     flex-grow: 1;
-    font-size: var(--typography-font-size-fluid-base);
+    font-size: var(--typography-font-size-fluid-0);
     justify-content: center;
     min-inline-size: 1px;
     position: relative;
