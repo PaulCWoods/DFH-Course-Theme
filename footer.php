@@ -1,6 +1,5 @@
             <footer class="site-footer">
                 <div class="site-footer__inner stack container">
-                    <span class="site-footer__brand">Design For Humans</span>
                     <nav class="site-footer__nav" aria-label="Footer">
                         <ul>
                             <li>
@@ -21,6 +20,7 @@
                         </ul>
                     </nav>
                     <p class="site-footer__copyright">&copy; <?php echo date('Y'); ?> Design For Humans. All rights reserved.</p>
+                    <span class="site-footer__brand" aria-hidden="true">Design For Humans</span>
                 </div>
             </footer>
         </div>
