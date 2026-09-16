@@ -112,7 +112,7 @@ get_header();
                                     </div>
                                 <?php endif; ?>
                                 <div class="index-card__content stack">
-                                    <div class="index-card__desc">
+                                    <div class="index-card__desc stack">
                                         <a class="index-card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                         <?php the_excerpt(); ?>
                                     </div>
