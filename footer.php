@@ -1,5 +1,6 @@
             <footer class="site-footer">
                 <div class="site-footer__inner stack container">
+                    <span class="site-footer__brand">Design For Humans</span>
                     <nav class="site-footer__nav" aria-label="Footer">
                         <ul>
                             <li>
