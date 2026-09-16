@@ -461,6 +461,12 @@
         margin-block-start: var(--ui-spacing-cushion);
         padding-block-start: var(--ui-spacing-cushion);
         border-block-start: var(--ui-border-subtle);
+        li a:first-child {
+            margin-inline-end: 0.5rem;
+            + a {
+                text-decoration: none;
+            }
+        }
     }
 }
 
