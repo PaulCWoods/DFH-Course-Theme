@@ -19,7 +19,7 @@
 // Lesson navigation header
 
 .lesson-head__container {
-    background-color: var(--ui-color-background-dark);
+    background-color: var(--ui-color-background-darker);
     min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
 }
 
@@ -172,7 +172,7 @@
 
 // Shared dark surface for the navigation, title, and video regions.
 :is(.lesson-head, .lesson-header, .lesson-video) {
-    background-color: var(--ui-color-background-dark);
+    background-color: var(--ui-color-background-darker);
     color: var(--ui-color-foreground-on-dark);
 }
 
