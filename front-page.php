@@ -112,8 +112,10 @@ get_header();
                                     </div>
                                 <?php endif; ?>
                                 <div class="index-card__content stack">
-                                    <a class="index-card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                    <?php the_excerpt(); ?>
+                                    <div class="index-card__desc">
+                                        <a class="index-card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                        <?php the_excerpt(); ?>
+                                    </div>
                                     <?php
                                     $course_id = get_the_ID();
                                     $is_course_completed = is_array($user_completed_courses) && !empty($user_completed_courses[$course_id]);
