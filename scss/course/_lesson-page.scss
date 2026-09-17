@@ -371,17 +371,15 @@
         }
     }
 
-    figure.wp-block-image {
-        margin-block: var(--ui-spacing-breathe) !important;
+    figure:is(.wp-block-image, .wp-block-embed) {
+        margin-block: var(--prose-vert-space, var(--ui-spacing-breathe)) !important;
 
         &:first-child {
             margin-block-start: 0 !important;
         }
 
-        &.\+half {
-            img {
-                max-inline-size: 50% !important;
-            }
+        &.\+half img {
+            max-inline-size: 50% !important;
         }
 
         &.\+scheme-adapt img {
