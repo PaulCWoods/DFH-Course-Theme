@@ -93,6 +93,10 @@
             &:has(a[href]) {
                 background-color: var(--ui-color-background-accent-muted);
                 border-color: var(--ui-color-border-accent);
+
+                @media (prefers-contrast: more) {
+                    background-color: var(--ui-color-background-surface);
+                }
             }
 
             > .lesson-item {

@@ -154,6 +154,10 @@ $course-bp: 60em;
         animation-delay: 0s, 0.5s;
     }
 
+    @media (prefers-contrast: more) {
+        background-color: var(--ui-color-background-surface);
+    }
+
     &:before {
         content: "🎉" / "";
         display: block;

@@ -17,6 +17,12 @@
     --ui-color-border-accent-strong: light-dark(var(--color-blue-600), var(--color-blue-400));
 
     --ui-border-subtle: var(--border-width-sm) dashed color-mix(in srgb, currentColor, transparent 70%);
+
+    @media (prefers-contrast: more) {
+        --ui-color-foreground-accent-hover: light-dark(var(--color-blue-700), var(--color-blue-300));
+        --ui-color-border-accent: var(--color-blue-500);
+        --ui-color-border-accent-strong: var(--color-blue-500);
+    }
 }
 
 // Lesson 1 and syllabus 1 tokens
@@ -32,6 +38,13 @@
 
     --ui-color-border-accent: light-dark(var(--color-blue-400), var(--color-blue-600));
     --ui-color-border-accent-strong: light-dark(var(--color-blue-600), var(--color-blue-400));
+
+
+    @media (prefers-contrast: more) {
+        --ui-color-foreground-accent-hover: light-dark(var(--color-blue-700), var(--color-blue-300));
+        --ui-color-border-accent: var(--color-blue-500);
+        --ui-color-border-accent-strong: var(--color-blue-500);
+    }
 }
 
 // Lesson 2 and syllabus 2 tokens
@@ -47,6 +60,12 @@
 
     --ui-color-border-accent: light-dark(var(--color-aqua-400), var(--color-aqua-600));
     --ui-color-border-accent-strong: light-dark(var(--color-aqua-600), var(--color-aqua-400));
+
+    @media (prefers-contrast: more) {
+        --ui-color-foreground-accent-hover: light-dark(var(--color-aqua-600), var(--color-aqua-400));
+        --ui-color-border-accent: var(--color-aqua-500);
+        --ui-color-border-accent-strong: var(--color-aqua-500);
+    }
 }
 
 // Lesson 3 and syllabus 3 tokens
@@ -61,7 +80,13 @@
     --ui-color-foreground-accent-pressed: light-dark(var(--color-purple-700), var(--color-purple-200));
 
     --ui-color-border-accent: light-dark(var(--color-purple-400), var(--color-purple-600));
-    --ui-color-border-accent-strong: light-dark(var(--color-purple-600), var(--color-purple-400));
+        --ui-color-border-accent-strong: light-dark(var(--color-purple-600), var(--color-purple-400));
+
+        @media (prefers-contrast: more) {
+            --ui-color-foreground-accent-hover: light-dark(var(--color-purple-700), var(--color-purple-300));
+            --ui-color-border-accent: var(--color-purple-500);
+            --ui-color-border-accent-strong: var(--color-purple-500);
+        }
 }
 
 // Lesson 4 and syllabus 4 tokens
@@ -77,4 +102,10 @@
 
     --ui-color-border-accent: light-dark(var(--color-olive-400), var(--color-olive-600));
     --ui-color-border-accent-strong: light-dark(var(--color-olive-600), var(--color-olive-400));
+
+    @media (prefers-contrast: more) {
+        --ui-color-foreground-accent-hover: light-dark(var(--color-olive-700), var(--color-olive-300));
+        --ui-color-border-accent: var(--color-olive-500);
+        --ui-color-border-accent-strong: var(--color-olive-500);
+    }
 }
