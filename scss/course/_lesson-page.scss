@@ -312,6 +312,11 @@
         padding-block: var(--ui-spacing-breathe);
         padding-inline: var(--ui-spacing-cushion);
 
+        @media (prefers-contrast: more) {
+            border: var(--ui-border);
+            box-shadow: none;
+        }
+
         &:last-child {
             margin-block-end: 0;
         }
