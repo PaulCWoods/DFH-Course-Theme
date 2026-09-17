@@ -8,6 +8,10 @@
     &[data-pc] {
         background-image: linear-gradient(to left, var(--ui-color-background-accent) var(--stat-progress), transparent var(--stat-progress));
     }
+
+    @media (prefers-contrast: more) {
+        border: var(--ui-border);
+    }
 }
 
 .stat-label {
