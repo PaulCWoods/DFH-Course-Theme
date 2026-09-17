@@ -7,9 +7,9 @@
         background-color: var(--ui-color-background-surface);
         font-weight: bold;
         padding: calc(var(--ui-spacing-unit)/2) var(--ui-spacing-unit);
-    }
 
-    @media (prefers-contrast: more) {
-        border: var(--ui-border);
+        @media (prefers-contrast: more) {
+            border: var(--ui-border);
+        }
     }
 }
