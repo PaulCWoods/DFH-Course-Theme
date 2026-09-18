@@ -1,7 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" viewBox="0 0 82.5 82.5" width="82.5" height="82.5"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 82.5 82.5">
+  <!-- Generator: Adobe Illustrator 30.8.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 1)  -->
+  <defs>
     <style>
       .st0 {
-        fill: #6da1c2;
+        fill: #379fd7;
       }
     </style>
-  </defs><rect class="st0" x="15" y="45" width="7.5" height="22.5"></rect><rect class="st0" x="45" y="15" width="7.5" height="22.5"></rect><rect class="st0" x="45" y="15" width="22.5" height="7.5"></rect><rect class="st0" x="60" y="37.5" width="7.5" height="30"></rect><rect class="st0" x="15" y="52.5" width="52.5" height="7.5"></rect><path class="st0" d="M0,0v82.5h82.5V0H0ZM75,75H7.5V7.5h67.5v67.5Z"></path><rect class="st0" x="30" y="15" width="7.5" height="22.5"></rect><rect class="st0" x="45" y="22.5" width="15" height="7.5"></rect><rect class="st0" x="15" y="22.5" width="22.5" height="15"></rect></svg>
+  </defs>
+  <polygon class="st0" points="22.5 60 60 60 60 67.5 67.5 67.5 67.5 60 67.5 52.5 67.5 37.5 60 37.5 60 52.5 22.5 52.5 22.5 45 15 45 15 52.5 15 60 15 67.5 22.5 67.5 22.5 60"/>
+  <polygon class="st0" points="52.5 30 60 30 60 22.5 67.5 22.5 67.5 15 52.5 15 45 15 45 22.5 45 30 45 37.5 52.5 37.5 52.5 30"/>
+  <path class="st0" d="M0,0v82.5h82.5V0H0ZM75,75H7.5V7.5h67.5v67.5Z"/>
+  <polygon class="st0" points="37.5 37.5 37.5 22.5 37.5 15 30 15 30 22.5 15 22.5 15 37.5 30 37.5 37.5 37.5"/>
+</svg>
