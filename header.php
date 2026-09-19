@@ -55,5 +55,5 @@ if (function_exists('is_singular') && is_singular('lesson')) {
 <body <?php body_class(); ?> data-syllabus="<?php echo esc_attr($syllabus_index); ?>">
 <?php get_template_part('content', 'icon-sprite'); ?>
 <?php wp_body_open(); ?>
-<a href="#main" class="skip-content">Skip to main content</a>
+<a href="#main" class="skip">Skip to main content</a>
 <div class="site">
