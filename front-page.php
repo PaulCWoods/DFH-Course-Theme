@@ -13,7 +13,7 @@ get_header();
 
 
     <!-- Hero Section -->
-    <section class="home__hero index-section +strong" aria-describedby="home-hero-heading">
+    <section class="home__hero section +strong" aria-describedby="home-hero-heading">
         <h2 class="sr" id="home-hero-heading">Welcome to Design for Humans Courses</h2>
         <div class="container">
             <?php
@@ -46,7 +46,7 @@ get_header();
                 : 'Welcome back';
 
             if (is_user_logged_in()): ?>
-                <p class="home__logged-in index-section__title"><?php echo esc_html($welcome_message); ?>, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
+                <p class="home__logged-in section__title"><?php echo esc_html($welcome_message); ?>, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
                         <a href="<?php echo esc_url($hero_target); ?>" class="button +strong">
@@ -69,9 +69,9 @@ get_header();
     </section>
 
     <!-- Courses Grid Section -->
-    <section class="index-section +strong +strong-1st home__section">
+    <section class="section +strong +strong-1st home__section">
         <div class="container">
-            <h2 class="index-section__title">Available courses</h2>
+            <h2 class="section__title">Available courses</h2>
 
             <?php
             // 1. Fetch all courses once with optimized WP_Query parameters
@@ -101,19 +101,19 @@ get_header();
 
             if ($courses_query->have_posts()):
                 ?>
-                <ul class="course-card-list index-card-list">
+                <ul class="course-card-list card-list">
                     <?php while ($courses_query->have_posts()):
                         $courses_query->the_post(); ?>
-                        <li class="index-card-list__item">
-                            <div class="index-card course-card">
+                        <li class="card-list__item">
+                            <div class="card course-card">
                                 <?php if (has_post_thumbnail()): ?>
-                                    <div class="index-card__thumb">
+                                    <div class="card__thumb">
                                         <?php the_post_thumbnail('medium_large'); ?>
                                     </div>
                                 <?php endif; ?>
-                                <div class="index-card__content stack">
-                                    <div class="index-card__desc stack">
-                                        <a class="index-card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                <div class="card__content stack">
+                                    <div class="card__desc stack">
+                                        <a class="card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                         <?php the_excerpt(); ?>
                                     </div>
                                     <?php
@@ -148,10 +148,10 @@ get_header();
 
     if (!empty($testimonials)):
         ?>
-        <section class="home__section grid-list__container index-section +strong +scroll@<lg" aria-labelledby="testimonials-heading">
+        <section class="home__section grid__container section +strong +scroll@<lg" aria-labelledby="testimonials-heading">
             <div class="container">
-                <h2 id="testimonials-heading" class="index-section__title">What students are saying</h2>
-                <div class="testimonials-grid grid-list">
+                <h2 id="testimonials-heading" class="section__title">What students are saying</h2>
+                <div class="testimonials-grid grid">
                     <?php foreach ($testimonials as $t):
                         $title = get_the_title($t->ID);
                         $quote = apply_filters('the_content', $t->post_content);
@@ -184,7 +184,7 @@ get_header();
 </main>
 <script>
     document.addEventListener('click', function (e) {
-        const card = e.target.closest('.index-card');
+        const card = e.target.closest('.card');
         if (card) {
             card.classList.add('is-loading');
             card.setAttribute('aria-busy', 'true');

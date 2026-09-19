@@ -1,14 +1,5 @@
-
-.course-card-list {
-    --index-card-width: var(--spacing-20);
-
-    li:first-child {
-        grid-column: 1 / -1;
-    }
-}
-
 .course-card__badge {
     align-self: start;
-    margin-block-start: calc(var(--index-card-padding) * -1);
+    margin-block-start: calc(var(--card-padding) * -1);
     order: -1;
 }
