@@ -114,60 +114,68 @@
     }
 }
 
+.lesson-head__progress {
+    display: none;
+}
+
     // Scroll-driven effects are progressive enhancements; the static header
     // remains usable when animation-timeline is unavailable.
-    @supports (animation-timeline: scroll()) {
+@supports (animation-timeline: scroll()) {
+
+    @media (prefers-reduced-motion: no-preference) {
 
         // Show reading progress when the browser supports scroll-driven animation.
-    .lesson-head__progress {
-        animation: --article-progress auto linear;
-        animation-timeline: scroll(root block);
-        background-color: var(--ui-color-foreground-accent);
-        block-size: var(--ui-border-width);
-        color-scheme: dark;
-        inline-size: 100%;
-        inset-block-start: 0;
-        inset-inline-start: 0;
-        position: fixed;
-        transform-origin: left;
-    }
-
-    @keyframes --article-progress {
-        from {
-            scale: 0 1;
+        .lesson-head__progress {
+            animation: --article-progress auto linear;
+            animation-timeline: scroll(root block);
+            background-color: var(--ui-color-foreground-accent);
+            block-size: var(--ui-border-width);
+            color-scheme: dark;
+            display: block;
+            inline-size: 100%;
+            inset-block-start: 0;
+            inset-inline-start: 0;
+            position: fixed;
+            transform-origin: left;
         }
 
-        to {
-            scale: 1 1;
+        @keyframes --article-progress {
+            from {
+                scale: 0 1;
+            }
+
+            to {
+                scale: 1 1;
+            }
         }
-    }
 
 
-        @keyframes --hide-parent {
-        to {
-            opacity: 0;
-            transform: translateY(-50%);
-            visibility: hidden;
-            position: absolute;
-            pointer-events: none;
+            @keyframes --hide-parent {
+            to {
+                opacity: 0;
+                transform: translateY(-50%);
+                visibility: hidden;
+                position: absolute;
+                pointer-events: none;
+            }
         }
-    }
 
         @keyframes --show-current {
-        from {
-            opacity: 0;
-            transform: translateY(50%);
-            position: absolute;
-            pointer-events: none;
-        }
+            from {
+                opacity: 0;
+                transform: translateY(50%);
+                position: absolute;
+                pointer-events: none;
+            }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-            position: static;
-            pointer-events: auto;
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                position: static;
+                pointer-events: auto;
+            }
         }
-        }
+    }
 }
 
 // Shared dark surface for the navigation, title, and video regions.
