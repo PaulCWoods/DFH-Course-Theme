@@ -163,8 +163,6 @@ get_template_part('content', 'course-header');
                         <h2>Course completed!</h2>
                         <p>Congratulations! You have finished all lessons in this course.</p>
                         <div class="course-landing__completion-buttons">
-                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>"
-                                class="button secondary-button">Review from Beginning</a>
                             <!-- Certificate Download Link -->
                             <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>"
                                 class="button +strong cert-btn" target="_blank">
@@ -173,6 +171,9 @@ get_template_part('content', 'course-header');
                                     <use href="#Download" />
                                 </svg>
                             </a>
+                            <!-- Review from Beginning Link -->
+                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>"
+                                class="button secondary-button">Review from Beginning</a>
                         </div>
                         <div class="course-landing__completion-feedback">
                             What did you think of this course?
