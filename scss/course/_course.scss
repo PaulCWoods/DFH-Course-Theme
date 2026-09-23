@@ -161,7 +161,6 @@ $course-bp: 60em;
 
     h2:before {
         content: "🎉" / "";
-        display: block;
         font-size: 1em;
         line-height: 1;
         margin-inline-end: calc(var(--ui-spacing-unit) / 2);
