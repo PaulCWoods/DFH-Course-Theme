@@ -87,7 +87,7 @@ $course-bp: 60em;
     }
 }
 
-.course-landing__access {
+.course-landing__access:has(:not(.course-landing__completion)) {
     padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
 
     h2 {
@@ -138,13 +138,14 @@ $course-bp: 60em;
 }
 
 .course-landing__completion {
+    --align: center;
     background-color: var(--ui-color-background-accent-muted);
     border: var(--ui-border);
     border-color: var(--ui-color-border-accent);
     box-shadow: var(--shadow-reset);
     color: var(--ui-color-foreground-base);
     padding: var(--site-block-padding, var(--ui-spacing-cushion));
-    text-align: center;
+    text-align: var(--align, center);
 
     // Completion motion is opt-in so reduced-motion users get the same state.
     @media (prefers-reduced-motion: no-preference) {
@@ -164,7 +165,6 @@ $course-bp: 60em;
         font-size: 3em;
         line-height: 1;
         margin-block-end: calc(var(--ui-spacing-unit) / 2);
-        text-align: center;
 
         @media (prefers-reduced-motion: no-preference) {
             animation: --course-complete-pop 0.5s both;
@@ -192,14 +192,13 @@ $course-bp: 60em;
     display: flex;
     flex-wrap: wrap;
     gap: calc(var(--ui-spacing-unit) / 2);
-    justify-content: center;
+    justify-content: var(--align, center);
     padding-block-start: var(--ui-spacing-unit);
 }
 
 .course-landing__completion-feedback {
     display: block;
     margin-block-start: var(--ui-spacing-unit);
-    text-align: center;
 }
 
 @keyframes --course-complete-pop {
