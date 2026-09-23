@@ -87,7 +87,7 @@ $course-bp: 60em;
     }
 }
 
-.course-landing__access:has(:not(.course-landing__completion)) {
+.course-landing__access:not(:has(.course-landing__completion)) {
     padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
 
     h2 {
