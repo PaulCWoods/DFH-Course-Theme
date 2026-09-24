@@ -68,13 +68,8 @@
 
 .progress-panel__brand {
     display: block;
-    font-family: var(--ui-typography-display-title-font-family);
     font-size: 1.5em;
-    letter-spacing: var(--ui-typography-display-title-letter-spacing);
-    line-height: 1;
     text-fit: grow;
-    text-transform:  var(--ui-typography-display-title-text-transform);
-    word-spacing: var(--ui-typography-display-title-word-spacing);
 }
 
 a.progress-panel__brand {

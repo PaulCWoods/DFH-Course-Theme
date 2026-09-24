@@ -7,7 +7,7 @@
                         <svg class="site-title__icon icon" width="32" height="32" aria-hidden="true">
                             <use href="#DesignForHumans" />
                         </svg>
-                        <span class="site-title__text">Courses</span>
+                        <span class="site-title__brand brand-wordmark">Courses</span>
                     </a>
                 </li>
                 <?php if (is_user_logged_in()): ?>

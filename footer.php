@@ -20,7 +20,7 @@
                         </ul>
                     </nav>
                     <p class="site-footer__copyright">&copy; <?php echo date('Y'); ?> Design For Humans. All rights reserved.</p>
-                    <span class="site-footer__brand" aria-hidden="true">Design For Humans</span>
+                    <span class="site-footer__brand brand-wordmark" aria-hidden="true">Design For Humans</span>
                 </div>
             </footer>
         </div>

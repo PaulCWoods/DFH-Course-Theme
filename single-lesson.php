@@ -525,7 +525,7 @@ get_header();
             </div>
         </nav>
         <footer class="panel__foot progress-panel__footer">
-            <a href="https://designforhumans.blog" class="progress-panel__brand">
+            <a href="https://designforhumans.blog" class="progress-panel__brand brand-wordmark">
                 Design for Humans
             </a>
         </footer>
