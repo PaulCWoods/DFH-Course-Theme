@@ -121,7 +121,7 @@ get_template_part('content', 'course-header');
                     <h2>Payment received!</h2>
                     <p class="small-text tc-muted">Your payment is processing. Your course access will unlock automatically in a moment.</p>
                     <p style="margin-top: 1.5rem;">
-                        <a href="<?php echo esc_url(get_permalink()); ?>" class="button +strong">Refresh Page</a>
+                        <a href="<?php echo esc_url(get_permalink()); ?>" class="dfh-button dfh-button--primary"><span>Refresh Page</span></a>
                     </p>
 
                 <?php elseif (!is_user_logged_in()): ?>
@@ -135,8 +135,8 @@ get_template_part('content', 'course-header');
                         <?php endif; ?>
                     </p>
                     <div class="course-purchase-actions">
-                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/register/'))); ?>" class="button +strong">
-                            Register to Enroll
+                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/register/'))); ?>" class="dfh-button dfh-button--primary">
+                            <span>Register to Enroll</span>
                         </a>
                     </div>
                     <p class="small-text tc-muted mt">Already have an account? <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="link">
@@ -151,7 +151,7 @@ get_template_part('content', 'course-header');
                     <div class="course-purchase-actions">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
-                            <button type="submit" class="button +strong buy-button">
+                            <button type="submit" class="dfh-button dfh-button--primary buy-button">
                                 <span>Buy Course — <?php echo $product->get_price_html(); ?></span>
                             </button>
                         </form>
@@ -165,15 +165,15 @@ get_template_part('content', 'course-header');
                         <div class="course-landing__completion-buttons">
                             <!-- Certificate Download Link -->
                             <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>"
-                                class="button +strong cert-btn" target="_blank">
-                                Download Certificate (PDF)
+                                class="dfh-button dfh-button--primary cert-btn" target="_blank">
+                                <span>Download Certificate (PDF)</span>
                                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                     <use href="#Download" />
                                 </svg>
                             </a>
                             <!-- Review from Beginning Link -->
                             <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>"
-                                class="button secondary-button">Review from Beginning</a>
+                                class="dfh-button dfh-button--secondary secondary-button"><span>Review from Beginning</span></a>
                         </div>
                         <div class="course-landing__completion-feedback">
                             What did you think of this course?
@@ -195,8 +195,8 @@ get_template_part('content', 'course-header');
                     $resume_url = get_permalink($active_lesson_status);
                     ?>
                     <p class="small-text tc-muted">Pick up where you left off:</p>
-                    <a href="<?php echo esc_url($resume_url); ?>" class="button resume-btn">
-                        Resume: <?php echo esc_html($resume_title); ?>
+                    <a href="<?php echo esc_url($resume_url); ?>" class="dfh-button dfh-button--primary resume-btn">
+                        <span>Resume: <?php echo esc_html($resume_title); ?></span>
                         <svg class="icon dir" width="32" height="32" aria-hidden="true">
                             <use href="#ArrowRight" />
                         </svg>
@@ -210,8 +210,8 @@ get_template_part('content', 'course-header');
                     <?php if (!empty($all_lessons)):
                         $first_lesson_url = get_permalink($all_lessons[0]);
                         ?>
-                        <a href="<?php echo esc_url($first_lesson_url); ?>" class="button +strong start-btn">
-                            Start Course
+                        <a href="<?php echo esc_url($first_lesson_url); ?>" class="dfh-button dfh-button--primary start-btn">
+                            <span>Start Course</span>
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />
                             </svg>
@@ -238,11 +238,11 @@ get_template_part('content', 'course-header');
                 $sample_title = get_the_title($sample_id);
                 ?>
                 <div class="course-sample-preview" style="margin-top: 1.5rem;">
-                    <a href="<?php echo esc_url($sample_url); ?>" class="button secondary-button">
+                    <a href="<?php echo esc_url($sample_url); ?>" class="dfh-button dfh-button--secondary secondary-button">
                         <svg class="icon dir" width="32" height="32" aria-hidden="true">
                             <use href="#Search" />
                         </svg>
-                        Read a Free Sample
+                        <span>Read a Free Sample</span>
                     </a>
                 </div>
             <?php endif; ?>

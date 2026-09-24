@@ -239,7 +239,7 @@
     }
 }
 
-.lesson-video__toggle.button {
+.lesson-video__toggle:is(.dfh-button, .button) {
     // The control is only useful where the player can become sticky.
     display: none;
 
@@ -492,7 +492,7 @@
     order: 4;
     text-align: end;
 
-    .button {
+    :is(.dfh-button, .button) {
         padding-inline-end: calc(var(--button-inner-gap) + var(--button-padding-inline) + 1em);
         position: relative;
 

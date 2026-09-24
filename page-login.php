@@ -12,7 +12,7 @@ get_template_part('content', 'course-header');
     <?php
     if ( is_user_logged_in() ) {
         echo '<p class="login-info">You are already logged in!</p>';
-        echo '<p><a href="' . esc_url( home_url() ) . '" class="button">Go to Your Course &rarr;</a></p>';
+        echo '<p><a href="' . esc_url( home_url() ) . '" class="dfh-button dfh-button--primary"><span>Go to Your Course &rarr;</span></a></p>';
     } else {
         // Use `redirect_to` query parameter if provided, otherwise default to course archive
         $redirect_to = isset( $_REQUEST['redirect_to'] ) ? esc_url_raw( wp_unslash( $_REQUEST['redirect_to'] ) ) : home_url();

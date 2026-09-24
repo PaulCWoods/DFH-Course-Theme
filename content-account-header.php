@@ -19,7 +19,7 @@
                     </li>
                 <?php endif; ?>
             </ul>
-            <button type="button" class="button +subtle site-header__nav-toggle my-account-header__nav-toggle closed"
+            <button type="button" class="dfh-button dfh-button--subtle site-header__nav-toggle my-account-header__nav-toggle closed"
                 aria-controls="my-account-navigation" aria-expanded="false">
                 <svg class="icon" width="32" height="32" aria-hidden="true">
                     <use href="#Navigation" />

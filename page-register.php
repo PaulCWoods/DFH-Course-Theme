@@ -58,8 +58,8 @@ get_template_part('content', 'course-header');
                 <h1 class="title">You are already logged in!</h1>
             <div class="fl fl-col gp-breathe">
                 <p>
-                    <a href="<?php echo esc_url(home_url()); ?>" class="button +strong">
-                        Go to Your Course
+                    <a href="<?php echo esc_url(home_url()); ?>" class="dfh-button dfh-button--primary">
+                        <span>Go to Your Course</span>
                         <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
                     </a>
                 </p>
@@ -70,8 +70,8 @@ get_template_part('content', 'course-header');
             <div class="fl fl-col gp-breathe">
                 <p>Your account has been successfully created and you are now logged in.</p>
                 <p style="margin-top: 1.5rem;">
-                    <a href="<?php echo esc_url($redirect_to); ?>" class="button +strong">
-                        Start Learning
+                    <a href="<?php echo esc_url($redirect_to); ?>" class="dfh-button dfh-button--primary">
+                        <span>Start Learning</span>
                         <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
                     </a>
                 </p>
@@ -120,7 +120,7 @@ get_template_part('content', 'course-header');
                 <?php do_action('register_form'); ?>
 
                 <p class="submit">
-                    <input type="submit" name="wp-submit" id="wp-submit" class="button +strong" value="Register Account" />
+                    <input type="submit" name="wp-submit" id="wp-submit" class="dfh-button dfh-button--primary" value="Register Account" />
                 </p>
             </form>
 

@@ -1369,8 +1369,8 @@ function dfh_add_return_to_course_link( $order_id ) {
     }
     ?>
     <div class="woocommerce-order-course-return" style="margin: 2rem 0; text-align: center;">
-        <a href="<?php echo esc_url( $course_url ); ?>" class="button +strong">
-            Go to Your Course
+        <a href="<?php echo esc_url( $course_url ); ?>" class="dfh-button dfh-button--primary">
+            <span>Go to Your Course</span>
             <svg class="icon dir" width="32" height="32" aria-hidden="true" style="margin-left: 0.5rem; vertical-align: middle;">
                 <use href="#ArrowRight" />
             </svg>

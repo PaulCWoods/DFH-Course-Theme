@@ -49,20 +49,20 @@ get_header();
                 <p class="home__logged-in section__title"><?php echo esc_html($welcome_message); ?>, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
-                        <a href="<?php echo esc_url($hero_target); ?>" class="button +strong">
-                            Resume Your Course
+                        <a href="<?php echo esc_url($hero_target); ?>" class="dfh-button dfh-button--primary">
+                            <span>Resume Your Course</span>
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />
                             </svg>
                         </a>
                     <?php endif; ?>
-                    <a class="button" href="<?php echo esc_url(wp_logout_url(home_url())); ?>">Log Out</a>
+                    <a class="dfh-button dfh-button--secondary" href="<?php echo esc_url(wp_logout_url(home_url())); ?>"><span>Log Out</span></a>
                 </div>
             <?php else: ?>
 
                 <div class="home__access">
-                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button +strong">Get Started</a>
-                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button">Log In</a>
+                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="dfh-button dfh-button--primary"><span>Get Started</span></a>
+                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="dfh-button dfh-button--secondary"><span>Log In</span></a>
                 </div>
             <?php endif; ?>
         </div>

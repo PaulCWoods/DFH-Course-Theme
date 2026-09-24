@@ -10,7 +10,7 @@
     }
 }
 
-.site-header__nav-toggle.button {
+.site-header__nav-toggle:is(.dfh-button, .button) {
     display: inline-flex;
 
     @media screen and (width > #{var.$bp-account}) {
