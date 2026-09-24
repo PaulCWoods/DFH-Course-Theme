@@ -448,7 +448,7 @@ get_header();
 
         ?>
         <header class="panel__head progress-panel__header">
-            <a class="link-button syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
+            <a class="dfh-button dfh-button--tight dfh-button--link syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                     <use href="#Home" />
                 </svg>
