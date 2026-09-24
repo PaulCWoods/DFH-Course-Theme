@@ -52,7 +52,7 @@ $adjacent = dfh_get_adjacent_lesson($lesson_id);
 $is_completed = dfh_is_lesson_completed($lesson_id);
 $is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
 $bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
-$bookmark_class = $is_bookmarked ? 'dfh-button dfh-button--primary bookmark-btn +active +strong' : 'dfh-button dfh-button--secondary bookmark-btn';
+$bookmark_class = $is_bookmarked ? 'dfh-button dfh-button--primary bookmark-btn' : 'dfh-button bookmark-btn';
 $bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
 $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 
@@ -617,17 +617,11 @@ get_header();
                         const useEl = bookmarkBtn.querySelector('use');
                         if (data.data.is_bookmarked) {
                             if (label) label.textContent = 'Bookmarked';
-                            bookmarkBtn.classList.add('+active');
-                            bookmarkBtn.classList.add('+strong');
                             bookmarkBtn.classList.add('dfh-button--primary');
-                            bookmarkBtn.classList.remove('dfh-button--secondary');
                             if (useEl) useEl.setAttribute('href', '#Bookmarked');
                         } else {
                             if (label) label.textContent = 'Bookmark Lesson';
-                            bookmarkBtn.classList.remove('+active');
-                            bookmarkBtn.classList.remove('+strong');
                             bookmarkBtn.classList.remove('dfh-button--primary');
-                            bookmarkBtn.classList.add('dfh-button--secondary');
                             if (useEl) useEl.setAttribute('href', '#Bookmark');
                         }
                     } else {

@@ -173,7 +173,7 @@ get_template_part('content', 'course-header');
                             </a>
                             <!-- Review from Beginning Link -->
                             <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>"
-                                class="dfh-button dfh-button--secondary secondary-button"><span>Review from Beginning</span></a>
+                                class="dfh-button"><span>Review from Beginning</span></a>
                         </div>
                         <div class="course-landing__completion-feedback">
                             What did you think of this course?
@@ -238,7 +238,7 @@ get_template_part('content', 'course-header');
                 $sample_title = get_the_title($sample_id);
                 ?>
                 <div class="course-sample-preview" style="margin-top: 1.5rem;">
-                    <a href="<?php echo esc_url($sample_url); ?>" class="dfh-button dfh-button--secondary secondary-button">
+                    <a href="<?php echo esc_url($sample_url); ?>" class="dfh-button">
                         <svg class="icon dir" width="32" height="32" aria-hidden="true">
                             <use href="#Search" />
                         </svg>

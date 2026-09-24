@@ -16,7 +16,7 @@ get_template_part('content', 'course-header');
             The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>
         <p>
-            <a href="<?php echo esc_url(home_url()); ?>" class="dfh-button dfh-button--secondary"><span>Return to Home</span></a>
+            <a href="<?php echo esc_url(home_url()); ?>" class="dfh-button "><span>Return to Home</span></a>
         </p>
     </article>
 </main>

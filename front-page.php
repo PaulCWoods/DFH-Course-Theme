@@ -56,13 +56,13 @@ get_header();
                             </svg>
                         </a>
                     <?php endif; ?>
-                    <a class="dfh-button dfh-button--secondary" href="<?php echo esc_url(wp_logout_url(home_url())); ?>"><span>Log Out</span></a>
+                    <a class="dfh-button " href="<?php echo esc_url(wp_logout_url(home_url())); ?>"><span>Log Out</span></a>
                 </div>
             <?php else: ?>
 
                 <div class="home__access">
                     <a href="<?php echo esc_url(home_url('/register/')); ?>" class="dfh-button dfh-button--primary"><span>Get Started</span></a>
-                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="dfh-button dfh-button--secondary"><span>Log In</span></a>
+                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="dfh-button "><span>Log In</span></a>
                 </div>
             <?php endif; ?>
         </div>
