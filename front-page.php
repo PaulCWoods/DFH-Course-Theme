@@ -121,9 +121,9 @@ get_header();
                                     $is_course_completed = is_array($user_completed_courses) && !empty($user_completed_courses[$course_id]);
                                     $has_access = in_array($course_id, $user_accessible_courses, true);
                                     if ($is_course_completed): ?>
-                                        <span class="course-card__badge completed badge +success">Completed</span>
+                                        <span class="course-card__badge completed dfh-badge dfh-badge--success"><span>Completed</span></span>
                                     <?php elseif ($has_access): ?>
-                                        <span class="course-card__badge enrolled badge">Enroled</span>
+                                        <span class="course-card__badge enrolled dfh-badge"><span>Enroled</span></span>
                                     <?php endif; ?>
                                 </div>
                             </div>

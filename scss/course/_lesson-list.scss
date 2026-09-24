@@ -146,11 +146,11 @@
         }
     }
 
-    .chip {
+    :is(.dfh-chip, .chip) {
         white-space: nowrap;
     }
 
-    &.l1 .chip {
+    &.l1 :is(.dfh-chip, .chip) {
         display: none;
     }
 }
