@@ -14,14 +14,14 @@
 
     .container {
         inline-size: 100%;
-        max-inline-size: calc(var(--ui-site-width) / 2);
+        max-inline-size: calc(var(--site-width) / 2);
     }
 
     form {
         p {
             display: flex;
             flex-direction: column;
-            gap: calc(var(--ui-spacing-unit) / 2);
+            gap: calc(var(--spacing-unit) / 2);
 
             // Required fields receive a visual marker without changing markup.
             &:has(input:required) {
@@ -50,25 +50,25 @@
 // -----------------------------------------------------------------------------
 // Supporting login content
 .login-extras {
-    margin-block-start: var(--ui-spacing-breathe);
+    margin-block-start: var(--spacing-breathe);
 }
 
 .login-info {
-    margin-block-end: var(--ui-spacing-breathe);
+    margin-block-end: var(--spacing-breathe);
 }
 
 // Shared surface for native and WooCommerce login forms and messages.
 .woocommerce-form.login,
 .login-page form,
 .login-message {
-    background-color: var(--ui-color-background-fade);
+    background-color: var(--surface-fade);
     display: flex;
     flex-direction: column;
-    gap: var(--ui-spacing-breathe);
-    padding: var(--ui-spacing-cushion);
+    gap: var(--spacing-breathe);
+    padding: var(--spacing-cushion);
 
     @media (prefers-contrast: more) {
-        background-color: var(--ui-color-background-surface);
-        border: var(--ui-border-muted);
+        background-color: var(--surface-card);
+        border: var(--border-muted);
     }
 }

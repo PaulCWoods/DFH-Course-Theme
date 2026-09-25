@@ -511,7 +511,7 @@ function dfh_render_lesson_children($parent_id, $level = 1, $active_lesson = nul
             $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</span>' . $bookmark_html . '</span>';
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
-            $chip_class = $completed ? 'dfh-chip chip complete' : 'dfh-chip chip in-progress';
+            $chip_class = $completed ? 'chip complete' : 'chip in-progress';
             $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($child->ID, $lvl + 1, $active_lesson);
@@ -579,7 +579,7 @@ function dfh_render_lesson_tree($roots = null, $level = 1, $active_lesson = null
             $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '</span>';
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
-            $chip_class = $completed ? 'dfh-chip chip complete' : 'dfh-chip chip in-progress';
+            $chip_class = $completed ? 'chip complete' : 'chip in-progress';
             $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</a>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($r_id, $lvl + 1, $active_lesson);
@@ -1369,7 +1369,7 @@ function dfh_add_return_to_course_link( $order_id ) {
     }
     ?>
     <div class="woocommerce-order-course-return" style="margin: 2rem 0; text-align: center;">
-        <a href="<?php echo esc_url( $course_url ); ?>" class="dfh-button dfh-button--primary">
+        <a href="<?php echo esc_url( $course_url ); ?>" class="button button--primary">
             <span>Go to Your Course</span>
             <svg class="icon dir" width="32" height="32" aria-hidden="true" style="margin-left: 0.5rem; vertical-align: middle;">
                 <use href="#ArrowRight" />
@@ -1701,12 +1701,12 @@ function dfh_handle_certificate_download()
                     display: inline-block;
                     font-family: var(--typography-font-family-display, sans-serif);
                     font-size: 2rem;
-                    letter-spacing: var(--ui-typography-display-title-letter-spacing);
+                    letter-spacing: var(--display-title-letter-spacing);
                     line-height: 1;
                     padding: 0.169em 0.13em;
                     text-box: trim-both cap alphabetic;
                     text-transform: uppercase;
-                    word-spacing: var(--ui-typography-display-title-word-spacing);
+                    word-spacing: var(--display-title-word-spacing);
                 }
 
                 @media print {

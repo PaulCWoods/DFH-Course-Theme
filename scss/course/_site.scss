@@ -4,13 +4,13 @@
     @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
         .site-header {
             @container scroll-state(stuck: top) {
-                box-shadow: var(--ui-shadow-reset);
+                box-shadow: var(--shadow-reset);
             }
         }
     }
 }
 
-.site-header__nav-toggle:is(.dfh-button, .button) {
+.site-header__nav-toggle.button {
     display: inline-flex;
 
     @media screen and (width > #{var.$bp-account}) {

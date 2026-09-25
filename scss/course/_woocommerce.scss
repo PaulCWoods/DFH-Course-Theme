@@ -20,7 +20,7 @@
     .title {
         display: flex;
         flex-direction: column;
-        margin-block-end: var(--ui-spacing-cushion);
+        margin-block-end: var(--spacing-cushion);
         font-family: inherit;
         font-size: inherit;
         font-weight: inherit;
@@ -36,11 +36,11 @@
     .u-columns {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(var(--cart-address-card-width, 16rem), 100%), 1fr));
-        gap: var(--ui-spacing-unit);
+        gap: var(--spacing-unit);
 
         [class^="u-column"] {
-            border: var(--ui-border-subtle);
-            padding: var(--ui-spacing-unit);
+            border: var(--border-subtle);
+            padding: var(--spacing-unit);
         }
     }
 
@@ -48,7 +48,7 @@
     p:has(label) {
         display: flex;
         flex-direction: column;
-        gap: calc(var(--ui-spacing-unit) / 2);
+        gap: calc(var(--spacing-unit) / 2);
     }
 
     // -------------------------------------------------------------------------
@@ -56,7 +56,7 @@
 
     .payment_methods {
         list-style: none;
-        margin-block-end: var(--ui-spacing-cushion);
+        margin-block-end: var(--spacing-cushion);
         margin-inline-start: 0;
         padding: 0;
 
@@ -69,7 +69,7 @@
 
             // Payment method labels
             > label {
-                margin-inline-start: calc(var(--ui-spacing-unit) / 2);
+                margin-inline-start: calc(var(--spacing-unit) / 2);
                 vertical-align: middle;
             }
         }
@@ -77,9 +77,9 @@
 
     // Expandable payment method details
     .payment_box {
-        background-color: var(--ui-color-background-surface);
-        margin-block-start: var(--ui-spacing-unit);
-        padding: var(--ui-spacing-unit);
+        background-color: var(--surface-card);
+        margin-block-start: var(--spacing-unit);
+        padding: var(--spacing-unit);
     }
 
     // Payment method table actions column
@@ -90,7 +90,7 @@
     }
 
     .account-payment-methods-table {
-        margin-block-end: var(--ui-spacing-cushion);
+        margin-block-end: var(--spacing-cushion);
     }
 
     .payment-method-method {
@@ -113,13 +113,13 @@
             align-items: center;
             block-size: 100%;
             display: flex;
-            padding-inline: var(--ui-spacing-unit);
+            padding-inline: var(--spacing-unit);
             inset-block-start: 0;
             inset-inline-end: 0;
             position: absolute;
 
             &:before {
-                color: var(--ui-color-foreground-muted);
+                color: var(--foreground-muted);
                 content: attr(aria-label);
                 font-size: var(--typography-font-size--1);
                 text-box: trim-both cap alphabetic;
@@ -130,7 +130,7 @@
 
     // Form container constraints
     &:has(.woocommerce-form) {
-        max-inline-size: calc(var(--ui-site-width) / 2);
+        max-inline-size: calc(var(--site-width) / 2);
         margin-inline: auto;
 
         @media screen and (width > #{var.$bp-account}) {
@@ -140,7 +140,7 @@
 
         h2 {
             @include prose.heading;
-            margin-block-end: var(--ui-spacing-breathe);
+            margin-block-end: var(--spacing-breathe);
         }
     }
 }
@@ -167,7 +167,7 @@
 
 // Login form submit button spacing
 .woocommerce-form-login__submit {
-    margin-block-start: var(--ui-spacing-cushion);
+    margin-block-start: var(--spacing-cushion);
 }
 
 
@@ -178,67 +178,67 @@
 .woocommerce-error,
 .woocommerce-message {
     &:focus-visible {
-        outline: var(--ui-focus-ring-outline);
-        outline-offset: var(--ui-focus-ring-outline-offset);
+        outline: var(--focus-ring-outline);
+        outline-offset: var(--focus-ring-outline-offset);
     }
 }
 
 // Success message styling
 .woocommerce-message {
-    color: var(--ui-color-foreground-accent);
+    color: var(--foreground-accent);
     font-weight: bold;
-    margin-block-end: var(--ui-spacing-cushion);
+    margin-block-end: var(--spacing-cushion);
 }
 
 // Success notice container
 .woocommerce-notice {
-    background-color: var(--ui-color-background-success);
-    border: var(--ui-border-subtle);
-    border-color: var(--ui-color-foreground-success);
-    color: var(--ui-color-foreground-success);
-    margin-block-end: var(--ui-spacing-breathe);
-    padding: var(--ui-spacing-unit);
+    background-color: var(--surface-success);
+    border: var(--border-subtle);
+    border-color: var(--foreground-success);
+    color: var(--foreground-success);
+    margin-block-end: var(--spacing-breathe);
+    padding: var(--spacing-unit);
 }
 
 // Error message styling
 .woocommerce-error {
-    color: var(--ui-color-foreground-danger);
-    margin-block-end: var(--ui-spacing-cushion);
+    color: var(--foreground-danger);
+    margin-block-end: var(--spacing-cushion);
     padding-inline-start: 1.5em;
 }
 
 // Informational notice container
 .woocommerce-info {
-    background-color: var(--ui-color-background-surface);
+    background-color: var(--surface-card);
     display: flex;
     flex-direction: column;
-    gap: var(--ui-spacing-cushion);
-    margin-block-end: var(--ui-spacing-breathe);
-    padding: var(--ui-spacing-cushion);
+    gap: var(--spacing-cushion);
+    margin-block-end: var(--spacing-breathe);
+    padding: var(--spacing-cushion);
 }
 
 // Notice wrapper container with contextual styling
 .woocommerce-notices-wrapper:not(:empty) {
-    border: var(--ui-border-subtle);
-    margin-block-end: var(--ui-spacing-breathe);
-    padding: var(--ui-spacing-unit);
+    border: var(--border-subtle);
+    margin-block-end: var(--spacing-breathe);
+    padding: var(--spacing-unit);
 
     // Focus state for wrapper
     &:has(:focus-visible) {
-        outline: var(--ui-focus-ring-outline);
-        outline-offset: var(--ui-focus-ring-outline-offset);
+        outline: var(--focus-ring-outline);
+        outline-offset: var(--focus-ring-outline-offset);
     }
 
     // Error state - wrapper contains error messages
     &:has(.woocommerce-error) {
-        background-color: var(--ui-color-background-danger);
-        border-color: var(--ui-color-foreground-danger);
+        background-color: var(--surface-danger);
+        border-color: var(--foreground-danger);
     }
 
     // Success state - wrapper contains success messages
     &:has(.woocommerce-message) {
-        background-color: var(--ui-color-background-accent);
-        border-color: var(--ui-color-foreground-accent);
+        background-color: var(--surface-accent);
+        border-color: var(--foreground-accent);
     }
 
     // Message and error styling within wrapper
@@ -258,34 +258,34 @@
 
 .woocommerce-order {
     section {
-        border-block-start: var(--ui-border-subtle);
-        margin-block-start: var(--ui-spacing-cushion);
-        padding-block-start: var(--ui-spacing-cushion);
+        border-block-start: var(--border-subtle);
+        margin-block-start: var(--spacing-cushion);
+        padding-block-start: var(--spacing-cushion);
 
         h2 {
             @include prose.heading;
-            margin-block-end: var(--ui-spacing-breathe);
+            margin-block-end: var(--spacing-breathe);
         }
     }
 
     // Address block styling
     address {
-        background-color: var(--ui-color-background-surface);
-        padding: var(--ui-spacing-unit);
+        background-color: var(--surface-card);
+        padding: var(--spacing-unit);
     }
 }
 
 // Order summary/overview list
 .woocommerce-order-overview {
-    background-color: var(--ui-color-background-surface);
+    background-color: var(--surface-card);
     list-style: none;
-    margin-block-end: var(--ui-spacing-cushion);
-    padding: var(--ui-spacing-cushion);
+    margin-block-end: var(--spacing-cushion);
+    padding: var(--spacing-cushion);
 
     li {
         align-items: center;
         display: grid;
-        gap: calc(var(--ui-spacing-unit) / 4);
+        gap: calc(var(--spacing-unit) / 4);
 
         @media screen and (width > 48em) {
             grid-template-columns: var(--spacing-12) 1fr;
@@ -298,26 +298,26 @@
 
         // Divider between list items
         + li {
-            border-block-start: var(--ui-border-subtle);
-            margin-block-start: calc(var(--ui-spacing-unit) / 2);
-            padding-block-start: calc(var(--ui-spacing-unit) / 2);
+            border-block-start: var(--border-subtle);
+            margin-block-start: calc(var(--spacing-unit) / 2);
+            padding-block-start: calc(var(--spacing-unit) / 2);
         }
     }
 }
 
 // Alternate address styling selector
 .woocommerce-Address address {
-    background-color: var(--ui-color-background-surface);
-    padding: var(--ui-spacing-unit);
+    background-color: var(--surface-card);
+    padding: var(--spacing-unit);
 }
 
 .woocommerce-MyAccount-navigation {
-    background-color: var(--ui-color-background-surface);
+    background-color: var(--surface-card);
     block-size: 0;
-    box-shadow: var(--ui-shadow-reset);
+    box-shadow: var(--shadow-reset);
     display: none;
     margin: calc(var(--site-block-padding) * -1);
-    padding: var(--ui-spacing-cushion);
+    padding: var(--spacing-cushion);
     opacity: 0;
     overflow: hidden;
     transition:
@@ -329,14 +329,14 @@
 
     .site:has(.my-account-header__nav-toggle.open) & {
         block-size: auto;
-        box-shadow: var(--ui-shadow);
+        box-shadow: var(--shadow);
         display: block;
-        margin-block-end: calc(var(--ui-spacing-cushion) * 2);
+        margin-block-end: calc(var(--spacing-cushion) * 2);
         opacity: 1;
 
         @starting-style {
             block-size: 0;
-            box-shadow: var(--ui-shadow-reset);
+            box-shadow: var(--shadow-reset);
             margin: calc(var(--site-block-padding) * -1);
             opacity: 0;
         }
@@ -356,7 +356,7 @@
     ul {
         display: flex;
         flex-direction: column;
-        gap: var(--ui-spacing-unit);
+        gap: var(--spacing-unit);
         list-style: none;
         margin: 0;
         padding: 0;
@@ -389,12 +389,12 @@
 
 .woocommerce-address-fields {
     .address-field:has(+ #billing_address_2_field) {
-        margin-block-end: calc(var(--ui-spacing-unit) / 2);
+        margin-block-end: calc(var(--spacing-unit) / 2);
     }
 }
 
 .woocommerce-address-fields__field-wrapper {
-    margin-block-end: var(--ui-spacing-cushion);
+    margin-block-end: var(--spacing-cushion);
 }
 
 .woocommerce-input-wrapper {
@@ -425,8 +425,8 @@
 
 .woocommerce-EditAccountForm {
     fieldset {
-        background-color: var(--ui-color-background-fade);
-        padding: var(--ui-spacing-cushion);
+        background-color: var(--surface-fade);
+        padding: var(--spacing-cushion);
     }
 
     legend {
@@ -434,7 +434,7 @@
         float: left;
         inline-size: 100%;
         margin: 0;
-        margin-block-end: var(--ui-spacing-unit);
+        margin-block-end: var(--spacing-unit);
 
         +* {
             clear: both;
@@ -442,7 +442,7 @@
     }
 
     .clear {
-        margin-block-end: var(--ui-spacing-cushion);
+        margin-block-end: var(--spacing-cushion);
     }
 }
 

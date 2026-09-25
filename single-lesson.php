@@ -12,7 +12,7 @@ if (!dfh_user_has_course_access()) {
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
             <?php if (!is_user_logged_in()): ?>
-                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="dfh-button dfh-button--primary"><span>Log in</span></a></p>
+                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="button button--primary"><span>Log in</span></a></p>
             <?php endif; ?>
         </article>
     </main>
@@ -52,7 +52,7 @@ $adjacent = dfh_get_adjacent_lesson($lesson_id);
 $is_completed = dfh_is_lesson_completed($lesson_id);
 $is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
 $bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
-$bookmark_class = $is_bookmarked ? 'dfh-button dfh-button--primary bookmark-btn' : 'dfh-button bookmark-btn';
+$bookmark_class = $is_bookmarked ? 'button button--primary bookmark-btn' : 'button bookmark-btn';
 $bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
 $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 
@@ -121,7 +121,7 @@ get_header();
             <div class="lesson-head__controls">
 
                 <?php if ($playback_id): ?>
-                    <button type="button" id="video-stick-toggle" class="dfh-button dfh-button--subtle lesson-video__toggle video-unstick"
+                    <button type="button" id="video-stick-toggle" class="button button--subtle lesson-video__toggle video-unstick"
                         aria-controls="lesson-video-player" aria-pressed="true">
                         <span class="sr">Stick video</span>
                         <svg class="icon" width="32" height="32" aria-hidden="true">
@@ -130,7 +130,7 @@ get_header();
                     </button>
                 <?php endif; ?>
 
-                <button class="dfh-button dfh-button--subtle progress-toggle course-progress__toggle" command="toggle-popover"
+                <button class="button button--subtle progress-toggle course-progress__toggle" command="toggle-popover"
                     commandfor="course-progress">
                     <span class="sr@<sm">Progress</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
@@ -368,13 +368,13 @@ get_header();
             }
 
             $button_label = $is_last_lesson ? 'Complete Course' : 'Next Lesson';
-            $button_class = $is_last_lesson ? 'dfh-button dfh-button--primary course-complete' : 'dfh-button dfh-button--primary next-lesson';
+            $button_class = $is_last_lesson ? 'button button--primary course-complete' : 'button button--primary next-lesson';
 
             // Compute the label shown to the user when the lesson is already completed.
             if ($is_completed) {
                 if ($is_last_lesson) {
                     $display_button_label = 'Course Home';
-                    $button_class = 'dfh-button dfh-button--primary course-home';
+                    $button_class = 'button button--primary course-home';
                 } else {
                     $display_button_label = 'Next Lesson';
                 }
@@ -389,7 +389,7 @@ get_header();
                 <div class="lesson-progression__buttons">
                     <?php if ($adjacent['previous']): ?>
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
-                            class="dfh-button dfh-button--subtle link-button prev-lesson">
+                            class="button button--subtle link-button prev-lesson">
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowLeft" />
                             </svg>
@@ -448,14 +448,14 @@ get_header();
 
         ?>
         <header class="panel__head progress-panel__header">
-            <a class="dfh-button dfh-button--tight dfh-button--link dfh-button--subtle syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
+            <a class="button button--tight button--link button--subtle syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                     <use href="#Home" />
                 </svg>
                 Courses Home
             </a>
 
-            <button class="dfh-button dfh-button--subtle syllabus-close" command="hide-popover" commandfor="course-progress"
+            <button class="button button--subtle syllabus-close" command="hide-popover" commandfor="course-progress"
                 title="Close navigation">
                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                     <use href="#Close" />
@@ -617,11 +617,11 @@ get_header();
                         const useEl = bookmarkBtn.querySelector('use');
                         if (data.data.is_bookmarked) {
                             if (label) label.textContent = 'Bookmarked';
-                            bookmarkBtn.classList.add('dfh-button--primary');
+                            bookmarkBtn.classList.add('button--primary');
                             if (useEl) useEl.setAttribute('href', '#Bookmarked');
                         } else {
                             if (label) label.textContent = 'Bookmark Lesson';
-                            bookmarkBtn.classList.remove('dfh-button--primary');
+                            bookmarkBtn.classList.remove('button--primary');
                             if (useEl) useEl.setAttribute('href', '#Bookmark');
                         }
                     } else {

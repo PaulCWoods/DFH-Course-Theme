@@ -1,15 +1,15 @@
 .resource-list {
-    --gap: calc(var(--ui-spacing-unit)/2);
+    --gap: calc(var(--spacing-unit)/2);
     max-inline-size: var(--spacing-32);
 
     a {
         display: block;
-        background-color: var(--ui-color-background-surface);
+        background-color: var(--surface-card);
         font-weight: bold;
-        padding: calc(var(--ui-spacing-unit)/2) var(--ui-spacing-unit);
+        padding: calc(var(--spacing-unit)/2) var(--spacing-unit);
 
         @media (prefers-contrast: more) {
-            border: var(--ui-border);
+            border: var(--border);
         }
     }
 }

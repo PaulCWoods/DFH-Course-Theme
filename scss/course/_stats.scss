@@ -1,25 +1,25 @@
 .stat {
     align-items: center;
-    background-color: var(--ui-color-background-surface);
+    background-color: var(--surface-card);
     display: flex;
-    gap: var(--ui-spacing-unit);
+    gap: var(--spacing-unit);
     justify-content: space-between;
-    padding: var(--ui-spacing-unit);
+    padding: var(--spacing-unit);
     &[data-pc] {
-        background-image: linear-gradient(to left, var(--ui-color-background-accent) var(--stat-progress), transparent var(--stat-progress));
+        background-image: linear-gradient(to left, var(--surface-accent) var(--stat-progress), transparent var(--stat-progress));
     }
 
     @media (prefers-contrast: more) {
-        border: var(--ui-border);
+        border: var(--border);
     }
 }
 
 .stat-label {
-    opacity: var(--ui-opacity-muted, 0.8);
+    opacity: var(--opacity-muted, 0.8);
 }
 
 .stat-value {
-    font-size: var(--ui-typography-heading-font-size);
+    font-size: var(--heading-font-size);
     font-weight: bold;
     text-box: trim-both cap alphabetic;
     white-space: nowrap;

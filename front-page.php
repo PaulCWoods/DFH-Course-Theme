@@ -49,20 +49,20 @@ get_header();
                 <p class="home__logged-in section__title"><?php echo esc_html($welcome_message); ?>, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
-                        <a href="<?php echo esc_url($hero_target); ?>" class="dfh-button dfh-button--primary">
+                        <a href="<?php echo esc_url($hero_target); ?>" class="button button--primary">
                             <span>Resume Your Course</span>
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />
                             </svg>
                         </a>
                     <?php endif; ?>
-                    <a class="dfh-button " href="<?php echo esc_url(wp_logout_url(home_url())); ?>"><span>Log Out</span></a>
+                    <a class="button " href="<?php echo esc_url(wp_logout_url(home_url())); ?>"><span>Log Out</span></a>
                 </div>
             <?php else: ?>
 
                 <div class="home__access">
-                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="dfh-button dfh-button--primary"><span>Get Started</span></a>
-                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="dfh-button "><span>Log In</span></a>
+                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button button--primary"><span>Get Started</span></a>
+                    <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button "><span>Log In</span></a>
                 </div>
             <?php endif; ?>
         </div>
@@ -121,9 +121,9 @@ get_header();
                                     $is_course_completed = is_array($user_completed_courses) && !empty($user_completed_courses[$course_id]);
                                     $has_access = in_array($course_id, $user_accessible_courses, true);
                                     if ($is_course_completed): ?>
-                                        <span class="course-card__badge completed dfh-badge dfh-badge--success"><span>Completed</span></span>
+                                        <span class="course-card__badge completed badge badge--success"><span>Completed</span></span>
                                     <?php elseif ($has_access): ?>
-                                        <span class="course-card__badge enrolled dfh-badge"><span>Enroled</span></span>
+                                        <span class="course-card__badge enrolled badge"><span>Enroled</span></span>
                                     <?php endif; ?>
                                 </div>
                             </div>

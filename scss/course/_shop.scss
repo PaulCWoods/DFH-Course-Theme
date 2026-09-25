@@ -7,7 +7,7 @@
 
     td,
     th {
-        padding: calc(var(--ui-spacing-unit)/2);
+        padding: calc(var(--spacing-unit)/2);
         padding-inline-start: 0;
 
         &:has(.amount) {
@@ -34,7 +34,7 @@
     }
 
     thead {
-        border-block-end: var(--ui-border);
+        border-block-end: var(--border);
 
         th {
             font-weight: bold;
@@ -53,15 +53,15 @@
 
     tbody {
         tr {
-            border-block-end: var(--ui-border-subtle);
+            border-block-end: var(--border-subtle);
         }
     }
 
     tfoot {
-        border-block-start: var(--ui-border);
+        border-block-start: var(--border);
 
         tr+tr {
-            border-block-start: var(--ui-border-subtle);
+            border-block-start: var(--border-subtle);
         }
 
         th[scope="row"] {

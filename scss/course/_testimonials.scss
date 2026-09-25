@@ -2,8 +2,8 @@
 
 .testimonial-card {
     align-items: start;
-    background-color: var(--ui-color-background-surface);
-    padding: var(--ui-spacing-cushion);
+    background-color: var(--surface-card);
+    padding: var(--spacing-cushion);
 }
 
 .testimonial-card__content {
@@ -14,9 +14,9 @@
 }
 
 .testimonial-card__author {
-    font-size: var(--ui-typography-body-small-font-size);
+    font-size: var(--body-small-font-size);
 
     strong {
-        font-weight: var(--ui-typography-body-strong-font-weight);
+        font-weight: var(--body-strong-font-weight);
     }
 }

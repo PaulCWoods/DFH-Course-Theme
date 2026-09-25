@@ -27,15 +27,15 @@ $course-bp: 60em;
 
 // Shared page padding. Safe-area insets keep content clear of device edges.
 :where(.course-landing__intro, .course-landing__header, .course-landing__access, .course-landing__section) {
-    padding-block: var(--site-block-padding, var(--ui-spacing-cushion));
-    padding-inline-start: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
-    padding-inline-end: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
+    padding-block: var(--site-block-padding, var(--spacing-cushion));
+    padding-inline-start: calc(var(--site-block-padding, var(--spacing-cushion)) + env(safe-area-inset-left));
+    padding-inline-end: calc(var(--site-block-padding, var(--spacing-cushion)) + env(safe-area-inset-left));
 }
 
 // The wide layout restores the normal start padding after the mobile inset.
 :where(.course-landing__intro, .course-landing__header, .course-landing__access) {
     @media screen and (width > #{$course-bp}) {
-        padding-inline-start: var(--site-block-padding, var(--ui-spacing-cushion));
+        padding-inline-start: var(--site-block-padding, var(--spacing-cushion));
     }
 }
 
@@ -77,10 +77,10 @@ $course-bp: 60em;
 // -----------------------------------------------------------------------------
 // Course introduction and access
 .course-landing__header {
-    background-color: var(--ui-color-background-accent-strong);
-    color: var(--ui-color-foreground-inverted);
+    background-color: var(--surface-accent-strong);
+    color: var(--foreground-inverted);
     margin-block-end: 0;
-    padding-block-end: calc(var(--site-block-padding, var(--ui-spacing-breathe))/2);
+    padding-block-end: calc(var(--site-block-padding, var(--spacing-breathe))/2);
 
     h1 {
         margin-block-end: 0;
@@ -88,24 +88,24 @@ $course-bp: 60em;
 }
 
 .course-landing__access:not(:has(.course-landing__completion)) {
-    padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
+    padding-block: calc(var(--site-block-padding, var(--spacing-cushion))*2);
 
     h2 {
         margin-block-start: 0;
     }
 
     .course-landing__progress {
-        margin-block: var(--ui-spacing-breathe);
+        margin-block: var(--spacing-breathe);
     }
 }
 
 .course-landing__intro {
-    background-color: var(--ui-color-background-accent-strong);
-    color: var(--ui-color-foreground-inverted);
-    padding-block-start: calc(var(--site-block-padding, var(--ui-spacing-breathe))/2);
+    background-color: var(--surface-accent-strong);
+    color: var(--foreground-inverted);
+    padding-block-start: calc(var(--site-block-padding, var(--spacing-breathe))/2);
 
     p {
-        font-weight: var(--ui-typography-body-strong-font-weight);
+        font-weight: var(--body-strong-font-weight);
 
         &:last-child {
             margin-block-end: 0;
@@ -116,35 +116,35 @@ $course-bp: 60em;
 // -----------------------------------------------------------------------------
 // Course sections and completion state
 .course-landing__section {
-    background: var(--ui-color-background-surface);
-    border-block-start: var(--ui-border);
+    background: var(--surface-card);
+    border-block-start: var(--border);
     flex-grow: 1;
-    gap: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
-    padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
+    gap: calc(var(--site-block-padding, var(--spacing-cushion))*2);
+    padding-block: calc(var(--site-block-padding, var(--spacing-cushion))*2);
 
     .heading {
-        margin-block-end: var(--ui-spacing-unit);
+        margin-block-end: var(--spacing-unit);
     }
 
     + .course-landing__section {
-        border-block-start: var(--ui-border-subtle);
+        border-block-start: var(--border-subtle);
         box-shadow: none;
     }
 }
 
 .course-landing__note {
-    color: var(--ui-color-foreground-muted);
-    margin-block-end: var(--ui-spacing-unit);
+    color: var(--foreground-muted);
+    margin-block-end: var(--spacing-unit);
 }
 
 .course-landing__completion {
     --align: start;
-    background-color: var(--ui-color-background-accent-muted);
-    border: var(--ui-border);
-    border-color: var(--ui-color-border-accent);
+    background-color: var(--surface-accent-muted);
+    border: var(--border);
+    border-color: var(--border-accent);
     box-shadow: var(--shadow-reset);
-    color: var(--ui-color-foreground-base);
-    padding: var(--site-block-padding, var(--ui-spacing-cushion));
+    color: var(--foreground-base);
+    padding: var(--site-block-padding, var(--spacing-cushion));
     text-align: var(--align, center);
 
     // Completion motion is opt-in so reduced-motion users get the same state.
@@ -156,14 +156,14 @@ $course-bp: 60em;
     }
 
     @media (prefers-contrast: more) {
-        background-color: var(--ui-color-background-surface);
+        background-color: var(--surface-card);
     }
 
     h2:before {
         content: "🎉" / "";
         font-size: 1em;
         line-height: 1;
-        margin-inline-end: calc(var(--ui-spacing-unit) / 2);
+        margin-inline-end: calc(var(--spacing-unit) / 2);
 
         @media (prefers-reduced-motion: no-preference) {
             animation: --course-complete-pop 0.5s both;
@@ -181,23 +181,23 @@ $course-bp: 60em;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-block-start: var(--ui-spacing-cushion);
+    margin-block-start: var(--spacing-cushion);
 }
 
 .course-landing__completion-buttons {
     align-items: center;
-    border-block-start: var(--ui-border-subtle);
+    border-block-start: var(--border-subtle);
     border-color: inherti;
     display: flex;
     flex-wrap: wrap;
-    gap: calc(var(--ui-spacing-unit) / 2);
+    gap: calc(var(--spacing-unit) / 2);
     justify-content: var(--align, center);
-    padding-block-start: var(--ui-spacing-unit);
+    padding-block-start: var(--spacing-unit);
 }
 
 .course-landing__completion-feedback {
     display: block;
-    margin-block-start: var(--ui-spacing-unit);
+    margin-block-start: var(--spacing-unit);
 }
 
 @keyframes --course-complete-pop {

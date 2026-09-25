@@ -19,7 +19,7 @@
 // Lesson navigation header
 
 .lesson-head__container {
-    background-color: var(--ui-color-background-darker);
+    background-color: var(--surface-darker);
     min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
 }
 
@@ -32,10 +32,10 @@
     color-scheme: dark;
     display: flex;
     inline-size: 100%;
-    max-inline-size: var(--ui-site-width);
+    max-inline-size: var(--site-width);
 
     .lesson-head.\+sample & {
-        max-inline-size: calc(var(--ui-site-width) + var(--site-block-padding, var(--ui-spacing-cushion)) * 2);
+        max-inline-size: calc(var(--site-width) + var(--site-block-padding, var(--spacing-cushion)) * 2);
     }
 }
 
@@ -45,7 +45,7 @@
     display: flex;
     flex-shrink: 0;
     gap: 0;
-    padding-inline-end: var(--site-block-padding, var(--ui-spacing-cushion));
+    padding-inline-end: var(--site-block-padding, var(--spacing-cushion));
 
     @media screen and (width > #{var.$site-width}) {
         padding-inline-end: 0;
@@ -55,12 +55,12 @@
 .lesson-head__code-badge {
     align-self: stretch;
     align-items: center;
-    background-color: var(--ui-color-background-accent);
+    background-color: var(--surface-accent);
     display: flex;
     font-size: var(--typography-font-size-fluid-0);
     font-variant-numeric: tabular-nums;
     font-weight: bold;
-    padding-inline: var(--ui-spacing-breathe);
+    padding-inline: var(--spacing-breathe);
 }
 
 .lesson-head__nav {
@@ -78,7 +78,7 @@
     font-weight: bold;
     max-inline-size: 100%;
     overflow: hidden;
-    padding-inline: var(--site-block-padding, var(--ui-spacing-cushion));
+    padding-inline: var(--site-block-padding, var(--spacing-cushion));
     text-overflow: ellipsis;
 }
 
@@ -110,7 +110,7 @@
     @supports (animation-timeline: scroll()) {
         animation: --show-current linear both;
         animation-timeline: scroll(root block);
-        animation-range: calc(var(--height) + var(--ui-spacing-cushion)) calc(var(--height) * 2 + var(--ui-spacing-cushion));
+        animation-range: calc(var(--height) + var(--spacing-cushion)) calc(var(--height) * 2 + var(--spacing-cushion));
     }
 }
 
@@ -128,8 +128,8 @@
         .lesson-head__progress {
             animation: --article-progress auto linear;
             animation-timeline: scroll(root block);
-            background-color: var(--ui-color-foreground-accent);
-            block-size: var(--ui-border-width);
+            background-color: var(--foreground-accent);
+            block-size: var(--border-width);
             color-scheme: dark;
             display: block;
             inline-size: 100%;
@@ -180,8 +180,8 @@
 
 // Shared dark surface for the navigation, title, and video regions.
 :is(.lesson-head, .lesson-header, .lesson-video) {
-    background-color: var(--ui-color-background-darker);
-    color: var(--ui-color-foreground-on-dark);
+    background-color: var(--surface-darker);
+    color: var(--foreground-on-dark);
 }
 
 // -----------------------------------------------------------------------------
@@ -190,9 +190,9 @@
 :where(.lesson-header,
     .lesson-content,
     .lesson-explore) {
-    padding-block: var(--site-block-padding, var(--ui-spacing-cushion));
-    padding-inline-start: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
-    padding-inline-end: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-left));
+    padding-block: var(--site-block-padding, var(--spacing-cushion));
+    padding-inline-start: calc(var(--site-block-padding, var(--spacing-cushion)) + env(safe-area-inset-left));
+    padding-inline-end: calc(var(--site-block-padding, var(--spacing-cushion)) + env(safe-area-inset-left));
 }
 
 .lesson-header__title {
@@ -204,10 +204,10 @@
 }
 
 .lesson-header__subtitle {
-    font-family: var(--ui-typography-subheading-font-family);
-    font-size: var(--ui-typography-subheading-font-size);
-    font-weight: var(--ui-typography-subheading-font-weight);
-    line-height: var(--ui-typography-subheading-line-height);
+    font-family: var(--subheading-font-family);
+    font-size: var(--subheading-font-size);
+    font-weight: var(--subheading-font-weight);
+    line-height: var(--subheading-line-height);
 }
 
 .lesson-header__kicker {
@@ -239,7 +239,7 @@
     }
 }
 
-.lesson-video__toggle:is(.dfh-button, .button) {
+.lesson-video__toggle.button {
     // The control is only useful where the player can become sticky.
     display: none;
 
@@ -250,7 +250,7 @@
     }
 
     &.video-unstick {
-        color: var(--ui-color-foreground-muted);
+        color: var(--foreground-muted);
     }
 }
 
@@ -280,7 +280,7 @@
         position: relative;
 
         .lesson-body__sample-text {
-            background-image: linear-gradient(transparent, var(--ui-color-background-base) 50%);
+            background-image: linear-gradient(transparent, var(--surface-base) 50%);
             align-items: flex-end;
             display: flex;
             position: absolute;
@@ -289,13 +289,13 @@
             justify-content: center;
             min-block-size: var(--spacing-12);
             max-inline-size: none;
-            padding: var(--ui-spacing-cushion);
+            padding: var(--spacing-cushion);
             text-align: center;
             text-wrap: balance;
 
             span {
-                border: var(--ui-border);
-                padding: calc(var(--ui-spacing-unit));
+                border: var(--border);
+                padding: calc(var(--spacing-unit));
             }
         }
     }
@@ -303,7 +303,7 @@
 
     ul.check-list {
         li::marker {
-            color: var(--ui-color-foreground-success);
+            color: var(--foreground-success);
             content: "✓ ";
         }
 
@@ -314,14 +314,14 @@
     }
 
     :is(aside, .callout-box) {
-        background-color: var(--ui-color-background-surface);
-        box-shadow: var(--ui-shadow);
-        margin-block: calc(var(--ui-spacing-breathe) * 2);
-        padding-block: var(--ui-spacing-breathe);
-        padding-inline: var(--ui-spacing-cushion);
+        background-color: var(--surface-card);
+        box-shadow: var(--shadow);
+        margin-block: calc(var(--spacing-breathe) * 2);
+        padding-block: var(--spacing-breathe);
+        padding-inline: var(--spacing-cushion);
 
         @media (prefers-contrast: more) {
-            border: var(--ui-border);
+            border: var(--border);
             box-shadow: none;
         }
 
@@ -331,8 +331,8 @@
     }
 
     section {
-        border-block-start: var(--ui-border-quiet);
-        padding-block: calc(var(--ui-spacing-breathe) * 2);
+        border-block-start: var(--border-quiet);
+        padding-block: calc(var(--spacing-breathe) * 2);
     }
 
     :is(aside, section, .callout-box) {
@@ -340,7 +340,7 @@
             &:before {
                 display: block;
                 font-size: 1.5em;
-                margin-block-end: var(--ui-spacing-cushion);
+                margin-block-end: var(--spacing-cushion);
             }
 
             &.idea:before {
@@ -380,7 +380,7 @@
     }
 
     figure:is(.wp-block-image, .wp-block-embed) {
-        margin-block: var(--prose-vert-space, var(--ui-spacing-breathe)) !important;
+        margin-block: var(--prose-vert-space, var(--spacing-breathe)) !important;
 
         &:first-child {
             margin-block-start: 0 !important;
@@ -403,9 +403,9 @@
 
     .wp-block-quote {
         &.\+bold {
-            background-color: var(--ui-color-background-surface);
-            padding-block: var(--ui-spacing-breathe);
-            padding-inline: var(--ui-spacing-cushion);
+            background-color: var(--surface-card);
+            padding-block: var(--spacing-breathe);
+            padding-inline: var(--spacing-cushion);
 
             p {
                 font-weight: var(--lesson-quote-bold-font-weight);
@@ -419,7 +419,7 @@
 
     // Needed to override WP styles
     .wp-block-pullquote {
-        background-color: var(--ui-color-background-fade);
+        background-color: var(--surface-fade);
         // !important needed to override stubborn classes in WP
         font-size: inherit !important;
         line-height: inherit !important;
@@ -431,9 +431,9 @@
             padding-inline-start: 0;
 
             p {
-                font-family: var(--ui-typography-pullquote-font-family);
-                font-size: var(--ui-typography-pullquote-font-size);
-                line-height: var(--ui-typography-pullquote-line-height);
+                font-family: var(--pullquote-font-family);
+                font-size: var(--pullquote-font-size);
+                line-height: var(--pullquote-line-height);
                 text-wrap: balance;
             }
         }
@@ -444,7 +444,7 @@
         td,
         th {
             border: 0 !important;
-            border-block-end: var(--ui-border-subtle) !important;
+            border-block-end: var(--border-subtle) !important;
             padding-inline-start: 0 !important;
         }
 
@@ -455,23 +455,23 @@
         }
 
         thead {
-            border-block-end: var(--ui-border) !important;
+            border-block-end: var(--border) !important;
         }
     }
 
 
     // CodePen embeds
     .wp-block-cp-codepen-gutenberg-embed-block {
-        box-shadow: var(--ui-shadow);
+        box-shadow: var(--shadow);
         font-size: 0;
     }
 
     .wp-block-footnotes {
-        font-size: var(--ui-typography-body-small-font-size);
-        line-height: var(--ui-typography-body-small-line-height);
-        margin-block-start: var(--ui-spacing-cushion);
-        padding-block-start: var(--ui-spacing-cushion);
-        border-block-start: var(--ui-border-subtle);
+        font-size: var(--body-small-font-size);
+        line-height: var(--body-small-line-height);
+        margin-block-start: var(--spacing-cushion);
+        padding-block-start: var(--spacing-cushion);
+        border-block-start: var(--border-subtle);
         li a:first-child {
             margin-inline-end: 0.5rem;
             + a {
@@ -486,13 +486,13 @@
 // Lesson resources and bookmark
 
 .lesson-bookmark {
-    border-block-start: var(--ui-border-subtle);
-    margin-block-start: var(--ui-spacing-cushion);
-    padding-block-start: var(--ui-spacing-cushion);
+    border-block-start: var(--border-subtle);
+    margin-block-start: var(--spacing-cushion);
+    padding-block-start: var(--spacing-cushion);
     order: 4;
     text-align: end;
 
-    :is(.dfh-button, .button) {
+    .button {
         padding-inline-end: calc(var(--button-inner-gap) + var(--button-padding-inline) + 1em);
         position: relative;
 
@@ -508,7 +508,7 @@
         border-block-start: none;
         margin-block-start: 0;
         padding-block-start: 0;
-        margin-block-end: var(--ui-spacing-cushion);
+        margin-block-end: var(--spacing-cushion);
         order: 0;
 
         &:last-child {
@@ -518,9 +518,9 @@
 }
 
 .lesson-resources {
-    border-block-start: var(--ui-border-subtle);
-    margin-block-end: var(--ui-spacing-cushion);
-    padding-block-start: var(--ui-spacing-cushion);
+    border-block-start: var(--border-subtle);
+    margin-block-end: var(--spacing-cushion);
+    padding-block-start: var(--spacing-cushion);
 
     &:last-child {
         margin-block-end: 0;
@@ -528,7 +528,7 @@
 }
 
 .lesson-resources__heading {
-    margin-block-end: var(--ui-spacing-breathe, 1em);
+    margin-block-end: var(--spacing-breathe, 1em);
 }
 
 // -----------------------------------------------------------------------------
@@ -538,46 +538,46 @@
 // preserves the focus-ring clearance while keeping the visible column aligned.
 .lesson-aside {
     align-self: start;
-    inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-4)) + var(--ui-spacing-unit));
-    margin: calc(var(--ui-focus-ring-clearance) * -1);
-    padding: var(--ui-focus-ring-clearance);
+    inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-4)) + var(--spacing-unit));
+    margin: calc(var(--focus-ring-clearance) * -1);
+    padding: var(--focus-ring-clearance);
     position: sticky;
     reading-flow: flex-visual;
 
     @media screen and (width > #{var.$bp-lesson}) {
         // Prevent a tall resource list from pushing the lesson content out of view.
-        max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--ui-spacing-unit) * 2);
+        max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--spacing-unit) * 2);
         overflow: auto;
     }
 }
 
 
 .lesson-stats__heading {
-    margin-block-end: var(--ui-spacing-unit);
+    margin-block-end: var(--spacing-unit);
 }
 
 // Stats list layout helper — default small-vertical list
 .lesson-stats__list {
-    --gap: calc(var(--ui-spacing-unit)/2);
+    --gap: calc(var(--spacing-unit)/2);
 }
 
 // -----------------------------------------------------------------------------
 // Explore area: child lessons and progression
 
 .lesson-explore {
-    --gap: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
-    background: var(--ui-color-background-surface);
-    box-shadow: var(--ui-shadow-inset);
+    --gap: calc(var(--site-block-padding, var(--spacing-cushion))*2);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-inset);
     flex-grow: 1;
-    padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion))*2);
+    padding-block: calc(var(--site-block-padding, var(--spacing-cushion))*2);
 
     @media (prefers-contrast: more) {
-        border-block-start: var(--ui-border);
+        border-block-start: var(--border);
         box-shadow: none;
     }
 
     .heading {
-        margin-block-end: var(--ui-spacing-unit);
+        margin-block-end: var(--spacing-unit);
     }
 }
 
@@ -594,7 +594,7 @@
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--ui-spacing-unit);
+    gap: var(--spacing-unit);
     justify-content: flex-end;
 
     .prev-lesson {
@@ -606,17 +606,17 @@
     // Stack download entries and remove default list decoration.
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
-    gap: calc(var(--ui-spacing-unit)/2);
+    gap: calc(var(--spacing-unit)/2);
     list-style: none;
 }
 
 .lesson-download {
     // Make the full card surface act as the download link.
-    background-color: var(--ui-color-background-surface);
+    background-color: var(--surface-card);
     position: relative;
 
     @media (prefers-contrast: more) {
-        border: var(--ui-border);
+        border: var(--border);
     }
 
     a:before {
@@ -627,11 +627,11 @@
 }
 
 .lesson-download__icon {
-    background-color: var(--ui-color-background-surface);
+    background-color: var(--surface-card);
     box-sizing: content-box;
     inset-block-start: 0;
     inset-inline-end: 0;
-    padding: var(--ui-spacing-unit);
+    padding: var(--spacing-unit);
     pointer-events: none;
     position: absolute;
 }
@@ -642,11 +642,11 @@
     font-size: 0;
     block-size: var(--spacing-8);
     position: relative;
-    margin: calc(var(--ui-spacing-unit) / 2);
+    margin: calc(var(--spacing-unit) / 2);
     margin-block-end: 0;
 
     img {
-        box-shadow: var(--ui-shadow);
+        box-shadow: var(--shadow);
         block-size: 100%;
         inline-size: 100%;
         object-fit: cover;
@@ -662,7 +662,7 @@
     }
     @media (hover:hover) {
         .lesson-download:hover & img {
-            box-shadow: var(--ui-shadow-raised);
+            box-shadow: var(--shadow-raised);
 
             @media (prefers-contrast: more) {
                 box-shadow: none;
@@ -671,8 +671,8 @@
     }
 
     .lesson-download:active & img {
-        box-shadow: var(--ui-shadow-reset);
-        opacity: var(--ui-opacity-muted);
+        box-shadow: var(--shadow-reset);
+        opacity: var(--opacity-muted);
 
         @media (prefers-contrast: more) {
             box-shadow: none;
@@ -683,13 +683,13 @@
 
 .lesson-download__info {
     flex: 1;
-    padding: var(--ui-spacing-unit);
+    padding: var(--spacing-unit);
 
     h3 {
         align-items: center;
         display: flex;
         font-weight: bold;
-        gap: calc(var(--ui-spacing-unit) / 2);
+        gap: calc(var(--spacing-unit) / 2);
         justify-content: space-between;
     }
 }

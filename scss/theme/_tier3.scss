@@ -8,13 +8,13 @@
     // Keep the stats column below the masthead when it becomes sticky.
     --lesson-aside-sticky-top: var(--lesson-header-height);
     --lesson-quote-bold-font-weight: var(--typography-font-weight-600);
-    --lesson-syllabus-transition: var(--ui-duration-md);
-    --lesson-download-transition: var(--ui-duration-sm);
+    --lesson-syllabus-transition: var(--duration-md);
+    --lesson-download-transition: var(--duration-sm);
 
     --my-account-nav-width: var(--spacing-20);
-    --my-account-nav-transition: var(--ui-duration-md);
+    --my-account-nav-transition: var(--duration-md);
 
-    --prose-body-font-family: var(--ui-typography-body-font-family);
+    --prose-body-font-family: var(--body-font-family);
 
     --cart-address-card-width: var(--spacing-16);
 
@@ -32,7 +32,7 @@
 
 // Contextual link tokens for lessons and syllabus views.
 :is([data-lesson], [data-syllabus]) {
-    --link-color: var(--ui-color-foreground-accent);
-    --link-hover-color: var(--ui-color-foreground-accent-hover);
-    --link-active-color: var(--ui-color-foreground-accent-pressed);
+    --link-color: var(--foreground-accent);
+    --link-hover-color: var(--foreground-accent-hover);
+    --link-active-color: var(--foreground-accent-pressed);
 }

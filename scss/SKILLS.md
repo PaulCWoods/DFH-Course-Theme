@@ -14,7 +14,7 @@
 - Start each utility or component file with a short title comment, an underline made of hyphens, and a brief description; include a usage example when helpful.
 - Order declarations consistently: layout/display, sizing, spacing, typography, color, positioning, then interaction/animation details where practical.
 - Use logical properties such as `inline-size`, `block-size`, `margin-block`, and `padding-inline` for writing-mode and responsive safety.
-- Prefer existing design tokens (`var(--ui-...)`, `var(--spacing-...)`, and Sass variables) over new literal values.
+- Prefer existing design tokens (`var(--...)`, `var(--spacing-...)`, and Sass variables) over new literal values.
 - Keep comments short and explain constraints, browser fallbacks, specificity decisions, or non-obvious layout math rather than narrating declarations.
 
 ## Techniques used here

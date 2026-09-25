@@ -1,15 +1,15 @@
 .progress-panel {
     --progress-panel_width: var(--spacing-32);
-    --progress-bar_height: calc(var(--ui-spacing-unit) / 2);
+    --progress-bar_height: calc(var(--spacing-unit) / 2);
 
     block-size: 100%;
-    box-shadow: var(--ui-shadow-ambient);
+    box-shadow: var(--shadow-ambient);
     display: none;
     flex-direction: column;
     inset-block-start: 0;
     inset-inline-end: 0;
     inset-inline-start: auto;
-    max-inline-size: calc(100% - (var(--ui-spacing-unit) * 2));
+    max-inline-size: calc(100% - (var(--spacing-unit) * 2));
     inline-size: var(--progress-panel_width);
     opacity: 0;
     overflow: auto;
@@ -43,18 +43,18 @@
 }
 
 :is(.progress-panel__header, .progress-panel__footer, .progress-panel__course) {
-    padding-inline: var(--site-block-padding, var(--ui-spacing-cushion));
+    padding-inline: var(--site-block-padding, var(--spacing-cushion));
 }
 
 :is(.progress-panel__header, .progress-panel__footer) {
-    background: color-mix(in srgb, var(--panel-background-color), transparent var(--ui-transparency-sticky));
-    backdrop-filter: blur(var(--ui-blur-sticky));
+    background: color-mix(in srgb, var(--panel-background-color), transparent var(--transparency-sticky));
+    backdrop-filter: blur(var(--blur-sticky));
 }
 
 .progress-panel__header {
     align-items: center;
     display: flex;
-    gap: var(--ui-spacing-unit, 1rem);
+    gap: var(--spacing-unit, 1rem);
     justify-content: space-between;
     min-block-size: var(--site-header-height);
     padding-block: .5rem;
@@ -62,8 +62,8 @@
 }
 
 .progress-panel__footer {
-    padding-block-end: calc(var(--site-block-padding, var(--ui-spacing-cushion)) + env(safe-area-inset-bottom));
-    padding-block-start: calc(var(--site-block-padding, var(--ui-spacing-cushion)) / 2);
+    padding-block-end: calc(var(--site-block-padding, var(--spacing-cushion)) + env(safe-area-inset-bottom));
+    padding-block-start: calc(var(--site-block-padding, var(--spacing-cushion)) / 2);
 }
 
 .progress-panel__brand {
@@ -88,22 +88,22 @@ a.progress-panel__brand {
 
 .progress-panel__course {
     flex-grow: 1;
-    padding-block: calc(var(--site-block-padding, var(--ui-spacing-cushion)) / 2);
+    padding-block: calc(var(--site-block-padding, var(--spacing-cushion)) / 2);
     z-index: 0;
 }
 
 .progress-panel__course-name {
-    margin-block-end: var(--ui-spacing-unit, 1rem);
+    margin-block-end: var(--spacing-unit, 1rem);
 }
 
 .progress-panel__course-progress {
-    margin-block-end: var(--ui-spacing-unit, 1rem);
+    margin-block-end: var(--spacing-unit, 1rem);
 }
 
 .progress-panel__course-progress-heading {
-    font-family: var(--ui-typography-subheading-font-family);
+    font-family: var(--subheading-font-family);
     font-size: var(--typography-font-size--1);
-    font-weight: var(--ui-typography-subheading-font-weight);
-    line-height: var(--ui-typography-subheading-line-height);
+    font-weight: var(--subheading-font-weight);
+    line-height: var(--subheading-line-height);
     text-transform: uppercase;
 }

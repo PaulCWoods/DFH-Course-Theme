@@ -1,15 +1,15 @@
 @mixin heading {
-    font-size: var(--ui-typography-heading-font-size);
-    font-family: var(--ui-typography-heading-font-family);
-    font-weight: var(--ui-typography-heading-font-weight);
-    line-height: var(--ui-typography-heading-line-height);
+    font-size: var(--heading-font-size);
+    font-family: var(--heading-font-family);
+    font-weight: var(--heading-font-weight);
+    line-height: var(--heading-line-height);
 }
 
 @mixin subheading {
-    font-size: var(--ui-typography-subheading-font-size);
-    font-family: var(--ui-typography-subheading-font-family);
-    font-weight: var(--ui-typography-subheading-font-weight);
-    line-height: var(--ui-typography-subheading-line-height);
+    font-size: var(--subheading-font-size);
+    font-family: var(--subheading-font-family);
+    font-weight: var(--subheading-font-weight);
+    line-height: var(--subheading-line-height);
 }
 
 @mixin link {
@@ -34,7 +34,7 @@
 
     // Block rhythm: shared spacing keeps the reading flow predictable.
     :where(h1, h2, h3, h4, h5, h6, p, dl, ul, ol, blockquote) {
-        margin-block-end: var(--ui-spacing-breathe);
+        margin-block-end: var(--spacing-breathe);
         &:last-child {
             margin-block-end: 0;
         }
@@ -46,12 +46,12 @@
 
     // Headings use the typography scale defined by the design system.
     :where(h1) {
-        font-size: var(--ui-typography-title-font-size);
-        font-family: var(--ui-typography-title-font-family);
-        font-weight: var(--ui-typography-title-font-weight);
-        letter-spacing: var(--ui-typography-title-letter-spacing);
-        line-height: var(--ui-typography-title-line-height);
-        text-transform: var(--ui-typography-title-text-transform);
+        font-size: var(--title-font-size);
+        font-family: var(--title-font-family);
+        font-weight: var(--title-font-weight);
+        letter-spacing: var(--title-letter-spacing);
+        line-height: var(--title-line-height);
+        text-transform: var(--title-text-transform);
     }
 
     :where(h2) {
@@ -63,10 +63,10 @@
     }
 
     :where(h4, h5, h6) {
-        font-size: var(--ui-typography-body-font-size);
-        font-family: var(--ui-typography-body-font-family);
-        font-weight: var(--ui-typography-body-strong-font-weight);
-        line-height: var(--ui-typography-body-line-height);
+        font-size: var(--body-font-size);
+        font-family: var(--body-font-family);
+        font-weight: var(--body-strong-font-weight);
+        line-height: var(--body-line-height);
     }
 
     // Keep headings visually grouped and avoid extra space at the start of a prose block.
@@ -96,7 +96,7 @@
     }
 
     :where(li) {
-        margin-block-end: calc(var(--ui-spacing-breathe) / 2);
+        margin-block-end: calc(var(--spacing-breathe) / 2);
 
         &:last-child {
             margin-block-end: 0;
@@ -149,7 +149,7 @@
 
     // Inline semantics use the body scale and shared decoration settings.
     :where(strong, b) {
-        font-weight: var(--ui-typography-body-strong-font-weight);
+        font-weight: var(--body-strong-font-weight);
     }
 
     :where(u, del, ins, s, b strong, strong b) {
@@ -183,12 +183,12 @@
     // Smaller text is useful for side comments and smallprint.
     :where(small) {
         font-size: var(--prose-small-font-size);
-        line-height: var(--ui-typography-body-small-line-height);
+        line-height: var(--body-small-line-height);
     }
 
     // Subscript and superscript text share a compact typographic treatment.
     :where(sub, sup) {
-        font-size: var(--ui-typography-script-font-size);
+        font-size: var(--script-font-size);
         line-height: 0;
         position: relative;
         vertical-align: baseline;

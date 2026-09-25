@@ -1,17 +1,17 @@
 .home__content {
-    padding-block-end: var(--ui-spacing-cushion);
+    padding-block-end: var(--spacing-cushion);
 }
 
 .home__title-highlight {
-    color: var(--ui-color-foreground-accent);
+    color: var(--foreground-accent);
 }
 
 .home__access {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--ui-spacing-unit);
+    gap: var(--spacing-unit);
 }
 
 .home__logged-in {
-    margin-block-end: var(--ui-spacing-unit);
+    margin-block-end: var(--spacing-unit);
 }
