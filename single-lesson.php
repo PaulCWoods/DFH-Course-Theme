@@ -74,7 +74,7 @@ get_header();
             $lesson_code = dfh_get_lesson_hierarchy_number();
             if ($lesson_code):
                 ?>
-                <span class="lesson-head__code-badge" title="Lesson code"><span class="sr">Lesson
+                <span class="lesson-head__code-badge" title="Lesson code"><span class="visually-hidden">Lesson
                         code:</span><?php echo esc_html($lesson_code); ?></span>
             <?php endif; ?>
             <nav class="lesson-head__nav stack +no-gap" aria-label="Breadcrumb">
@@ -123,7 +123,7 @@ get_header();
                 <?php if ($playback_id): ?>
                     <button type="button" id="video-stick-toggle" class="button button--subtle lesson-video__toggle video-unstick"
                         aria-controls="lesson-video-player" aria-pressed="true">
-                        <span class="sr">Stick video</span>
+                        <span class="visually-hidden">Stick video</span>
                         <svg class="icon" width="32" height="32" aria-hidden="true">
                             <use href="#Unlock" />
                         </svg>
@@ -282,7 +282,7 @@ get_header();
                                                     download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
                                             </h3>
                                             <?php if (trim($download_post->post_excerpt) !== ''): ?>
-                                                <p class="tc-muted fs-sm tw-balance"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                                                <p class="text-color-muted font-size-sm text-wrap-balance"><?php echo esc_html($download_post->post_excerpt); ?></p>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -385,7 +385,7 @@ get_header();
 
             <div class="container lesson-explore__section lesson-progression"
                 aria-describedby="lesson-progression__heading">
-                <h2 class="sr" id="progression-progress-heading">Proceed to the next step</h2>
+                <h2 class="visually-hidden" id="progression-progress-heading">Proceed to the next step</h2>
                 <div class="lesson-progression__buttons">
                     <?php if ($adjacent['previous']): ?>
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
@@ -393,7 +393,7 @@ get_header();
                             <svg class="icon dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowLeft" />
                             </svg>
-                            <span class="sr@<sm">Previous Lesson</span>
+                            <span class="visually-hidden@<sm">Previous Lesson</span>
                         </a>
                     <?php endif; ?>
 
@@ -460,7 +460,7 @@ get_header();
                 <svg class="icon dir" width="32" height="32" aria-hidden="true">
                     <use href="#Close" />
                 </svg>
-                <span class="sr">Close Navigation</span>
+                <span class="visually-hidden">Close Navigation</span>
             </button>
         </header>
         <nav class="progress-panel__course" aria-label="Course syllabus">

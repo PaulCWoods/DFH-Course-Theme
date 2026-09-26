@@ -56,7 +56,7 @@ get_template_part('content', 'course-header');
 
         <?php if (is_user_logged_in() && !$registration_success): ?>
                 <h1 class="title">You are already logged in!</h1>
-            <div class="fl fl-col gp-breathe">
+            <div class="flex flex-direction-column gap-breathe">
                 <p>
                     <a href="<?php echo esc_url(home_url()); ?>" class="button button--primary">
                         <span>Go to Your Course</span>
@@ -67,7 +67,7 @@ get_template_part('content', 'course-header');
 
         <?php elseif ($registration_success): ?>
                 <h1 class="title">Welcome aboard!</h1>
-            <div class="fl fl-col gp-breathe">
+            <div class="flex flex-direction-column gap-breathe">
                 <p>Your account has been successfully created and you are now logged in.</p>
                 <p style="margin-top: 1.5rem;">
                     <a href="<?php echo esc_url($redirect_to); ?>" class="button button--primary">

@@ -24,7 +24,7 @@
                 <svg class="icon" width="32" height="32" aria-hidden="true">
                     <use href="#Navigation" />
                 </svg>
-                <span class="sr">Open My Account Navigation</span>
+                <span class="visually-hidden">Open My Account Navigation</span>
             </button>
         </nav>
     </div>

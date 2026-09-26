@@ -105,21 +105,21 @@ get_template_part('content', 'course-header');
         if ($current_user && $current_user->ID) {
             $user_name = $current_user->display_name ? $current_user->display_name : $current_user->user_login;
         }
-        $welcome_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome, ' . esc_html($user_name) . '!</span>';
-        $welcome_back_msg = '<span id="course-landing__access-welcome" class="small-heading tc-muted">Welcome back, ' . esc_html($user_name) . '</span>';
+        $welcome_msg = '<span id="course-landing__access-welcome" class="small-heading text-color-muted">Welcome, ' . esc_html($user_name) . '!</span>';
+        $welcome_back_msg = '<span id="course-landing__access-welcome" class="small-heading text-color-muted">Welcome back, ' . esc_html($user_name) . '</span>';
         ?>
 
         <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
             <div class="container +2/3 +start">
                 <?php if ($course_closed): ?>
                     <h2>Coming soon</h2>
-                    <p class="small-text tc-muted">This course is not available yet. Check back soon.</p>
+                    <p class="small-text text-color-muted">This course is not available yet. Check back soon.</p>
 
                 <?php elseif ($has_pending_order && !$has_access): ?>
                     <!-- State 0D: Order Processing / Payment Clearing -->
                     <?php echo $welcome_msg; ?>
                     <h2>Payment received!</h2>
-                    <p class="small-text tc-muted">Your payment is processing. Your course access will unlock automatically in a moment.</p>
+                    <p class="small-text text-color-muted">Your payment is processing. Your course access will unlock automatically in a moment.</p>
                     <p style="margin-top: 1.5rem;">
                         <a href="<?php echo esc_url(get_permalink()); ?>" class="button button--primary"><span>Refresh Page</span></a>
                     </p>
@@ -127,7 +127,7 @@ get_template_part('content', 'course-header');
                 <?php elseif (!is_user_logged_in()): ?>
                     <!-- State 0: Logged-out Visitor -->
                     <h2>Ready to start learning?</h2>
-                    <p class="small-text tc-muted">
+                    <p class="small-text text-color-muted">
                         <?php if ($product): ?>
                             Log in or create an account to enroll (<?php echo $product->get_price_html(); ?>).
                         <?php else: ?>
@@ -139,7 +139,7 @@ get_template_part('content', 'course-header');
                             <span>Register to Enroll</span>
                         </a>
                     </div>
-                    <p class="small-text tc-muted mt">Already have an account? <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="link">
+                    <p class="small-text text-color-muted margin-block-start">Already have an account? <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="link">
                             log in
                         </a> to enroll in the course.</p>
 
@@ -147,7 +147,7 @@ get_template_part('content', 'course-header');
                     <!-- State 0C: Logged-in User without purchase -->
                     <?php echo $welcome_msg; ?>
                     <h2>Unlock Full Course Access</h2>
-                    <p class="small-text tc-muted">Purchase the course to unlock all lessons and track your progress.</p>
+                    <p class="small-text text-color-muted">Purchase the course to unlock all lessons and track your progress.</p>
                     <div class="course-purchase-actions">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
@@ -194,7 +194,7 @@ get_template_part('content', 'course-header');
                     $resume_title = get_the_title($active_lesson_status);
                     $resume_url = get_permalink($active_lesson_status);
                     ?>
-                    <p class="small-text tc-muted">Pick up where you left off:</p>
+                    <p class="small-text text-color-muted">Pick up where you left off:</p>
                     <a href="<?php echo esc_url($resume_url); ?>" class="button button--primary resume-btn">
                         <span>Resume: <?php echo esc_html($resume_title); ?></span>
                         <svg class="icon dir" width="32" height="32" aria-hidden="true">
@@ -206,7 +206,7 @@ get_template_part('content', 'course-header');
                     <!-- State 1: Brand New (Not Started / Has Access) -->
                     <?php echo $welcome_msg; ?>
                     <h2>Ready to Begin?</h2>
-                    <p class="small-text tc-muted">Jump straight into the first lesson of the course.</p>
+                    <p class="small-text text-color-muted">Jump straight into the first lesson of the course.</p>
                     <?php if (!empty($all_lessons)):
                         $first_lesson_url = get_permalink($all_lessons[0]);
                         ?>

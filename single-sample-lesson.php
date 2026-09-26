@@ -32,7 +32,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                 <?php if ($playback_id): ?>
                     <button type="button" id="video-stick-toggle" class="button button--subtle lesson-video__toggle video-unstick"
                         aria-controls="lesson-video-player" aria-pressed="true">
-                        <span class="sr">Stick video</span>
+                        <span class="visually-hidden">Stick video</span>
                         <svg class="icon" width="32" height="32" aria-hidden="true">
                             <use href="#Unlock" />
                         </svg>
@@ -72,7 +72,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
             <div class="container lesson-main article__main">
                 <div class="lesson-body article__body prose +sample">
                     <?php the_content(); ?>
-                    <hr class="sr" />
+                    <hr class="visually-hidden" />
                     <p class="lesson-body__sample-text">
                         <span>
                             To read more, consider
@@ -174,7 +174,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                                                         download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
                                                 </h3>
                                                 <?php if (trim($download_post->post_excerpt) !== ''): ?>
-                                                    <p class="tc-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                                                    <p class="text-color-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
                                                 <?php endif; ?>
                                             </div>
                                         </div>

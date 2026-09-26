@@ -14,7 +14,7 @@ get_header();
 
     <!-- Hero Section -->
     <section class="home__hero section +strong" aria-describedby="home-hero-heading">
-        <h2 class="sr" id="home-hero-heading">Welcome to Design for Humans Courses</h2>
+        <h2 class="visually-hidden" id="home-hero-heading">Welcome to Design for Humans Courses</h2>
         <div class="container">
             <?php
             // Determine the target URL for the hero button: prefer the user's active course when available.
@@ -170,7 +170,7 @@ get_header();
                                             <a href="<?php echo esc_url($author_url); ?>" class="link" target="_blank"
                                                 rel="noopener"><?php echo esc_html($author_title); ?></a>
                                         <?php else: ?>
-                                            <span class="tc-muted"><?php echo esc_html($author_title); ?></span>
+                                            <span class="text-color-muted"><?php echo esc_html($author_title); ?></span>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </cite>
