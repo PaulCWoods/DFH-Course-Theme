@@ -159,15 +159,20 @@ $course-bp: 60em;
         background-color: var(--surface-card);
     }
 
-    h2:before {
-        content: "🎉" / "";
-        font-size: 1em;
-        line-height: 1;
-        margin-inline-end: calc(var(--spacing-unit) / 2);
+    h2 {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--spacing-unit);
+        
+        &:after {
+            content: "🎉" / "";
+            font-size: 1em;
+            line-height: 1;
 
-        @media (prefers-reduced-motion: no-preference) {
-            animation: --course-complete-pop 0.5s both;
-            animation-delay: 0.5s;
+            @media (prefers-reduced-motion: no-preference) {
+                animation: --course-complete-pop 0.5s both;
+                animation-delay: 0.5s;
+            }
         }
     }
 
