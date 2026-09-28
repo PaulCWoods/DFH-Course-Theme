@@ -40,6 +40,7 @@
     font-size: var(--body-small-font-size);
     line-height: var(--body-small-line-height);
     position: relative;
+    text-wrap: balance;
 
     a:is(.link, .link:hover, .link:active) {
         color: inherit;
@@ -47,10 +48,9 @@
 }
 
 .testimonial-card__icon {
-    position: absolute;
+    color: light-dark(hsl(from var(--foreground-dark) h s l / 0.5), var(--foreground-light));
     font-size: 10em;
-    filter: blur(calc(var(--ui-blur)/2));
     inset-block-start: -.1em;
     inset-inline-start: -.1em;
-    color: light-dark(hsl(from var(--foreground-dark) h s l / 0.5), var(--foreground-light));
+    position: absolute;
 }
