@@ -60,6 +60,7 @@ get_header();
                 </div>
             <?php else: ?>
 
+                <p class="section__title">Ready to learn?</p>
                 <div class="home__access">
                     <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button button--primary"><span>Get Started</span></a>
                     <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button "><span>Log In</span></a>
@@ -69,7 +70,7 @@ get_header();
     </section>
 
     <!-- Courses Grid Section -->
-    <section class="section +strong +strong-1st home__section">
+    <section class="section +strong-1st home__section">
         <div class="container">
             <h2 class="section__title">Available courses</h2>
 
@@ -148,7 +149,7 @@ get_header();
 
     if (!empty($testimonials)):
         ?>
-        <section class="home__section grid__container section +strong +scroll@<lg" aria-labelledby="testimonials-heading">
+        <section class="home__section grid__container section +scroll@<lg" aria-labelledby="testimonials-heading">
             <div class="container">
                 <h2 id="testimonials-heading" class="section__title">What students are saying</h2>
                 <div class="testimonials-grid grid">

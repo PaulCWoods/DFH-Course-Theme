@@ -2,8 +2,21 @@
 
 .testimonial-card {
     align-items: start;
-    background-color: var(--surface-card);
+    background-color: var(--surface-inverted);
+    color: var(--foreground-inverted);
     padding: var(--spacing-cushion);
+
+    a.link {
+        color: var(--link-inverted-color);
+        @media (hover: hover) {
+            &:hover {
+                color: var(--link-inverted-hover-color);
+            }
+        }
+        &:active {
+            color: var(--link-inverted-active-color);
+        }
+    }
 }
 
 .testimonial-card__content {
