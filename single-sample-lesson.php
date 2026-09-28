@@ -18,7 +18,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 
 <header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
     <div class="lesson-head site-header +sample">
-        <div class="lesson-head__inner container">
+        <div class="lesson-head__inner wrapper">
             <nav class="lesson-head__nav stack +no-gap" aria-label="Breadcrumb">
                 <?php if ($associated_course_id && get_post($associated_course_id)): ?>
                     <a class="lesson-head__nav-parent link"
@@ -47,7 +47,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
     <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack +no-gap'); ?>>
 
         <header class="lesson-header prose">
-            <div class="container">
+            <div class="wrapper">
                 <span class="lesson-header__kicker +pre small-heading">Free sample</span>
                 <h1 class="lesson-header__title">
                     <?php the_title(); ?>
@@ -59,7 +59,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
         // Video playback
         if ($playback_id): ?>
             <div class="lesson-video">
-                <div class="lesson-video__container container">
+                <div class="lesson-video__container wrapper">
                     <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>"
                         accent-color="#2eab93" metadata-video-title="<?php echo esc_attr(get_the_title()); ?>"
                         style="width:100%;height:auto;" thumbnail-time="2">
@@ -69,7 +69,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
         <?php endif; ?>
 
         <div class="lesson-content">
-            <div class="container lesson-main article__main">
+            <div class="wrapper lesson-main article__main">
                 <div class="lesson-body article__body prose +sample">
                     <?php the_content(); ?>
                     <hr class="visually-hidden" />

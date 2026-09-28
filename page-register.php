@@ -51,7 +51,7 @@ get_header();
 get_template_part('content', 'course-header');
 ?>
 <main class="site-main login-page" id="main">
-    <div class="container">
+    <div class="wrapper">
 
 
         <?php if (is_user_logged_in() && !$registration_success): ?>

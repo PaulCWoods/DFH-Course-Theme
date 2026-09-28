@@ -8,7 +8,7 @@ get_template_part('content', 'course-header');
 ?>
 
 <main class="site-main" id="main">
-    <article class="prose container blog article">
+    <article class="prose wrapper blog article">
         <?php while (have_posts()): the_post(); ?>
             <header class="article__header">
                 <h1><?php the_title(); ?></h1>

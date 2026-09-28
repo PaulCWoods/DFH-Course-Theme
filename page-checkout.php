@@ -9,7 +9,7 @@ get_template_part('content', 'account-header');
 
 <main class="site-main shop-main" id="main">
     <!-- Use a wider container or full layout for checkout/cart, prose for normal pages -->
-    <article class="article container shop">
+    <article class="article wrapper shop">
         
         <header class="article__header">
             <h1 class="title"><? class_exists('WooCommerce') && is_cart() ? 'Shopping Cart' : the_title(); ?></h1>

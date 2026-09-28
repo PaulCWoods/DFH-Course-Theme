@@ -4,7 +4,7 @@
 get_header();
 ?>
 <main class="home site-main" id="main">
-    <article class="prose container home__content">
+    <article class="prose wrapper home__content">
         <header class="article__header">
             <h1 class="display-title brand-frame">Design for Humans: <span class="home__title-highlight">Courses</span></h1>
         </header>
@@ -15,7 +15,7 @@ get_header();
     <!-- Hero Section -->
     <section class="home__hero section +strong" aria-describedby="home-hero-heading">
         <h2 class="visually-hidden" id="home-hero-heading">Welcome to Design for Humans Courses</h2>
-        <div class="container">
+        <div class="wrapper">
             <?php
             // Determine the target URL for the hero button: prefer the user's active course when available.
             $hero_target = home_url('/course/');
@@ -71,7 +71,7 @@ get_header();
 
     <!-- Courses Grid Section -->
     <section class="section +strong-1st home__section">
-        <div class="container">
+        <div class="wrapper">
             <h2 class="section__title">Available courses</h2>
 
             <?php
@@ -150,7 +150,7 @@ get_header();
     if (!empty($testimonials)):
         ?>
         <section class="home__section grid__container section +scroll@<lg" aria-labelledby="testimonials-heading">
-            <div class="container">
+            <div class="wrapper">
                 <h2 id="testimonials-heading" class="section__title">What our students are saying</h2>
                 <div class="testimonials-grid grid">
                     <?php foreach ($testimonials as $t):

@@ -6,7 +6,7 @@ get_header();
 get_template_part('content', 'course-header');
 ?>
 <main class="site-main login-page" id="main">
-    <div class="container">
+    <div class="wrapper">
     <h1 class="title">Log in to your account</h1>
     
     <?php

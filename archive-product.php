@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <main class="site-main shop-archive" id="main">
-    <article class="container">
+    <article class="wrapper">
         <header class="article__header">
             <h1 class="display-title"><?php woocommerce_page_title(); ?></h1>
         </header>

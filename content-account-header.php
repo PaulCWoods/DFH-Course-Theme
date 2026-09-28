@@ -1,6 +1,6 @@
 <header class="site-header__container">
     <div class="site-header my-account-header">
-        <nav class="container site-header__inner">
+        <nav class="wrapper site-header__inner">
             <ul class="site-breadcrumb">
                 <li class="+home">
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-title site-breadcrumb__home link">

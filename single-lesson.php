@@ -8,7 +8,7 @@ if (!dfh_user_has_course_access()) {
     get_template_part('content', 'course-header');
     ?>
     <main class="restricted-access site-main" id="main">
-        <article class="article prose container">
+        <article class="article prose wrapper">
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
             <?php if (!is_user_logged_in()): ?>
@@ -69,7 +69,7 @@ get_header();
 <header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
     <div class="lesson-head site-header">
         <div class="lesson-head__progress" aria-hidden="true"></div>
-        <div class="lesson-head__inner container">
+        <div class="lesson-head__inner wrapper">
             <?php
             $lesson_code = dfh_get_lesson_hierarchy_number();
             if ($lesson_code):
@@ -146,7 +146,7 @@ get_header();
     <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack +no-gap'); ?>>
 
         <header class="lesson-header prose">
-            <div class="container">
+            <div class="wrapper">
                 <h1 class="lesson-header__title">
                     <?php the_title(); ?>
                 </h1>
@@ -167,7 +167,7 @@ get_header();
         // Video playback: Mux only (legacy fallback removed)
         if ($playback_id): ?>
             <div class="lesson-video">
-                <div class="lesson-video__container container">
+                <div class="lesson-video__container wrapper">
                     <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>"
                         accent-color="#2eab93" metadata-video-title="<?php echo esc_attr(get_the_title()); ?>"
                         style="width:100%;height:auto;" thumbnail-time="2">
@@ -177,7 +177,7 @@ get_header();
         <?php endif; ?>
         <div class="lesson-content">
 
-            <div class="container lesson-main article__main">
+            <div class="wrapper lesson-main article__main">
                 <div class="lesson-body article__body prose"><?php the_content(); ?></div>
                 <aside class="lesson-aside article__aside stack +no-gap">
                     <div class="lesson-bookmark">
@@ -313,7 +313,7 @@ get_header();
             <?php
             $children_html = dfh_render_lesson_children($parent_id, $child_level);
             if (!empty(trim($children_html))): ?>
-                <section class="container lesson-explore__section lesson-children"
+                <section class="wrapper lesson-explore__section lesson-children"
                     aria-describedby="lesson-children-heading" data-level="<?php echo esc_attr($child_level); ?>">
                     <h2 class="heading" id="lesson-children-heading">Lessons in this section</h2>
                     <div class="lesson-list__container">
@@ -383,7 +383,7 @@ get_header();
             }
             ?>
 
-            <div class="container lesson-explore__section lesson-progression"
+            <div class="wrapper lesson-explore__section lesson-progression"
                 aria-describedby="lesson-progression__heading">
                 <h2 class="visually-hidden" id="progression-progress-heading">Proceed to the next step</h2>
                 <div class="lesson-progression__buttons">
