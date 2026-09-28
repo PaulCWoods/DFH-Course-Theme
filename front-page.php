@@ -165,7 +165,6 @@ get_header();
                             </div>
                             <footer>
                                 <cite class="testimonial-card__author">
-                                    <strong><?php echo esc_html($title); ?></strong>
                                     <?php if ($author_title): ?>
                                         <?php if ($author_url): ?>
                                             <a href="<?php echo esc_url($author_url); ?>" class="link" target="_blank"
