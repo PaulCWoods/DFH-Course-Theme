@@ -386,11 +386,11 @@
             margin-block-start: 0 !important;
         }
 
-        &.\+half img {
+        &.article-figure--half img {
             max-inline-size: 50% !important;
         }
 
-        &.\+scheme-adapt img {
+        &.article-figure--scheme-adapt img {
             @media (prefers-color-scheme: dark) {
                 filter: invert(1) hue-rotate(180deg);
             }
