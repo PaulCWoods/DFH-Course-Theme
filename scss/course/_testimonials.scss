@@ -5,6 +5,8 @@
     background-color: var(--surface-inverted);
     color: var(--foreground-inverted);
     padding: var(--spacing-cushion);
+    overflow: hidden;
+    position: relative;
 
     a.link {
         color: var(--link-inverted-color);
@@ -24,6 +26,7 @@
     display: flex;
     flex: 1;
     font-size: 1.15em;
+    position: relative;
 
     p {
         font-size: var(--body-font-size);
@@ -36,8 +39,18 @@
     display: block;
     font-size: var(--body-small-font-size);
     line-height: var(--body-small-line-height);
+    position: relative;
 
     a:is(.link, .link:hover, .link:active) {
         color: inherit;
     }
+}
+
+.testimonial-card__icon {
+    position: absolute;
+    font-size: 10em;
+    filter: blur(calc(var(--ui-blur)/2));
+    inset-block-start: -.1em;
+    inset-inline-start: -.1em;
+    color: light-dark(hsl(from var(--foreground-dark) h s l / 0.5), var(--foreground-light));
 }

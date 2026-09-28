@@ -48,7 +48,7 @@
 
 :is(.progress-panel__header, .progress-panel__footer) {
     background: color-mix(in srgb, var(--panel-background-color), transparent var(--transparency-sticky));
-    backdrop-filter: blur(var(--blur-sticky));
+    backdrop-filter: blur(var(--ui-blur));
 }
 
 .progress-panel__header {

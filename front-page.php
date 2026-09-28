@@ -160,6 +160,9 @@ get_header();
                         $author_url = get_post_meta($t->ID, '_dfh_testimonial_author_url', true);
                         ?>
                         <blockquote class="testimonial-card stack">
+                            <svg class="testimonial-card__icon icon" width="32" height="32" aria-hidden="true">
+                                <use href="#Quote" />
+                            </svg>
                             <div class="testimonial-card__content">
                                 <?php echo $quote; ?>
                             </div>
