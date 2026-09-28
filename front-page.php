@@ -160,14 +160,14 @@ get_header();
                         $author_url = get_post_meta($t->ID, '_dfh_testimonial_author_url', true);
                         ?>
                         <blockquote class="testimonial-card stack">
-                            <div class="testimonial-card__content prose">
+                            <div class="testimonial-card__content">
                                 <?php echo $quote; ?>
                             </div>
                             <footer>
                                 <cite class="testimonial-card__author">
                                     <?php if ($author_title): ?>
                                         <?php if ($author_url): ?>
-                                            <a href="<?php echo esc_url($author_url); ?>" class="link" target="_blank"
+                                            <a class="link" href="<?php echo esc_url($author_url); ?>" target="_blank"
                                                 rel="noopener"><?php echo esc_html($author_title); ?></a>
                                         <?php else: ?>
                                             <span class="text-color-muted"><?php echo esc_html($author_title); ?></span>

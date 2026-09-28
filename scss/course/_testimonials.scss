@@ -24,12 +24,20 @@
     display: flex;
     flex: 1;
     font-size: 1.15em;
+
+    p {
+        font-size: var(--body-font-size);
+        font-weight: var(--body-strong-font-weight);
+        line-height: var(--body-line-height);
+    }
 }
 
 .testimonial-card__author {
+    display: block;
     font-size: var(--body-small-font-size);
+    line-height: var(--body-small-line-height);
 
-    strong {
-        font-weight: var(--body-strong-font-weight);
+    a:is(.link, .link:hover, .link:active) {
+        color: inherit;
     }
 }
