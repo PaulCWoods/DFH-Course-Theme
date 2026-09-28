@@ -151,7 +151,7 @@ get_header();
         ?>
         <section class="home__section grid__container section +scroll@<lg" aria-labelledby="testimonials-heading">
             <div class="container">
-                <h2 id="testimonials-heading" class="section__title">What students are saying</h2>
+                <h2 id="testimonials-heading" class="section__title">What our students are saying</h2>
                 <div class="testimonials-grid grid">
                     <?php foreach ($testimonials as $t):
                         $title = get_the_title($t->ID);
