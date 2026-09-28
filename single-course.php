@@ -139,9 +139,7 @@ get_template_part('content', 'course-header');
                             <span>Register to Enroll</span>
                         </a>
                     </div>
-                    <p class="small-text text-color-muted margin-block-start">Already have an account? <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="link">
-                            log in
-                        </a> to enroll in the course.</p>
+                    <p class="small-text text-color-muted margin-block-start">Already have an account? <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="link bold">Log in</a> to enroll in the course.</p>
 
                 <?php elseif (!$has_access && $product): ?>
                     <!-- State 0C: Logged-in User without purchase -->

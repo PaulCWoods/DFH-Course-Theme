@@ -124,7 +124,7 @@ get_template_part('content', 'course-header');
                 </p>
             </form>
 
-            <p class="login-extras">Already have an account? <a class="link" href="<?php echo isset($_GET['redirect_to']) ? esc_url(add_query_arg('redirect_to', esc_url_raw(wp_unslash($_GET['redirect_to'])), home_url('/login/'))) : esc_url(home_url('/login/')); ?>">Log in</a></p>
+            <p class="login-extras">Already have an account? <a class="link bold" href="<?php echo isset($_GET['redirect_to']) ? esc_url(add_query_arg('redirect_to', esc_url_raw(wp_unslash($_GET['redirect_to'])), home_url('/login/'))) : esc_url(home_url('/login/')); ?>">Log in</a></p>
 
         <?php endif; ?>
 
