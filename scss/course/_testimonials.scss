@@ -4,6 +4,7 @@
     align-items: start;
     background-color: var(--surface-inverted);
     color: var(--foreground-inverted);
+    container-type: inline-size;
     padding: var(--spacing-cushion);
     overflow: hidden;
     position: relative;
@@ -49,7 +50,7 @@
 
 .testimonial-card__icon {
     color: light-dark(hsl(from var(--foreground-dark) h s l / 0.5), var(--foreground-light));
-    font-size: 10em;
+    font-size: 50cqmin;;
     inset-block-start: -.1em;
     inset-inline-start: -.1em;
     position: absolute;
