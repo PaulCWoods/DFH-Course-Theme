@@ -63,6 +63,11 @@
 
 // -----------------------------------------------------------------------------
 // Syllabus levels
+
+.logged-in {
+    --logged-in: true;
+}
+
 .lesson-list__container {
     > .lesson-list {
         display: grid;
@@ -91,8 +96,9 @@
             padding: var(--l1-box-padding);
 
             &:has(a[href]) {
-                background-color: color-mix(var(--surface-accent-muted), transparent, 30%);
+                background-color: color-mix(var(--surface-accent-muted), transparent 30%);
                 border-color: var(--border-accent);
+
 
                 @media (prefers-contrast: more) {
                     background-color: var(--surface-card);
@@ -166,8 +172,14 @@
     text-wrap: balance;
 
     &:not(a[href]) {
-        cursor: not-allowed;
-        opacity: 0.8;
+        opacity: 1;
+    }
+
+    @container style(--logged-in: true) {
+        &:not(a[href]) {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
     }
 }
 

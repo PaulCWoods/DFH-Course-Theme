@@ -18,7 +18,7 @@ $root_lesson_ids = array_values(array_unique($root_lesson_ids));
 get_template_part('content', 'course-header');
 ?>
 
-<main class="course-landing site-main stack" id="main">
+<main class="course-landing site-main stack<?php echo is_user_logged_in() ? ' logged-in' : ''; ?>" id="main">
     <article class="course-landing__article stack article">
         <figure class="course-landing__poster">
             <?php if (has_post_thumbnail())
@@ -246,7 +246,7 @@ get_template_part('content', 'course-header');
             <?php endif; ?>
         </article>
     </section>
-    <section class="course-landing__section course-landing__syllabus" aria-describedby="course-plan-heading">
+    <section class="course-landing__section course-landing__syllabus " aria-describedby="course-plan-heading">
         <div class="wrapper">
             <h2 id="course-plan-heading" class="heading">Course plan</h2>
             <p class="small-text course-landing__note">Note: Access to lessons will be granted as you progress through
