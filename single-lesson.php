@@ -28,7 +28,7 @@ if (!user_can($user_id, 'administrator')) {
     $current_allowed_lesson = dfh_get_student_current_lesson($user_id);
 
     // If the lesson is NOT completed AND is not their current active lesson, block access
-    // (If all lessons are complete, $current_allowed_lesson returns 'completed', meaning future direct URLs are locked)
+    // (If all lessons are complete, $current_allowed_lesson returns 'completed', meaning future icon--direct URLs are locked)
     if (!$is_completed && (int) $current_allowed_lesson !== (int) $lesson_id) {
         // Find where they are supposed to be (fallback to course archive or active lesson)
         $redirect_url = home_url();
@@ -273,7 +273,7 @@ get_header();
                                                 <?php echo get_the_post_thumbnail($download_id, 'medium_large'); ?>
                                             </div>
                                         <?php endif; ?>
-                                        <svg class="icon dir lesson-download__icon" width="32" height="32" aria-hidden="true">
+                                        <svg class="icon icon--dir lesson-download__icon" width="32" height="32" aria-hidden="true">
                                             <use href="#Download" />
                                         </svg>
                                         <div class="lesson-download__info">
@@ -390,7 +390,7 @@ get_header();
                     <?php if ($adjacent['previous']): ?>
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
                             class="button button--subtle link-button prev-lesson">
-                            <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                            <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowLeft" />
                             </svg>
                             <span class="visually-hidden@<sm">Previous Lesson</span>
@@ -405,7 +405,7 @@ get_header();
                         data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_progress_nonce')); ?>"
                         class="<?php echo esc_attr($button_class); ?>">
                         <span class="progress-label"><?php echo esc_html($display_button_label); ?></span>
-                        <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                             <use href="<?php echo esc_attr($complete_icon); ?>" />
                         </svg>
                     </button>
@@ -449,7 +449,7 @@ get_header();
         ?>
         <header class="panel__head progress-panel__header">
             <a class="button button--tight button--link button--subtle syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
-                <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                     <use href="#Home" />
                 </svg>
                 Courses Home
@@ -457,7 +457,7 @@ get_header();
 
             <button class="button button--subtle syllabus-close" command="hide-popover" commandfor="course-progress"
                 title="Close navigation">
-                <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                     <use href="#Close" />
                 </svg>
                 <span class="visually-hidden">Close Navigation</span>

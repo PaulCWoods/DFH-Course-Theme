@@ -60,7 +60,7 @@ get_template_part('content', 'course-header');
                 <p>
                     <a href="<?php echo esc_url(home_url()); ?>" class="button button--primary">
                         <span>Go to Your Course</span>
-                        <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
                     </a>
                 </p>
             </div>
@@ -72,7 +72,7 @@ get_template_part('content', 'course-header');
                 <p style="margin-top: 1.5rem;">
                     <a href="<?php echo esc_url($redirect_to); ?>" class="button button--primary">
                         <span>Start Learning</span>
-                        <svg class="icon dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
                     </a>
                 </p>
             </div>

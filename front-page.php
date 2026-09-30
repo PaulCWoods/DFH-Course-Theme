@@ -51,7 +51,7 @@ get_header();
                     <?php if ($has_resume_course): ?>
                         <a href="<?php echo esc_url($hero_target); ?>" class="button button--primary">
                             <span>Resume Your Course</span>
-                            <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                            <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />
                             </svg>
                         </a>

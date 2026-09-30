@@ -165,7 +165,7 @@ get_template_part('content', 'course-header');
                             <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>"
                                 class="button button--primary cert-btn" target="_blank">
                                 <span>Download Certificate (PDF)</span>
-                                <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                                <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                                     <use href="#Download" />
                                 </svg>
                             </a>
@@ -195,7 +195,7 @@ get_template_part('content', 'course-header');
                     <p class="small-text text-color-muted">Pick up where you left off:</p>
                     <a href="<?php echo esc_url($resume_url); ?>" class="button button--primary resume-btn">
                         <span>Resume: <?php echo esc_html($resume_title); ?></span>
-                        <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                             <use href="#ArrowRight" />
                         </svg>
                     </a>
@@ -210,7 +210,7 @@ get_template_part('content', 'course-header');
                         ?>
                         <a href="<?php echo esc_url($first_lesson_url); ?>" class="button button--primary start-btn">
                             <span>Start Course</span>
-                            <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                            <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowRight" />
                             </svg>
                         </a>
@@ -237,7 +237,7 @@ get_template_part('content', 'course-header');
                 ?>
                 <div class="course-sample-preview" style="margin-top: 1.5rem;">
                     <a href="<?php echo esc_url($sample_url); ?>" class="button">
-                        <svg class="icon dir" width="32" height="32" aria-hidden="true">
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                             <use href="#Search" />
                         </svg>
                         <span>Read a Free Sample</span>

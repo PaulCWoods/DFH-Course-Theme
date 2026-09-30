@@ -165,7 +165,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                                                     <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>
                                                 </div>
                                             <?php endif; ?>
-                                            <svg class="icon dir lesson-download__icon" width="32" height="32" aria-hidden="true">
+                                            <svg class="icon icon--dir lesson-download__icon" width="32" height="32" aria-hidden="true">
                                                 <use href="#Download" />
                                             </svg>
                                             <div class="lesson-download__info">
