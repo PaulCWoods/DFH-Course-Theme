@@ -109,7 +109,7 @@ get_header();
                     <?php while ($courses_query->have_posts()):
                         $courses_query->the_post(); ?>
                         <li class="card-list__item">
-                            <div class="card course-card">
+                            <div class="card index-card course-card">
                                 <?php if (has_post_thumbnail()): ?>
                                     <div class="card__thumb">
                                         <?php the_post_thumbnail('medium_large'); ?>
