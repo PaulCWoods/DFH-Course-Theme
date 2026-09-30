@@ -314,7 +314,7 @@
 .woocommerce-MyAccount-navigation {
     background-color: var(--surface-card);
     block-size: 0;
-    box-shadow: var(--shadow-reset);
+    box-shadow: var(--shadow-none);
     display: none;
     margin: calc(var(--site-block-padding) * -1);
     padding: var(--spacing-cushion);
@@ -336,7 +336,7 @@
 
         @starting-style {
             block-size: 0;
-            box-shadow: var(--shadow-reset);
+            box-shadow: var(--shadow-none);
             margin: calc(var(--site-block-padding) * -1);
             opacity: 0;
         }

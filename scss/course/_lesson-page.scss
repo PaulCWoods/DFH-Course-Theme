@@ -662,7 +662,7 @@
     }
     @media (hover:hover) {
         .lesson-download:hover & img {
-            box-shadow: var(--shadow-raised);
+            box-shadow: var(--shadow-md);
 
             @media (prefers-contrast: more) {
                 box-shadow: none;
@@ -671,7 +671,7 @@
     }
 
     .lesson-download:active & img {
-        box-shadow: var(--shadow-reset);
+        box-shadow: var(--shadow-none);
         opacity: var(--opacity-muted);
 
         @media (prefers-contrast: more) {

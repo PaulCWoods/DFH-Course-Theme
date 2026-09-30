@@ -4,7 +4,7 @@
     @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
         .site-header {
             @container scroll-state(stuck: top) {
-                box-shadow: var(--shadow-reset);
+                box-shadow: var(--shadow-none);
             }
         }
     }

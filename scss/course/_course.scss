@@ -142,7 +142,7 @@ $course-bp: 60em;
     background-color: var(--surface-accent-muted);
     border: var(--border);
     border-color: var(--border-accent);
-    box-shadow: var(--shadow-reset);
+    box-shadow: var(--shadow-none);
     color: var(--foreground-base);
     padding: var(--site-block-padding, var(--spacing-cushion));
     text-align: var(--align, center);
@@ -212,7 +212,7 @@ $course-bp: 60em;
     }
 
     70% {
-        box-shadow: var(--shadow-reset);
+        box-shadow: var(--shadow-none);
         opacity: 1;
         scale: 1.05;
     }
@@ -224,7 +224,7 @@ $course-bp: 60em;
     }
 
     100% {
-        box-shadow: var(--shadow-reset);
+        box-shadow: var(--shadow-none);
         opacity: 1;
         scale: 1;
     }
