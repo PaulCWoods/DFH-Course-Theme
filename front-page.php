@@ -112,12 +112,9 @@ get_header();
                                         <?php the_post_thumbnail('medium_large'); ?>
                                     </div>
                                 <?php endif; ?>
-                                <div class="card__content stack">
-                                    <div class="card__desc stack">
-                                        <a class="card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                        <?php the_excerpt(); ?>
-                                    </div>
-                                    <?php
+                                <article class="card__content">
+                                    <header class="card__header">
+                                        <?php
                                     $course_id = get_the_ID();
                                     $is_course_completed = is_array($user_completed_courses) && !empty($user_completed_courses[$course_id]);
                                     $has_access = in_array($course_id, $user_accessible_courses, true);
@@ -126,7 +123,14 @@ get_header();
                                     <?php elseif ($has_access): ?>
                                         <span class="course-card__badge enrolled badge"><span>Enroled</span></span>
                                     <?php endif; ?>
-                                </div>
+                                        <h3 class="card__title">
+                                            <a class="card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                        </h3>
+                                    </header>
+                                    <div class="card__body">
+                                        <?php the_excerpt(); ?>
+                                    </div>
+                                </article>
                             </div>
                         </li>
                     <?php endwhile;
