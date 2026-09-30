@@ -567,7 +567,7 @@
 .lesson-explore {
     --gap: calc(var(--site-block-padding, var(--spacing-cushion))*2);
     background: var(--surface-card);
-    box-shadow: var(--shadow-inset);
+    box-shadow: var(--shadow-inner);
     flex-grow: 1;
     padding-block: calc(var(--site-block-padding, var(--spacing-cushion))*2);
 
