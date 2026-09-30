@@ -213,10 +213,10 @@
 .lesson-header__kicker {
     display: block;
     font-weight: bold;
-    margin-block-start: var(--spacing-05);
+    margin-block-start: var(--spacing-0-5);
 
     &.\+pre {
-        margin-block-end: var(--spacing-05);
+        margin-block-end: var(--spacing-0-5);
         margin-block-start: 0;
     }
 }
