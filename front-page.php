@@ -6,7 +6,8 @@ get_header();
 <main class="home site-main" id="main">
     <article class="prose wrapper home__content">
         <header class="article__header">
-            <h1 class="display-title brand-frame">Design for Humans: <span class="home__title-highlight">Courses</span></h1>
+            <h1 class="display-title brand-frame">Design for Humans: <span class="home__title-highlight">Courses</span>
+            </h1>
         </header>
         <?php the_content(); ?>
     </article>
@@ -24,7 +25,7 @@ get_header();
                 $active_lesson = dfh_get_student_current_lesson();
                 $user_id = get_current_user_id();
                 $completed_lessons = dfh_get_completed_lessons($user_id);
-                
+
                 // Only show resume button if user has actually started (completed at least one lesson)
                 if (!empty($completed_lessons) && is_int($active_lesson) && $active_lesson > 0 && function_exists('dfh_get_courses_for_lesson')) {
                     $courses = dfh_get_courses_for_lesson($active_lesson);
@@ -33,7 +34,7 @@ get_header();
                         $has_resume_course = !empty($hero_target);
                     }
                 }
-                
+
                 $current_user = wp_get_current_user();
                 $user_name = '';
                 if ($current_user && $current_user->ID) {
@@ -46,7 +47,8 @@ get_header();
                 : 'Welcome back';
 
             if (is_user_logged_in()): ?>
-                <p class="home__logged-in section__title"><?php echo esc_html($welcome_message); ?>, <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
+                <p class="home__logged-in section__title"><?php echo esc_html($welcome_message); ?>, <a class="link"
+                        href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
                         <a href="<?php echo esc_url($hero_target); ?>" class="button button--primary">
@@ -62,7 +64,8 @@ get_header();
 
                 <p class="section__title">Ready to learn?</p>
                 <div class="home__access">
-                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button button--primary"><span>Get Started</span></a>
+                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button button--primary"><span>Get
+                            Started</span></a>
                     <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button "><span>Log In</span></a>
                 </div>
             <?php endif; ?>
@@ -114,18 +117,21 @@ get_header();
                                 <?php endif; ?>
                                 <article class="card__content">
                                     <header class="card__header">
-                                        <?php
-                                    $course_id = get_the_ID();
-                                    $is_course_completed = is_array($user_completed_courses) && !empty($user_completed_courses[$course_id]);
-                                    $has_access = in_array($course_id, $user_accessible_courses, true);
-                                    if ($is_course_completed): ?>
-                                        <span class="course-card__badge completed badge badge--success"><span>Completed</span></span>
-                                    <?php elseif ($has_access): ?>
-                                        <span class="course-card__badge enrolled badge"><span>Enroled</span></span>
-                                    <?php endif; ?>
                                         <h3 class="card__title">
-                                            <a class="card__link link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                            <a class="card__link link"
+                                                href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                         </h3>
+
+                                        <?php
+                                        $course_id = get_the_ID();
+                                        $is_course_completed = is_array($user_completed_courses) && !empty($user_completed_courses[$course_id]);
+                                        $has_access = in_array($course_id, $user_accessible_courses, true);
+                                        if ($is_course_completed): ?>
+                                            <span
+                                                class="course-card__badge completed badge badge--success"><span>Completed</span></span>
+                                        <?php elseif ($has_access): ?>
+                                            <span class="course-card__badge enrolled badge"><span>Enroled</span></span>
+                                        <?php endif; ?>
                                     </header>
                                     <div class="card__body">
                                         <?php the_excerpt(); ?>
