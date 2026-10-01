@@ -447,7 +447,7 @@ get_header();
         }
 
         ?>
-        <div class="card__content">
+        <div class="card__content" tabindex="0" aria-label="Scrollable panel content">
             <header class="card__header progress-panel__header">
                 <a class="button button--tight button--link button--subtle syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
                     <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
