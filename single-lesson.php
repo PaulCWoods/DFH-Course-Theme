@@ -122,7 +122,7 @@ get_header();
 
                 <?php if ($playback_id): ?>
                     <button type="button" id="video-stick-toggle" class="button button--subtle lesson-video__toggle video-unstick"
-                        aria-controls="lesson-video-player" aria-pressed="true">
+                        aria-controls="lesson-video-player" aria-pressed="false">
                         <span class="visually-hidden">Stick video</span>
                         <svg class="icon" width="32" height="32" aria-hidden="true">
                             <use href="#Unlock" />
@@ -542,13 +542,16 @@ get_header();
 
         if (videoStickToggle) {
             videoStickToggle.addEventListener('click', function () {
-                const isSticky = videoStickToggle.classList.contains('video-stick');
+                const makeSticky = videoStickToggle.getAttribute('aria-pressed') !== 'true';
+                const label = videoStickToggle.querySelector('.visually-hidden');
+                const use = videoStickToggle.querySelector('use');
 
-                videoStickToggle.classList.toggle('video-stick', !isSticky);
-                videoStickToggle.classList.toggle('video-unstick', isSticky);
-                videoStickToggle.setAttribute('aria-pressed', String(!isSticky));
-                videoStickToggle.querySelector('.sr').textContent = isSticky ? 'Stick video' : 'Unstick video';
-                videoStickToggle.querySelector('use').setAttribute('href', isSticky ? '#Unlock' : '#Lock');
+                videoStickToggle.classList.toggle('video-stick', makeSticky);
+                videoStickToggle.classList.toggle('video-unstick', !makeSticky);
+                videoStickToggle.setAttribute('aria-pressed', String(makeSticky));
+
+                if (label) label.textContent = makeSticky ? 'Unstick video' : 'Stick video';
+                if (use) use.setAttribute('href', makeSticky ? '#Lock' : '#Unlock');
             });
         }
 
