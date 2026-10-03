@@ -1631,11 +1631,11 @@ function dfh_handle_certificate_download()
                     padding: 0;
                     font-family: var(--typography-font-family-sans, sans-serif);
                     background-image: repeating-linear-gradient(45deg,
-                            var(--color-muted-100),
-                            var(--color-muted-100) 1cm,
-                            var(--color-muted-200) 1cm,
-                            var(--color-muted-200) 2cm);
-                    color: var(--color-muted-900);
+                            var(--color-neutral-000),
+                            var(--color-neutral-000) 1cm,
+                            var(--color-neutral-200) 1cm,
+                            var(--color-neutral-200) 2cm);
+                    color: var(--color-neutral-900);
                     display: flex;
                     flex-direction: column;
                     gap: 5cm;
@@ -1648,7 +1648,7 @@ function dfh_handle_certificate_download()
                 .certificate-wrapper {
                     width: 1000px;
                     padding: 4rem;
-                    border: 8px solid var(--color-muted-900);
+                    border: 8px solid var(--color-neutral-900);
                     text-align: center;
                     background: #fff;
                     box-sizing: border-box;
@@ -1674,7 +1674,7 @@ function dfh_handle_certificate_download()
                     font-family: var(--typography-font-family-mono, monospace);
                     font-size: 2.2rem;
                     font-weight: bold;
-                    border-bottom: 2px solid var(--color-muted-900);
+                    border-bottom: 2px solid var(--color-neutral-900);
                     display: inline-block;
                     padding: 0 2rem 0.5rem;
                     margin: 1.5rem 0;
@@ -1692,7 +1692,7 @@ function dfh_handle_certificate_download()
                     justify-content: space-between;
                     margin-top: 4rem;
                     font-size: 1rem;
-                    border-top: 1px solid var(--color-muted-600);
+                    border-top: 1px solid var(--color-neutral-600);
                     padding-top: 1.5rem;
                 }
 
@@ -1715,7 +1715,7 @@ function dfh_handle_certificate_download()
                     }
 
                     .certificate-wrapper {
-                        border: 4px solid var(--color-muted-900);
+                        border: 4px solid var(--color-neutral-900);
                         max-width: 100%;
                     }
                 }

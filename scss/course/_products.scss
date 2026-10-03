@@ -18,8 +18,8 @@
     flex-wrap: wrap;
     flex-direction: row;
     font-size: 1em;
-    gap: var(--spacing-unit);
-    padding-block: var(--spacing-unit);
+    gap: var(--spacing);
+    padding-block: var(--spacing);
 
     h2 {
         font-size: 1em;
@@ -34,7 +34,7 @@ a.woocommerce-loop-product__link {
     text-decoration: none;
     flex-grow: 1;
     flex-direction: row;
-    gap: var(--spacing-unit);
+    gap: var(--spacing);
 
     img {
         aspect-ratio: 1 / 1;
@@ -114,7 +114,7 @@ a.woocommerce-loop-product__link {
         align-self: stretch;
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-unit);
+        gap: var(--spacing);
         flex: 1;
     }
 
@@ -128,7 +128,7 @@ a.woocommerce-loop-product__link {
     .cart {
         display: flex;
         flex-direction: row;
-        gap: var(--spacing-unit);
+        gap: var(--spacing);
     }
 
     .quantity {
@@ -178,7 +178,7 @@ a.woocommerce-loop-product__link {
 
     h2 {
         @include prose.subheading;
-        margin-block-end: var(--spacing-unit);
+        margin-block-end: var(--spacing);
     }
 }
 

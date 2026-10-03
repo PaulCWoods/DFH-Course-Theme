@@ -55,6 +55,10 @@
     --border-accent: light-dark(var(--color-blue-400), var(--color-blue-600));
     --border-accent-strong: light-dark(var(--color-blue-600), var(--color-blue-400));
 
+    --pullquote-font-family: var(--body-alt-font-family);
+    --pullquote-font-size: var(--body-large-font-size);
+    --pullquote-line-height: var(--heading-line-height);
+
 
     @media (prefers-contrast: more) {
         --foreground-accent-hover: light-dark(var(--color-blue-700), var(--color-blue-300));

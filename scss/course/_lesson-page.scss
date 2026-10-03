@@ -280,7 +280,7 @@
         position: relative;
 
         .lesson-body__sample-text {
-            background-image: linear-gradient(transparent, var(--surface-base) 50%);
+            background-image: linear-gradient(transparent, var(--surface) 50%);
             align-items: flex-end;
             display: flex;
             position: absolute;
@@ -295,7 +295,7 @@
 
             span {
                 border: var(--border);
-                padding: calc(var(--spacing-unit));
+                padding: calc(var(--spacing));
             }
         }
     }
@@ -538,7 +538,7 @@
 // preserves the focus-ring clearance while keeping the visible column aligned.
 .lesson-aside {
     align-self: start;
-    inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-4)) + var(--spacing-unit));
+    inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-4)) + var(--spacing));
     margin: calc(var(--focus-ring-clearance) * -1);
     padding: var(--focus-ring-clearance);
     position: sticky;
@@ -546,19 +546,19 @@
 
     @media screen and (width > #{var.$bp-lesson}) {
         // Prevent a tall resource list from pushing the lesson content out of view.
-        max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--spacing-unit) * 2);
+        max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-4)) - var(--spacing) * 2);
         overflow: auto;
     }
 }
 
 
 .lesson-stats__heading {
-    margin-block-end: var(--spacing-unit);
+    margin-block-end: var(--spacing);
 }
 
 // Stats list layout helper — default small-vertical list
 .lesson-stats__list {
-    --gap: calc(var(--spacing-unit)/2);
+    --gap: calc(var(--spacing)/2);
 }
 
 // -----------------------------------------------------------------------------
@@ -577,7 +577,7 @@
     }
 
     .heading {
-        margin-block-end: var(--spacing-unit);
+        margin-block-end: var(--spacing);
     }
 }
 
@@ -594,7 +594,7 @@
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-unit);
+    gap: var(--spacing);
     justify-content: flex-end;
 
     .prev-lesson {
@@ -606,7 +606,7 @@
     // Stack download entries and remove default list decoration.
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
-    gap: calc(var(--spacing-unit)/2);
+    gap: calc(var(--spacing)/2);
     list-style: none;
 }
 
@@ -631,7 +631,7 @@
     box-sizing: content-box;
     inset-block-start: 0;
     inset-inline-end: 0;
-    padding: var(--spacing-unit);
+    padding: var(--spacing);
     pointer-events: none;
     position: absolute;
 }
@@ -642,7 +642,7 @@
     font-size: 0;
     block-size: var(--spacing-8);
     position: relative;
-    margin: calc(var(--spacing-unit) / 2);
+    margin: calc(var(--spacing) / 2);
     margin-block-end: 0;
 
     img {
@@ -683,13 +683,13 @@
 
 .lesson-download__info {
     flex: 1;
-    padding: var(--spacing-unit);
+    padding: var(--spacing);
 
     h3 {
         align-items: center;
         display: flex;
         font-weight: bold;
-        gap: calc(var(--spacing-unit) / 2);
+        gap: calc(var(--spacing) / 2);
         justify-content: space-between;
     }
 }

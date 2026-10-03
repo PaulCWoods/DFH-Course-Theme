@@ -1,12 +1,12 @@
 .resource-list {
-    --gap: calc(var(--spacing-unit)/2);
+    --gap: calc(var(--spacing)/2);
     max-inline-size: var(--spacing-32);
 
     a {
         display: block;
         background-color: var(--surface-card);
         font-weight: bold;
-        padding: calc(var(--spacing-unit)/2) var(--spacing-unit);
+        padding: calc(var(--spacing)/2) var(--spacing);
 
         @media (prefers-contrast: more) {
             border: var(--border);

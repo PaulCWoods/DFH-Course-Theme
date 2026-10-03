@@ -5,14 +5,14 @@
 // -----------------------------------------------------------------------------
 // List spacing
 :where(.lesson-list) {
-    margin-block-start: calc(var(--spacing-unit, 1rem) / 2);
+    margin-block-start: calc(var(--spacing, 1rem) / 2);
 
     &:first-child {
         margin-block-start: 0;
     }
 
     li + li {
-        margin-block-start: calc(var(--spacing-unit, 1rem) / 2);
+        margin-block-start: calc(var(--spacing, 1rem) / 2);
     }
 }
 
@@ -115,13 +115,13 @@
 
             > .lesson-list {
                 border-block-start: var(--border-width-sm) dashed var(--border-accent);
-                margin-block-start: var(--spacing-unit, 1rem);
-                padding-block-start: var(--spacing-unit, 1rem);
+                margin-block-start: var(--spacing, 1rem);
+                padding-block-start: var(--spacing, 1rem);
 
                 > li + li {
                     border-block-start: var(--border-width-sm) dashed var(--border-accent);
-                    margin-block-start: var(--spacing-unit, 1rem);
-                    padding-block-start: var(--spacing-unit, 1rem);
+                    margin-block-start: var(--spacing, 1rem);
+                    padding-block-start: var(--spacing, 1rem);
                 }
             }
         }
@@ -134,7 +134,7 @@
 .lesson-item {
     align-items: baseline;
     display: flex;
-    gap: var(--spacing-unit, 1rem);
+    gap: var(--spacing, 1rem);
     justify-content: space-between;
     position: relative;
 

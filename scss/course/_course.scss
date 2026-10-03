@@ -123,7 +123,7 @@ $course-bp: 60em;
     padding-block: calc(var(--site-block-padding, var(--spacing-cushion))*2);
 
     .heading {
-        margin-block-end: var(--spacing-unit);
+        margin-block-end: var(--spacing);
     }
 
     + .course-landing__section {
@@ -134,7 +134,7 @@ $course-bp: 60em;
 
 .course-landing__note {
     color: var(--foreground-muted);
-    margin-block-end: var(--spacing-unit);
+    margin-block-end: var(--spacing);
 }
 
 .course-landing__completion {
@@ -143,7 +143,7 @@ $course-bp: 60em;
     border: var(--border);
     border-color: var(--border-accent);
     box-shadow: var(--shadow-none);
-    color: var(--foreground-base);
+    color: var(--foreground);
     padding: var(--site-block-padding, var(--spacing-cushion));
     text-align: var(--align, center);
 
@@ -162,7 +162,7 @@ $course-bp: 60em;
     h2 {
         display: flex;
         justify-content: space-between;
-        gap: var(--spacing-unit);
+        gap: var(--spacing);
         
         &:after {
             content: "🎉" / "";
@@ -195,14 +195,14 @@ $course-bp: 60em;
     border-color: inherti;
     display: flex;
     flex-wrap: wrap;
-    gap: calc(var(--spacing-unit) / 2);
+    gap: calc(var(--spacing) / 2);
     justify-content: var(--align, center);
-    padding-block-start: var(--spacing-unit);
+    padding-block-start: var(--spacing);
 }
 
 .course-landing__completion-feedback {
     display: block;
-    margin-block-start: var(--spacing-unit);
+    margin-block-start: var(--spacing);
 }
 
 @keyframes --course-complete-pop {

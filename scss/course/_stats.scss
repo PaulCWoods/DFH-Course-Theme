@@ -2,9 +2,9 @@
     align-items: center;
     background-color: var(--surface-card);
     display: flex;
-    gap: var(--spacing-unit);
+    gap: var(--spacing);
     justify-content: space-between;
-    padding: var(--spacing-unit);
+    padding: var(--spacing);
     &[data-pc] {
         background-image: linear-gradient(to left, var(--surface-accent) var(--stat-progress), transparent var(--stat-progress));
     }

@@ -36,11 +36,11 @@
     .u-columns {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(var(--cart-address-card-width, 16rem), 100%), 1fr));
-        gap: var(--spacing-unit);
+        gap: var(--spacing);
 
         [class^="u-column"] {
             border: var(--border-subtle);
-            padding: var(--spacing-unit);
+            padding: var(--spacing);
         }
     }
 
@@ -48,7 +48,7 @@
     p:has(label) {
         display: flex;
         flex-direction: column;
-        gap: calc(var(--spacing-unit) / 2);
+        gap: calc(var(--spacing) / 2);
     }
 
     // -------------------------------------------------------------------------
@@ -69,7 +69,7 @@
 
             // Payment method labels
             > label {
-                margin-inline-start: calc(var(--spacing-unit) / 2);
+                margin-inline-start: calc(var(--spacing) / 2);
                 vertical-align: middle;
             }
         }
@@ -78,8 +78,8 @@
     // Expandable payment method details
     .payment_box {
         background-color: var(--surface-card);
-        margin-block-start: var(--spacing-unit);
-        padding: var(--spacing-unit);
+        margin-block-start: var(--spacing);
+        padding: var(--spacing);
     }
 
     // Payment method table actions column
@@ -113,7 +113,7 @@
             align-items: center;
             block-size: 100%;
             display: flex;
-            padding-inline: var(--spacing-unit);
+            padding-inline: var(--spacing);
             inset-block-start: 0;
             inset-inline-end: 0;
             position: absolute;
@@ -197,7 +197,7 @@
     border-color: var(--foreground-success);
     color: var(--foreground-success);
     margin-block-end: var(--spacing-breathe);
-    padding: var(--spacing-unit);
+    padding: var(--spacing);
 }
 
 // Error message styling
@@ -221,7 +221,7 @@
 .woocommerce-notices-wrapper:not(:empty) {
     border: var(--border-subtle);
     margin-block-end: var(--spacing-breathe);
-    padding: var(--spacing-unit);
+    padding: var(--spacing);
 
     // Focus state for wrapper
     &:has(:focus-visible) {
@@ -271,7 +271,7 @@
     // Address block styling
     address {
         background-color: var(--surface-card);
-        padding: var(--spacing-unit);
+        padding: var(--spacing);
     }
 }
 
@@ -285,7 +285,7 @@
     li {
         align-items: center;
         display: grid;
-        gap: calc(var(--spacing-unit) / 4);
+        gap: calc(var(--spacing) / 4);
 
         @media screen and (width > 48em) {
             grid-template-columns: var(--spacing-12) 1fr;
@@ -299,8 +299,8 @@
         // Divider between list items
         + li {
             border-block-start: var(--border-subtle);
-            margin-block-start: calc(var(--spacing-unit) / 2);
-            padding-block-start: calc(var(--spacing-unit) / 2);
+            margin-block-start: calc(var(--spacing) / 2);
+            padding-block-start: calc(var(--spacing) / 2);
         }
     }
 }
@@ -308,7 +308,7 @@
 // Alternate address styling selector
 .woocommerce-Address address {
     background-color: var(--surface-card);
-    padding: var(--spacing-unit);
+    padding: var(--spacing);
 }
 
 .woocommerce-MyAccount-navigation {
@@ -356,7 +356,7 @@
     ul {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-unit);
+        gap: var(--spacing);
         list-style: none;
         margin: 0;
         padding: 0;
@@ -389,7 +389,7 @@
 
 .woocommerce-address-fields {
     .address-field:has(+ #billing_address_2_field) {
-        margin-block-end: calc(var(--spacing-unit) / 2);
+        margin-block-end: calc(var(--spacing) / 2);
     }
 }
 
@@ -434,7 +434,7 @@
         float: left;
         inline-size: 100%;
         margin: 0;
-        margin-block-end: var(--spacing-unit);
+        margin-block-end: var(--spacing);
 
         +* {
             clear: both;

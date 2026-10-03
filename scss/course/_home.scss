@@ -9,9 +9,9 @@
 .home__access {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-unit);
+    gap: var(--spacing);
 }
 
 .home__logged-in {
-    margin-block-end: var(--spacing-unit);
+    margin-block-end: var(--spacing);
 }
