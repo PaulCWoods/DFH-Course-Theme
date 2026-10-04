@@ -18,7 +18,7 @@
 
 .lesson-list {
     // Level-specific tokens make nested lists inherit their presentation cleanly.
-    --l1-box-padding: var(--spacing-1);
+    --l1-box-padding: var(--spacing-16);
     --l1-box-border-width: var(--border-width);
 
     --l1-label-font-family: var(--subheading-font-family);
@@ -55,8 +55,8 @@
     --link-underline-thickness: var(--prose-link-underline-thickness);
     --link-underline-color: var(--prose-link-underline-color);
 
-    --syllabus-width: var(--spacing-28);
-    --testimonial-width: var(--spacing-28);
+    --syllabus-width: var(--spacing-448);
+    --testimonial-width: var(--spacing-448);
 
     list-style: none;
 }

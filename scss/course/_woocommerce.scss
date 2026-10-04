@@ -288,7 +288,7 @@
         gap: calc(var(--spacing) / 4);
 
         @media screen and (width > 48em) {
-            grid-template-columns: var(--spacing-12) 1fr;
+            grid-template-columns: var(--spacing-192) 1fr;
         }
 
         strong {

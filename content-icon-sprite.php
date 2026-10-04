@@ -1,5 +1,18 @@
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="ChevronsUpDown" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="60 94.39 30.93 65.32 20.32 75.93 60 115.61 99.68 75.93 89.07 65.32 60 94.39"></polygon>
+            <polygon points="60 25.61 89.07 54.68 99.68 44.07 60 4.39 20.32 44.07 30.93 54.68 60 25.61"></polygon>
+        </symbol>
+        <symbol id="ChevronsLeftRight" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="75.93 20.32 65.32 30.93 94.39 60 65.32 89.07 75.93 99.68 115.61 60 75.93 20.32"></polygon>
+            <polygon points="44.07 20.32 4.39 60 44.07 99.68 54.68 89.07 25.61 60 54.68 30.93 44.07 20.32"></polygon>
+        </symbol>
+        <symbol id="More" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <rect width="15" height="15" x="52.5" y="52.5"></rect>
+            <rect width="15" height="15" x="82.5" y="52.5"></rect>
+            <rect width="15" height="15" x="22.5" y="52.5"></rect>
+        </symbol>
         <symbol id="Quote" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <path d="M39.51 32.75c-3.52-1.46-7.24-2.11-10.94-1.96l8.58-20.71-13.86-5.74-17.57 42.4c-2.64 6.38-2.64 13.41 0 19.79s7.61 11.35 13.99 13.99c3.19 1.32 6.54 1.98 9.9 1.98s6.7-0.66 9.89-1.98c6.38-2.64 11.35-7.61 13.99-13.99s2.64-13.41 0-19.79-7.61-11.35-13.98-13.99z"></path>
             <path d="M114.28 46.74c-2.64-6.38-7.61-11.35-13.99-13.99-3.52-1.46-7.24-2.11-10.94-1.96l8.58-20.71-13.86-5.74-17.56 42.4c-2.64 6.38-2.64 13.41 0 19.79s7.61 11.35 13.99 13.99c3.19 1.32 6.54 1.98 9.9 1.98s6.7-0.66 9.89-1.98c6.38-2.64 11.35-7.61 13.99-13.99s2.64-13.41 0-19.79z"></path>

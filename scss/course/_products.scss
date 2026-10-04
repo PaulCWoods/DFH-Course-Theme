@@ -38,12 +38,12 @@ a.woocommerce-loop-product__link {
 
     img {
         aspect-ratio: 1 / 1;
-        inline-size: var(--spacing-4);
+        inline-size: var(--spacing-64);
         object-fit: cover;
 
         @media screen and (width > 48em) {
             aspect-ratio: 4 / 3;
-            inline-size: var(--spacing-8);
+            inline-size: var(--spacing-128);
         }
     }
 
