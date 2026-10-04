@@ -9,9 +9,9 @@
             <polygon points="44.07 20.32 4.39 60 44.07 99.68 54.68 89.07 25.61 60 54.68 30.93 44.07 20.32"></polygon>
         </symbol>
         <symbol id="More" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
-            <rect width="15" height="15" x="52.5" y="52.5"></rect>
-            <rect width="15" height="15" x="82.5" y="52.5"></rect>
-            <rect width="15" height="15" x="22.5" y="52.5"></rect>
+            <rect width="22.5" height="22.5" x="48.75" y="48.75"></rect>
+            <rect width="22.5" height="22.5" x="7.5" y="48.75"></rect>
+            <rect width="22.5" height="22.5" x="90" y="48.75"></rect>
         </symbol>
         <symbol id="Quote" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <path d="M39.51 32.75c-3.52-1.46-7.24-2.11-10.94-1.96l8.58-20.71-13.86-5.74-17.57 42.4c-2.64 6.38-2.64 13.41 0 19.79s7.61 11.35 13.99 13.99c3.19 1.32 6.54 1.98 9.9 1.98s6.7-0.66 9.89-1.98c6.38-2.64 11.35-7.61 13.99-13.99s2.64-13.41 0-19.79-7.61-11.35-13.98-13.99z"></path>
