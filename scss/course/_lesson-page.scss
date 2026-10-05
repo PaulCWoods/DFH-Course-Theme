@@ -419,7 +419,7 @@
 
     // Needed to override WP styles
     .wp-block-pullquote {
-        background-color: var(--surface-fade);
+        background-color: var(--surface-translucent);
         // !important needed to override stubborn classes in WP
         font-size: inherit !important;
         line-height: inherit !important;
