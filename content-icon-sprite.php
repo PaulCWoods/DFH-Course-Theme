@@ -1,5 +1,70 @@
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="Paste" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M120 120H52.5V33.75h40.61L120 60.64zM67.5 105H105V66.86L86.89 48.75H67.5z"></path>
+            <polygon points="112.5 67.25 86.5 67.25 86.5 41.25 93.5 41.25 93.5 60.25 112.5 60.25 112.5 67.25"></polygon>
+            <rect width="37.5" height="15" x="30"></rect>
+            <polygon points="48.75 120 0 120 0 7.5 97.5 7.5 97.5 30 82.5 30 82.5 22.5 15 22.5 15 105 48.75 105 48.75 120"></polygon>
+        </symbol>
+        <symbol id="Duplicate" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M120 120H30V30h90zM45 105h60V45H45z"></path>
+            <polygon points="26.25 90 0 90 0 0 90 0 90 26.25 75 26.25 75 15 15 15 15 75 26.25 75 26.25 90"></polygon>
+        </symbol>
+        <symbol id="Delete" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M101.25 120h-82.5V26.25h82.5zM33.75 105h52.5V41.25h-52.5z"></path>
+            <rect width="97.5" height="15" x="11.25" y="7.5"></rect>
+            <rect width="15" height="48.75" x="63.75" y="48.75"></rect>
+            <rect width="15" height="48.75" x="41.25" y="48.75"></rect>
+            <rect width="52.5" height="15" x="33.75"></rect>
+        </symbol>
+        <symbol id="Cut" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <g>
+                <rect transform="rotate(-33 55.908791 49.959205)" width="15" height="97.5" x="48.42" y="1.21"></rect>
+                <path d="M95.09 105.18c-1.57 0-3.15-0.17-4.72-0.5-5.88-1.25-10.92-4.71-14.19-9.75S71.79 83.88 73.04 78s4.71-10.92 9.75-14.19c10.4-6.76 24.36-3.79 31.12 6.61v0c6.76 10.41 3.79 24.37-6.62 31.13-3.69 2.4-7.91 3.64-12.2 3.63zM95.03 75.18c-1.4 0-2.81 0.39-4.07 1.21-1.68 1.09-2.83 2.77-3.25 4.73s-0.04 3.96 1.05 5.64 2.77 2.84 4.73 3.25c1.96 0.42 3.96 0.04 5.64-1.05 3.47-2.25 4.46-6.91 2.21-10.37v0c-1.43-2.21-3.85-3.41-6.31-3.41z"></path>
+            </g>
+            <g>
+                <rect transform="rotate(-57 64.078528 49.958663)" width="97.5" height="15" x="15.33" y="42.46"></rect>
+                <path d="M24.91 105.18c-4.3 0-8.52-1.24-12.21-3.64C2.29 94.78-0.67 80.82 6.08 70.42v0C12.84 60.01 26.8 57.05 37.2 63.8c5.04 3.27 8.5 8.31 9.75 14.19s0.13 11.89-3.14 16.93-8.31 8.5-14.19 9.75c-1.57 0.33-3.15 0.5-4.71 0.51zM18.66 78.59c-2.25 3.47-1.26 8.12 2.21 10.37 1.68 1.09 3.68 1.46 5.64 1.05 1.96-0.42 3.64-1.57 4.73-3.25s1.46-3.69 1.05-5.64c-0.42-1.96-1.57-3.64-3.25-4.73-3.47-2.25-8.12-1.26-10.38 2.21z"></path>
+            </g>
+        </symbol>
+        <symbol id="Copy" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M120 120H41.25V22.5h44.36L120 56.89zM56.25 105H105V63.11L79.39 37.5H56.25z"></path>
+            <polygon points="112.5 63.5 79 63.5 79 30 86 30 86 56.5 112.5 56.5 112.5 63.5"></polygon>
+            <polygon points="37.5 97.5 0 97.5 0 0 78.75 0 78.75 18.75 63.75 18.75 63.75 15 15 15 15 82.5 37.5 82.5 37.5 97.5"></polygon>
+        </symbol>
+        <symbol id="Clipboard" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="108.75 120 11.25 120 11.25 7.5 41.25 7.5 41.25 22.5 26.25 22.5 26.25 105 93.75 105 93.75 22.5 78.75 22.5 78.75 7.5 108.75 7.5 108.75 120"></polygon>
+            <path d="M86.25 48.75h-52.5V7.5h52.5zM48.75 33.75h22.5V22.5h-22.5z"></path>
+            <rect width="37.5" height="15" x="41.25"></rect>
+        </symbol>
+        <symbol id="ChevronUp" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="89.07 82.49 60 53.42 30.93 82.49 20.32 71.88 60 32.21 99.68 71.88 89.07 82.49"></polygon>
+        </symbol>
+        <symbol id="ChevronRight" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="48.12 99.68 37.51 89.07 66.58 60 37.51 30.93 48.12 20.32 87.79 60 48.12 99.68"></polygon>
+        </symbol>
+        <symbol id="ChevronLeft" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="71.88 99.68 32.21 60 71.88 20.32 82.49 30.93 53.42 60 82.49 89.07 71.88 99.68"></polygon>
+        </symbol>
+        <symbol id="ChevronDown" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="60 87.79 20.32 48.12 30.93 37.51 60 66.58 89.07 37.51 99.68 48.12 60 87.79"></polygon>
+        </symbol>
+        <symbol id="Bell" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M120 97.5c-20.68 0-37.5-16.82-37.5-37.5V37.5C82.5 25.09 72.41 15 60 15S37.5 25.09 37.5 37.5V60c0 20.68-16.82 37.5-37.5 37.5v-15c12.41 0 22.5-10.09 22.5-22.5V37.5C22.5 16.82 39.32 0 60 0s37.5 16.82 37.5 37.5V60c0 12.41 10.09 22.5 22.5 22.5z"></path>
+            <rect width="30" height="15" x="45" y="105"></rect>
+            <rect width="120" height="15" y="82.5"></rect>
+        </symbol>
+        <symbol id="BellFilled" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <g>
+                <path d="M120 90c-16.57 0-30-13.43-30-30V37.5c0-16.57-13.43-30-30-30s-30 13.43-30 30V60c0 16.57-13.43 30-30 30"></path>
+                <path d="M120 97.5c-20.68 0-37.5-16.82-37.5-37.5V37.5C82.5 25.09 72.41 15 60 15S37.5 25.09 37.5 37.5V60c0 20.68-16.82 37.5-37.5 37.5v-15c12.41 0 22.5-10.09 22.5-22.5V37.5C22.5 16.82 39.32 0 60 0s37.5 16.82 37.5 37.5V60c0 12.41 10.09 22.5 22.5 22.5z"></path>
+            </g>
+            <rect width="30" height="15" x="45" y="105"></rect>
+            <rect width="120" height="15" y="82.5"></rect>
+        </symbol>
+        <symbol id="Clip" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M60 0C37.25 0 18.75 18.5 18.75 41.25V105h15V41.25C33.75 26.78 45.53 15 60 15s26.25 11.78 26.25 26.25V90c0 8.27-6.73 15-15 15s-15-6.73-15-15V41.25c0-2.07 1.68-3.75 3.75-3.75s3.75 1.68 3.75 3.75v45h15v-45c0-10.34-8.41-18.75-18.75-18.75s-18.75 8.41-18.75 18.75V90c0 16.54 13.46 30 30 30s30-13.46 30-30V41.25C101.25 18.5 82.75 0 60 0z"></path>
+        </symbol>
         <symbol id="ChevronsUpDown" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <polygon points="60 94.39 30.93 65.32 20.32 75.93 60 115.61 99.68 75.93 89.07 65.32 60 94.39"></polygon>
             <polygon points="60 25.61 89.07 54.68 99.68 44.07 60 4.39 20.32 44.07 30.93 54.68 60 25.61"></polygon>
