@@ -130,9 +130,9 @@ get_header();
                     </button>
                 <?php endif; ?>
 
-                <button class="button button--subtle progress-toggle course-progress__toggle" command="toggle-popover"
+                <button class="button button--subtle button--icon-on-sm progress-toggle course-progress__toggle" command="toggle-popover"
                     commandfor="course-progress">
-                    <span class="x-visually-hidden@<sm button__text">Progress</span>
+                    <span class="button__text">Progress</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
                         <use href="#Navigation" />
                     </svg>
@@ -386,14 +386,14 @@ get_header();
             <div class="wrapper lesson-explore__section lesson-progression"
                 aria-describedby="lesson-progression__heading">
                 <h2 class="visually-hidden" id="progression-progress-heading">Proceed to the next step</h2>
-                <div class="lesson-progression__buttons">
+                <div class="lesson-progression__buttons container-type-inline-size">
                     <?php if ($adjacent['previous']): ?>
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
-                            class="button button--subtle link-button prev-lesson">
+                            class="button button--subtle button--responsive link-button prev-lesson">
                             <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                                 <use href="#ArrowLeft" />
                             </svg>
-                            <span class="visually-hidden@<sm">Previous Lesson</span>
+                            <span class="button__text">Previous Lesson</span>
                         </a>
                     <?php endif; ?>
 
