@@ -19,7 +19,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 <header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
     <div class="lesson-head site-header +sample">
         <div class="lesson-head__inner wrapper">
-            <nav class="lesson-head__nav stack +no-gap" aria-label="Breadcrumb">
+            <nav class="lesson-head__nav stack stack--tight" aria-label="Breadcrumb">
                 <?php if ($associated_course_id && get_post($associated_course_id)): ?>
                     <a class="lesson-head__nav-parent link"
                         href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
@@ -44,7 +44,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 </header>
 
 <main class="site-main lesson-page" id="main">
-    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack +no-gap'); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack stack--tight'); ?>>
 
         <header class="lesson-header prose">
             <div class="wrapper">
@@ -85,7 +85,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                         </span>
                     </p>
                 </div>
-                <aside class="lesson-aside article__aside stack +no-gap">
+                <aside class="lesson-aside article__aside stack stack--tight">
                     <?php
                     // Gather stats, external links, and downloads; render aside only if any exist
                     $stats_meta = function_exists('get_field') ? get_field('lesson_stats') : get_post_meta(get_the_ID(), 'lesson_stats', true);
@@ -159,7 +159,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                                 if ($download_post && $pdf_url) {
                                     ?>
                                     <li>
-                                        <div class="lesson-download stack +no-gap">
+                                        <div class="lesson-download stack stack--tight">
                                             <?php if (has_post_thumbnail($download_id)): ?>
                                                 <div class="lesson-download__thumb">
                                                     <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>

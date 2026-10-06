@@ -30,9 +30,9 @@
     }
 }
 
-// Contextual link tokens for lessons and syllabus views.
-:is([data-lesson], [data-syllabus]) {
-    --link-color: var(--foreground-accent);
-    --link-hover-color: var(--foreground-accent-hover);
-    --link-active-color: var(--foreground-accent-pressed);
-}
+// // Contextual link tokens for lessons and syllabus views.
+// :is([data-lesson], [data-syllabus]) {
+//     --link-color: var(--foreground-accent);
+//     --link-hover-color: var(--foreground-accent-hover);
+//     --link-active-color: var(--foreground-accent-pressed);
+// }

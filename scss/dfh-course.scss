@@ -7,3 +7,17 @@
 @layer theme {
     @include meta.load-css('theme');
 }
+
+.progress-toggle {
+    container-type: inline-size;
+
+    .icon {
+        flex-shrink: 0;
+    }
+
+    @container (max-width: 100px) {
+        .button__text {
+            display: none;
+        }
+    }
+}

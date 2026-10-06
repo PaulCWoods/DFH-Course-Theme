@@ -4,149 +4,184 @@
 
 // Base theme tokens
 :root {
-    --surface-accent: light-dark(var(--color-blue-200), var(--color-blue-700));
-    --surface-accent-dark: var(--color-blue-800);
-    --surface-accent-muted: light-dark(var(--color-blue-100), var(--color-blue-900));
-    --surface-accent-strong: light-dark(var(--color-blue-700), var(--color-blue-300));
+    --surface-color-accent-light: var(--color-blue-200);
+    --surface-color-accent-muted-light: var(--color-blue-100);
+    --surface-color-accent-muted-dark: var(--color-blue-900);
+    --surface-color-accent-strong-light: var(--color-blue-700);
+    --surface-color-accent-strong-dark: var(--color-blue-300);
+    --surface-color-accent-dark: var(--color-blue-800);
 
-    --foreground-accent: light-dark(var(--color-blue-700), var(--color-blue-300));
-    --foreground-accent-hover: light-dark(var(--color-blue-600), var(--color-blue-400));
-    --foreground-accent-pressed: light-dark(var(--color-blue-800), var(--color-blue-200));
+    --foreground-color-accent-dark: var(--color-blue-700);
+    --foreground-color-accent-dark-hover: var(--color-blue-600);
+    --foreground-color-accent-dark-pressed: var(--color-blue-800);
+    --foreground-color-accent-light: var(--color-blue-300);
+    --foreground-color-accent-light-hover: var(--color-blue-200);
+    --foreground-color-accent-light-pressed: var(--color-blue-400);
 
-    --foreground-accent-inverted: light-dark(var(--color-blue-300), var(--color-blue-700));
-    --foreground-accent-inverted-hover: light-dark(var(--color-blue-400), var(--color-blue-600));
-    --foreground-accent-inverted-pressed: light-dark(var(--color-blue-200), var(--color-blue-800));
-
-    --foreground-accent-on-dark: var(--color-blue-300);
-    --foreground-accent-on-dark-hover: var(--color-blue-400);
-    --foreground-accent-on-dark-pressed: var(--color-blue-200);
-
-    --border-accent: light-dark(var(--color-blue-400), var(--color-blue-600));
-    --border-accent-strong: light-dark(var(--color-blue-600), var(--color-blue-400));
+    --border-color-accent-light: var(--color-blue-400);
+    --border-color-accent-dark: var(--color-blue-600);
 
     --pullquote-font-family: var(--body-alt-font-family);
     --pullquote-font-size: var(--body-large-font-size);
     --pullquote-line-height: var(--heading-line-height);
 
+    --surface-accent: light-dark(var(--surface-color-accent-light), var(--surface-color-accent-dark));
+    --surface-accent-muted: light-dark(var(--surface-color-accent-muted-light), var(--surface-color-accent-muted-dark));
+    --surface-accent-strong: light-dark(var(--surface-color-accent-strong-light), var(--surface-color-accent-strong-dark));
+
+    --foreground-accent: light-dark(var(--foreground-color-accent-dark), var(--foreground-color-accent-light));
+    --foreground-accent-hover: light-dark(var(--foreground-color-accent-dark-hover), var(--foreground-color-accent-light-hover));
+    --foreground-accent-pressed: light-dark(var(--foreground-color-accent-dark-pressed), var(--foreground-color-accent-light-pressed));
+
+    --border-color-accent: light-dark(var(--border-color-accent-light), var(--border-color-accent-dark));
+
+
     @media (prefers-contrast: more) {
         --foreground-accent-hover: light-dark(var(--color-blue-700), var(--color-blue-300));
-        --border-accent: var(--color-blue-500);
-        --border-accent-strong: var(--color-blue-500);
+        --border-color-accent: var(--color-blue-500);
+        --border-color-accent-strong: var(--color-blue-500);
     }
 }
 
 // Lesson 1 and syllabus 1 tokens
 :is([data-lesson="1"], [data-syllabus="1"]) {
-    --surface-accent: light-dark(var(--color-blue-200), var(--color-blue-700));
-    --surface-accent-dark: var(--color-blue-800);
-    --surface-accent-muted: light-dark(var(--color-blue-100), var(--color-blue-900));
-    --surface-accent-strong: light-dark(var(--color-blue-700), var(--color-blue-300));
+    --surface-color-accent-light: var(--color-blue-200);
+    --surface-color-accent-muted-light: var(--color-blue-100);
+    --surface-color-accent-muted-dark: var(--color-blue-900);
+    --surface-color-accent-strong-light: var(--color-blue-700);
+    --surface-color-accent-strong-dark: var(--color-blue-300);
+    --surface-color-accent-dark: var(--color-blue-800);
 
-    --foreground-accent: light-dark(var(--color-blue-700), var(--color-blue-300));
-    --foreground-accent-hover: light-dark(var(--color-blue-600), var(--color-blue-400));
-    --foreground-accent-pressed: light-dark(var(--color-blue-800), var(--color-blue-200));
+    --foreground-color-accent-dark: var(--color-blue-700);
+    --foreground-color-accent-dark-hover: var(--color-blue-600);
+    --foreground-color-accent-dark-pressed: var(--color-blue-800);
+    --foreground-color-accent-light: var(--color-blue-300);
+    --foreground-color-accent-light-hover: var(--color-blue-200);
+    --foreground-color-accent-light-pressed: var(--color-blue-400);
 
-    --foreground-accent-inverted: light-dark(var(--color-blue-300), var(--color-blue-700));
-    --foreground-accent-inverted-hover: light-dark(var(--color-blue-400), var(--color-blue-600));
-    --foreground-accent-inverted-pressed: light-dark(var(--color-blue-200), var(--color-blue-800));
+    --border-color-accent-light: var(--color-blue-400);
+    --border-color-accent-dark: var(--color-blue-600);
 
-    --foreground-accent-on-dark: var(--color-blue-300);
-    --foreground-accent-on-dark-hover: var(--color-blue-400);
-    --foreground-accent-on-dark-pressed: var(--color-blue-200);
+    --border-color-accent: light-dark(var(--color-blue-400), var(--color-blue-600));
 
-    --border-accent: light-dark(var(--color-blue-400), var(--color-blue-600));
-    --border-accent-strong: light-dark(var(--color-blue-600), var(--color-blue-400));
+    --surface-accent: light-dark(var(--surface-color-accent-light), var(--surface-color-accent-dark));
+    --surface-accent-muted: light-dark(var(--surface-color-accent-muted-light), var(--surface-color-accent-muted-dark));
+    --surface-accent-strong: light-dark(var(--surface-color-accent-strong-light), var(--surface-color-accent-strong-dark));
+
+    --foreground-accent: light-dark(var(--foreground-color-accent-dark), var(--foreground-color-accent-light));
+    --foreground-accent-hover: light-dark(var(--foreground-color-accent-dark-hover), var(--foreground-color-accent-light-hover));
+    --foreground-accent-pressed: light-dark(var(--foreground-color-accent-dark-pressed), var(--foreground-color-accent-light-pressed));
+
+    --border-color-accent: light-dark(var(--border-color-accent-light), var(--border-color-accent-dark));
 
     @media (prefers-contrast: more) {
         --foreground-accent-hover: light-dark(var(--color-blue-700), var(--color-blue-300));
-        --border-accent: var(--color-blue-500);
-        --border-accent-strong: var(--color-blue-500);
+        --border-color-accent: var(--color-blue-500);
     }
 }
 
 // Lesson 2 and syllabus 2 tokens
 :is([data-lesson="2"], [data-syllabus="2"]) {
-    --surface-accent: light-dark(var(--color-aqua-200), var(--color-aqua-700));
-    --surface-accent-dark: var(--color-aqua-800);
-    --surface-accent-muted: light-dark(var(--color-aqua-100), var(--color-aqua-900));
-    --surface-accent-strong: light-dark(var(--color-aqua-700), var(--color-aqua-300));
+    --surface-color-accent-light: var(--color-aqua-200);
+    --surface-color-accent-muted-light: var(--color-aqua-100);
+    --surface-color-accent-muted-dark: var(--color-aqua-900);
+    --surface-color-accent-strong-light: var(--color-aqua-700);
+    --surface-color-accent-strong-dark: var(--color-aqua-300);
+    --surface-color-accent-dark: var(--color-aqua-800);
 
-    --foreground-accent: light-dark(var(--color-aqua-700), var(--color-aqua-300));
-    --foreground-accent-hover: light-dark(var(--color-aqua-600), var(--color-aqua-400));
-    --foreground-accent-pressed: light-dark(var(--color-aqua-800), var(--color-aqua-200));
+    --foreground-color-accent-dark: var(--color-aqua-700);
+    --foreground-color-accent-dark-hover: var(--color-aqua-600);
+    --foreground-color-accent-dark-pressed: var(--color-aqua-800);
+    --foreground-color-accent-light: var(--color-aqua-300);
+    --foreground-color-accent-light-hover: var(--color-aqua-200);
+    --foreground-color-accent-light-pressed: var(--color-aqua-400);
 
-    --foreground-accent-inverted: light-dark(var(--color-aqua-300), var(--color-aqua-700));
-    --foreground-accent-inverted-hover: light-dark(var(--color-aqua-400), var(--color-aqua-600));
-    --foreground-accent-inverted-pressed: light-dark(var(--color-aqua-200), var(--color-aqua-800));
+    --border-color-accent-light: var(--color-aqua-400);
+    --border-color-accent-dark: var(--color-aqua-600);
 
-    --foreground-accent-on-dark: var(--color-aqua-300);
-    --foreground-accent-on-dark-hover: var(--color-aqua-400);
-    --foreground-accent-on-dark-pressed: var(--color-aqua-200);
+    --surface-accent: light-dark(var(--surface-color-accent-light), var(--surface-color-accent-dark));
+    --surface-accent-muted: light-dark(var(--surface-color-accent-muted-light), var(--surface-color-accent-muted-dark));
+    --surface-accent-strong: light-dark(var(--surface-color-accent-strong-light), var(--surface-color-accent-strong-dark));
 
-    --border-accent: light-dark(var(--color-aqua-400), var(--color-aqua-600));
-    --border-accent-strong: light-dark(var(--color-aqua-600), var(--color-aqua-400));
+    --foreground-accent: light-dark(var(--foreground-color-accent-dark), var(--foreground-color-accent-light));
+    --foreground-accent-hover: light-dark(var(--foreground-color-accent-dark-hover), var(--foreground-color-accent-light-hover));
+    --foreground-accent-pressed: light-dark(var(--foreground-color-accent-dark-pressed), var(--foreground-color-accent-light-pressed));
+
+    --border-color-accent: light-dark(var(--border-color-accent-light), var(--border-color-accent-dark));
 
     @media (prefers-contrast: more) {
         --foreground-accent-hover: light-dark(var(--color-aqua-600), var(--color-aqua-400));
-        --border-accent: var(--color-aqua-500);
-        --border-accent-strong: var(--color-aqua-500);
+        --border-color-accent: var(--color-aqua-500);
     }
 }
 
 // Lesson 3 and syllabus 3 tokens
 :is([data-lesson="3"], [data-syllabus="3"]) {
-    --surface-accent: light-dark(var(--color-purple-200), var(--color-purple-700));
-    --surface-accent-dark: var(--color-purple-800);
-    --surface-accent-muted: light-dark(var(--color-purple-100), var(--color-purple-900));
-    --surface-accent-strong: light-dark(var(--color-purple-700), var(--color-purple-300));
+    --surface-color-accent-light: var(--color-purple-200);
+    --surface-color-accent-muted-light: var(--color-purple-100);
+    --surface-color-accent-muted-dark: var(--color-purple-900);
+    --surface-color-accent-strong-light: var(--color-purple-700);
+    --surface-color-accent-strong-dark: var(--color-purple-300);
+    --surface-color-accent-dark: var(--color-purple-800);
 
-    --foreground-accent: light-dark(var(--color-purple-700), var(--color-purple-300));
-    --foreground-accent-hover: light-dark(var(--color-purple-600), var(--color-purple-400));
-    --foreground-accent-pressed: light-dark(var(--color-purple-800), var(--color-purple-200));
+    --foreground-color-accent-dark: var(--color-purple-700);
+    --foreground-color-accent-dark-hover: var(--color-purple-600);
+    --foreground-color-accent-dark-pressed: var(--color-purple-800);
+    --foreground-color-accent-light: var(--color-purple-300);
+    --foreground-color-accent-light-hover: var(--color-purple-200);
+    --foreground-color-accent-light-pressed: var(--color-purple-400);
 
-    --foreground-accent-inverted: light-dark(var(--color-purple-300), var(--color-purple-700));
-    --foreground-accent-inverted-hover: light-dark(var(--color-purple-400), var(--color-purple-600));
-    --foreground-accent-inverted-pressed: light-dark(var(--color-purple-200), var(--color-purple-800));
+    --border-color-accent-light: var(--color-purple-400);
+    --border-color-accent-dark: var(--color-purple-600);
 
-    --foreground-accent-on-dark: var(--color-purple-300);
-    --foreground-accent-on-dark-hover: var(--color-purple-400);
-    --foreground-accent-on-dark-pressed: var(--color-purple-200);
+    --surface-accent: light-dark(var(--surface-color-accent-light), var(--surface-color-accent-dark));
+    --surface-accent-muted: light-dark(var(--surface-color-accent-muted-light), var(--surface-color-accent-muted-dark));
+    --surface-accent-strong: light-dark(var(--surface-color-accent-strong-light), var(--surface-color-accent-strong-dark));
 
-    --border-accent: light-dark(var(--color-purple-400), var(--color-purple-600));
-    --border-accent-strong: light-dark(var(--color-purple-600), var(--color-purple-400));
+    --foreground-accent: light-dark(var(--foreground-color-accent-dark), var(--foreground-color-accent-light));
+    --foreground-accent-hover: light-dark(var(--foreground-color-accent-dark-hover), var(--foreground-color-accent-light-hover));
+    --foreground-accent-pressed: light-dark(var(--foreground-color-accent-dark-pressed), var(--foreground-color-accent-light-pressed));
+
+    --border-color-accent: light-dark(var(--border-color-accent-light), var(--border-color-accent-dark));
+
 
         @media (prefers-contrast: more) {
             --foreground-accent-hover: light-dark(var(--color-purple-700), var(--color-purple-300));
-            --border-accent: var(--color-purple-500);
-            --border-accent-strong: var(--color-purple-500);
+            --border-color-accent: var(--color-purple-500);
         }
 }
 
 // Lesson 4 and syllabus 4 tokens
 :is([data-lesson="4"], [data-syllabus="4"]) {
-    --surface-accent: light-dark(var(--color-olive-200), var(--color-olive-700));
-    --surface-accent-dark: var(--color-olive-800);
-    --surface-accent-muted: light-dark(var(--color-olive-100), var(--color-olive-900));
-    --surface-accent-strong: light-dark(var(--color-olive-700), var(--color-olive-300));
+    --surface-color-accent-light: var(--color-olive-200);
+    --surface-color-accent-muted-light: var(--color-olive-100);
+    --surface-color-accent-muted-dark: var(--color-olive-900);
+    --surface-color-accent-strong-light: var(--color-olive-700);
+    --surface-color-accent-strong-dark: var(--color-olive-300);
+    --surface-color-accent-dark: var(--color-olive-800);
 
-    --foreground-accent: light-dark(var(--color-olive-700), var(--color-olive-300));
-    --foreground-accent-hover: light-dark(var(--color-olive-600), var(--color-olive-400));
-    --foreground-accent-pressed: light-dark(var(--color-olive-800), var(--color-olive-200));
+    --foreground-color-accent-dark: var(--color-olive-700);
+    --foreground-color-accent-dark-hover: var(--color-olive-600);
+    --foreground-color-accent-dark-pressed: var(--color-olive-800);
+    --foreground-color-accent-light: var(--color-olive-300);
+    --foreground-color-accent-light-hover: var(--color-olive-200);
+    --foreground-color-accent-light-pressed: var(--color-olive-400);
 
-    --foreground-accent-inverted: light-dark(var(--color-olive-300), var(--color-olive-700));
-    --foreground-accent-inverted-hover: light-dark(var(--color-olive-400), var(--color-olive-600));
-    --foreground-accent-inverted-pressed: light-dark(var(--color-olive-200), var(--color-olive-800));
+    --border-color-accent-light: var(--color-olive-400);
+    --border-color-accent-dark: var(--color-olive-600);
 
-    --foreground-accent-on-dark: var(--color-olive-300);
-    --foreground-accent-on-dark-hover: var(--color-olive-400);
-    --foreground-accent-on-dark-pressed: var(--color-olive-200);
+    --surface-accent: light-dark(var(--surface-color-accent-light), var(--surface-color-accent-dark));
+    --surface-accent-muted: light-dark(var(--surface-color-accent-muted-light), var(--surface-color-accent-muted-dark));
+    --surface-accent-strong: light-dark(var(--surface-color-accent-strong-light), var(--surface-color-accent-strong-dark));
 
-    --border-accent: light-dark(var(--color-olive-400), var(--color-olive-600));
-    --border-accent-strong: light-dark(var(--color-olive-600), var(--color-olive-400));
+    --foreground-accent: light-dark(var(--foreground-color-accent-dark), var(--foreground-color-accent-light));
+    --foreground-accent-hover: light-dark(var(--foreground-color-accent-dark-hover), var(--foreground-color-accent-light-hover));
+    --foreground-accent-pressed: light-dark(var(--foreground-color-accent-dark-pressed), var(--foreground-color-accent-light-pressed));
+
+    --border-color-accent: light-dark(var(--border-color-accent-light), var(--border-color-accent-dark));
 
     @media (prefers-contrast: more) {
         --foreground-accent-hover: light-dark(var(--color-olive-700), var(--color-olive-300));
-        --border-accent: var(--color-olive-500);
-        --border-accent-strong: var(--color-olive-500);
+        --border-color-accent: var(--color-olive-500);
     }
 }

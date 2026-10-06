@@ -97,7 +97,7 @@
 
             &:has(a[href]) {
                 background-color: color-mix(var(--surface-accent-muted), transparent 66%);
-                border-color: var(--border-accent);
+                border-color: var(--border-color-accent);
 
 
                 @media (prefers-contrast: more) {
@@ -114,12 +114,12 @@
             }
 
             > .lesson-list {
-                border-block-start: var(--border-width-sm) dashed var(--border-accent);
+                border-block-start: var(--border-width-sm) dashed var(--border-color-accent);
                 margin-block-start: var(--spacing, 1rem);
                 padding-block-start: var(--spacing, 1rem);
 
                 > li + li {
-                    border-block-start: var(--border-width-sm) dashed var(--border-accent);
+                    border-block-start: var(--border-width-sm) dashed var(--border-color-accent);
                     margin-block-start: var(--spacing, 1rem);
                     padding-block-start: var(--spacing, 1rem);
                 }
@@ -141,7 +141,7 @@
     .progress-panel &.current {
         &:before {
             content: "";
-            background-color: var(--border-accent);
+            background-color: var(--border-color-accent);
             border-radius: 50%;
             block-size: 0.75rem;
             inline-size: 0.75rem;

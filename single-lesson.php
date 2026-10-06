@@ -77,7 +77,7 @@ get_header();
                 <span class="lesson-head__code-badge" title="Lesson code"><span class="visually-hidden">Lesson
                         code:</span><?php echo esc_html($lesson_code); ?></span>
             <?php endif; ?>
-            <nav class="lesson-head__nav stack +no-gap" aria-label="Breadcrumb">
+            <nav class="lesson-head__nav stack stack--tight" aria-label="Breadcrumb">
                 <?php
                 $post_id = get_the_ID();
                 $parent_id = wp_get_post_parent_id($post_id);
@@ -132,7 +132,7 @@ get_header();
 
                 <button class="button button--subtle progress-toggle course-progress__toggle" command="toggle-popover"
                     commandfor="course-progress">
-                    <span class="visually-hidden@<sm">Progress</span>
+                    <span class="x-visually-hidden@<sm button__text">Progress</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
                         <use href="#Navigation" />
                     </svg>
@@ -143,7 +143,7 @@ get_header();
 </header>
 <main class="site-main lesson-page" id="main">
     <!-- Syllabus overlay panel (hidden by default) -->
-    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack +no-gap'); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack stack--tight'); ?>>
 
         <header class="lesson-header prose">
             <div class="wrapper">
@@ -179,7 +179,7 @@ get_header();
 
             <div class="wrapper lesson-main article__main">
                 <div class="lesson-body article__body prose"><?php the_content(); ?></div>
-                <aside class="lesson-aside article__aside stack +no-gap">
+                <aside class="lesson-aside article__aside stack stack--tight">
                     <div class="lesson-bookmark">
                         <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
                             data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>"
@@ -267,7 +267,7 @@ get_header();
                             if ($download_post && $pdf_url) {
                                 ?>
                                 <li>
-                                    <div class="lesson-download stack +no-gap">
+                                    <div class="lesson-download stack stack--tight">
                                         <?php if (has_post_thumbnail($download_id)): ?>
                                             <div class="lesson-download__thumb">
                                                 <?php echo get_the_post_thumbnail($download_id, 'medium_large'); ?>
