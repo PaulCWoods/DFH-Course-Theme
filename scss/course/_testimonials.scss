@@ -49,7 +49,7 @@
 }
 
 .testimonial-card__icon {
-    color: light-dark(hsl(from var(--foreground-dark) h s l / 0.5), var(--foreground-light));
+    color: var(--foreground-strong);
     font-size: 50cqmin;;
     inset-block-start: -.1em;
     inset-inline-start: -.1em;
