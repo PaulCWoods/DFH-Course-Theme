@@ -26,12 +26,12 @@ get_template_part('content', 'course-header');
         </figure>
         <header class="article__header course-landing__header prose">
 
-            <div class="wrapper wrapper--2/3 wrapper--start">
+            <div class="wrapper wrapper--lg wrapper--start">
                 <h1><?php the_title(); ?></h1>
             </div>
         </header>
         <div class="course-landing__intro prose">
-            <div class="wrapper wrapper--2/3 wrapper--start">
+            <div class="wrapper wrapper--lg wrapper--start">
                 <?php the_excerpt(); ?>
             </div>
         </div>
@@ -110,7 +110,7 @@ get_template_part('content', 'course-header');
         ?>
 
         <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
-            <div class="wrapper wrapper--2/3 wrapper--start">
+            <div class="wrapper wrapper--lg wrapper--start">
                 <?php if ($course_closed): ?>
                     <h2>Coming soon</h2>
                     <p class="small-text text-color-muted">This course is not available yet. Check back soon.</p>
