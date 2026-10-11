@@ -105,7 +105,7 @@ get_header();
 
             if ($courses_query->have_posts()):
                 ?>
-                <ul class="course-card-list card-list">
+                <ul class="course-card-list card-list grid grid--cushioned">
                     <?php while ($courses_query->have_posts()):
                         $courses_query->the_post(); ?>
                         <li class="card-list__item">
@@ -162,7 +162,7 @@ get_header();
         <section class="home__section grid__container section s-grid:scroll-x@<md" aria-labelledby="testimonials-heading">
             <div class="wrapper">
                 <h2 id="testimonials-heading" class="section__title">What our students are saying</h2>
-                <div class="testimonials-grid grid">
+                <div class="testimonials-grid grid grid--cushioned">
                     <?php foreach ($testimonials as $t):
                         $title = get_the_title($t->ID);
                         $quote = apply_filters('the_content', $t->post_content);
