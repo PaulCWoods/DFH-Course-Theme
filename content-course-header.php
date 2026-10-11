@@ -5,7 +5,7 @@
                 <li class="+home">
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-title site-breadcrumb__home link">
                         <svg class="site-title__icon icon" width="32" height="32" aria-hidden="true">
-                            <use href="#DesignForHumans" />
+                            <use href="#BrandDesignForHumans" />
                         </svg>
                         <span class="site-title__brand brand-wordmark">Courses</span>
                     </a>
