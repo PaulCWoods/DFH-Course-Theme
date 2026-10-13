@@ -416,7 +416,8 @@ get_header();
 
     </article><!-- #post-<?php the_ID(); ?> -->
 
-    <aside id="course-progress" class="card card--scrollable card--sticky-ends progress-panel course-progress" popover>
+    <aside id="course-progress" class="progress-panel course-progress" popover>
+        <div class="card card--scrollable card--sticky-header card--sticky-footer">
         <?php
         // Determine a course to display in the panel: prefer any already-found $course_id,
         // otherwise check the current lesson and its ancestors for a course that lists them as roots.
@@ -530,6 +531,7 @@ get_header();
                     Design for Humans
                 </a>
             </footer>
+        </div>
         </div>
     </aside>
 </main><!-- #primary -->

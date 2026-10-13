@@ -9,15 +9,7 @@
 }
 
 .progress-toggle {
-    container-type: inline-size;
-
-    .icon {
-        flex-shrink: 0;
-    }
-
-    @container (max-width: 100px) {
-        .button__text {
-            display: none;
-        }
+    @media screen and (width < 600px) {
+        --ui-variant: icon-only;
     }
 }

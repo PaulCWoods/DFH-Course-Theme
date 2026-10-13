@@ -1,5 +1,68 @@
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="Upload" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="2.2 77.2 12.8 87.8 52.5 48.11 52.5 120 67.5 120 67.5 48.11 107.2 87.8 117.8 77.2 60 19.39 2.2 77.2"></polygon>
+            <polygon points="0 0 0 30 15 30 15 15 105 15 105 30 120 30 120 0 0 0"></polygon>
+        </symbol>
+        <symbol id="Stop" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M108.75 108.75h-97.5v-97.5h97.5zM26.25 93.75h67.5v-67.5h-67.5z"></path>
+        </symbol>
+        <symbol id="Play" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M15 116.29V3.71L112.5 60zM30 29.69v60.62L82.5 60z"></path>
+        </symbol>
+        <symbol id="Pause" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <rect width="15" height="75" x="30" y="22.5"></rect>
+            <rect width="15" height="75" x="75" y="22.5"></rect>
+        </symbol>
+        <symbol id="Expand" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="67.5 11.25 67.5 26.25 93.75 26.25 93.75 52.5 108.75 52.5 108.75 11.25 67.5 11.25"></polygon>
+            <polygon points="26.25 67.5 11.25 67.5 11.25 108.75 52.5 108.75 52.5 93.75 26.25 93.75 26.25 67.5"></polygon>
+        </symbol>
+        <symbol id="Edit" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="90 105 15 105 15 30 45 30 45 15 0 15 0 120 105 120 105 75 90 75 90 105"></polygon>
+            <path d="M30 90h25.61l63.75-63.75L93.75 0.64 30 64.39zM45 70.61 93.75 21.86l4.39 4.39L49.39 75H45z"></path>
+        </symbol>
+        <symbol id="Disc" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M60 7.5C31.05 7.5 7.5 31.05 7.5 60s23.55 52.5 52.5 52.5 52.5-23.55 52.5-52.5S88.95 7.5 60 7.5z"></path>
+        </symbol>
+        <symbol id="Contract" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="78.75 41.25 78.75 15 63.75 15 63.75 56.25 105 56.25 105 41.25 78.75 41.25"></polygon>
+            <polygon points="15 78.75 41.25 78.75 41.25 105 56.25 105 56.25 63.75 15 63.75 15 78.75"></polygon>
+        </symbol>
+        <symbol id="Code" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="87.8 32.2 77.2 42.8 94.39 60 77.2 77.2 87.8 87.8 115.61 60 87.8 32.2"></polygon>
+            <polygon points="25.61 60 42.8 42.8 32.2 32.2 4.39 60 32.2 87.8 42.8 77.2 25.61 60"></polygon>
+            <rect transform="rotate(-74.74 60.008135 59.999517)" width="85.51" height="15" x="17.24" y="52.5"></rect>
+        </symbol>
+        <symbol id="Circle" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <path d="M60 112.5C31.05 112.5 7.5 88.95 7.5 60S31.05 7.5 60 7.5 112.5 31.05 112.5 60 88.95 112.5 60 112.5zM60 22.5c-20.68 0-37.5 16.82-37.5 37.5S39.32 97.5 60 97.5 97.5 80.68 97.5 60 80.68 22.5 60 22.5z"></path>
+        </symbol>
+        <symbol id="ChevronUpRight" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="101.25 75 86.25 75 86.25 33.89 45.14 33.89 45.14 18.89 101.25 18.89 101.25 75"></polygon>
+        </symbol>
+        <symbol id="ChevronUpLeft" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="33.89 75 18.89 75 18.89 18.89 75 18.89 75 33.89 33.89 33.89 33.89 75"></polygon>
+        </symbol>
+        <symbol id="ChevronStart" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="82.49 30.93 71.88 20.32 32.21 60 71.88 99.68 82.49 89.07 53.42 60 82.49 30.93"></polygon>
+            <rect width="15" height="75" y="22.5"></rect>
+        </symbol>
+        <symbol id="ChevronEnd" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="37.51 30.93 66.58 60 37.51 89.07 48.12 99.68 87.79 60 48.12 20.32 37.51 30.93"></polygon>
+            <rect width="15" height="75" x="105" y="22.5"></rect>
+        </symbol>
+        <symbol id="ChevronDownRight" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="101.25 101.25 45.14 101.25 45.14 86.25 86.25 86.25 86.25 45.14 101.25 45.14 101.25 101.25"></polygon>
+        </symbol>
+        <symbol id="ChevronDownLeft" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="75 101.25 18.89 101.25 18.89 45.14 33.89 45.14 33.89 86.25 75 86.25 75 101.25"></polygon>
+        </symbol>
+        <symbol id="ArrowDownRight" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="89.62 22.5 89.62 78.64 28.18 17.2 17.57 27.8 79.01 89.25 22.88 89.25 22.88 104.25 104.62 104.25 104.62 22.5 89.62 22.5"></polygon>
+        </symbol>
+        <symbol id="ArrowDownLeft" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="102.43 28.18 91.82 17.57 30.38 79.02 30.38 22.88 15.38 22.88 15.38 104.62 97.12 104.62 97.12 89.62 40.98 89.62 102.43 28.18"></polygon>
+        </symbol>
         <symbol id="ArrowBottom" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <polygon points="117.8 42.8 107.2 32.2 67.5 71.89 67.5 0 52.5 0 52.5 71.89 12.8 32.2 2.2 42.8 60 100.61 117.8 42.8"></polygon>
             <rect width="120" height="15" y="105"></rect>
@@ -106,10 +169,8 @@
             <path d="M113.92 70.42v0C107.16 60.01 93.2 57.05 82.8 63.8c-2.18 1.42-4.04 3.18-5.58 5.18l-8.27-12.73 27.98-43.09-12.58-8.17L60 42.48 35.65 4.99 23.07 13.16 51.05 56.25 42.78 68.98c-1.54-2-3.4-3.76-5.58-5.18-10.4-6.76-24.37-3.79-31.12 6.61v0c-6.76 10.41-3.79 24.37 6.62 31.13 3.69 2.4 7.91 3.64 12.21 3.64 1.57 0 3.15-0.17 4.72-0.5 5.88-1.25 10.92-4.71 14.19-9.75 0 0 0 0 0 0l16.17-24.9 16.18 24.91v0c3.27 5.04 8.31 8.5 14.19 9.75 1.57 0.33 3.15 0.5 4.72 0.5 4.3 0 8.52-1.24 12.21-3.64 10.41-6.76 13.37-20.72 6.63-31.13zM26.51 90.01c-1.96 0.42-3.96 0.04-5.64-1.05-3.47-2.25-4.46-6.91-2.21-10.37 2.25-3.47 6.91-4.46 10.38-2.21 1.68 1.09 2.83 2.77 3.25 4.73s0.05 3.96-1.04 5.64v0c0 0 0 0 0 0s0 0 0 0c-1.09 1.68-2.77 2.83-4.74 3.26zM99.13 88.97c-1.68 1.09-3.68 1.46-5.64 1.05-1.96-0.42-3.64-1.57-4.73-3.25s-1.46-3.68-1.05-5.64c0.42-1.96 1.57-3.64 3.25-4.73 1.26-0.82 2.67-1.21 4.07-1.21 2.46 0 4.87 1.2 6.3 3.41 2.25 3.47 1.26 8.12-2.2 10.37z"></path>
         </symbol>
         <symbol id="Delete" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
-            <path d="M18.75 120h82.5V26.25h-82.5zM33.75 41.25h52.5V105h-52.5z"></path>
-            <polygon points="86.25 7.5 86.25 0 33.75 0 33.75 7.5 11.25 7.5 11.25 22.5 108.75 22.5 108.75 7.5 86.25 7.5"></polygon>
-            <rect width="15" height="48.75" x="63.75" y="48.75"></rect>
-            <rect width="15" height="48.75" x="41.25" y="48.75"></rect>
+            <path d="M18.75 120h82.5V22.5h-82.5zM33.75 37.5h52.5V105h-52.5z"></path>
+            <rect width="97.5" height="15" x="11.25"></rect>
         </symbol>
         <symbol id="BrandDesignForHumans" viewBox="0 0 82.5 82.5" fill="currentColor" version="1.1">
             <!-- Generator: Adobe Illustrator 30.7.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 114) -->
@@ -119,8 +180,8 @@
             <polygon points="37.5 37.5 37.5 22.5 37.5 15 30 15 30 22.5 15 22.5 15 37.5 30 37.5 37.5 37.5"></polygon>
         </symbol>
         <symbol id="Download" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
-            <polygon points="117.8 39.05 107.2 28.45 67.5 68.14 67.5 0 52.5 0 52.5 68.14 12.8 28.45 2.2 39.05 60 96.86 117.8 39.05"></polygon>
-            <rect width="105" height="15" x="7.5" y="105"></rect>
+            <polygon points="117.8 42.8 107.2 32.2 67.5 71.89 67.5 0 52.5 0 52.5 71.89 12.8 32.2 2.2 42.8 60 100.61 117.8 42.8"></polygon>
+            <polygon points="105 90 105 105 15 105 15 90 0 90 0 120 120 120 120 90 105 90"></polygon>
         </symbol>
         <symbol id="Duplicate" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <path d="M30 30v90h90V30zM105 105H45V45h60z"></path>
