@@ -1,5 +1,19 @@
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="Sortable" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="59.95 46.05 70.55 35.45 35.25 0.14 -0.05 35.45 10.55 46.05 27.75 28.86 27.75 85.75 42.75 85.75 42.75 28.86 59.95 46.05"></polygon>
+            <polygon points="108.7 72.95 91.5 90.14 91.5 33.25 76.5 33.25 76.5 90.14 59.3 72.95 48.7 83.55 84 118.86 119.3 83.55 108.7 72.95"></polygon>
+        </symbol>
+        <symbol id="SortableHorizontal" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="46.18 59.18 35.57 48.57 0.27 83.88 35.57 119.18 46.18 108.57 28.98 91.38 85.88 91.38 85.88 76.38 28.98 76.38 46.18 59.18"></polygon>
+            <polygon points="73.07 59.82 83.68 70.43 118.98 35.12 83.68 -0.18 73.07 10.43 90.27 27.62 33.38 27.62 33.38 42.62 90.27 42.62 73.07 59.82"></polygon>
+        </symbol>
+        <symbol id="FullScreen" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
+            <polygon points="78.75 0 78.75 15 105 15 105 41.25 120 41.25 120 0 78.75 0"></polygon>
+            <polygon points="15 78.75 0 78.75 0 120 41.25 120 41.25 105 15 105 15 78.75"></polygon>
+            <polygon points="105 105 78.75 105 78.75 120 120 120 120 78.75 105 78.75 105 105"></polygon>
+            <polygon points="0 41.25 15 41.25 15 15 41.25 15 41.25 0 0 0 0 41.25"></polygon>
+        </symbol>
         <symbol id="Upload" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <polygon points="2.2 77.2 12.8 87.8 52.5 48.11 52.5 120 67.5 120 67.5 48.11 107.2 87.8 117.8 77.2 60 19.39 2.2 77.2"></polygon>
             <polygon points="0 0 0 30 15 30 15 15 105 15 105 30 120 30 120 0 0 0"></polygon>
@@ -15,8 +29,8 @@
             <rect width="15" height="75" x="75" y="22.5"></rect>
         </symbol>
         <symbol id="Expand" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
-            <polygon points="67.5 11.25 67.5 26.25 93.75 26.25 93.75 52.5 108.75 52.5 108.75 11.25 67.5 11.25"></polygon>
-            <polygon points="26.25 67.5 11.25 67.5 11.25 108.75 52.5 108.75 52.5 93.75 26.25 93.75 26.25 67.5"></polygon>
+            <polygon points="0 41.25 15 41.25 15 15 41.25 15 41.25 0 0 0 0 41.25"></polygon>
+            <polygon points="105 78.75 105 105 78.75 105 78.75 120 120 120 120 78.75 105 78.75"></polygon>
         </symbol>
         <symbol id="Edit" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
             <polygon points="90 105 15 105 15 30 45 30 45 15 0 15 0 120 105 120 105 75 90 75 90 105"></polygon>
@@ -30,8 +44,8 @@
             <polygon points="15 78.75 41.25 78.75 41.25 105 56.25 105 56.25 63.75 15 63.75 15 78.75"></polygon>
         </symbol>
         <symbol id="Code" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">
-            <polygon points="87.8 32.2 77.2 42.8 94.39 60 77.2 77.2 87.8 87.8 115.61 60 87.8 32.2"></polygon>
-            <polygon points="25.61 60 42.8 42.8 32.2 32.2 4.39 60 32.2 87.8 42.8 77.2 25.61 60"></polygon>
+            <polygon points="91.55 87.8 80.95 77.2 98.14 60 80.95 42.8 91.55 32.2 119.36 60 91.55 87.8"></polygon>
+            <polygon points="28.45 87.8 0.64 60 28.45 32.2 39.05 42.8 21.86 60 39.05 77.2 28.45 87.8"></polygon>
             <rect transform="rotate(-74.74 60.008135 59.999517)" width="85.51" height="15" x="17.24" y="52.5"></rect>
         </symbol>
         <symbol id="Circle" viewBox="0 0 120 120" fill="currentColor" data-name="Layer 1">

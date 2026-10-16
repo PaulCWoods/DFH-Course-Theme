@@ -130,7 +130,7 @@ get_header();
                     </button>
                 <?php endif; ?>
 
-                <button class="button button--subtle button--icon-on-sm progress-toggle course-progress__toggle" command="toggle-popover"
+                <button class="button button--subtle progress-toggle course-progress__toggle" command="toggle-popover"
                     commandfor="course-progress">
                     <span class="button__text">Progress</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">

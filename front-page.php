@@ -117,7 +117,7 @@ get_header();
                                 <?php endif; ?>
                                 <article class="card__content">
                                     <header class="card__header">
-                                        <h3 class="card__title">
+                                        <h3 class="card__title heading">
                                             <a class="card__link link"
                                                 href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                         </h3>
