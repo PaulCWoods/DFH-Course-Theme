@@ -24,13 +24,13 @@ get_template_part('content', 'course-header');
             <?php if (has_post_thumbnail())
                 the_post_thumbnail(); ?>
         </figure>
-        <header class="article__header course-landing__header prose">
+        <header class="article__header course-landing__header prose font-sizing-fluid">
 
             <div class="wrapper wrapper--lg wrapper--start">
                 <h1><?php the_title(); ?></h1>
             </div>
         </header>
-        <div class="course-landing__intro prose">
+        <div class="course-landing__intro prose font-sizing-fluid">
             <div class="wrapper wrapper--lg wrapper--start">
                 <?php the_excerpt(); ?>
             </div>
@@ -109,7 +109,7 @@ get_template_part('content', 'course-header');
         $welcome_back_msg = '<span id="course-landing__access-welcome" class="small-heading text-color-muted">Welcome back, ' . esc_html($user_name) . '</span>';
         ?>
 
-        <section class="course-landing__access prose" aria-describedby="course-landing__access-heading">
+        <section class="course-landing__access prose font-sizing-fluid" aria-describedby="course-landing__access-heading">
             <div class="wrapper wrapper--lg wrapper--start">
                 <?php if ($course_closed): ?>
                     <h2>Coming soon</h2>
@@ -225,7 +225,7 @@ get_template_part('content', 'course-header');
     <section class="course-landing__section course-landing__about" aria-describedby="course-about-heading">
         <article class="wrapper">
             <h2 id="course-about-heading" class="heading">About this course</h2>
-            <div class="prose">
+            <div class="prose font-sizing-fluid">
                 <?php the_content(); ?>
             </div>
             <?php

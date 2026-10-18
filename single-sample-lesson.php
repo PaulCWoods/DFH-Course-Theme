@@ -46,7 +46,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 <main class="site-main lesson-page" id="main">
     <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack stack--tight'); ?>>
 
-        <header class="lesson-header prose">
+        <header class="lesson-header prose font-sizing-fluid">
             <div class="wrapper">
                 <span class="lesson-header__kicker +pre small-heading">Free sample</span>
                 <h1 class="lesson-header__title">
@@ -70,7 +70,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
 
         <div class="lesson-content">
             <div class="wrapper lesson-main article__main">
-                <div class="lesson-body article__body prose +sample">
+                <div class="lesson-body article__body prose font-sizing-fluid +sample">
                     <?php the_content(); ?>
                     <hr class="visually-hidden" />
                     <p class="lesson-body__sample-text">

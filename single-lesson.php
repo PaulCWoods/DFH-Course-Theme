@@ -8,7 +8,7 @@ if (!dfh_user_has_course_access()) {
     get_template_part('content', 'course-header');
     ?>
     <main class="restricted-access site-main" id="main">
-        <article class="article prose wrapper">
+        <article class="article prose font-sizing-fluid wrapper">
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
             <?php if (!is_user_logged_in()): ?>
@@ -145,7 +145,7 @@ get_header();
     <!-- Syllabus overlay panel (hidden by default) -->
     <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack stack--tight'); ?>>
 
-        <header class="lesson-header prose">
+        <header class="lesson-header prose font-sizing-fluid">
             <div class="wrapper">
                 <h1 class="lesson-header__title">
                     <?php the_title(); ?>
@@ -178,7 +178,7 @@ get_header();
         <div class="lesson-content">
 
             <div class="wrapper lesson-main article__main">
-                <div class="lesson-body article__body prose"><?php the_content(); ?></div>
+                <div class="lesson-body article__body prose font-sizing-fluid"><?php the_content(); ?></div>
                 <aside class="lesson-aside article__aside stack stack--tight">
                     <div class="lesson-bookmark">
                         <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"

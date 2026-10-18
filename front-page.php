@@ -4,7 +4,7 @@
 get_header();
 ?>
 <main class="home site-main" id="main">
-    <article class="prose wrapper home__content">
+    <article class="prose font-sizing-fluid font-sizing-fluid wrapper home__content">
         <header class="article__header">
             <h1 class="display-title brand-frame">Design for Humans: <span class="home__title-highlight">Courses</span>
             </h1>
