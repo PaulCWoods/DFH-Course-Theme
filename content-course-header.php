@@ -3,7 +3,7 @@
         <nav class="wrapper site-header__inner">
             <ul class="site-breadcrumb">
                 <li class="+home">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-title site-breadcrumb__home link">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-title site-breadcrumb__home link link--plain">
                         <svg class="site-title__icon icon" width="32" height="32" aria-hidden="true">
                             <use href="#BrandDesignForHumans" />
                         </svg>
@@ -12,15 +12,15 @@
                 </li>
                 <?php if (is_user_logged_in()): ?>
                     <li>
-                        <a class="link" href="<?php echo esc_url(home_url('/my-account/')); ?>">Account</a>
+                        <a class="link link--plain" href="<?php echo esc_url(home_url('/my-account/')); ?>">Account</a>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">Log Out</a>
+                        <a class="link link--plain" href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">Log Out</a>
                     </li>
                 <?php elseif (!is_page('login')): ?>
                     <li>
                         <!-- Replace 'login' with the slug or URL of your new login page -->
-                        <a class="link" href="<?php echo esc_url(home_url('/login/')); ?>">Log In</a>
+                        <a class="link link--plain" href="<?php echo esc_url(home_url('/login/')); ?>">Log In</a>
                     </li>
                 <?php endif; ?>
             </ul>
