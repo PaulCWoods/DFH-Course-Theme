@@ -118,7 +118,7 @@ get_header();
                 <!-- Syllabus overlay toggle -->
 
             </nav>
-            <div class="lesson-head__controls">
+            <div class="lesson-head__controls max-lg:hide-labels">
 
                 <?php if ($playback_id): ?>
                     <button type="button" id="video-stick-toggle" class="button button--subtle lesson-video__toggle video-unstick"
@@ -450,14 +450,14 @@ get_header();
         ?>
         <div class="card__content" tabindex="0" aria-label="Scrollable panel content">
             <header class="card__header progress-panel__header">
-                <a class="button button--tight button--link button--subtle syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
+                <a class="button button--flush button--plain syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
                     <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                         <use href="#Home" />
                     </svg>
                     Courses Home
                 </a>
 
-                <button class="button button--subtle syllabus-close" command="hide-popover" commandfor="course-progress"
+                <button class="button button--plain syllabus-close" command="hide-popover" commandfor="course-progress"
                     title="Close navigation">
                     <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                         <use href="#Close" />

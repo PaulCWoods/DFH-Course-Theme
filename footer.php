@@ -3,19 +3,19 @@
                     <nav class="site-footer__nav" aria-label="Footer">
                         <ul>
                             <li>
-                                <a class="link" href="<?php echo esc_url(home_url()); ?>">Courses Home</a>
+                                <a class="link link--plain" href="<?php echo esc_url(home_url()); ?>">Courses Home</a>
                             </li>
                             <li>
-                                <a class="link" href="<?php echo esc_url(home_url( "/privacy-policy" )); ?>">Privacy Policy</a>
+                                <a class="link link--plain" href="<?php echo esc_url(home_url( "/privacy-policy" )); ?>">Privacy Policy</a>
                             </li>
                             <li>
-                                <a class="link" href="<?php echo esc_url(home_url( "/terms-and-conditions" )); ?>">Terms & Conditions</a>
+                                <a class="link link--plain" href="<?php echo esc_url(home_url( "/terms-and-conditions" )); ?>">Terms & Conditions</a>
                             </li>
                             <li>
-                                <a target="_blank" class="link" href="https://designforhumans.blog">Blog</a>
+                                <a target="_blank" class="link link--plain" href="https://designforhumans.blog">Blog</a>
                             </li>
                             <li>
-                                <a target="_blank" class="link" href="https://designforhumans.blog/contact">Contact me</a>
+                                <a target="_blank" class="link link--plain" href="https://designforhumans.blog/contact">Contact me</a>
                             </li>
                         </ul>
                     </nav>

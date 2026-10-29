@@ -511,7 +511,7 @@ function dfh_render_lesson_children($parent_id, $level = 1, $active_lesson = nul
             $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</span>' . $bookmark_html . '</span>';
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
-            $chip_class = $completed ? 'chip complete' : 'chip in-progress';
+            $chip_class = $completed ? 'status status--plain status--no-dot complete' : 'status status--plain status--success chip in-progress';
             $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($child->ID, $lvl + 1, $active_lesson);

@@ -28,7 +28,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                 <?php endif; ?>
                 <span class="lesson-head__nav-current" aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
             </nav>
-            <div class="lesson-head__controls">
+            <div class="lesson-head__controls max-lg:hide-labels">
                 <?php if ($playback_id): ?>
                     <button type="button" id="video-stick-toggle" class="button button--subtle lesson-video__toggle video-unstick"
                         aria-controls="lesson-video-player" aria-pressed="false">
