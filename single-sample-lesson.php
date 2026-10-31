@@ -16,22 +16,27 @@ $associated_course_id = function_exists('get_field') ? get_field('sample_lesson_
 $associated_course_id = !empty($associated_course_id) ? absint($associated_course_id) : 0;
 ?>
 
-<header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
-    <div class="lesson-head site-header +sample">
-        <div class="lesson-head__inner wrapper">
+<header class="header header--sticky max-md:header--compact lesson-head__container" aria-label="Lesson navigation">
+    <div class="lesson-head header__bar +sample">
+        <div class="lesson-head__progress" aria-hidden="true"></div>
+        <div class="lesson-head__inner">
             <nav class="lesson-head__nav stack stack--tight" aria-label="Breadcrumb">
                 <?php if ($associated_course_id && get_post($associated_course_id)): ?>
-                    <a class="lesson-head__nav-parent link"
+                    <a class="lesson-head__nav-parent link" style="padding-inline: 0"
+                        title="<?php echo esc_html(get_the_title($associated_course_id)); ?>"
                         href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
                 <?php else: ?>
-                    <a class="lesson-head__nav-parent link" href="<?php echo esc_url(home_url()); ?>">Home</a>
+                    <a class="lesson-head__nav-parent link" style="padding-inline: 0"
+                        href="<?php echo esc_url(home_url()); ?>">Home</a>
                 <?php endif; ?>
-                <span class="lesson-head__nav-current" aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
+                <span class="lesson-head__nav-current" style="padding-inline: 0"
+                    aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
             </nav>
             <div class="lesson-head__controls max-lg:hide-labels">
                 <?php if ($playback_id): ?>
-                    <button type="button" id="video-stick-toggle" class="button button--subtle lesson-video__toggle video-unstick"
-                        aria-controls="lesson-video-player" aria-pressed="false">
+                    <button type="button" id="video-stick-toggle"
+                        class="button button--subtle lesson-video__toggle video-unstick" aria-controls="lesson-video-player"
+                        aria-pressed="false">
                         <span class="visually-hidden">Stick video</span>
                         <svg class="icon" width="32" height="32" aria-hidden="true">
                             <use href="#Unlock" />
@@ -52,6 +57,12 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                 <h1 class="lesson-header__title">
                     <?php the_title(); ?>
                 </h1>
+                <?php
+                $lesson_subtitle = function_exists('get_field') ? get_field('subtitle') : get_post_meta(get_the_ID(), 'subtitle', true);
+                if ($lesson_subtitle):
+                    ?>
+                    <p class="lesson-header__subtitle small-heading"><?php echo esc_html($lesson_subtitle); ?></p>
+                <?php endif; ?>
             </div>
         </header>
 
@@ -59,7 +70,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
         // Video playback
         if ($playback_id): ?>
             <div class="lesson-video">
-                <div class="lesson-video__container wrapper">
+                <div class="lesson-video__container wrapper wrapper--flush">
                     <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>"
                         accent-color="#2eab93" metadata-video-title="<?php echo esc_attr(get_the_title()); ?>"
                         style="width:100%;height:auto;" thumbnail-time="2">
@@ -162,7 +173,7 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                                         <div class="lesson-download stack stack--tight">
                                             <?php if (has_post_thumbnail($download_id)): ?>
                                                 <div class="lesson-download__thumb">
-                                                    <?php echo get_the_post_thumbnail($download_id, 'thumbnail'); ?>
+                                                    <?php echo get_the_post_thumbnail($download_id, 'medium_large'); ?>
                                                 </div>
                                             <?php endif; ?>
                                             <svg class="icon icon--dir lesson-download__icon" width="32" height="32" aria-hidden="true">
@@ -174,7 +185,9 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
                                                         download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
                                                 </h3>
                                                 <?php if (trim($download_post->post_excerpt) !== ''): ?>
-                                                    <p class="text-color-muted"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                                                    <p class="text-color-muted font-size-sm text-wrap-balance">
+                                                        <?php echo esc_html($download_post->post_excerpt); ?>
+                                                    </p>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
