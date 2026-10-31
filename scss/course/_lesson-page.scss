@@ -235,7 +235,7 @@
     .site:has(.video-stick) & {
         @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
             position: sticky;
-            inset-block-start: var(--lesson-aside-sticky-top, var(--spacing-64));
+            inset-block-start: var(--header-compact-bar-min-size, var(--spacing-48));
             z-index: 1;
         }
     }
