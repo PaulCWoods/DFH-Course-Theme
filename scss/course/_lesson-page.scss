@@ -21,6 +21,21 @@
 .lesson-head__container {
     background-color: var(--surface-darker);
     min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
+
+    @media screen {
+        z-index: var(--site-header-z-index);
+    }
+
+    @media screen and (height > #{var.$bp-lesson}) {
+        container-type: scroll-state;
+        inset-block-start: 0;
+        position: sticky;
+    }
+
+    @supports (animation-timeline: scroll()) {
+        view-timeline-name: --page-scroll;
+    }
+
 }
 
 .lesson-head.site-header {
@@ -45,11 +60,6 @@
     display: flex;
     flex-shrink: 0;
     gap: 0;
-    padding-inline-end: var(--site-block-padding, var(--spacing-cushion));
-
-    @media screen and (width > #{var.$site-width}) {
-        padding-inline-end: 0;
-    }
 }
 
 .lesson-head__code-badge {
@@ -60,11 +70,11 @@
     font-size: var(--typography-font-size-fluid-0);
     font-variant-numeric: tabular-nums;
     font-weight: bold;
-    padding-inline: var(--spacing-breathe);
+    padding-inline: var(--spacing-breathe-sm);
 }
 
 .lesson-head__nav {
-    --height: var(--site-header-height);
+    --height: var(--header-bar-min-size);
     align-self: stretch;
     flex-grow: 1;
     font-size: var(--typography-font-size-fluid-0);
@@ -118,8 +128,8 @@
     display: none;
 }
 
-    // Scroll-driven effects are progressive enhancements; the static header
-    // remains usable when animation-timeline is unavailable.
+// Scroll-driven effects are progressive enhancements; the static header
+// remains usable when animation-timeline is unavailable.
 @supports (animation-timeline: scroll()) {
 
     @media (prefers-reduced-motion: no-preference) {
@@ -150,7 +160,7 @@
         }
 
 
-            @keyframes --hide-parent {
+        @keyframes --hide-parent {
             to {
                 opacity: 0;
                 transform: translateY(-50%);
@@ -191,8 +201,8 @@
     .lesson-content,
     .lesson-explore) {
     padding-block: var(--site-block-padding, var(--spacing-cushion));
-    padding-inline-start: calc(var(--site-block-padding, var(--spacing-cushion)) + env(safe-area-inset-left));
-    padding-inline-end: calc(var(--site-block-padding, var(--spacing-cushion)) + env(safe-area-inset-left));
+    padding-inline-start: calc(0px + env(safe-area-inset-left));
+    padding-inline-end: calc(0px + env(safe-area-inset-left));
 }
 
 .lesson-header__title {
@@ -472,9 +482,11 @@
         margin-block-start: var(--spacing-cushion);
         padding-block-start: var(--spacing-cushion);
         border-block-start: var(--border-subtle);
+
         li a:first-child {
             margin-inline-end: 0.5rem;
-            + a {
+
+            +a {
                 text-decoration: none;
             }
         }
@@ -660,6 +672,7 @@
             box-shadow: none;
         }
     }
+
     @media (hover:hover) {
         .lesson-download:hover & img {
             box-shadow: var(--shadow-md);

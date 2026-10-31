@@ -12,7 +12,8 @@ if (!dfh_user_has_course_access()) {
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
             <?php if (!is_user_logged_in()): ?>
-                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="button button--primary"><span>Log in</span></a></p>
+                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="button button--primary"><span>Log in</span></a>
+                </p>
             <?php endif; ?>
         </article>
     </main>
@@ -66,10 +67,10 @@ $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 get_header();
 ?>
 
-<header class="site-header__container lesson-head__container" aria-label="Lesson navigation">
-    <div class="lesson-head site-header">
+<header class="header header--sticky max-md:header--compact lesson-head__container" aria-label="Lesson navigation">
+    <div class="lesson-head header__bar">
         <div class="lesson-head__progress" aria-hidden="true"></div>
-        <div class="lesson-head__inner wrapper">
+        <div class="lesson-head__inner">
             <?php
             $lesson_code = dfh_get_lesson_hierarchy_number();
             if ($lesson_code):
@@ -113,7 +114,8 @@ get_header();
                     <?php endif;
                 endif; ?>
 
-                <span class="lesson-head__nav-current" aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
+                <span class="lesson-head__nav-current"
+                    aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
 
                 <!-- Syllabus overlay toggle -->
 
@@ -121,8 +123,9 @@ get_header();
             <div class="lesson-head__controls max-lg:hide-labels">
 
                 <?php if ($playback_id): ?>
-                    <button type="button" id="video-stick-toggle" class="button button--subtle lesson-video__toggle video-unstick"
-                        aria-controls="lesson-video-player" aria-pressed="false">
+                    <button type="button" id="video-stick-toggle"
+                        class="button button--subtle lesson-video__toggle video-unstick" aria-controls="lesson-video-player"
+                        aria-pressed="false">
                         <span class="visually-hidden">Stick video</span>
                         <svg class="icon" width="32" height="32" aria-hidden="true">
                             <use href="#Unlock" />
@@ -130,7 +133,7 @@ get_header();
                     </button>
                 <?php endif; ?>
 
-                <button class="button button--subtle progress-toggle course-progress__toggle" command="toggle-popover"
+                <button class="button button--plain progress-toggle course-progress__toggle" command="toggle-popover"
                     commandfor="course-progress">
                     <span class="button__text">Progress</span>
                     <svg class="icon" width="32" height="32" aria-hidden="true">
@@ -167,7 +170,7 @@ get_header();
         // Video playback: Mux only (legacy fallback removed)
         if ($playback_id): ?>
             <div class="lesson-video">
-                <div class="lesson-video__container wrapper">
+                <div class="lesson-video__container wrapper wrapper--flush">
                     <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>"
                         accent-color="#2eab93" metadata-video-title="<?php echo esc_attr(get_the_title()); ?>"
                         style="width:100%;height:auto;" thumbnail-time="2">
@@ -282,7 +285,9 @@ get_header();
                                                     download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
                                             </h3>
                                             <?php if (trim($download_post->post_excerpt) !== ''): ?>
-                                                <p class="text-color-muted font-size-sm text-wrap-balance"><?php echo esc_html($download_post->post_excerpt); ?></p>
+                                                <p class="text-color-muted font-size-sm text-wrap-balance">
+                                                    <?php echo esc_html($download_post->post_excerpt); ?>
+                                                </p>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -313,8 +318,8 @@ get_header();
             <?php
             $children_html = dfh_render_lesson_children($parent_id, $child_level);
             if (!empty(trim($children_html))): ?>
-                <section class="wrapper lesson-explore__section lesson-children"
-                    aria-describedby="lesson-children-heading" data-level="<?php echo esc_attr($child_level); ?>">
+                <section class="wrapper lesson-explore__section lesson-children" aria-describedby="lesson-children-heading"
+                    data-level="<?php echo esc_attr($child_level); ?>">
                     <h2 class="heading" id="lesson-children-heading">Lessons in this section</h2>
                     <div class="lesson-list__container">
                         <?php echo $children_html; ?>
@@ -418,120 +423,121 @@ get_header();
 
     <aside id="course-progress" class="progress-panel course-progress" popover>
         <div class="card card--scrollable card--sticky-header card--sticky-footer">
-        <?php
-        // Determine a course to display in the panel: prefer any already-found $course_id,
-        // otherwise check the current lesson and its ancestors for a course that lists them as roots.
-        $panel_course_id = isset($course_id) && $course_id ? $course_id : null;
-        if (empty($panel_course_id)) {
-            $ancestors = get_post_ancestors(get_the_ID());
-            array_unshift($ancestors, get_the_ID());
+            <?php
+            // Determine a course to display in the panel: prefer any already-found $course_id,
+            // otherwise check the current lesson and its ancestors for a course that lists them as roots.
+            $panel_course_id = isset($course_id) && $course_id ? $course_id : null;
+            if (empty($panel_course_id)) {
+                $ancestors = get_post_ancestors(get_the_ID());
+                array_unshift($ancestors, get_the_ID());
 
-            $all_courses = get_posts(array('post_type' => 'course', 'posts_per_page' => -1, 'fields' => 'ids'));
-            if (!empty($all_courses)) {
-                foreach ($all_courses as $c_id) {
-                    $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
-                    if (is_string($roots)) {
-                        $maybe = @unserialize($roots);
-                        if ($maybe !== false)
-                            $roots = $maybe;
-                    }
-                    if (!empty($roots)) {
-                        foreach ($ancestors as $anc) {
-                            if (in_array($anc, (array) $roots)) {
-                                $panel_course_id = $c_id;
-                                break 2;
+                $all_courses = get_posts(array('post_type' => 'course', 'posts_per_page' => -1, 'fields' => 'ids'));
+                if (!empty($all_courses)) {
+                    foreach ($all_courses as $c_id) {
+                        $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
+                        if (is_string($roots)) {
+                            $maybe = @unserialize($roots);
+                            if ($maybe !== false)
+                                $roots = $maybe;
+                        }
+                        if (!empty($roots)) {
+                            foreach ($ancestors as $anc) {
+                                if (in_array($anc, (array) $roots)) {
+                                    $panel_course_id = $c_id;
+                                    break 2;
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
-        ?>
-        <div class="card__content" tabindex="0" aria-label="Scrollable panel content">
-            <header class="card__header progress-panel__header">
-                <a class="button button--flush button--plain syllabus-course" href="<?php echo esc_url(home_url()); ?>" title="Home">
-                    <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
-                        <use href="#Home" />
-                    </svg>
-                    Courses Home
-                </a>
+            ?>
+            <div class="card__content" tabindex="0" aria-label="Scrollable panel content">
+                <header class="card__header progress-panel__header">
+                    <a class="button button--flush button--plain syllabus-course"
+                        href="<?php echo esc_url(home_url()); ?>" title="Home">
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
+                            <use href="#Home" />
+                        </svg>
+                        Courses Home
+                    </a>
 
-                <button class="button button--plain syllabus-close" command="hide-popover" commandfor="course-progress"
-                    title="Close navigation">
-                    <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
-                        <use href="#Close" />
-                    </svg>
-                    <span class="visually-hidden">Close Navigation</span>
-                </button>
-            </header>
-            <nav class="card__body progress-panel__course" aria-label="Course syllabus">
+                    <button class="button button--plain syllabus-close" command="hide-popover"
+                        commandfor="course-progress" title="Close navigation">
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
+                            <use href="#Close" />
+                        </svg>
+                        <span class="visually-hidden">Close Navigation</span>
+                    </button>
+                </header>
+                <nav class="card__body progress-panel__course" aria-label="Course syllabus">
 
-                <?php
-                // Show the current Course title and link when available
-                $display_course_id = !empty($panel_course_id) ? $panel_course_id : (!empty($course_id) ? $course_id : null);
-                if ($display_course_id): ?>
-                    <h2 class="heading progress-panel__course-name"><a class="link"
-                            href="<?php echo esc_url(get_permalink($display_course_id)); ?>"><?php echo esc_html(get_the_title($display_course_id)); ?></a>
-                    </h2>
-                <?php else: ?>
-                    <h2 class="heading progress-panel__course-name">Course</h2>
-                <?php endif; ?>
+                    <?php
+                    // Show the current Course title and link when available
+                    $display_course_id = !empty($panel_course_id) ? $panel_course_id : (!empty($course_id) ? $course_id : null);
+                    if ($display_course_id): ?>
+                        <h2 class="heading progress-panel__course-name"><a class="link"
+                                href="<?php echo esc_url(get_permalink($display_course_id)); ?>"><?php echo esc_html(get_the_title($display_course_id)); ?></a>
+                        </h2>
+                    <?php else: ?>
+                        <h2 class="heading progress-panel__course-name">Course</h2>
+                    <?php endif; ?>
 
-                <?php
-                $progress_roots = !empty($panel_course_id)
-                    ? (function_exists('get_field') ? get_field('course_root_lessons', $panel_course_id) : get_post_meta($panel_course_id, 'course_root_lessons', true))
-                    : array();
-                if (!is_array($progress_roots)) {
-                    $progress_roots = empty($progress_roots) ? array() : array((int) $progress_roots);
-                }
+                    <?php
+                    $progress_roots = !empty($panel_course_id)
+                        ? (function_exists('get_field') ? get_field('course_root_lessons', $panel_course_id) : get_post_meta($panel_course_id, 'course_root_lessons', true))
+                        : array();
+                    if (!is_array($progress_roots)) {
+                        $progress_roots = empty($progress_roots) ? array() : array((int) $progress_roots);
+                    }
 
-                $progress_lessons = array();
-                if (empty($panel_course_id)) {
-                    $progress_lessons = dfh_get_ordered_lesson_tree(0);
-                } else {
-                    foreach ($progress_roots as $progress_root) {
-                        $progress_root_id = is_object($progress_root) ? (int) $progress_root->ID : (int) $progress_root;
-                        if ($progress_root_id) {
-                            $progress_lessons[] = $progress_root_id;
-                            $progress_lessons = array_merge($progress_lessons, dfh_get_ordered_lesson_tree($progress_root_id));
+                    $progress_lessons = array();
+                    if (empty($panel_course_id)) {
+                        $progress_lessons = dfh_get_ordered_lesson_tree(0);
+                    } else {
+                        foreach ($progress_roots as $progress_root) {
+                            $progress_root_id = is_object($progress_root) ? (int) $progress_root->ID : (int) $progress_root;
+                            if ($progress_root_id) {
+                                $progress_lessons[] = $progress_root_id;
+                                $progress_lessons = array_merge($progress_lessons, dfh_get_ordered_lesson_tree($progress_root_id));
+                            }
                         }
                     }
-                }
-                $progress_lessons = array_values(array_unique($progress_lessons));
-                $progress_completed = array_map('intval', dfh_get_completed_lessons());
-                $progress_total = count($progress_lessons);
-                $progress_count = count(array_intersect($progress_completed, $progress_lessons));
-                $progress_percent = $progress_total > 0 ? round(($progress_count / $progress_total) * 100) : 0;
-                ?>
-                <div class="progress-panel__course-progress">
-                    <h3 class="progress-panel__course-progress-heading">Your progress:
-                        <?php echo esc_html($progress_percent); ?>% Complete
-                    </h3>
-                    <div class="progress-bar-container">
-                        <progress class="progress-bar" max="100"
-                            value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
-                    </div>
-                </div>
-
-                <div class="lesson-list__container">
-                    <?php
-                    // If we have a course, get its roots; otherwise leave null to render top-level lessons
-                    $roots = null;
-                    if (!empty($course_id)) {
-                        $roots = function_exists('get_field') ? get_field('course_root_lessons', $course_id) : get_post_meta($course_id, 'course_root_lessons', true);
-                    }
-
-                    echo dfh_render_lesson_tree($roots, 1);
+                    $progress_lessons = array_values(array_unique($progress_lessons));
+                    $progress_completed = array_map('intval', dfh_get_completed_lessons());
+                    $progress_total = count($progress_lessons);
+                    $progress_count = count(array_intersect($progress_completed, $progress_lessons));
+                    $progress_percent = $progress_total > 0 ? round(($progress_count / $progress_total) * 100) : 0;
                     ?>
-                </div>
-            </nav>
-            <footer class="card__footer progress-panel__footer">
-                <a href="https://designforhumans.blog" class="progress-panel__brand brand-wordmark">
-                    Design for Humans
-                </a>
-            </footer>
-        </div>
+                    <div class="progress-panel__course-progress">
+                        <h3 class="progress-panel__course-progress-heading">Your progress:
+                            <?php echo esc_html($progress_percent); ?>% Complete
+                        </h3>
+                        <div class="progress-bar-container">
+                            <progress class="progress-bar" max="100"
+                                value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
+                        </div>
+                    </div>
+
+                    <div class="lesson-list__container">
+                        <?php
+                        // If we have a course, get its roots; otherwise leave null to render top-level lessons
+                        $roots = null;
+                        if (!empty($course_id)) {
+                            $roots = function_exists('get_field') ? get_field('course_root_lessons', $course_id) : get_post_meta($course_id, 'course_root_lessons', true);
+                        }
+
+                        echo dfh_render_lesson_tree($roots, 1);
+                        ?>
+                    </div>
+                </nav>
+                <footer class="card__footer progress-panel__footer">
+                    <a href="https://designforhumans.blog" class="progress-panel__brand brand-wordmark">
+                        Design for Humans
+                    </a>
+                </footer>
+            </div>
         </div>
     </aside>
 </main><!-- #primary -->

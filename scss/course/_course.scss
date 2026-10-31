@@ -116,6 +116,7 @@ $course-bp: 60em;
 // -----------------------------------------------------------------------------
 // Course sections and completion state
 .course-landing__section {
+    --font-sizing: fluid;
     background: var(--surface-card);
     border-block-start: var(--border);
     flex-grow: 1;
@@ -126,7 +127,7 @@ $course-bp: 60em;
         margin-block-end: var(--spacing);
     }
 
-    + .course-landing__section {
+    +.course-landing__section {
         border-block-start: var(--border-subtle);
         box-shadow: none;
     }
@@ -163,7 +164,7 @@ $course-bp: 60em;
         display: flex;
         justify-content: space-between;
         gap: var(--spacing);
-        
+
         &:after {
             content: "🎉" / "";
             font-size: 1em;

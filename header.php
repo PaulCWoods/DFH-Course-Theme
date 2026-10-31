@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
+
 <head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <meta
-        name="viewport"
-        content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
-    >
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
     <?php
     // Build page title as "[Page title] | Design for Humans Courses"
     if (function_exists('is_singular') && is_singular()) {
@@ -24,16 +23,19 @@
 
     <!-- Shared Design Tokens & Styles from your main blog -->
     <link rel="stylesheet" href="https://designforhumans.blog/styles/css/dfh-shared.css">
-    <link rel="stylesheet" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/css/dfh-course.css' ); ?>">
+    <link rel="stylesheet" href="<?php echo esc_url(get_stylesheet_directory_uri() . '/css/dfh-course.css'); ?>">
 
     <!-- Modern scalable SVG favicon with dark mode support -->
-    <link rel="icon" type="image/svg+xml" href="<?php echo get_template_directory_uri(); ?>/assets/favicons/favicon.svg">
+    <link rel="icon" type="image/svg+xml"
+        href="<?php echo get_template_directory_uri(); ?>/assets/favicons/favicon.svg">
 
     <!-- Legacy fallback ICO (using sizes="any" tells modern browsers to prefer the SVG above) -->
-    <link rel="icon" type="image/x-icon" sizes="32x32 48x48" href="<?php echo get_template_directory_uri(); ?>/assets/favicons/favicon.ico">
+    <link rel="icon" type="image/x-icon" sizes="32x32 48x48"
+        href="<?php echo get_template_directory_uri(); ?>/assets/favicons/favicon.ico">
 
     <!-- Apple Touch Icon for iOS home screen bookmarks -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/assets/favicons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="<?php echo get_template_directory_uri(); ?>/assets/favicons/apple-touch-icon.png">
 
     <!-- Web Manifest -->
     <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/site.webmanifest">
@@ -52,8 +54,8 @@ if (function_exists('is_singular') && is_singular('lesson')) {
     }
 }
 ?>
+
 <body <?php body_class(); ?> data-syllabus="<?php echo esc_attr($syllabus_index); ?>">
-<?php get_template_part('content', 'icon-sprite'); ?>
-<?php wp_body_open(); ?>
-<a href="#main" class="skip-link">Skip to main content</a>
-<div class="site">
+    <?php get_template_part('content', 'icon-sprite'); ?>
+    <?php wp_body_open(); ?>
+    <div class="app">

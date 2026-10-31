@@ -1,32 +1,31 @@
-<header class="site-header__container">
-    <div class="site-header my-account-header">
-        <nav class="wrapper site-header__inner">
-            <ul class="site-breadcrumb">
-                <li class="+home">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-title site-breadcrumb__home link link--plain">
-                        <svg class="site-title__icon icon" width="32" height="32" aria-hidden="true">
-                            <use href="#BrandDesignForHumans" />
-                        </svg>
-                        <span class="site-title__brand brand-wordmark">Courses</span>
-                    </a>
-                </li>
+<header class="header header--sticky header--translucent max-md:header--compact">
+    <a href="#main" class="skip-link header__skip-link">Skip to main content</a>
+    <div class="header__bar">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="link link--plain header__brand">
+            <svg class="icon header__brand-icon" width="1em" height="1em" aria-hidden="true" focusable="false">
+                <use href="#BrandDesignForHumans"></use>
+            </svg>
+            <span class="header__brand-wordmark">Courses</span>
+        </a>
+        <nav class="header__nav tab-list tab-list--plain tab-list--scrollable site-trail" aria-label="Breadcrumb">
+            <ul>
                 <?php if (is_user_logged_in()): ?>
-                    <li><a class="link link--plain" href="<?php echo esc_url(home_url('/cart/')); ?>">My Cart</a></li>
+                    <li><a class="tab" href="<?php echo esc_url(home_url('/cart/')); ?>">My Cart</a></li>
                 <?php elseif (!is_page('login')): ?>
                     <li>
                         <!-- Replace 'login' with the slug or URL of your new login page -->
-                        <a class="link link--plain" href="<?php echo esc_url(home_url('/login/')); ?>">Log In</a>
+                        <a class="tab" href="<?php echo esc_url(home_url('/login/')); ?>">Log In</a>
                     </li>
                 <?php endif; ?>
             </ul>
-            <button type="button" class="button button--subtle site-header__nav-toggle my-account-header__nav-toggle closed"
-                aria-controls="my-account-navigation" aria-expanded="false">
-                <svg class="icon" width="32" height="32" aria-hidden="true">
-                    <use href="#Navigation" />
-                </svg>
-                <span class="visually-hidden">Open My Account Navigation</span>
-            </button>
         </nav>
+        <button type="button" class="button button--subtle site-header__nav-toggle my-account-header__nav-toggle closed"
+            aria-controls="my-account-navigation" aria-expanded="false">
+            <svg class="icon" width="32" height="32" aria-hidden="true">
+                <use href="#Navigation" />
+            </svg>
+            <span class="visually-hidden">Open My Account Navigation</span>
+        </button>
     </div>
 </header>
 

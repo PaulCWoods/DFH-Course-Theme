@@ -1,7 +1,7 @@
-            <footer class="site-footer">
-                <div class="site-footer__inner stack wrapper">
-                    <nav class="site-footer__nav" aria-label="Footer">
-                        <ul>
+        <footer class="footer footer--stacked">
+            <div class="footer__bar">
+                    <nav aria-label="Footer">
+                        <ul class="cluster" role="list">
                             <li>
                                 <a class="link link--plain" href="<?php echo esc_url(home_url()); ?>">Courses Home</a>
                             </li>
@@ -19,10 +19,10 @@
                             </li>
                         </ul>
                     </nav>
-                    <p class="site-footer__copyright">&copy; <?php echo date('Y'); ?> Design For Humans. All rights reserved.</p>
-                    <span class="site-footer__brand brand-wordmark" aria-hidden="true">Design For Humans</span>
-                </div>
-            </footer>
+                <p class="small-text">&copy; <?php echo date('Y'); ?> Design For Humans. All rights reserved.</p>
+                    <span class="footer__brand footer__brand-wordmark" aria-hidden="true">Design For Humans</span>
+            </div>
+        </footer>            
         </div>
         <?php wp_footer(); ?>
     </body>
