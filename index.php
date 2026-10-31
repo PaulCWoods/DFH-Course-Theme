@@ -6,15 +6,15 @@
 get_header();
 ?>
 
-<main class="site-main">
-        <?php
-        if ( have_posts() ) :
-            while ( have_posts() ) :
-                the_post();
-                the_content();
-            endwhile;
-        endif;
-        ?>
+<main class="main">
+    <?php
+    if (have_posts()):
+        while (have_posts()):
+            the_post();
+            the_content();
+        endwhile;
+    endif;
+    ?>
 </main>
 
 <?php

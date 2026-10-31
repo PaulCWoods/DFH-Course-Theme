@@ -9,7 +9,7 @@ get_header();
 get_template_part('content', 'course-header');
 ?>
 
-<main class="site-main error-404-page" id="main">
+<main class="main error-404-page" id="main">
     <article class="article prose wrapper wrapper--1/2 wrapper--middle">
         <h1>Page not found</h1>
         <p>

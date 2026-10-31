@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main class="site-main shop-archive" id="main">
+<main class="main shop-archive" id="main">
     <article class="wrapper">
         <header class="article__header">
             <h1 class="display-title"><?php woocommerce_page_title(); ?></h1>
@@ -10,18 +10,18 @@ get_header();
 
         <div class="article__content">
             <?php
-            if ( have_posts() ) {
+            if (have_posts()) {
                 // WooCommerce loop container wrapper
                 woocommerce_product_loop_start();
-                
-                while ( have_posts() ) {
+
+                while (have_posts()) {
                     the_post();
-                    wc_get_template_part( 'content', 'product' );
+                    wc_get_template_part('content', 'product');
                 }
-                
+
                 woocommerce_product_loop_end();
             } else {
-                do_action( 'woocommerce_no_products_found' );
+                do_action('woocommerce_no_products_found');
             }
             ?>
         </div>

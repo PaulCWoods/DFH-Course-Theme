@@ -10,7 +10,7 @@ $registration_success = false;
 if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['dfh_register_nonce'])) {
     if (wp_verify_nonce($_POST['dfh_register_nonce'], 'dfh_register_action')) {
         $username = sanitize_user($_POST['user_login']);
-        $email    = sanitize_email($_POST['user_email']);
+        $email = sanitize_email($_POST['user_email']);
         $password = $_POST['user_pass'];
         $display_name = isset($_POST['dfh_student_name']) ? sanitize_text_field($_POST['dfh_student_name']) : '';
         $redirect_to = isset($_POST['redirect_to']) ? esc_url_raw(wp_unslash($_POST['redirect_to'])) : home_url();
@@ -33,7 +33,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['dfh_register_nonce'])
                 if (!empty($display_name)) {
                     update_user_meta($user_id, 'dfh_student_name', $display_name);
                 }
-                
+
                 // Success: Automatically log the user in and redirect
                 $registration_success = true;
                 wp_set_current_user($user_id);
@@ -50,67 +50,79 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['dfh_register_nonce'])
 get_header();
 get_template_part('content', 'course-header');
 ?>
-<main class="site-main login-page" id="main">
+<main class="main login-page" id="main">
     <div class="wrapper">
 
 
         <?php if (is_user_logged_in() && !$registration_success): ?>
-                <h1 class="title">You are already logged in!</h1>
+            <h1 class="title">You are already logged in!</h1>
             <div class="flex flex-direction-column gap-breathe">
                 <p>
                     <a href="<?php echo esc_url(home_url()); ?>" class="button button--primary">
                         <span>Go to Your Course</span>
-                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
+                            <use href="#ArrowRight" />
+                        </svg>
                     </a>
                 </p>
             </div>
 
         <?php elseif ($registration_success): ?>
-                <h1 class="title">Welcome aboard!</h1>
+            <h1 class="title">Welcome aboard!</h1>
             <div class="flex flex-direction-column gap-breathe">
                 <p>Your account has been successfully created and you are now logged in.</p>
                 <p style="margin-top: 1.5rem;">
                     <a href="<?php echo esc_url($redirect_to); ?>" class="button button--primary">
                         <span>Start Learning</span>
-                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true"><use href="#ArrowRight" /></svg>
+                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
+                            <use href="#ArrowRight" />
+                        </svg>
                     </a>
                 </p>
             </div>
             <script>
                 // Redirect after brief delay to show success message
-                setTimeout(function() {
+                setTimeout(function () {
                     window.location.href = '<?php echo esc_url($redirect_to); ?>';
                 }, 2000);
             </script>
 
         <?php else: ?>
-        <h1 class="title">Create an Account</h1>
+            <h1 class="title">Create an Account</h1>
 
             <?php if (!empty($registration_error)): ?>
-                <div class="login-message error-message" style="border-left: 4px solid #cc0000; padding-left: 1rem; margin-bottom: 1.5rem; color: #cc0000;">
+                <div class="login-message error-message"
+                    style="border-left: 4px solid #cc0000; padding-left: 1rem; margin-bottom: 1.5rem; color: #cc0000;">
                     <p><?php echo esc_html($registration_error); ?></p>
                 </div>
             <?php endif; ?>
 
             <form name="registerform" id="registerform" method="post">
                 <?php wp_nonce_field('dfh_register_action', 'dfh_register_nonce'); ?>
-                
+
                 <!-- Preserve redirect_to parameter from course page -->
                 <?php if (isset($_GET['redirect_to'])): ?>
-                    <input type="hidden" name="redirect_to" value="<?php echo esc_attr(esc_url_raw(wp_unslash($_GET['redirect_to']))); ?>" />
+                    <input type="hidden" name="redirect_to"
+                        value="<?php echo esc_attr(esc_url_raw(wp_unslash($_GET['redirect_to']))); ?>" />
                 <?php endif; ?>
-                
+
                 <p>
                     <label for="dfh_student_name">Your name (optional)</label>
-                    <input type="text" name="dfh_student_name" id="dfh_student_name" value="<?php echo isset($_POST['dfh_student_name']) ? esc_attr($_POST['dfh_student_name']) : ''; ?>" size="25" />
+                    <input type="text" name="dfh_student_name" id="dfh_student_name"
+                        value="<?php echo isset($_POST['dfh_student_name']) ? esc_attr($_POST['dfh_student_name']) : ''; ?>"
+                        size="25" />
                 </p>
                 <p>
                     <label for="user_login">Username</label>
-                    <input type="text" name="user_login" id="user_login" value="<?php echo isset($_POST['user_login']) ? esc_attr($_POST['user_login']) : ''; ?>" size="20" autocapitalize="off" required />
+                    <input type="text" name="user_login" id="user_login"
+                        value="<?php echo isset($_POST['user_login']) ? esc_attr($_POST['user_login']) : ''; ?>" size="20"
+                        autocapitalize="off" required />
                 </p>
                 <p>
                     <label for="user_email">Email Address</label>
-                    <input type="email" name="user_email" id="user_email" value="<?php echo isset($_POST['user_email']) ? esc_attr($_POST['user_email']) : ''; ?>" size="25" required />
+                    <input type="email" name="user_email" id="user_email"
+                        value="<?php echo isset($_POST['user_email']) ? esc_attr($_POST['user_email']) : ''; ?>" size="25"
+                        required />
                 </p>
                 <p>
                     <label for="user_pass">Password</label>
@@ -120,11 +132,14 @@ get_template_part('content', 'course-header');
                 <?php do_action('register_form'); ?>
 
                 <p class="submit">
-                    <input type="submit" name="wp-submit" id="wp-submit" class="button button--primary" value="Register Account" />
+                    <input type="submit" name="wp-submit" id="wp-submit" class="button button--primary"
+                        value="Register Account" />
                 </p>
             </form>
 
-            <p class="login-extras">Already have an account? <a class="link bold" href="<?php echo isset($_GET['redirect_to']) ? esc_url(add_query_arg('redirect_to', esc_url_raw(wp_unslash($_GET['redirect_to'])), home_url('/login/'))) : esc_url(home_url('/login/')); ?>">Log in</a></p>
+            <p class="login-extras">Already have an account? <a class="link bold"
+                    href="<?php echo isset($_GET['redirect_to']) ? esc_url(add_query_arg('redirect_to', esc_url_raw(wp_unslash($_GET['redirect_to'])), home_url('/login/'))) : esc_url(home_url('/login/')); ?>">Log
+                    in</a></p>
 
         <?php endif; ?>
 

@@ -18,7 +18,7 @@ $root_lesson_ids = array_values(array_unique($root_lesson_ids));
 get_template_part('content', 'course-header');
 ?>
 
-<main class="course-landing site-main stack<?php echo is_user_logged_in() ? ' logged-in' : ''; ?>" id="main">
+<main class="course-landing main main--flush stack<?php echo is_user_logged_in() ? ' logged-in' : ''; ?>" id="main">
     <article class="course-landing__article stack article">
         <figure class="course-landing__poster">
             <?php if (has_post_thumbnail())
@@ -49,7 +49,7 @@ get_template_part('content', 'course-header');
         $product = $woo_product_id ? wc_get_product($woo_product_id) : false;
 
         // Check if user has course access (requires access function and product linkage)
-        $has_access = false; 
+        $has_access = false;
         if (function_exists('dfh_user_has_course_access')) {
             $has_access = dfh_user_has_course_access($user_id, $course_id);
         }
@@ -59,9 +59,9 @@ get_template_part('content', 'course-header');
         if ($user_id && !empty($woo_product_id) && !$has_access) {
             $pending_orders = wc_get_orders(array(
                 'customer_id' => $user_id,
-                'status'      => array('processing', 'on-hold'),
-                'limit'       => 1,
-                'product_id'  => $woo_product_id,
+                'status' => array('processing', 'on-hold'),
+                'limit' => 1,
+                'product_id' => $woo_product_id,
             ));
             if (!empty($pending_orders)) {
                 $has_pending_order = true;
@@ -109,7 +109,8 @@ get_template_part('content', 'course-header');
         $welcome_back_msg = '<span id="course-landing__access-welcome" class="small-heading text-color-muted">Welcome back, ' . esc_html($user_name) . '</span>';
         ?>
 
-        <section class="course-landing__access prose font-sizing-fluid" aria-describedby="course-landing__access-heading">
+        <section class="course-landing__access prose font-sizing-fluid"
+            aria-describedby="course-landing__access-heading">
             <div class="wrapper wrapper--lg wrapper--start">
                 <?php if ($course_closed): ?>
                     <h2>Coming soon</h2>
@@ -119,9 +120,11 @@ get_template_part('content', 'course-header');
                     <!-- State 0D: Order Processing / Payment Clearing -->
                     <?php echo $welcome_msg; ?>
                     <h2>Payment received!</h2>
-                    <p class="small-text text-color-muted">Your payment is processing. Your course access will unlock automatically in a moment.</p>
+                    <p class="small-text text-color-muted">Your payment is processing. Your course access will unlock
+                        automatically in a moment.</p>
                     <p style="margin-top: 1.5rem;">
-                        <a href="<?php echo esc_url(get_permalink()); ?>" class="button button--primary"><span>Refresh Page</span></a>
+                        <a href="<?php echo esc_url(get_permalink()); ?>" class="button button--primary"><span>Refresh
+                                Page</span></a>
                     </p>
 
                 <?php elseif (!is_user_logged_in()): ?>
@@ -135,17 +138,21 @@ get_template_part('content', 'course-header');
                         <?php endif; ?>
                     </p>
                     <div class="course-purchase-actions">
-                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/register/'))); ?>" class="button button--primary">
+                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/register/'))); ?>"
+                            class="button button--primary">
                             <span>Register to Enroll</span>
                         </a>
                     </div>
-                    <p class="small-text text-color-muted margin-block-start">Already have an account? <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>" class="link bold">Log in</a> to enroll in the course.</p>
+                    <p class="small-text text-color-muted margin-block-start">Already have an account? <a
+                            href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>"
+                            class="link bold">Log in</a> to enroll in the course.</p>
 
                 <?php elseif (!$has_access && $product): ?>
                     <!-- State 0C: Logged-in User without purchase -->
                     <?php echo $welcome_msg; ?>
                     <h2>Unlock Full Course Access</h2>
-                    <p class="small-text text-color-muted">Purchase the course to unlock all lessons and track your progress.</p>
+                    <p class="small-text text-color-muted">Purchase the course to unlock all lessons and track your
+                        progress.</p>
                     <div class="course-purchase-actions">
                         <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="cart">
                             <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
@@ -170,12 +177,13 @@ get_template_part('content', 'course-header');
                                 </svg>
                             </a>
                             <!-- Review from Beginning Link -->
-                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>"
-                                class="button"><span>Review from Beginning</span></a>
+                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button"><span>Review
+                                    from Beginning</span></a>
                         </div>
                         <div class="course-landing__completion-feedback">
                             What did you think of this course?
-                            <a class="link" href="https://designforhumans.blog/contact?subject=Course Feedback"> Let me know.</a>
+                            <a class="link" href="https://designforhumans.blog/contact?subject=Course Feedback"> Let me
+                                know.</a>
                         </div>
                     </div>
 

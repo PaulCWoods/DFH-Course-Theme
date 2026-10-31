@@ -7,7 +7,7 @@ get_header();
 get_template_part('content', 'account-header');
 ?>
 
-<main class="site-main shop-main" id="main">
+<main class="main shop-main" id="main">
     <!-- Use a wider container or full layout for checkout/cart, prose for normal pages -->
     <div class="article wrapper my-account">
         <?php
