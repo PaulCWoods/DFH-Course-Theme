@@ -1,11 +1,11 @@
 <header class="header header--sticky header--translucent max-md:header--compact">
     <a href="#main" class="skip-link header__skip-link">Skip to main content</a>
     <div class="header__bar">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="link link--plain header__brand">
-            <svg class="icon header__brand-icon" width="1em" height="1em" aria-hidden="true" focusable="false">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="brand">
+            <svg class="brand__mark icon" width="1em" height="1em" aria-hidden="true" focusable="false">
                 <use href="#BrandDesignForHumans"></use>
             </svg>
-            <span class="header__brand-wordmark">Courses</span>
+            <span class="brand__name">Courses</span>
         </a>
         <nav class="header__nav tab-list tab-list--plain tab-list--scrollable site-trail" aria-label="Breadcrumb">
             <ul>
