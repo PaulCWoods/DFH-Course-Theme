@@ -187,7 +187,7 @@ $course-bp: 60em;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-block-start: var(--spacing-cushion);
+    margin-block: var(--spacing-cushion);
 }
 
 .course-landing__completion-buttons {
