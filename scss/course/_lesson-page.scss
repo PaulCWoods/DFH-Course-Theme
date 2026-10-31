@@ -213,16 +213,8 @@
     margin-block: 0; // keep title snug to content
 }
 
-.lesson-header__subtitle {
-    font-family: var(--subheading-font-family);
-    font-size: var(--subheading-font-size);
-    font-weight: var(--subheading-font-weight);
-    line-height: var(--subheading-line-height);
-}
-
 .lesson-header__kicker {
     display: block;
-    font-weight: bold;
     margin-block-start: var(--spacing-8);
 
     &.\+pre {
