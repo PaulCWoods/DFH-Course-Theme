@@ -26,12 +26,12 @@ get_template_part('content', 'course-header');
         </figure>
         <header class="article__header course-landing__header prose font-sizing-fluid">
 
-            <div class="wrapper wrapper--lg wrapper--start">
+            <div class="wrapper wrapper--lg wrapper--start wrapper--flush">
                 <h1><?php the_title(); ?></h1>
             </div>
         </header>
         <div class="course-landing__intro prose font-sizing-fluid">
-            <div class="wrapper wrapper--lg wrapper--start">
+            <div class="wrapper wrapper--lg wrapper--start wrapper--flush">
                 <?php the_excerpt(); ?>
             </div>
         </div>
@@ -111,7 +111,7 @@ get_template_part('content', 'course-header');
 
         <section class="course-landing__access prose font-sizing-fluid"
             aria-describedby="course-landing__access-heading">
-            <div class="wrapper wrapper--lg wrapper--start">
+            <div class="wrapper wrapper--lg wrapper--start wrapper--flush">
                 <?php if ($course_closed): ?>
                     <h2>Coming soon</h2>
                     <p class="small-text text-color-muted">This course is not available yet. Check back soon.</p>
@@ -231,7 +231,7 @@ get_template_part('content', 'course-header');
         </section>
     </article>
     <section class="course-landing__section course-landing__about" aria-describedby="course-about-heading">
-        <article class="wrapper">
+        <article class="wrapper wrapper--flush">
             <h2 id="course-about-heading" class="heading">About this course</h2>
             <div class="prose font-sizing-fluid">
                 <?php the_content(); ?>
@@ -255,7 +255,7 @@ get_template_part('content', 'course-header');
         </article>
     </section>
     <section class="course-landing__section course-landing__syllabus " aria-describedby="course-plan-heading">
-        <div class="wrapper">
+        <div class="wrapper wrapper--flush">
             <h2 id="course-plan-heading" class="heading">Course plan</h2>
             <p class="small-text course-landing__note">Note: Access to lessons will be granted as you progress through
                 the course.</p>
