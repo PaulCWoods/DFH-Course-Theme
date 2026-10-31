@@ -23,7 +23,7 @@
             </ul>
         </nav>
         <p class="small-text">&copy; <?php echo date('Y'); ?> Design For Humans. All rights reserved.</p>
-        <span class="footer__brand footer__brand-wordmark" aria-hidden="true">Design For Humans</span>
+        <span class="brand" aria-hidden="true">Design For Humans</span>
     </div>
 </footer>
 </div>
