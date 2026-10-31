@@ -232,7 +232,7 @@
 
     // Pinning is limited to the narrow, touch layout where the toggle exposes
     // the sticky-player state.
-    .site:has(.video-stick) & {
+    .app:has(.video-stick) & {
         @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
             position: sticky;
             inset-block-start: var(--header-compact-bar-min-size, var(--spacing-48));
@@ -246,7 +246,7 @@
     display: none;
 
     @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
-        .site:has(.lesson-video) & {
+        .app:has(.lesson-video) & {
             display: inline-flex;
         }
     }
