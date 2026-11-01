@@ -168,7 +168,7 @@
     font-weight: var(--label-font-weight);
     line-height: var(--label-line-height);
     text-transform: var(--label-text-transform);
-    text-underline-offset: var(--link-underline-offset);
+    text-underline-offset: var(--link-underline-offset, var(--underline-offset, 0.25em));
     text-wrap: balance;
 
     &:not(a[href]) {

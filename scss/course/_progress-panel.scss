@@ -49,7 +49,7 @@
 }
 
 .progress-panel__footer {
-    padding-block-end: calc(var(--card-padding) + env(safe-area-inset-bottom));
+    padding-block-end: calc(var(--card-padding, var(--spacing-cushion)) + env(safe-area-inset-bottom));
 }
 
 .progress-panel__brand {

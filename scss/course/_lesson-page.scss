@@ -497,12 +497,12 @@
     text-align: end;
 
     .button {
-        padding-inline-end: calc(var(--button-inner-gap) + var(--button-padding-inline) + 1em);
+        padding-inline-end: calc(var(--button-inner-gap, var(--spacing-12)) + var(--button-padding-inline, var(--spacing-md)) + 1em);
         position: relative;
 
         .icon {
             position: absolute;
-            inset-block-start: calc(var(--button-border-width) * -1);
+            inset-block-start: calc(var(--button-border-width, var(--border-width, 1px)) * -1);
             inset-inline-end: .5em;
             font-size: 1.5em;
         }

@@ -17,9 +17,9 @@
         a {
             color: var(--link-color);
             font-weight: bold;
-            text-decoration-color: var(--link-underline-color);
-            text-decoration-thickness: var(--link-underline-thickness);
-            text-underline-offset: var(--link-underline-offset);
+            text-decoration-color: var(--link-underline-color, currentColor);
+            text-decoration-thickness: var(--link-underline-thickness, var(--underline-thickness, 1px));
+            text-underline-offset: var(--link-underline-offset, var(--underline-offset, 0.25em));
 
             @media (hover:hover) {
                 &:hover {
