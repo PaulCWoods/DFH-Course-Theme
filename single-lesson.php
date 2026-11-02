@@ -12,7 +12,7 @@ if (!dfh_user_has_course_access()) {
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
             <?php if (!is_user_logged_in()): ?>
-                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="button button--primary"><span>Log in</span></a>
+                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="button button--strong button--accent"><span>Log in</span></a>
                 </p>
             <?php endif; ?>
         </article>
@@ -53,7 +53,7 @@ $adjacent = dfh_get_adjacent_lesson($lesson_id);
 $is_completed = dfh_is_lesson_completed($lesson_id);
 $is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
 $bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
-$bookmark_class = $is_bookmarked ? 'button button--primary bookmark-btn' : 'button bookmark-btn';
+$bookmark_class = $is_bookmarked ? 'button is-active bookmark-btn' : 'button bookmark-btn';
 $bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
 $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 
@@ -373,13 +373,13 @@ get_header();
             }
 
             $button_label = $is_last_lesson ? 'Complete Course' : 'Next Lesson';
-            $button_class = $is_last_lesson ? 'button button--primary course-complete' : 'button button--primary next-lesson';
+            $button_class = $is_last_lesson ? 'button button--strong button--accent course-complete' : 'button button--strong button--accent next-lesson';
 
             // Compute the label shown to the user when the lesson is already completed.
             if ($is_completed) {
                 if ($is_last_lesson) {
                     $display_button_label = 'Course Home';
-                    $button_class = 'button button--primary course-home';
+                    $button_class = 'button button--strong button--accent course-home';
                 } else {
                     $display_button_label = 'Next Lesson';
                 }
@@ -630,11 +630,11 @@ get_header();
                         const useEl = bookmarkBtn.querySelector('use');
                         if (data.data.is_bookmarked) {
                             if (label) label.textContent = 'Bookmarked';
-                            bookmarkBtn.classList.add('button--primary');
+                            bookmarkBtn.classList.add('is-active');
                             if (useEl) useEl.setAttribute('href', '#Bookmarked');
                         } else {
                             if (label) label.textContent = 'Bookmark Lesson';
-                            bookmarkBtn.classList.remove('button--primary');
+                            bookmarkBtn.classList.remove('is-active');
                             if (useEl) useEl.setAttribute('href', '#Bookmark');
                         }
                     } else {
