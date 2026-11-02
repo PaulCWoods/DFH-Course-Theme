@@ -1,11 +1,22 @@
+// ============================================================================
+// Design For Humans course: the course's own CSS
+// ----------------------------------------------------------------------------
+// The library loads first, from components.designforhumans.blog/css/<version>/:
+// dfh-components.css, themes/dfh.css, then the course sub-brands (header.php).
+// This file holds only what the course adds, appended to the library's
+// cascade layers:
+// - tokens: the course's own tokens
+// - layout: its components, after the library's components and layout
+//   primitives and under its utilities
+// ============================================================================
 @use 'sass:meta';
 
-@layer components {
-    @include meta.load-css('course');
+@layer tokens {
+    @include meta.load-css('theme');
 }
 
-@layer theme {
-    @include meta.load-css('theme');
+@layer layout {
+    @include meta.load-css('course');
 }
 
 .progress-toggle {

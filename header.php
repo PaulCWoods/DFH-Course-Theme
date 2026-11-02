@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="viewport-fit-cover" <?php language_attributes(); ?>>
+<html class="viewport-fit-cover theme-course" <?php language_attributes(); ?>>
 
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
@@ -21,8 +21,16 @@
 
     <?php wp_head(); ?>
 
-    <!-- Shared Design Tokens & Styles from your main blog -->
-    <link rel="stylesheet" href="https://designforhumans.blog/styles/css/dfh-shared.css">
+    <!-- The library and the DFH theme from components.designforhumans.blog, then the
+         course and its lesson colours (sub-brands: theme-course on <html>, a lesson's
+         class beside its data-lesson or data-syllabus), the DFH site components the
+         blog shares, then the course's own CSS -->
+    <link rel="stylesheet" href="https://use.typekit.net/lrj6kun.css">
+<?php foreach (array('dfh-components.css', 'themes/dfh.css', 'themes/course.css', 'themes/course-aqua.css', 'themes/course-purple.css', 'themes/course-olive.css') as $sheet) : ?>
+    <link rel="stylesheet" href="<?php echo esc_url(dfh_library_css($sheet)); ?>">
+<?php endforeach; ?>
+    <link rel="stylesheet" href="https://designforhumans.blog/styles/css/dfh-site.css">
+
     <link rel="stylesheet" href="<?php echo esc_url(get_stylesheet_directory_uri() . '/css/dfh-course.css'); ?>">
 
     <!-- Modern scalable SVG favicon with dark mode support -->
@@ -55,7 +63,7 @@ if (function_exists('is_singular') && is_singular('lesson')) {
 }
 ?>
 
-<body <?php body_class(); ?> data-syllabus="<?php echo esc_attr($syllabus_index); ?>">
+<body <?php body_class(dfh_lesson_theme_class($syllabus_index)); ?> data-syllabus="<?php echo esc_attr($syllabus_index); ?>">
     <?php get_template_part('content', 'icon-sprite'); ?>
     <?php wp_body_open(); ?>
     <div class="app">

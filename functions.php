@@ -361,6 +361,27 @@ if (function_exists('acf_add_local_field_group')) {
  * -------------------------------------------------------------------------
  */
 
+/**
+ * The library's published CSS, pinned to a version. Define DFH_COMPONENTS_CSS
+ * in wp-config.php to load another build (a local one, or the next version).
+ */
+function dfh_library_css($file)
+{
+    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.1.0';
+    return rtrim($base, '/') . '/' . $file;
+}
+
+/**
+ * The sub-brand class for a top-level lesson number, set beside its
+ * data-lesson or data-syllabus. Lesson 1 wears the course itself; 2 to 4
+ * their own colours (tokens/themes/course-*.json in DFH-Components).
+ */
+function dfh_lesson_theme_class($number)
+{
+    $themes = array('1' => 'theme-course', '2' => 'theme-course-aqua', '3' => 'theme-course-purple', '4' => 'theme-course-olive');
+    return $themes[(string) $number] ?? '';
+}
+
 function dfh_get_lesson_hierarchy_number($post_id = null)
 {
     $post = get_post($post_id);
@@ -499,6 +520,7 @@ function dfh_render_lesson_children($parent_id, $level = 1, $active_lesson = nul
         $code = dfh_get_lesson_hierarchy_number($child->ID);
         $code_html = $code ? '<span class="lesson-item__code">' . esc_html($code) . '</span> ' : '';
         $data_lesson = $code ? $code : (string) $child->ID;
+        $item_class = trim('lesson-list__item l' . $lvl . ' ' . dfh_lesson_theme_class($data_lesson));
 
         $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($child->ID) : false;
         $bookmarked = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($child->ID) : false;
@@ -508,11 +530,11 @@ function dfh_render_lesson_children($parent_id, $level = 1, $active_lesson = nul
 
         if (!$started) {
             // Not started: render as non-clickable span and omit the progress chip.
-            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</span>' . $bookmark_html . '</span>';
+            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</span>' . $bookmark_html . '</span>';
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
             $chip_class = $completed ? 'status status--plain status--no-dot complete' : 'status status--plain status--success chip in-progress';
-            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
+            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($child->ID, $lvl + 1, $active_lesson);
         $output .= '</li>';
@@ -567,6 +589,7 @@ function dfh_render_lesson_tree($roots = null, $level = 1, $active_lesson = null
         $code = dfh_get_lesson_hierarchy_number($r_id);
         $code_html = $code ? '<span class="lesson-item__code">' . esc_html($code) . '</span> ' : '';
         $data_lesson = $code ? $code : (string) $r_id;
+        $item_class = trim('lesson-list__item l' . $lvl . ' ' . dfh_lesson_theme_class($data_lesson));
 
         $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($r_id) : false;
         $bookmarked_root = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($r_id) : false;
@@ -576,11 +599,11 @@ function dfh_render_lesson_tree($roots = null, $level = 1, $active_lesson = null
 
         if (!$started) {
             // Not started: render as non-clickable span and omit the progress chip.
-            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '</span>';
+            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '</span>';
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
             $chip_class = $completed ? 'chip complete' : 'chip in-progress';
-            $output .= '<li class="lesson-list__item l' . $lvl . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</a>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
+            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</a>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($r_id, $lvl + 1, $active_lesson);
         $output .= '</li>';
@@ -1624,7 +1647,9 @@ function dfh_handle_certificate_download()
             <title>
                 Certificate of Completion - <?php echo esc_html($course_title); ?>
             </title>
-            <link rel="stylesheet" href="https://designforhumans.blog/styles/css/dfh-shared.css" />
+            <link rel="stylesheet" href="https://use.typekit.net/lrj6kun.css" />
+            <link rel="stylesheet" href="<?php echo esc_url(dfh_library_css('dfh-components.css')); ?>" />
+            <link rel="stylesheet" href="<?php echo esc_url(dfh_library_css('themes/dfh.css')); ?>" />
             <style>
                 body {
                     margin: 0;
