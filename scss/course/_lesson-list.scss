@@ -11,7 +11,7 @@
         margin-block-start: 0;
     }
 
-    li + li {
+    li+li {
         margin-block-start: calc(var(--spacing, 1rem) / 2);
     }
 }
@@ -69,7 +69,7 @@
 }
 
 .lesson-list__container {
-    > .lesson-list {
+    >.lesson-list {
         display: grid;
         gap: var(--spacing-breathe);
         grid-template-columns: repeat(auto-fill, minmax(min(var(--syllabus-width, 28rem), 100%), 1fr));
@@ -90,13 +90,13 @@
             }
         }
 
-        > .lesson-list__item {
+        >.lesson-list__item {
             border: var(--l1-box-border-width) solid currentColor;
             margin-block-start: 0;
             padding: var(--l1-box-padding);
 
             &:has(a[href]) {
-                background-color: color-mix(var(--surface-accent-muted), transparent 66%);
+                background-color: color-mix(var(--surface-accent), transparent 66%);
                 border-color: var(--border-color-accent);
 
 
@@ -105,7 +105,7 @@
                 }
             }
 
-            > .lesson-item {
+            >.lesson-item {
                 --code-font-family: var(--l1-label-font-family);
                 --code-font-size: var(--l1-label-font-size);
                 --code-font-weight: var(--l1-label-font-weight);
@@ -113,12 +113,12 @@
                 --code-text-transform: var(--l1-label-text-transform);
             }
 
-            > .lesson-list {
+            >.lesson-list {
                 border-block-start: var(--border-width-1) dashed var(--border-color-accent);
                 margin-block-start: var(--spacing, 1rem);
                 padding-block-start: var(--spacing, 1rem);
 
-                > li + li {
+                >li+li {
                     border-block-start: var(--border-width-1) dashed var(--border-color-accent);
                     margin-block-start: var(--spacing, 1rem);
                     padding-block-start: var(--spacing, 1rem);
@@ -184,6 +184,7 @@
 }
 
 a.lesson-item__label {
+
     // Make the whole relatively positioned lesson row clickable.
     &:before {
         content: "";
