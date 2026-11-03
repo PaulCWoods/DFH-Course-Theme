@@ -333,7 +333,7 @@
     }
 
     section {
-        border-block-start: var(--border-quiet);
+        border-block-start: var(--border-width) solid var(--border-color-quiet);
         padding-block: calc(var(--spacing-breathe) * 2);
     }
 
