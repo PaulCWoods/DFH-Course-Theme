@@ -13,7 +13,7 @@
 
 .product {
     align-items: center;
-    border-block-end: var(--border-subtle);
+    border-block-end: var(--border-width-thin) dashed var(--border-color-quiet);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -137,7 +137,7 @@ a.woocommerce-loop-product__link {
 }
 
 .wp-block-woocommerce-empty-cart-block {
-    border: var(--border-subtle);
+    border: var(--border-width-thin) dashed var(--border-color-quiet);
     padding: var(--spacing-cushion);
 }
 

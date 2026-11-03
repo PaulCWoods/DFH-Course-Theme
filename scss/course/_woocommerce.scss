@@ -39,7 +39,7 @@
         gap: var(--spacing);
 
         [class^="u-column"] {
-            border: var(--border-subtle);
+            border: var(--border-width-thin) dashed var(--border-color-quiet);
             padding: var(--spacing);
         }
     }
@@ -194,7 +194,7 @@
 // Success notice container
 .woocommerce-notice {
     background-color: var(--surface-success);
-    border: var(--border-subtle);
+    border: var(--border-width-thin) dashed var(--border-color-quiet);
     border-color: var(--foreground-success);
     color: var(--foreground-success);
     margin-block-end: var(--spacing-breathe);
@@ -220,7 +220,7 @@
 
 // Notice wrapper container with contextual styling
 .woocommerce-notices-wrapper:not(:empty) {
-    border: var(--border-subtle);
+    border: var(--border-width-thin) dashed var(--border-color-quiet);
     margin-block-end: var(--spacing-breathe);
     padding: var(--spacing);
 
@@ -259,7 +259,7 @@
 
 .woocommerce-order {
     section {
-        border-block-start: var(--border-subtle);
+        border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
         margin-block-start: var(--spacing-cushion);
         padding-block-start: var(--spacing-cushion);
 
@@ -299,7 +299,7 @@
 
         // Divider between list items
         +li {
-            border-block-start: var(--border-subtle);
+            border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
             margin-block-start: calc(var(--spacing) / 2);
             padding-block-start: calc(var(--spacing) / 2);
         }

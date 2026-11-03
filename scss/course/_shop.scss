@@ -53,7 +53,7 @@
 
     tbody {
         tr {
-            border-block-end: var(--border-subtle);
+            border-block-end: var(--border-width-thin) dashed var(--border-color-quiet);
         }
     }
 
@@ -61,7 +61,7 @@
         border-block-start: var(--border);
 
         tr+tr {
-            border-block-start: var(--border-subtle);
+            border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
         }
 
         th[scope="row"] {

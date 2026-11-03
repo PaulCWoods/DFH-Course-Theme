@@ -128,7 +128,7 @@ $course-bp: 60em;
     }
 
     +.course-landing__section {
-        border-block-start: var(--border-subtle);
+        border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
         box-shadow: none;
     }
 }
@@ -192,7 +192,7 @@ $course-bp: 60em;
 
 .course-landing__completion-buttons {
     align-items: center;
-    border-block-start: var(--border-subtle);
+    border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
     border-color: inherti;
     display: flex;
     flex-wrap: wrap;

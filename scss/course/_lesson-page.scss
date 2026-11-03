@@ -446,7 +446,7 @@
         td,
         th {
             border: 0 !important;
-            border-block-end: var(--border-subtle) !important;
+            border-block-end: var(--border-width-thin) dashed var(--border-color-quiet) !important;
             padding-inline-start: 0 !important;
         }
 
@@ -473,7 +473,7 @@
         line-height: var(--body-small-line-height);
         margin-block-start: var(--spacing-cushion);
         padding-block-start: var(--spacing-cushion);
-        border-block-start: var(--border-subtle);
+        border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
 
         li a:first-child {
             margin-inline-end: 0.5rem;
@@ -490,7 +490,7 @@
 // Lesson resources and bookmark
 
 .lesson-bookmark {
-    border-block-start: var(--border-subtle);
+    border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
     margin-block-start: var(--spacing-cushion);
     padding-block-start: var(--spacing-cushion);
     order: 4;
@@ -522,7 +522,7 @@
 }
 
 .lesson-resources {
-    border-block-start: var(--border-subtle);
+    border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
     margin-block-end: var(--spacing-cushion);
     padding-block-start: var(--spacing-cushion);
 
