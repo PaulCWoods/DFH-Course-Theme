@@ -83,7 +83,7 @@ a.woocommerce-loop-product__link {
 
     :is(.product,
         .woocommerce-notices-wrapper) {
-        max-inline-size: var(--site-width);
+        max-inline-size: var(--spacing-site-width);
         margin-inline: auto;
     }
 

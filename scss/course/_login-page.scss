@@ -14,7 +14,7 @@
 
     .wrapper {
         inline-size: 100%;
-        max-inline-size: calc(var(--site-width) / 2);
+        max-inline-size: calc(var(--spacing-site-width) / 2);
     }
 
     form {

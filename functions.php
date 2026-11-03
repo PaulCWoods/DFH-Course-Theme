@@ -367,7 +367,7 @@ if (function_exists('acf_add_local_field_group')) {
  */
 function dfh_library_css($file)
 {
-    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.1.0';
+    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.2.0';
     return rtrim($base, '/') . '/' . $file;
 }
 
@@ -1293,36 +1293,37 @@ add_action('save_post_course', 'dfh_save_course_product_meta');
 /**
  * Automatically grant course access when a WooCommerce order is processing or completed.
  */
-function dfh_grant_course_access_on_purchase( $order_id ) {
-    $order = wc_get_order( $order_id );
-    if ( ! $order ) {
+function dfh_grant_course_access_on_purchase($order_id)
+{
+    $order = wc_get_order($order_id);
+    if (!$order) {
         return;
     }
 
     $user_id = $order->get_user_id();
-    if ( ! $user_id ) {
-        return; 
+    if (!$user_id) {
+        return;
     }
 
-    foreach ( $order->get_items() as $item ) {
+    foreach ($order->get_items() as $item) {
         $product_id = $item->get_product_id();
 
         // Check if this product is linked to any course
-        $courses = get_posts( array(
-            'post_type'   => 'course',
-            'meta_key'    => '_dfh_product_id',
-            'meta_value'  => $product_id,
+        $courses = get_posts(array(
+            'post_type' => 'course',
+            'meta_key' => '_dfh_product_id',
+            'meta_value' => $product_id,
             'numberposts' => 1,
-        ) );
+        ));
 
-        if ( ! empty( $courses ) ) {
-            update_user_meta( $user_id, 'dfh_course_enrolled', '1' );
+        if (!empty($courses)) {
+            update_user_meta($user_id, 'dfh_course_enrolled', '1');
         }
     }
 }
 // Listen to both processing and completed states so the user gets instant access
-add_action( 'woocommerce_order_status_processing', 'dfh_grant_course_access_on_purchase' );
-add_action( 'woocommerce_order_status_completed', 'dfh_grant_course_access_on_purchase' );
+add_action('woocommerce_order_status_processing', 'dfh_grant_course_access_on_purchase');
+add_action('woocommerce_order_status_completed', 'dfh_grant_course_access_on_purchase');
 
 /**
  * Completely disable WooCommerce default stylesheets.
@@ -1332,76 +1333,79 @@ add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 /**
  * Automatically complete orders for virtual products.
  */
-function dfh_auto_complete_virtual_orders( $order_id ) {
-    if ( ! $order_id ) {
+function dfh_auto_complete_virtual_orders($order_id)
+{
+    if (!$order_id) {
         return;
     }
 
-    $order = wc_get_order( $order_id );
-    if ( ! $order ) {
+    $order = wc_get_order($order_id);
+    if (!$order) {
         return;
     }
 
     // Only affect orders that are currently processing
-    if ( 'processing' !== $order->get_status() ) {
+    if ('processing' !== $order->get_status()) {
         return;
     }
 
     $has_downloadable_or_virtual = false;
 
-    foreach ( $order->get_items() as $item ) {
+    foreach ($order->get_items() as $item) {
         $product = $item->get_product();
-        if ( $product && ( $product->is_virtual() || $product->is_downloadable() ) ) {
+        if ($product && ($product->is_virtual() || $product->is_downloadable())) {
             $has_downloadable_or_virtual = true;
             break;
         }
     }
 
-    if ( $has_downloadable_or_virtual ) {
-        $order->update_status( 'completed' );
+    if ($has_downloadable_or_virtual) {
+        $order->update_status('completed');
     }
 }
-add_action( 'woocommerce_thankyou', 'dfh_auto_complete_virtual_orders' );
-add_action( 'woocommerce_payment_complete', 'dfh_auto_complete_virtual_orders' );
+add_action('woocommerce_thankyou', 'dfh_auto_complete_virtual_orders');
+add_action('woocommerce_payment_complete', 'dfh_auto_complete_virtual_orders');
 
 /**
  * Add a "Return to Course" link on the WooCommerce Order Received (Thank You) page.
  */
-function dfh_add_return_to_course_link( $order_id ) {
+function dfh_add_return_to_course_link($order_id)
+{
     // Convert order ID to order object
-    $order = wc_get_order( $order_id );
-    if ( ! $order ) {
+    $order = wc_get_order($order_id);
+    if (!$order) {
         return;
     }
-    
+
     // Find if the order contains a course product
     $course_url = home_url(); // Fallback to home
-    
-    foreach ( $order->get_items() as $item ) {
+
+    foreach ($order->get_items() as $item) {
         $product_id = $item->get_product_id();
-        $courses = get_posts( array(
-            'post_type'   => 'course',
-            'meta_key'    => '_dfh_product_id',
-            'meta_value'  => $product_id,
+        $courses = get_posts(array(
+            'post_type' => 'course',
+            'meta_key' => '_dfh_product_id',
+            'meta_value' => $product_id,
             'numberposts' => 1,
-        ) );
-        if ( ! empty( $courses ) ) {
-            $course_url = get_permalink( $courses[0]->ID );
+        ));
+        if (!empty($courses)) {
+            $course_url = get_permalink($courses[0]->ID);
             break;
         }
     }
     ?>
     <div class="woocommerce-order-course-return" style="margin: 2rem 0; text-align: center;">
-        <a href="<?php echo esc_url( $course_url ); ?>" class="button button--strong button--accent">
+        <a href="<?php echo esc_url($course_url); ?>" class="button button--strong button--accent">
             <span>Go to Your Course</span>
-            <svg class="icon icon--dir" width="32" height="32" aria-hidden="true" style="margin-left: 0.5rem; vertical-align: middle;">
+            <svg class="icon icon--dir" width="32" height="32" aria-hidden="true"
+                style="margin-left: 0.5rem; vertical-align: middle;">
                 <use href="#ArrowRight" />
             </svg>
         </a>
     </div>
     <?php
 }
-add_action( 'woocommerce_thankyou', 'dfh_add_return_to_course_link', 20 );
+add_action('woocommerce_thankyou', 'dfh_add_return_to_course_link', 20);
 
 /**
  * Register Downloadable Resources Custom Post Type.

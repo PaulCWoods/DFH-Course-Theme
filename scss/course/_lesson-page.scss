@@ -47,10 +47,10 @@
     color-scheme: dark;
     display: flex;
     inline-size: 100%;
-    max-inline-size: var(--site-width);
+    max-inline-size: var(--spacing-site-width);
 
     .lesson-head.\+sample & {
-        max-inline-size: calc(var(--site-width) + var(--site-block-padding, var(--spacing-cushion)) * 2);
+        max-inline-size: calc(var(--spacing-site-width) + var(--site-block-padding, var(--spacing-cushion)) * 2);
     }
 }
 
