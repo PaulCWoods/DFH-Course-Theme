@@ -12,7 +12,8 @@ if (!dfh_user_has_course_access()) {
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
             <?php if (!is_user_logged_in()): ?>
-                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="button button--strong button--accent"><span>Log in</span></a>
+                <p><a href="<?php echo esc_url(home_url('/login/')); ?>" class="button button--strong button--accent"><span>Log
+                            in</span></a>
                 </p>
             <?php endif; ?>
         </article>
@@ -54,7 +55,7 @@ $is_completed = dfh_is_lesson_completed($lesson_id);
 $is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
 $bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
 $bookmark_class = $is_bookmarked ? 'button is-active bookmark-btn' : 'button bookmark-btn';
-$bookmark_icon = $is_bookmarked ? '#Bookmarked' : '#Bookmark';
+$bookmark_icon = $is_bookmarked ? '#BookmarkFilled' : '#Bookmark';
 $playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
 
 /**
@@ -631,7 +632,7 @@ get_header();
                         if (data.data.is_bookmarked) {
                             if (label) label.textContent = 'Bookmarked';
                             bookmarkBtn.classList.add('is-active');
-                            if (useEl) useEl.setAttribute('href', '#Bookmarked');
+                            if (useEl) useEl.setAttribute('href', '#BookmarkFilled');
                         } else {
                             if (label) label.textContent = 'Bookmark Lesson';
                             bookmarkBtn.classList.remove('is-active');

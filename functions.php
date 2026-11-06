@@ -367,7 +367,7 @@ if (function_exists('acf_add_local_field_group')) {
  */
 function dfh_library_css($file)
 {
-    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.2.1';
+    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.3.0';
     return rtrim($base, '/') . '/' . $file;
 }
 
@@ -524,7 +524,7 @@ function dfh_render_lesson_children($parent_id, $level = 1, $active_lesson = nul
 
         $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($child->ID) : false;
         $bookmarked = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($child->ID) : false;
-        $bookmark_html = $bookmarked ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="visually-hidden">Bookmarked</span></span>' : '';
+        $bookmark_html = $bookmarked ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#BookmarkFilled" /></svg><span class="visually-hidden">Bookmarked</span></span>' : '';
         // A lesson is considered "started" if it's completed or it's the user's current active lesson.
         $started = $completed || ($active_lesson && ((int) $active_lesson === (int) $child->ID));
 
@@ -593,7 +593,7 @@ function dfh_render_lesson_tree($roots = null, $level = 1, $active_lesson = null
 
         $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($r_id) : false;
         $bookmarked_root = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($r_id) : false;
-        $bookmark_html_root = $bookmarked_root ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#Bookmarked" /></svg><span class="visually-hidden">Bookmarked</span></span>' : '';
+        $bookmark_html_root = $bookmarked_root ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#BookmarkFilled" /></svg><span class="visually-hidden">Bookmarked</span></span>' : '';
         // A lesson is considered "started" if it's completed or it's the user's current active lesson.
         $started = $completed || ($active_lesson && ((int) $active_lesson === (int) $r_id));
 
