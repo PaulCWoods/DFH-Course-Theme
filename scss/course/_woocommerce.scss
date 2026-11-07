@@ -155,23 +155,13 @@
 // -----------------------------------------------------------------------------
 // Notifications and messages
 
-// Default focus state for error and message containers
-.woocommerce-error,
-.woocommerce-message {
-    &:focus-visible {
-        outline: var(--focus-ring-width) solid var(--focus-ring-color);
-        outline-offset: var(--focus-ring-offset);
-    }
+// WooCommerce's notices are Banners (woocommerce/notices); they sit in the
+// flow above what they're about
+.banner:is(.woocommerce-info, .woocommerce-message, .woocommerce-error) {
+    margin-block-end: var(--spacing-breathe);
 }
 
-// Success message styling
-.woocommerce-message {
-    color: var(--foreground-accent);
-    font-weight: bold;
-    margin-block-end: var(--spacing-cushion);
-}
-
-// Success notice container
+// The order-received notice on the thank-you page
 .woocommerce-notice {
     background-color: var(--surface-success);
     border: var(--border-width-thin) dashed var(--border-color-quiet);
@@ -179,58 +169,6 @@
     color: var(--foreground-success);
     margin-block-end: var(--spacing-breathe);
     padding: var(--spacing);
-}
-
-// Error message styling
-.woocommerce-error {
-    color: var(--foreground-danger);
-    margin-block-end: var(--spacing-cushion);
-    padding-inline-start: 1.5em;
-}
-
-// Informational notice container
-.woocommerce-info {
-    background-color: var(--surface-card);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-cushion);
-    margin-block-end: var(--spacing-breathe);
-    padding: var(--spacing-cushion);
-}
-
-// Notice wrapper container with contextual styling
-.woocommerce-notices-wrapper:not(:empty) {
-    border: var(--border-width-thin) dashed var(--border-color-quiet);
-    margin-block-end: var(--spacing-breathe);
-    padding: var(--spacing);
-
-    // Focus state for wrapper
-    &:has(:focus-visible) {
-        outline: var(--focus-ring-width) solid var(--focus-ring-color);
-        outline-offset: var(--focus-ring-offset);
-    }
-
-    // Error state - wrapper contains error messages
-    &:has(.woocommerce-error) {
-        background-color: var(--surface-danger);
-        border-color: var(--foreground-danger);
-    }
-
-    // Success state - wrapper contains success messages
-    &:has(.woocommerce-message) {
-        background-color: var(--surface-accent);
-        border-color: var(--foreground-accent);
-    }
-
-    // Message and error styling within wrapper
-    .woocommerce-error,
-    .woocommerce-message {
-        margin-block-end: 0;
-
-        &:focus-visible {
-            outline: none;
-        }
-    }
 }
 
 

@@ -1318,15 +1318,7 @@ function dfh_grant_course_access_on_purchase($order_id)
     foreach ($order->get_items() as $item) {
         $product_id = $item->get_product_id();
 
-        // Check if this product is linked to any course
-        $courses = get_posts(array(
-            'post_type' => 'course',
-            'meta_key' => '_dfh_product_id',
-            'meta_value' => $product_id,
-            'numberposts' => 1,
-        ));
-
-        if (!empty($courses)) {
+        if (dfh_course_for_product($product_id)) {
             update_user_meta($user_id, 'dfh_course_enrolled', '1');
         }
     }
@@ -1334,6 +1326,36 @@ function dfh_grant_course_access_on_purchase($order_id)
 // Listen to both processing and completed states so the user gets instant access
 add_action('woocommerce_order_status_processing', 'dfh_grant_course_access_on_purchase');
 add_action('woocommerce_order_status_completed', 'dfh_grant_course_access_on_purchase');
+
+/**
+ * The course a WooCommerce product sells (the course's WooCommerce Product ID),
+ * or null.
+ */
+function dfh_course_for_product($product_id)
+{
+    $courses = get_posts(array(
+        'post_type' => 'course',
+        'meta_key' => '_dfh_product_id',
+        'meta_value' => $product_id,
+        'numberposts' => 1,
+    ));
+    return $courses ? $courses[0] : null;
+}
+
+/**
+ * Courses are sold from their own page, so a product's page (which the cart
+ * links to) goes to the course it sells, or the courses home.
+ */
+function dfh_redirect_product_to_course()
+{
+    if (!function_exists('is_product') || !is_product()) {
+        return;
+    }
+    $course = dfh_course_for_product(get_queried_object_id());
+    wp_safe_redirect($course ? get_permalink($course) : home_url('/'), 301);
+    exit;
+}
+add_action('template_redirect', 'dfh_redirect_product_to_course');
 
 /**
  * Completely disable WooCommerce default stylesheets.
@@ -1395,6 +1417,55 @@ function dfh_remove_core_block_styles($args, $name)
     return $args;
 }
 add_filter('register_block_type_args', 'dfh_remove_core_block_styles', 10, 2);
+
+/**
+ * A WooCommerce notice as the library's Banner: the intent's icon, the message
+ * in a text atom, and any links WooCommerce styles as buttons ("View cart",
+ * "Confirm email address") moved under it in a cluster. Used by the theme's
+ * woocommerce/notices templates.
+ */
+function dfh_notice_banner($messages, $intent, $icon, $extra_class = '')
+{
+    $actions = array();
+    $items = array();
+    foreach ($messages as $notice) {
+        $html = wc_kses_notice($notice['notice']);
+        $html = preg_replace_callback('#<a\s[^>]*class="[^"]*\bbutton\b[^"]*"[^>]*>.*?</a>#s', function ($match) use (&$actions) {
+            $actions[] = $match[0];
+            return '';
+        }, $html);
+        $items[] = array('html' => trim($html), 'attr' => wc_get_notice_data_attr($notice));
+    }
+    ?>
+    <div class="banner banner--<?php echo esc_attr($intent); ?> prose-end <?php echo esc_attr($extra_class); ?>">
+        <span class="icon-box" aria-hidden="true"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#<?php echo esc_attr($icon); ?>"/></svg></span>
+        <div class="banner__body">
+            <?php if (count($items) === 1) : ?>
+                <p class="text"<?php echo $items[0]['attr']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo $items[0]['html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+            <?php else : ?>
+                <ul class="list">
+                    <?php foreach ($items as $item) : ?>
+                        <li class="text"<?php echo $item['attr']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo $item['html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+            <?php if ($actions) : ?>
+                <div class="cluster mt-sm"><?php echo implode('', $actions); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php
+}
+
+// WooCommerce filters the whole notice output, Banner and all: let the
+// Banner's sprite icon through
+function dfh_notice_allowed_icon($tags)
+{
+    $tags['svg'] = array('class' => true, 'width' => true, 'height' => true, 'aria-hidden' => true, 'focusable' => true);
+    $tags['use'] = array('href' => true);
+    return $tags;
+}
+add_filter('woocommerce_kses_notice_allowed_tags', 'dfh_notice_allowed_icon');
 
 // The footnotes list takes the library's small text
 function dfh_footnotes_small_text($content) {
@@ -1458,27 +1529,19 @@ function dfh_add_return_to_course_link($order_id)
 
     foreach ($order->get_items() as $item) {
         $product_id = $item->get_product_id();
-        $courses = get_posts(array(
-            'post_type' => 'course',
-            'meta_key' => '_dfh_product_id',
-            'meta_value' => $product_id,
-            'numberposts' => 1,
-        ));
-        if (!empty($courses)) {
-            $course_url = get_permalink($courses[0]->ID);
+        $course = dfh_course_for_product($product_id);
+        if ($course) {
+            $course_url = get_permalink($course);
             break;
         }
     }
     ?>
-    <div class="woocommerce-order-course-return" style="margin: 2rem 0; text-align: center;">
+    <p class="woocommerce-order-course-return text-center my-cushion">
         <a href="<?php echo esc_url($course_url); ?>" class="button button--strong button--accent">
-            <span>Go to Your Course</span>
-            <svg class="icon icon--dir" width="32" height="32" aria-hidden="true"
-                style="margin-left: 0.5rem; vertical-align: middle;">
-                <use href="#ArrowRight" />
-            </svg>
+            <span>Go to your course</span>
+            <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#ArrowRight" /></svg>
         </a>
-    </div>
+    </p>
     <?php
 }
 add_action('woocommerce_thankyou', 'dfh_add_return_to_course_link', 20);

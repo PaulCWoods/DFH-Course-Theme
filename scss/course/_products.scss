@@ -78,63 +78,6 @@ a.woocommerce-loop-product__link {
     }
 }
 
-.single-product {
-
-    :is(.product,
-        .woocommerce-notices-wrapper) {
-        max-inline-size: var(--spacing-site-width);
-        margin-inline: auto;
-    }
-
-    .woocommerce-message {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .images {
-        position: relative;
-    }
-
-    .woocommerce-product-gallery__trigger {
-        align-items: center;
-        background-color: var(--surface-dark);
-        display: flex;
-        inset-block-start: 0;
-        inset-inline-start: 0;
-        justify-content: center;
-        min-block-size: var(--spacing-target);
-        min-inline-size: var(--spacing-target);
-        position: absolute;
-        z-index: 1;
-    }
-
-    .summary {
-        align-self: stretch;
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing);
-        flex: 1;
-    }
-
-    .price {
-        font-size: var(--subheading-fixed-font-size);
-        font-family: var(--subheading-font-family);
-        font-weight: var(--subheading-font-weight);
-        line-height: var(--subheading-line-height);
-    }
-
-    .cart {
-        display: flex;
-        flex-direction: row;
-        gap: var(--spacing);
-    }
-
-    .quantity {
-        flex: 1;
-    }
-}
-
 .wp-block-woocommerce-empty-cart-block {
     border: var(--border-width-thin) dashed var(--border-color-quiet);
     padding: var(--spacing-cushion);
@@ -142,45 +85,4 @@ a.woocommerce-loop-product__link {
 
 .wc-block-grid__products {
     max-inline-size: none;
-}
-
-
-// Tabs
-
-.wc-tabs-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.wc-tabs {
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-
-    li {
-        &.active {
-            a {
-                color: inherit;
-                font-weight: bold;
-            }
-        }
-    }
-}
-
-.woocommerce-Tabs-panel {
-    padding: var(--spacing-cushion);
-
-    h2 {
-        margin-block-end: var(--spacing);
-    }
-}
-
-// Product meta
-
-.product_meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
 }
