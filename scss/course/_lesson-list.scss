@@ -22,7 +22,7 @@
     --l1-box-border-width: var(--border-width);
 
     --l1-label-font-family: var(--subheading-font-family);
-    --l1-label-font-size: var(--subheading-font-size);
+    --l1-label-font-size: var(--subheading-fixed-font-size);
     --l1-label-font-weight: var(--subheading-font-weight);
     --l1-label-line-height: var(--subheading-line-height);
     --l1-label-text-transform: none;
@@ -51,9 +51,6 @@
     --code-line-height: var(--subheading-line-height);
     --code-text-transform: uppercase;
 
-    --link-underline-offset: var(--prose-link-underline-offset);
-    --link-underline-thickness: var(--prose-link-underline-thickness);
-    --link-underline-color: var(--prose-link-underline-color);
 
     --syllabus-width: var(--spacing-448);
     --testimonial-width: var(--spacing-448);

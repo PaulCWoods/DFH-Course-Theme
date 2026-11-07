@@ -50,7 +50,7 @@
     max-inline-size: var(--spacing-site-width);
 
     .lesson-head.\+sample & {
-        max-inline-size: calc(var(--spacing-site-width) + var(--site-block-padding, var(--spacing-cushion)) * 2);
+        max-inline-size: calc(var(--spacing-site-width) + var(--spacing-cushion) * 2);
     }
 }
 
@@ -74,7 +74,6 @@
 }
 
 .lesson-head__nav {
-    --height: var(--header-bar-min-size);
     align-self: stretch;
     flex-grow: 1;
     font-size: var(--typography-font-size-fluid-0);
@@ -88,22 +87,18 @@
     font-weight: bold;
     max-inline-size: 100%;
     overflow: hidden;
-    padding-inline: var(--site-block-padding, var(--spacing-cushion));
+    padding-inline: var(--spacing-cushion);
     text-overflow: ellipsis;
 }
 
 .lesson-head__nav-parent {
     opacity: 1;
     transform: translateY(0);
-    transition:
-        opacity var(--site-header-transition) ease,
-        transform var(--site-header-transition) ease,
-        visibility var(--site-header-transition) ease;
 
     @supports (animation-timeline: scroll()) {
         animation: --hide-parent linear both;
         animation-timeline: scroll(root block);
-        animation-range: var(--height) calc(var(--height) * 2);
+        animation-range: 4rem 8rem;
 
     }
 }
@@ -113,19 +108,47 @@
     transform: translateY(50%);
     position: absolute;
     pointer-events: none;
-    transition:
-        opacity var(--site-header-transition) ease,
-        transform var(--site-header-transition) ease;
 
     @supports (animation-timeline: scroll()) {
         animation: --show-current linear both;
         animation-timeline: scroll(root block);
-        animation-range: calc(var(--height) + var(--spacing-cushion)) calc(var(--height) * 2 + var(--spacing-cushion));
+        animation-range: calc(4rem + var(--spacing-cushion)) calc(8rem + var(--spacing-cushion));
     }
 }
 
 .lesson-head__progress {
     display: none;
+}
+
+// The parent link scrolls away and the current lesson takes its place
+@supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+        @keyframes --hide-parent {
+            to {
+                opacity: 0;
+                transform: translateY(-50%);
+                visibility: hidden;
+                position: absolute;
+                pointer-events: none;
+            }
+        }
+
+        @keyframes --show-current {
+            from {
+                opacity: 0;
+                transform: translateY(50%);
+                position: absolute;
+                pointer-events: none;
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                position: static;
+                pointer-events: auto;
+            }
+        }
+    }
 }
 
 // Scroll-driven effects are progressive enhancements; the static header
@@ -200,7 +223,7 @@
 :where(.lesson-header,
     .lesson-content,
     .lesson-explore) {
-    padding-block: var(--site-block-padding, var(--spacing-cushion));
+    padding-block: var(--spacing-cushion);
     padding-inline-start: calc(0px + env(safe-area-inset-left));
     padding-inline-end: calc(0px + env(safe-area-inset-left));
 }
@@ -265,17 +288,12 @@
 // -----------------------------------------------------------------------------
 // Lesson content layout
 
-// Article content and WordPress block overrides.
-// Keep these rules nested under .lesson-body so they win over editor defaults
-// without leaking into unrelated post content.
+// Lesson content: the sample's overlay and the lesson's own content classes.
+// WordPress's blocks are in scss/blocks.
 .lesson-body {
 
     &:empty {
         display: none;
-    }
-
-    sup.fn {
-        margin-inline: 0.25em;
     }
 
     &.\+sample {
@@ -355,134 +373,6 @@
         }
     }
 
-    // -------------------------------------------------------------------------
-    // WordPress block overrides
-    // -------------------------------------------------------------------------
-
-    // Embedded media
-    figure.wp-embed-aspect-16-9 {
-        --embed-aspect-ratio: 16/9;
-    }
-
-    figure.wp-embed-aspect-4-3 {
-        --embed-aspect-ratio: 4/3;
-    }
-
-    figure.wp-has-aspect-ratio {
-        .wp-block-embed__wrapper {
-            font-size: 0;
-
-            iframe {
-                aspect-ratio: var(--embed-aspect-ratio);
-                height: auto;
-                inline-size: 100%;
-                max-width: initial;
-            }
-        }
-    }
-
-    figure:is(.wp-block-image, .wp-block-embed) {
-        margin-block: var(--prose-vert-space, var(--spacing-breathe)) !important;
-
-        &:first-child {
-            margin-block-start: 0 !important;
-        }
-
-        &.article-figure--half img {
-            max-inline-size: 50% !important;
-        }
-
-        &.article-figure--scheme-adapt img {
-            @media (prefers-color-scheme: dark) {
-                filter: invert(1) hue-rotate(180deg);
-            }
-        }
-
-        :where(figcaption) {
-            margin-block-end: 1.5em !important;
-        }
-    }
-
-    .wp-block-quote {
-        &.\+bold {
-            background-color: var(--surface-card);
-            padding-block: var(--spacing-breathe);
-            padding-inline: var(--spacing-cushion);
-
-            p {
-                font-weight: var(--lesson-quote-bold-font-weight);
-
-                &:last-child {
-                    margin-block-end: 0;
-                }
-            }
-        }
-    }
-
-    // Needed to override WP styles
-    .wp-block-pullquote {
-        background-color: var(--surface-translucent);
-        // !important needed to override stubborn classes in WP
-        font-size: inherit !important;
-        line-height: inherit !important;
-        margin-block: 2em !important;
-        padding: 2em !important;
-
-        blockquote {
-            box-shadow: none;
-            padding-inline-start: 0;
-
-            p {
-                font-family: var(--pullquote-font-family);
-                font-size: var(--pullquote-font-size);
-                line-height: var(--pullquote-line-height);
-                text-wrap: balance;
-            }
-        }
-    }
-
-    .wp-block-table {
-
-        td,
-        th {
-            border: 0 !important;
-            border-block-end: var(--border-width-thin) dashed var(--border-color-quiet) !important;
-            padding-inline-start: 0 !important;
-        }
-
-        tbody {
-            tr:last-child :is(td, th) {
-                border-block-end: 0 !important;
-            }
-        }
-
-        thead {
-            border-block-end: var(--border) !important;
-        }
-    }
-
-
-    // CodePen embeds
-    .wp-block-cp-codepen-gutenberg-embed-block {
-        box-shadow: var(--shadow);
-        font-size: 0;
-    }
-
-    .wp-block-footnotes {
-        font-size: var(--body-small-font-size);
-        line-height: var(--body-small-line-height);
-        margin-block-start: var(--spacing-cushion);
-        padding-block-start: var(--spacing-cushion);
-        border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
-
-        li a:first-child {
-            margin-inline-end: 0.5rem;
-
-            +a {
-                text-decoration: none;
-            }
-        }
-    }
 }
 
 
@@ -569,11 +459,11 @@
 // Explore area: child lessons and progression
 
 .lesson-explore {
-    --gap: calc(var(--site-block-padding, var(--spacing-cushion))*2);
+    --gap: calc(var(--spacing-cushion)*2);
     background: var(--surface-card);
     box-shadow: var(--shadow-inner);
     flex-grow: 1;
-    padding-block: calc(var(--site-block-padding, var(--spacing-cushion))*2);
+    padding-block: calc(var(--spacing-cushion)*2);
 
     @media (prefers-contrast: more) {
         border-block-start: var(--border);

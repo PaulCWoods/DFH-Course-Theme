@@ -44,7 +44,6 @@
 .progress-panel__header {
     align-items: center;
     justify-content: space-between;
-    min-block-size: var(--site-header-height);
     padding-block: .5rem;
 }
 
@@ -80,7 +79,7 @@ a.progress-panel__brand {
 
 .progress-panel__course {
     flex-grow: 1;
-    padding-block: calc(var(--site-block-padding, var(--spacing-cushion)) / 2);
+    padding-block: calc(var(--spacing-cushion) / 2);
     z-index: 0;
 }
 

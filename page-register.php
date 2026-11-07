@@ -91,13 +91,15 @@ get_template_part('content', 'course-header');
             <h1 class="title">Create an Account</h1>
 
             <?php if (!empty($registration_error)): ?>
-                <div class="login-message error-message"
-                    style="border-left: 4px solid #cc0000; padding-left: 1rem; margin-bottom: 1.5rem; color: #cc0000;">
-                    <p><?php echo esc_html($registration_error); ?></p>
+                <div class="banner banner--danger login-message">
+                    <span class="icon-box" aria-hidden="true"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Warning" /></svg></span>
+                    <div class="banner__body">
+                        <p class="text"><?php echo esc_html($registration_error); ?></p>
+                    </div>
                 </div>
             <?php endif; ?>
 
-            <form name="registerform" id="registerform" method="post">
+            <form name="registerform" id="registerform" class="form" method="post">
                 <?php wp_nonce_field('dfh_register_action', 'dfh_register_nonce'); ?>
 
                 <!-- Preserve redirect_to parameter from course page -->
@@ -106,38 +108,36 @@ get_template_part('content', 'course-header');
                         value="<?php echo esc_attr(esc_url_raw(wp_unslash($_GET['redirect_to']))); ?>" />
                 <?php endif; ?>
 
-                <p>
-                    <label for="dfh_student_name">Your name (optional)</label>
-                    <input type="text" name="dfh_student_name" id="dfh_student_name"
-                        value="<?php echo isset($_POST['dfh_student_name']) ? esc_attr($_POST['dfh_student_name']) : ''; ?>"
-                        size="25" />
-                </p>
-                <p>
-                    <label for="user_login">Username</label>
-                    <input type="text" name="user_login" id="user_login"
-                        value="<?php echo isset($_POST['user_login']) ? esc_attr($_POST['user_login']) : ''; ?>" size="20"
+                <div class="field">
+                    <label for="dfh_student_name" class="field__label label">Your name <span class="text-muted">(optional)</span></label>
+                    <input type="text" name="dfh_student_name" id="dfh_student_name" class="input" autocomplete="name"
+                        value="<?php echo isset($_POST['dfh_student_name']) ? esc_attr($_POST['dfh_student_name']) : ''; ?>" />
+                </div>
+                <div class="field">
+                    <label for="user_login" class="field__label label">Username</label>
+                    <input type="text" name="user_login" id="user_login" class="input" autocomplete="username"
+                        value="<?php echo isset($_POST['user_login']) ? esc_attr($_POST['user_login']) : ''; ?>"
                         autocapitalize="off" required />
-                </p>
-                <p>
-                    <label for="user_email">Email Address</label>
-                    <input type="email" name="user_email" id="user_email"
-                        value="<?php echo isset($_POST['user_email']) ? esc_attr($_POST['user_email']) : ''; ?>" size="25"
+                </div>
+                <div class="field">
+                    <label for="user_email" class="field__label label">Email address</label>
+                    <input type="email" name="user_email" id="user_email" class="input" autocomplete="email"
+                        value="<?php echo isset($_POST['user_email']) ? esc_attr($_POST['user_email']) : ''; ?>"
                         required />
-                </p>
-                <p>
-                    <label for="user_pass">Password</label>
-                    <input type="password" name="user_pass" id="user_pass" size="20" required />
-                </p>
+                </div>
+                <div class="field">
+                    <label for="user_pass" class="field__label label">Password</label>
+                    <input type="password" name="user_pass" id="user_pass" class="input" autocomplete="new-password" required />
+                </div>
 
                 <?php do_action('register_form'); ?>
 
-                <p class="submit">
-                    <input type="submit" name="wp-submit" id="wp-submit" class="button button--strong button--accent"
-                        value="Register Account" />
-                </p>
+                <div class="form__actions button-group">
+                    <button type="submit" name="wp-submit" id="wp-submit" class="button button--strong button--accent"><span>Register account</span></button>
+                </div>
             </form>
 
-            <p class="login-extras">Already have an account? <a class="link bold"
+            <p class="login-extras">Already have an account? <a class="link font-bold"
                     href="<?php echo isset($_GET['redirect_to']) ? esc_url(add_query_arg('redirect_to', esc_url_raw(wp_unslash($_GET['redirect_to'])), home_url('/login/'))) : esc_url(home_url('/login/')); ?>">Log
                     in</a></p>
 

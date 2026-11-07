@@ -372,6 +372,16 @@ function dfh_library_css($file)
 }
 
 /**
+ * DFH Shared Styles (what the course, the blog and the components docs share),
+ * pinned to a tag. Define DFH_SHARED_CSS in wp-config.php to load another
+ * build (a local one, or the next version).
+ */
+function dfh_shared_css()
+{
+    return defined('DFH_SHARED_CSS') ? DFH_SHARED_CSS : 'https://cdn.jsdelivr.net/gh/PaulCWoods/dfh-shared-styles@0.1.0/dist/dfh-site.css';
+}
+
+/**
  * The sub-brand class for a top-level lesson number, set beside its
  * data-lesson or data-syllabus. Lesson 1 wears the course itself; 2 to 4
  * their own colours (tokens/themes/course-*.json in DFH-Components).
@@ -534,7 +544,7 @@ function dfh_render_lesson_children($parent_id, $level = 1, $active_lesson = nul
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
             $chip_class = $completed ? 'status status--plain status--no-dot complete' : 'status status--plain status--success chip in-progress';
-            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
+            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link link--plain l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($child->ID, $lvl + 1, $active_lesson);
         $output .= '</li>';
@@ -603,7 +613,7 @@ function dfh_render_lesson_tree($roots = null, $level = 1, $active_lesson = null
         } else {
             $chip_label = $completed ? 'Complete' : 'In Progress';
             $chip_class = $completed ? 'chip complete' : 'chip in-progress';
-            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</a>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
+            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link link--plain l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</a>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
         }
         $output .= dfh_render_lesson_children($r_id, $lvl + 1, $active_lesson);
         $output .= '</li>';
@@ -1329,6 +1339,72 @@ add_action('woocommerce_order_status_completed', 'dfh_grant_course_access_on_pur
  * Completely disable WooCommerce default stylesheets.
  */
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
+
+/**
+ * WooCommerce's generated fields (addresses) take the library's Field classes.
+ * Its account forms are overridden in woocommerce/myaccount/.
+ */
+function dfh_woocommerce_field_classes($args)
+{
+    // A state is a text input where the country has no list (the UK)
+    $controls = array('select' => 'select', 'country' => 'select', 'textarea' => 'textarea', 'checkbox' => 'checkbox-input', 'radio' => 'radio-input');
+    $args['class'][] = 'field';
+    $args['label_class'][] = 'field__label';
+    $args['label_class'][] = 'label';
+    $args['input_class'][] = $controls[$args['type']] ?? 'input';
+    return $args;
+}
+add_filter('woocommerce_form_field_args', 'dfh_woocommerce_field_classes');
+
+// Without selectWoo, WooCommerce keeps the native country and state selects
+function dfh_remove_select_woo()
+{
+    wp_dequeue_script('selectWoo');
+    wp_dequeue_style('select2');
+}
+add_action('wp_enqueue_scripts', 'dfh_remove_select_woo', 100);
+
+/**
+ * WordPress's own front-end styles. It prints them outside any cascade layer,
+ * so they beat every rule in the library's layers whatever its specificity.
+ * The course styles its content with the library instead; scss/_wordpress.scss
+ * covers the WordPress classes that still need styling. The editor keeps them.
+ */
+function dfh_remove_wordpress_styles()
+{
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style('classic-theme-styles');
+    wp_dequeue_style('global-styles');
+    wp_dequeue_style('woocommerce-inline');
+}
+add_action('wp_enqueue_scripts', 'dfh_remove_wordpress_styles', 100);
+
+remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+remove_action('wp_enqueue_scripts', 'wp_enqueue_classic_theme_styles');
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_enqueue_scripts', 'wp_enqueue_emoji_styles');
+
+// Each core block's own stylesheet, which loads when the block is on the page
+function dfh_remove_core_block_styles($args, $name)
+{
+    if (!is_admin() && str_starts_with($name, 'core/')) {
+        $args['style_handles'] = array();
+    }
+    return $args;
+}
+add_filter('register_block_type_args', 'dfh_remove_core_block_styles', 10, 2);
+
+// The footnotes list takes the library's small text
+function dfh_footnotes_small_text($content) {
+    $tags = new WP_HTML_Tag_Processor($content);
+    if ($tags->next_tag('ol')) {
+        $tags->add_class('small-text');
+    }
+    return $tags->get_updated_html();
+}
+add_filter('render_block_core/footnotes', 'dfh_footnotes_small_text');
 
 /**
  * Automatically complete orders for virtual products.

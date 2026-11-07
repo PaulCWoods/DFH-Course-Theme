@@ -10,15 +10,7 @@
     position: relative;
 
     a.link {
-        color: var(--link-inverted-color);
-        @media (hover: hover) {
-            &:hover {
-                color: var(--link-inverted-hover-color);
-            }
-        }
-        &:active {
-            color: var(--link-inverted-active-color);
-        }
+        color: inherit;
     }
 }
 
@@ -30,7 +22,7 @@
     position: relative;
 
     p {
-        font-size: var(--body-font-size);
+        font-size: var(--body-fixed-font-size);
         font-weight: var(--body-strong-font-weight);
         line-height: var(--body-line-height);
     }
@@ -38,8 +30,8 @@
 
 .testimonial-card__author {
     display: block;
-    font-size: var(--body-small-font-size);
-    line-height: var(--body-small-line-height);
+    font-size: var(--body-sm-fixed-font-size);
+    line-height: var(--body-sm-line-height);
     position: relative;
     text-wrap: balance;
 

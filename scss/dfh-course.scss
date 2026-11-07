@@ -5,11 +5,16 @@
 // dfh-components.css, themes/dfh.css, then the course sub-brands (header.php).
 // This file holds only what the course adds, appended to the library's
 // cascade layers:
+// - reset: the WordPress classes its output still relies on
 // - tokens: the course's own tokens
-// - layout: its components, after the library's components and layout
+// - layout: its components and WordPress's blocks (blocks/), after the library's components and layout
 //   primitives and under its utilities
 // ============================================================================
 @use 'sass:meta';
+
+@layer reset {
+    @include meta.load-css('wordpress');
+}
 
 @layer tokens {
     @include meta.load-css('theme');
@@ -17,6 +22,7 @@
 
 @layer layout {
     @include meta.load-css('course');
+    @include meta.load-css('blocks');
 }
 
 .progress-toggle {

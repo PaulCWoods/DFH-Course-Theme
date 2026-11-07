@@ -22,11 +22,11 @@ $associated_course_id = !empty($associated_course_id) ? absint($associated_cours
         <div class="lesson-head__inner">
             <nav class="lesson-head__nav stack stack--tight" aria-label="Breadcrumb">
                 <?php if ($associated_course_id && get_post($associated_course_id)): ?>
-                    <a class="lesson-head__nav-parent link" style="padding-inline: 0"
+                    <a class="lesson-head__nav-parent link link--plain" style="padding-inline: 0"
                         title="<?php echo esc_html(get_the_title($associated_course_id)); ?>"
                         href="<?php echo esc_url(get_permalink($associated_course_id)); ?>"><?php echo esc_html(get_the_title($associated_course_id)); ?></a>
                 <?php else: ?>
-                    <a class="lesson-head__nav-parent link" style="padding-inline: 0"
+                    <a class="lesson-head__nav-parent link link--plain" style="padding-inline: 0"
                         href="<?php echo esc_url(home_url()); ?>">Home</a>
                 <?php endif; ?>
                 <span class="lesson-head__nav-current" style="padding-inline: 0"

@@ -4,7 +4,7 @@
 
 // Shared component tokens
 :root {
-    --lesson-header-height: var(--site-header-height);
+    --lesson-header-height: var(--header-height, var(--spacing-64));
     // Keep the stats column below the masthead when it becomes sticky.
     --lesson-aside-sticky-top: var(--lesson-header-height);
     --lesson-quote-bold-font-weight: var(--typography-font-weight-600);
@@ -18,7 +18,7 @@
 
     --cart-address-card-width: var(--spacing-256);
 
-    --site-header-z-index: var(--z-index-100);
+    --site-header-z-index: var(--z-index-sticky);
 }
 
 // Disable component transitions for users who prefer reduced motion.

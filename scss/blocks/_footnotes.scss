@@ -1,0 +1,20 @@
+// Footnotes (core/footnotes): the list at the end of a lesson, and the
+// numbers in the text that link to it. The list takes .small-text from
+// functions.php.
+sup.fn {
+    margin-inline: 0.25em;
+}
+
+.wp-block-footnotes {
+    border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
+    margin-block-start: var(--spacing-cushion);
+    padding-block-start: var(--spacing-cushion);
+
+    li a:first-child {
+        margin-inline-end: 0.5rem;
+
+        + a {
+            text-decoration: none;
+        }
+    }
+}

@@ -86,7 +86,8 @@ get_header();
 
                 // Breadcrumb: parent lesson when available; otherwise try to find parent Course
                 if ($parent_id): ?>
-                    <a class="lesson-head__nav-parent link" title="<?php echo esc_html(get_the_title($parent_id)); ?>"
+                    <a class="lesson-head__nav-parent link link--plain"
+                        title="<?php echo esc_html(get_the_title($parent_id)); ?>"
                         href="<?php echo esc_url(get_permalink($parent_id)); ?>"><?php echo esc_html(get_the_title($parent_id)); ?></a>
                 <?php else:
                     // Attempt to find a Course that references this lesson as a root (ACF or postmeta)
@@ -108,10 +109,11 @@ get_header();
                     }
 
                     if ($course_id): ?>
-                        <a class="lesson-head__nav-parent link" title="<?php echo esc_html(get_the_title($course_id)); ?>"
+                        <a class="lesson-head__nav-parent link link--plain"
+                            title="<?php echo esc_html(get_the_title($course_id)); ?>"
                             href="<?php echo esc_url(get_permalink($course_id)); ?>"><?php echo esc_html(get_the_title($course_id)); ?></a>
                     <?php else: ?>
-                        <a class="lesson-head__nav-parent link" href="<?php echo esc_url(home_url()); ?>">Home</a>
+                        <a class="lesson-head__nav-parent link link--plain" href="<?php echo esc_url(home_url()); ?>">Home</a>
                     <?php endif;
                 endif; ?>
 
@@ -246,7 +248,7 @@ get_header();
                                         $parts = explode('|', $line);
                                         $link_title = trim($parts[0]);
                                         $link_url = isset($parts[1]) ? trim($parts[1]) : '#';
-                                        echo '<li><a href="' . esc_url($link_url) . '" target="_blank" class="link" rel="noopener noreferrer">' . esc_html($link_title) . '</a></li>';
+                                        echo '<li><a href="' . esc_url($link_url) . '" target="_blank" class="link link--plain" rel="noopener noreferrer">' . esc_html($link_title) . '</a></li>';
                                     }
                                     ?>
                                 </ul>
@@ -282,7 +284,7 @@ get_header();
                                         </svg>
                                         <div class="lesson-download__info">
                                             <h3>
-                                                <a class="link" href="<?php echo esc_url($pdf_url); ?>"
+                                                <a class="link link--plain" href="<?php echo esc_url($pdf_url); ?>"
                                                     download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
                                             </h3>
                                             <?php if (trim($download_post->post_excerpt) !== ''): ?>
@@ -456,8 +458,7 @@ get_header();
             ?>
             <div class="card__content" tabindex="0" aria-label="Scrollable panel content">
                 <header class="card__header progress-panel__header">
-                    <a class="button button--flush button--plain syllabus-course"
-                        href="<?php echo esc_url(home_url()); ?>" title="Home">
+                    <a class="link link--plain inline gap-xs" href="<?php echo esc_url(home_url()); ?>" title="Home">
                         <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
                             <use href="#Home" />
                         </svg>
@@ -478,7 +479,7 @@ get_header();
                     // Show the current Course title and link when available
                     $display_course_id = !empty($panel_course_id) ? $panel_course_id : (!empty($course_id) ? $course_id : null);
                     if ($display_course_id): ?>
-                        <h2 class="heading progress-panel__course-name"><a class="link"
+                        <h2 class="heading progress-panel__course-name"><a class="link link--plain"
                                 href="<?php echo esc_url(get_permalink($display_course_id)); ?>"><?php echo esc_html(get_the_title($display_course_id)); ?></a>
                         </h2>
                     <?php else: ?>

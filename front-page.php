@@ -14,7 +14,7 @@ get_header();
 
 
     <!-- Hero Section -->
-    <section class="home__hero section section--strong" aria-describedby="home-hero-heading">
+    <section class="home__hero section" aria-describedby="home-hero-heading">
         <h2 class="visually-hidden" id="home-hero-heading">Welcome to Design for Humans Courses</h2>
         <div class="wrapper">
             <?php
@@ -47,7 +47,7 @@ get_header();
                 : 'Welcome back';
 
             if (is_user_logged_in()): ?>
-                <p class="home__logged-in section__title"><?php echo esc_html($welcome_message); ?>, <a class="link"
+                <p class="home__logged-in section__title title"><?php echo esc_html($welcome_message); ?>, <a class="link"
                         href="<?php echo esc_url(home_url('/my-account/')); ?>"><?php echo esc_html($user_name); ?></a></p>
                 <div class="home__access">
                     <?php if ($has_resume_course): ?>
@@ -62,7 +62,7 @@ get_header();
                 </div>
             <?php else: ?>
 
-                <p class="section__title">Ready to learn?</p>
+                <p class="section__title title">Ready to learn?</p>
                 <div class="home__access">
                     <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button button--strong button--accent"><span>Get
                             Started</span></a>
@@ -75,7 +75,7 @@ get_header();
     <!-- Courses Grid Section -->
     <section class="section section--strong-1st home__section">
         <div class="wrapper">
-            <h2 class="section__title">Available courses</h2>
+            <h2 class="section__title heading">Available courses</h2>
 
             <?php
             // 1. Fetch all courses once with optimized WP_Query parameters
@@ -161,7 +161,7 @@ get_header();
         ?>
         <section class="home__section grid__container section s-grid:scroll-x@<md" aria-labelledby="testimonials-heading">
             <div class="wrapper">
-                <h2 id="testimonials-heading" class="section__title">What our students are saying</h2>
+                <h2 id="testimonials-heading" class="section__title heading">What our students are saying</h2>
                 <div class="testimonials-grid grid grid--cushioned">
                     <?php foreach ($testimonials as $t):
                         $title = get_the_title($t->ID);

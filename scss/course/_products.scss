@@ -1,4 +1,3 @@
-@use "../mixins/prose" as prose;
 
 .products {
     display: flex;
@@ -119,7 +118,7 @@ a.woocommerce-loop-product__link {
     }
 
     .price {
-        font-size: var(--subheading-font-size);
+        font-size: var(--subheading-fixed-font-size);
         font-family: var(--subheading-font-family);
         font-weight: var(--subheading-font-weight);
         line-height: var(--subheading-line-height);
@@ -160,10 +159,6 @@ a.woocommerce-loop-product__link {
     list-style: none;
 
     li {
-        a {
-            @include prose.link;
-        }
-
         &.active {
             a {
                 color: inherit;
@@ -177,7 +172,6 @@ a.woocommerce-loop-product__link {
     padding: var(--spacing-cushion);
 
     h2 {
-        @include prose.subheading;
         margin-block-end: var(--spacing);
     }
 }
@@ -189,7 +183,4 @@ a.woocommerce-loop-product__link {
     flex-direction: column;
     gap: 0.5rem;
 
-    a {
-        @include prose.link;
-    }
 }

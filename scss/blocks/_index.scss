@@ -1,0 +1,13 @@
+// ============================================================================
+// WordPress blocks the library has no equivalent for
+// ----------------------------------------------------------------------------
+// WordPress's own block styles are off on the front end (functions.php), and
+// lesson content sits in .prose, which styles headings, lists, figures, code,
+// quotes and tables. These files hold only what a block adds on top: one file
+// per block, named after it, with WordPress's class as the selector.
+// ============================================================================
+@forward "codepen";
+@forward "embed";
+@forward "footnotes";
+@forward "pullquote";
+@forward "quote";

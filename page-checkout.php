@@ -12,7 +12,7 @@ get_template_part('content', 'account-header');
     <article class="article wrapper shop">
 
         <header class="article__header">
-            <h1 class="title"><? class_exists('WooCommerce') && is_cart() ? 'Shopping Cart' : the_title(); ?></h1>
+            <h1 class="title"><?php if (class_exists('WooCommerce') && is_cart()) : ?>Shopping cart<?php else : the_title(); endif; ?></h1>
         </header>
 
         <div class="article__content">

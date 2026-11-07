@@ -24,12 +24,12 @@
     <!-- The library and the DFH theme from components.designforhumans.blog, then the
          course and its lesson colours (sub-brands: theme-course on <html>, a lesson's
          class beside its data-lesson or data-syllabus), the DFH site components the
-         blog shares, then the course's own CSS -->
+         blog and the docs share (DFH Shared Styles), then the course's own CSS -->
     <link rel="stylesheet" href="https://use.typekit.net/lrj6kun.css">
 <?php foreach (array('dfh-components.css', 'themes/dfh.css', 'themes/course.css', 'themes/course-aqua.css', 'themes/course-purple.css', 'themes/course-olive.css') as $sheet) : ?>
     <link rel="stylesheet" href="<?php echo esc_url(dfh_library_css($sheet)); ?>">
 <?php endforeach; ?>
-    <link rel="stylesheet" href="https://designforhumans.blog/styles/css/dfh-site.css">
+    <link rel="stylesheet" href="<?php echo esc_url(dfh_shared_css()); ?>">
 
     <link rel="stylesheet" href="<?php echo esc_url(get_stylesheet_directory_uri() . '/css/dfh-course.css'); ?>">
 

@@ -16,35 +16,10 @@
         inline-size: 100%;
         max-inline-size: calc(var(--spacing-site-width) / 2);
     }
+}
 
-    form {
-        p {
-            display: flex;
-            flex-direction: column;
-            gap: calc(var(--spacing) / 2);
-
-            // Required fields receive a visual marker without changing markup.
-            &:has(input:required) {
-                label::after {
-                    content: " * ";
-                }
-            }
-        }
-
-        input:is([type="button"], [type="submit"]) {
-            align-self: start;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        label:has([type="checkbox"], [type="radio"]) {
-            align-items: center;
-            display: flex;
-            gap: 1em;
-        }
-    }
+.login-message {
+    margin-block-end: var(--spacing-breathe);
 }
 
 // -----------------------------------------------------------------------------
@@ -57,10 +32,9 @@
     margin-block-end: var(--spacing-breathe);
 }
 
-// Shared surface for native and WooCommerce login forms and messages.
+// Shared surface for native and WooCommerce login forms.
 .woocommerce-form.login,
-.login-page form,
-.login-message {
+.login-page form {
     background-color: var(--surface-translucent);
     display: flex;
     flex-direction: column;
