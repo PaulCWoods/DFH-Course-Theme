@@ -6,7 +6,7 @@ get_header();
 <main class="home main" id="main">
     <article class="prose font-sizing-fluid font-sizing-fluid wrapper home__content">
         <header class="article__header">
-            <h1 class="display-title brand-frame">Design for Humans: <span class="home__title-highlight">Courses</span>
+            <h1 class="display-title brand-frame">Design for Humans: <span class="text-accent">Courses</span>
             </h1>
         </header>
         <?php the_content(); ?>
@@ -64,7 +64,8 @@ get_header();
 
                 <p class="section__title title">Ready to learn?</p>
                 <div class="home__access">
-                    <a href="<?php echo esc_url(home_url('/register/')); ?>" class="button button--strong button--accent"><span>Get
+                    <a href="<?php echo esc_url(home_url('/register/')); ?>"
+                        class="button button--strong button--accent"><span>Get
                             Started</span></a>
                     <a href="<?php echo esc_url(home_url('/login/')); ?>" class="button "><span>Log In</span></a>
                 </div>
