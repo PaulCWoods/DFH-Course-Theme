@@ -540,6 +540,20 @@ function dfh_lesson_state($lesson_id, $context)
     return $context['open'] ? 'open' : 'locked';
 }
 
+/* Started: the lesson or any lesson under it is complete or in progress */
+function dfh_lesson_started($lesson_id, $context)
+{
+    if (in_array(dfh_lesson_state($lesson_id, $context), array('complete', 'in-progress'), true)) {
+        return true;
+    }
+    foreach (dfh_get_lesson_children($lesson_id) as $child_id) {
+        if (dfh_lesson_started($child_id, $context)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function dfh_lesson_status_html($state)
 {
     $statuses = array(
@@ -639,7 +653,7 @@ function dfh_render_lesson_tree($roots = null, $active_lesson = null)
 function dfh_render_course_plan($roots = null, $active_lesson = null)
 {
     $context = dfh_lesson_tree_context($active_lesson);
-    $output = '<ol class="grid grid--2-col" role="list">';
+    $output = '<ol class="grid grid--2-col grid--sm" role="list">';
     foreach (dfh_get_root_lesson_ids($roots) as $root_id) {
         $state = dfh_lesson_state($root_id, $context);
         $title = dfh_lesson_label_html($root_id);
@@ -648,8 +662,9 @@ function dfh_render_course_plan($roots = null, $active_lesson = null)
         } elseif ('locked' === $state) {
             $title .= '<span class="sr-only">, locked</span>';
         }
-        $output .= '<li class="card ' . esc_attr(dfh_lesson_theme_class(dfh_get_lesson_hierarchy_number($root_id))) . '">'
-            . '<header class="card__header"><h3 class="card__title subheading">' . $title . '</h3>' . dfh_lesson_status_html($state) . '</header>'
+        $frame = dfh_lesson_started($root_id, $context) ? ' border bg-accent border-accent' : ' border border-muted';
+        $output .= '<li class="card ' . esc_attr(dfh_lesson_theme_class(dfh_get_lesson_hierarchy_number($root_id)) . $frame) . '">'
+            . '<header class="card__header"><h3 class="card__title heading">' . $title . '</h3>' . dfh_lesson_status_html($state) . '</header>'
             . '<div class="card__body"><div class="navigation-tree navigation-tree--ruled navigation-tree--compact">'
             . dfh_render_lesson_list(dfh_get_lesson_children($root_id), $context)
             . '</div></div></li>';
@@ -1520,19 +1535,23 @@ function dfh_notice_banner($messages, $intent, $icon, $extra_class = '')
     }
     ?>
     <div class="banner banner--<?php echo esc_attr($intent); ?> prose-end <?php echo esc_attr($extra_class); ?>">
-        <span class="icon-box" aria-hidden="true"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#<?php echo esc_attr($icon); ?>"/></svg></span>
+        <span class="icon-box" aria-hidden="true"><svg class="icon" width="1em" height="1em" aria-hidden="true"
+                focusable="false">
+                <use href="#<?php echo esc_attr($icon); ?>" />
+            </svg></span>
         <div class="banner__body">
-            <?php if (count($items) === 1) : ?>
-                <p class="text"<?php echo $items[0]['attr']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo $items[0]['html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-            <?php else : ?>
+            <?php if (count($items) === 1): ?>
+                <p class="text" <?php echo $items[0]['attr']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo $items[0]['html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+            <?php else: ?>
                 <ul class="list">
-                    <?php foreach ($items as $item) : ?>
-                        <li class="text"<?php echo $item['attr']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo $item['html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></li>
+                    <?php foreach ($items as $item): ?>
+                        <li class="text" <?php echo $item['attr']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo $item['html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
-            <?php if ($actions) : ?>
-                <div class="cluster mt-sm"><?php echo implode('', $actions); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+            <?php if ($actions): ?>
+                <div class="cluster mt-sm">
+                    <?php echo implode('', $actions); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
             <?php endif; ?>
         </div>
     </div>
@@ -1550,7 +1569,8 @@ function dfh_notice_allowed_icon($tags)
 add_filter('woocommerce_kses_notice_allowed_tags', 'dfh_notice_allowed_icon');
 
 // The footnotes list takes the library's small text
-function dfh_footnotes_small_text($content) {
+function dfh_footnotes_small_text($content)
+{
     $tags = new WP_HTML_Tag_Processor($content);
     if ($tags->next_tag('ol')) {
         $tags->add_class('small-text');
@@ -1621,7 +1641,9 @@ function dfh_add_return_to_course_link($order_id)
     <p class="woocommerce-order-course-return text-center my-cushion">
         <a href="<?php echo esc_url($course_url); ?>" class="button button--strong button--accent">
             <span>Go to your course</span>
-            <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#ArrowRight" /></svg>
+            <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false">
+                <use href="#ArrowRight" />
+            </svg>
         </a>
     </p>
     <?php

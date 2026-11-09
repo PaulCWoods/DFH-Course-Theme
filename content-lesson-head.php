@@ -13,7 +13,7 @@ $playback_id = $args['playback_id'] ?? '';
 <a href="#main" class="skip-link">Skip to main content</a>
 <header class="header header--sticky max-md:header--compact lesson-head__container">
     <div class="lesson-head header__bar">
-        <div class="lesson-head__progress" aria-hidden="true"></div>
+        <div class="reading-progress color-scheme-dark" aria-hidden="true"></div>
         <div class="lesson-head__inner">
             <?php if ($code): ?>
                 <span class="lesson-head__code-badge"><span class="sr-only">Lesson </span><?php echo esc_html($code); ?></span>

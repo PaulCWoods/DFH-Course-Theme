@@ -127,7 +127,7 @@ get_header();
         <div class="lesson-content">
             <div class="wrapper article__main">
                 <div class="lesson-body article__body prose font-sizing-fluid"><?php the_content(); ?></div>
-                <aside class="lesson-aside article__aside stack" aria-label="Lesson resources">
+                <aside class="lesson-aside article__aside stack gap-cushion" aria-label="Lesson resources">
                     <div class="lesson-bookmark">
                         <button type="button" id="dfh-bookmark-btn" class="button"
                             aria-pressed="<?php echo $is_bookmarked ? 'true' : 'false'; ?>"
@@ -155,8 +155,10 @@ get_header();
             if ($children_html): ?>
                 <section class="wrapper stack" aria-labelledby="lesson-children-heading">
                     <h2 class="heading" id="lesson-children-heading">Lessons in this section</h2>
-                    <nav class="navigation-tree navigation-tree--ruled navigation-tree--compact max-w-md" aria-labelledby="lesson-children-heading">
-                        <?php echo $children_html; ?></nav>
+                    <nav class="navigation-tree navigation-tree--ruled navigation-tree--compact max-w-md"
+                        aria-labelledby="lesson-children-heading">
+                        <?php echo $children_html; ?>
+                    </nav>
                 </section>
             <?php endif; ?>
             <div class="wrapper lesson-progression">
@@ -218,15 +220,13 @@ get_header();
                     <?php echo dfh_render_lesson_tree($course_id ? dfh_get_course_root_ids($course_id) : null); ?>
                 </nav>
             </div>
-            <footer class="card__footer cluster cluster--between">
-                <a class="link link--plain inline gap-sm" href="<?php echo esc_url(home_url()); ?>">
-                    <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                        <use href="#Home" />
+            <footer class="card__footer">
+                <a href="<?php echo esc_url(home_url()); ?>" class="brand">
+                    <svg class="brand__mark icon" width="1em" height="1em" aria-hidden="true" focusable="false">
+                        <use href="#BrandDesignForHumans"></use>
                     </svg>
-                    <span>Courses home</span>
+                    <span class="brand__name">Courses</span>
                 </a>
-                <a href="https://designforhumans.blog" class="brand"><span class="brand__name">Design For
-                        Humans</span></a>
             </footer>
         </article>
     </dialog>

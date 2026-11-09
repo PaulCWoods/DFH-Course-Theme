@@ -7,14 +7,14 @@
             </svg>
             <span class="brand__name">Courses</span>
         </a>
-        <nav class="header__nav tab-list tab-list--plain tab-list--scrollable site-trail" aria-label="Breadcrumb">
+        <nav class="header__nav tab-list tab-list--plain tab-list--scrollable" aria-label="Account">
             <ul>
                 <?php if (is_user_logged_in()): ?>
-                    <li><a class="tab" href="<?php echo esc_url(home_url('/cart/')); ?>">My Cart</a></li>
+                    <li><a class="tab" href="<?php echo esc_url(home_url('/cart/')); ?>">Cart</a></li>
                 <?php elseif (!is_page('login')): ?>
                     <li>
                         <!-- Replace 'login' with the slug or URL of your new login page -->
-                        <a class="tab" href="<?php echo esc_url(home_url('/login/')); ?>">Log In</a>
+                        <a class="tab" href="<?php echo esc_url(home_url('/login/')); ?>">Log in</a>
                     </li>
                 <?php endif; ?>
             </ul>

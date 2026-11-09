@@ -117,10 +117,6 @@
     }
 }
 
-.lesson-head__progress {
-    display: none;
-}
-
 // The parent link scrolls away and the current lesson takes its place
 @supports (animation-timeline: scroll()) {
     @media (prefers-reduced-motion: no-preference) {
@@ -157,32 +153,6 @@
 @supports (animation-timeline: scroll()) {
 
     @media (prefers-reduced-motion: no-preference) {
-
-        // Show reading progress when the browser supports scroll-driven animation.
-        .lesson-head__progress {
-            animation: --article-progress auto linear;
-            animation-timeline: scroll(root block);
-            background-color: var(--foreground-accent);
-            block-size: var(--border-width);
-            color-scheme: dark;
-            display: block;
-            inline-size: 100%;
-            inset-block-start: 0;
-            inset-inline-start: 0;
-            position: fixed;
-            transform-origin: left;
-        }
-
-        @keyframes --article-progress {
-            from {
-                scale: 0 1;
-            }
-
-            to {
-                scale: 1 1;
-            }
-        }
-
 
         @keyframes --hide-parent {
             to {
