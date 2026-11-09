@@ -367,7 +367,7 @@ if (function_exists('acf_add_local_field_group')) {
  */
 function dfh_library_css($file)
 {
-    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.3.0';
+    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.4.0';
     return rtrim($base, '/') . '/' . $file;
 }
 
@@ -378,7 +378,7 @@ function dfh_library_css($file)
  */
 function dfh_shared_css()
 {
-    return defined('DFH_SHARED_CSS') ? DFH_SHARED_CSS : 'https://cdn.jsdelivr.net/gh/PaulCWoods/dfh-shared-styles@0.1.0/dist/dfh-site.css';
+    return defined('DFH_SHARED_CSS') ? DFH_SHARED_CSS : 'https://cdn.jsdelivr.net/gh/PaulCWoods/dfh-shared-styles@0.3.0/dist/dfh-site.css';
 }
 
 /**

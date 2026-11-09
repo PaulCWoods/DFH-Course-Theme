@@ -7,8 +7,8 @@
 // cascade layers:
 // - reset: the WordPress classes its output still relies on
 // - tokens: the course's own tokens
-// - layout: its components and WordPress's blocks (blocks/), after the library's components and layout
-//   primitives and under its utilities
+// - site: its components and WordPress's blocks (blocks/), the layer the library leaves for them:
+//   after its components and layout primitives, and under its utilities (library 0.4.0 and later)
 // ============================================================================
 @use 'sass:meta';
 
@@ -20,7 +20,7 @@
     @include meta.load-css('theme');
 }
 
-@layer layout {
+@layer site {
     @include meta.load-css('course');
     @include meta.load-css('blocks');
 }

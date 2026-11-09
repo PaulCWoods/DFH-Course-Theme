@@ -1,5 +1,5 @@
+<a href="#main" class="skip-link">Skip to main content</a>
 <header class="header header--sticky header--translucent max-md:header--compact">
-    <a href="#main" class="skip-link header__skip-link">Skip to main content</a>
     <div class="header__bar">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="brand">
             <svg class="brand__mark icon" width="1em" height="1em" aria-hidden="true" focusable="false">

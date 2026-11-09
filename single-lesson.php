@@ -458,11 +458,11 @@ get_header();
             ?>
             <div class="card__content" tabindex="0" aria-label="Scrollable panel content">
                 <header class="card__header progress-panel__header">
-                    <a class="link link--plain inline gap-xs" href="<?php echo esc_url(home_url()); ?>" title="Home">
-                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
+                    <a class="link link--plain inline gap-sm" href="<?php echo esc_url(home_url()); ?>">
+                        <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
                             <use href="#Home" />
                         </svg>
-                        Courses Home
+                        <span>Courses home</span>
                     </a>
 
                     <button class="button button--plain syllabus-close" command="hide-popover"
