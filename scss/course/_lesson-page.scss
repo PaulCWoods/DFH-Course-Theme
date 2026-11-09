@@ -48,10 +48,6 @@
     display: flex;
     inline-size: 100%;
     max-inline-size: var(--spacing-site-width);
-
-    .lesson-head.\+sample & {
-        max-inline-size: calc(var(--spacing-site-width) + var(--spacing-cushion) * 2);
-    }
 }
 
 .lesson-head__controls {
@@ -89,6 +85,11 @@
     overflow: hidden;
     padding-inline: var(--spacing-cushion);
     text-overflow: ellipsis;
+}
+
+// Without a lesson number (the sample), the titles start at the bar's edge
+.lesson-head__nav:first-child > * {
+    padding-inline-start: 0;
 }
 
 .lesson-head__nav-parent {
@@ -236,16 +237,6 @@
     margin-block: 0; // keep title snug to content
 }
 
-.lesson-header__kicker {
-    display: block;
-    margin-block-start: var(--spacing-8);
-
-    &.\+pre {
-        margin-block-end: var(--spacing-8);
-        margin-block-start: 0;
-    }
-}
-
 // -----------------------------------------------------------------------------
 // Video player and mobile pinning
 
@@ -255,7 +246,7 @@
 
     // Pinning is limited to the narrow, touch layout where the toggle exposes
     // the sticky-player state.
-    .app:has(.video-stick) & {
+    :root.video-stick & {
         @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
             position: sticky;
             inset-block-start: var(--header-compact-bar-min-size, var(--spacing-48));
@@ -269,13 +260,9 @@
     display: none;
 
     @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
-        .app:has(.lesson-video) & {
+        :root:has(.lesson-video) & {
             display: inline-flex;
         }
-    }
-
-    &.video-unstick {
-        color: var(--foreground-muted);
     }
 }
 
@@ -377,59 +364,21 @@
 
 
 // -----------------------------------------------------------------------------
-// Lesson resources and bookmark
+// Aside: bookmark and resources
 
+// The bookmark sits at the end of the column; on narrow screens the aside
+// follows the lesson, and the bookmark goes last.
 .lesson-bookmark {
-    border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
-    margin-block-start: var(--spacing-cushion);
-    padding-block-start: var(--spacing-cushion);
     order: 4;
     text-align: end;
 
-    .button {
-        padding-inline-end: calc(var(--button-inner-gap, var(--spacing-12)) + var(--button-padding-inline, var(--spacing-md)) + 1em);
-        position: relative;
-
-        .icon {
-            position: absolute;
-            inset-block-start: calc(var(--button-border-width, var(--border-width, 1px)) * -1);
-            inset-inline-end: .5em;
-            font-size: 1.5em;
-        }
-    }
-
     @media screen and (width > #{var.$bp-lesson}) {
-        border-block-start: none;
-        margin-block-start: 0;
-        padding-block-start: 0;
-        margin-block-end: var(--spacing-cushion);
         order: 0;
-
-        &:last-child {
-            margin-block-end: 0;
-        }
     }
 }
 
-.lesson-resources {
-    border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
-    margin-block-end: var(--spacing-cushion);
-    padding-block-start: var(--spacing-cushion);
-
-    &:last-child {
-        margin-block-end: 0;
-    }
-}
-
-.lesson-resources__heading {
-    margin-block-end: var(--spacing-breathe, 1em);
-}
-
-// -----------------------------------------------------------------------------
-// Lesson statistics and sticky aside
-
-// Resource column, including the stats definition list. The negative margin
-// preserves the focus-ring clearance while keeping the visible column aligned.
+// The column stays in view beside a long lesson. The negative margin keeps
+// room for focus rings while the visible column stays aligned.
 .lesson-aside {
     align-self: start;
     inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-64)) + var(--spacing));
@@ -439,152 +388,28 @@
     reading-flow: flex-visual;
 
     @media screen and (width > #{var.$bp-lesson}) {
-        // Prevent a tall resource list from pushing the lesson content out of view.
+        // A tall column scrolls rather than push the lesson out of view.
         max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-64)) - var(--spacing) * 2);
         overflow: auto;
     }
-}
-
-
-.lesson-stats__heading {
-    margin-block-end: var(--spacing);
-}
-
-// Stats list layout helper — default small-vertical list
-.lesson-stats__list {
-    --gap: calc(var(--spacing)/2);
 }
 
 // -----------------------------------------------------------------------------
 // Explore area: child lessons and progression
 
 .lesson-explore {
-    --gap: calc(var(--spacing-cushion)*2);
+    --gap: calc(var(--spacing-cushion) * 2);
     background: var(--surface-card);
     box-shadow: var(--shadow-inner);
     flex-grow: 1;
-    padding-block: calc(var(--spacing-cushion)*2);
+    padding-block: calc(var(--spacing-cushion) * 2);
 
     @media (prefers-contrast: more) {
         border-block-start: var(--border);
         box-shadow: none;
     }
-
-    .heading {
-        margin-block-end: var(--spacing);
-    }
-}
-
-.lesson-explore__section {
-    inline-size: 100%;
 }
 
 .lesson-progression {
     margin-block-start: auto;
-}
-
-.lesson-progression__buttons {
-    // Keep previous navigation at the start and primary progression at the end.
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing);
-    justify-content: flex-end;
-
-    .prev-lesson {
-        margin-inline-end: auto;
-    }
-}
-
-.lesson-downloads ul {
-    // Stack download entries and remove default list decoration.
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
-    gap: calc(var(--spacing)/2);
-    list-style: none;
-}
-
-.lesson-download {
-    // Make the full card surface act as the download link.
-    background-color: var(--surface-card);
-    position: relative;
-
-    @media (prefers-contrast: more) {
-        border: var(--border);
-    }
-
-    a:before {
-        content: "";
-        inset: 0;
-        position: absolute;
-    }
-}
-
-.lesson-download__icon {
-    background-color: var(--surface-card);
-    box-sizing: content-box;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    padding: var(--spacing);
-    pointer-events: none;
-    position: absolute;
-}
-
-.lesson-download__thumb {
-    // Reserve a stable thumbnail column for each download card.
-    display: flex;
-    font-size: 0;
-    block-size: var(--spacing-128);
-    position: relative;
-    margin: calc(var(--spacing) / 2);
-    margin-block-end: 0;
-
-    img {
-        box-shadow: var(--shadow);
-        block-size: 100%;
-        inline-size: 100%;
-        object-fit: cover;
-        opacity: 1;
-        position: absolute;
-        transition:
-            box-shadow var(--lesson-download-transition),
-            opacity var(--lesson-download-transition);
-
-        @media (prefers-contrast: more) {
-            box-shadow: none;
-        }
-    }
-
-    @media (hover:hover) {
-        .lesson-download:hover & img {
-            box-shadow: var(--shadow-md);
-
-            @media (prefers-contrast: more) {
-                box-shadow: none;
-            }
-        }
-    }
-
-    .lesson-download:active & img {
-        box-shadow: var(--shadow-none);
-        opacity: var(--opacity-muted);
-
-        @media (prefers-contrast: more) {
-            box-shadow: none;
-            opacity: 1;
-        }
-    }
-}
-
-.lesson-download__info {
-    flex: 1;
-    padding: var(--spacing);
-
-    h3 {
-        align-items: center;
-        display: flex;
-        font-weight: bold;
-        gap: calc(var(--spacing) / 2);
-        justify-content: space-between;
-    }
 }

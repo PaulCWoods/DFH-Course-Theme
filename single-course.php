@@ -190,11 +190,9 @@ get_template_part('content', 'course-header');
                 <?php elseif ($completed_count > 0): ?>
                     <!-- State 2: In-Progress (Resume) -->
                     <?php echo $welcome_back_msg; ?>
-                    <h2>Your progress: <?php echo esc_html($progress_percent); ?>% Complete</h2>
-                    <div class="progress-bar-container course-landing__progress">
-                        <progress class="progress-bar" max="100"
-                            value="<?php echo esc_html($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
-                    </div>
+                    <h2 id="course-progress-heading">Your progress: <?php echo esc_html($progress_percent); ?>% complete</h2>
+                    <progress class="progress course-landing__progress" max="100" aria-labelledby="course-progress-heading"
+                        value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
 
                     <?php
                     $resume_title = get_the_title($active_lesson_status);
@@ -260,9 +258,11 @@ get_template_part('content', 'course-header');
             <p class="small-text course-landing__note">Note: Access to lessons will be granted as you progress through
                 the course.</p>
             <?php if ($root_lessons): ?>
-                <div class="lesson-list__container">
-                    <?php echo dfh_render_lesson_tree($root_lesson_ids, 1, $active_lesson_status); ?>
-                </div>
+                <?php if ($has_access): ?>
+                    <nav aria-labelledby="course-plan-heading"><?php echo dfh_render_course_plan($root_lesson_ids, $active_lesson_status); ?></nav>
+                <?php else: ?>
+                    <?php echo dfh_render_course_plan($root_lesson_ids, $active_lesson_status); ?>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
     </section>

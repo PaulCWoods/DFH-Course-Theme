@@ -8,8 +8,6 @@
     // Keep the stats column below the masthead when it becomes sticky.
     --lesson-aside-sticky-top: var(--lesson-header-height);
     --lesson-quote-bold-font-weight: var(--typography-font-weight-600);
-    --lesson-syllabus-transition: var(--duration-md);
-    --lesson-download-transition: var(--duration-sm);
 
     --my-account-nav-width: var(--spacing-320);
     --my-account-nav-transition: var(--duration-md);
@@ -24,9 +22,7 @@
 // Disable component transitions for users who prefer reduced motion.
 @media (prefers-reduced-motion: reduce) {
     :root {
-        --lesson-syllabus-transition: 0s;
         --my-account-nav-transition: 0s;
-        --lesson-download-transition: 0s;
     }
 }
 

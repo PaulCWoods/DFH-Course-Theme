@@ -503,124 +503,158 @@ function dfh_get_adjacent_lesson($current_lesson_id)
     return $result;
 }
 
-function dfh_render_lesson_children($parent_id, $level = 1, $active_lesson = null)
+/**
+ * The lesson tree, as the library's Navigation Tree: nested lists of
+ * Buttons. A lesson the student can open is a link (aria-current on the
+ * page being read); one they haven't reached is an unavailable link,
+ * dimmed and locked; for someone without the course, every lesson is
+ * plain text, so the plan reads as a list rather than a wall of locks.
+ * The caller wraps the lists: a <nav class="navigation-tree"> where the
+ * lessons can be opened, a <div class="navigation-tree"> otherwise.
+ */
+function dfh_lesson_tree_context($active_lesson = null)
 {
-    $children = get_posts(array(
+    if (null === $active_lesson) {
+        $active_lesson = dfh_get_student_current_lesson();
+    }
+    return array(
+        'active' => $active_lesson,
+        'access' => dfh_user_has_course_access(),
+        'open' => dfh_lessons_open() || current_user_can('administrator'),
+    );
+}
+
+/* What a student can do with a lesson: read it, not yet, or only see it */
+function dfh_lesson_state($lesson_id, $context)
+{
+    if (!$context['access']) {
+        return 'listed';
+    }
+    $is_active = $context['active'] && (int) $context['active'] === (int) $lesson_id;
+    if (dfh_is_lesson_completed($lesson_id)) {
+        return 'complete';
+    }
+    if ($is_active) {
+        return 'in-progress';
+    }
+    return $context['open'] ? 'open' : 'locked';
+}
+
+function dfh_lesson_status_html($state)
+{
+    $statuses = array(
+        'complete' => '<span class="status status--plain status--success"><span class="status__text">Complete</span></span>',
+        'in-progress' => '<span class="status status--plain status--accent"><span class="status__text">In progress</span></span>',
+    );
+    return $statuses[$state] ?? '';
+}
+
+function dfh_lesson_label_html($lesson_id)
+{
+    $code = dfh_get_lesson_hierarchy_number($lesson_id);
+    return ($code ? esc_html($code) . ' ' : '') . esc_html(get_the_title($lesson_id));
+}
+
+function dfh_render_lesson_item($lesson_id, $context)
+{
+    $label = '<span>' . dfh_lesson_label_html($lesson_id) . '</span>';
+    $state = dfh_lesson_state($lesson_id, $context);
+
+    if ('listed' === $state) {
+        return '<span class="button">' . $label . '</span>';
+    }
+    if ('locked' === $state) {
+        return '<a role="link" class="button" aria-disabled="true">' . $label
+            . '<svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Lock" /></svg><span class="sr-only">, locked</span></a>';
+    }
+
+    $bookmark = dfh_is_lesson_bookmarked($lesson_id)
+        ? '<svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#BookmarkFilled" /></svg><span class="sr-only">, bookmarked</span>'
+        : '';
+    $current = (int) $lesson_id === (int) get_the_ID() ? ' aria-current="page"' : '';
+
+    return '<a class="button" href="' . esc_url(get_permalink($lesson_id)) . '"' . $current . '>' . $label . $bookmark . dfh_lesson_status_html($state) . '</a>';
+}
+
+function dfh_get_lesson_children($parent_id)
+{
+    return get_posts(array(
         'post_type' => 'lesson',
         'post_parent' => $parent_id,
         'posts_per_page' => -1,
         'orderby' => 'menu_order title',
         'order' => 'ASC',
+        'fields' => 'ids',
     ));
-
-    if (!$children)
-        return '';
-
-    if (null === $active_lesson) {
-        $active_lesson = function_exists('dfh_get_student_current_lesson') ? dfh_get_student_current_lesson() : null;
-    }
-
-    function_exists('dfh_is_lesson_completed') ? '' : null;
-
-    $lvl = intval($level);
-    $output = '<ul class="lesson-list l' . $lvl . '">';
-    foreach ($children as $child) {
-        $is_current = ($child->ID === get_the_ID());
-        $lesson_item_class = $is_current ? ' class="current lesson-item l' . $lvl . '"' : ' class="lesson-item l' . $lvl . '"';
-        $code = dfh_get_lesson_hierarchy_number($child->ID);
-        $code_html = $code ? '<span class="lesson-item__code">' . esc_html($code) . '</span> ' : '';
-        $data_lesson = $code ? $code : (string) $child->ID;
-        $item_class = trim('lesson-list__item l' . $lvl . ' ' . dfh_lesson_theme_class($data_lesson));
-
-        $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($child->ID) : false;
-        $bookmarked = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($child->ID) : false;
-        $bookmark_html = $bookmarked ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#BookmarkFilled" /></svg><span class="visually-hidden">Bookmarked</span></span>' : '';
-        // A lesson is considered "started" if it's completed or it's the user's current active lesson.
-        $started = $completed || ($active_lesson && ((int) $active_lesson === (int) $child->ID));
-
-        if (!$started) {
-            // Not started: render as non-clickable span and omit the progress chip.
-            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</span>' . $bookmark_html . '</span>';
-        } else {
-            $chip_label = $completed ? 'Complete' : 'In Progress';
-            $chip_class = $completed ? 'status status--plain status--no-dot complete' : 'status status--plain status--success chip in-progress';
-            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($child->ID)) . '" class="lesson-item__label link link--plain l' . $lvl . '">' . esc_html(get_the_title($child->ID)) . '</a>' . $bookmark_html . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
-        }
-        $output .= dfh_render_lesson_children($child->ID, $lvl + 1, $active_lesson);
-        $output .= '</li>';
-    }
-    $output .= '</ul>';
-
-    return $output;
 }
 
-function dfh_render_lesson_tree($roots = null, $level = 1, $active_lesson = null)
+/* An <ol> of lessons, each with its own children nested inside it */
+function dfh_render_lesson_list($lesson_ids, $context)
+{
+    if (empty($lesson_ids)) {
+        return '';
+    }
+    $output = '<ol>';
+    foreach ($lesson_ids as $lesson_id) {
+        $output .= '<li>' . dfh_render_lesson_item($lesson_id, $context)
+            . dfh_render_lesson_list(dfh_get_lesson_children($lesson_id), $context) . '</li>';
+    }
+    return $output . '</ol>';
+}
+
+function dfh_render_lesson_children($parent_id, $active_lesson = null)
+{
+    return dfh_render_lesson_list(dfh_get_lesson_children($parent_id), dfh_lesson_tree_context($active_lesson));
+}
+
+/* A course's root lessons, without any that sit inside another root */
+function dfh_get_root_lesson_ids($roots)
 {
     if (empty($roots)) {
-        return dfh_render_lesson_children(0, $level, $active_lesson);
+        return dfh_get_lesson_children(0);
     }
-
-    if (!is_array($roots)) {
-        $roots = array($roots);
-    }
-
     $root_ids = array();
-    foreach ($roots as $r) {
+    foreach ((array) $roots as $r) {
         $id = is_object($r) ? (int) $r->ID : (int) $r;
-        if ($id)
+        if ($id) {
             $root_ids[] = $id;
+        }
     }
     $root_ids = array_values(array_unique($root_ids));
+    return array_values(array_filter($root_ids, function ($id) use ($root_ids) {
+        return !array_intersect(get_post_ancestors($id), $root_ids);
+    }));
+}
 
-    $filtered_roots = array();
-    foreach ($root_ids as $id) {
-        $ancestors = get_post_ancestors($id);
-        $is_descendant = false;
-        foreach ($root_ids as $other) {
-            if ($other === $id)
-                continue;
-            if (in_array($other, $ancestors)) {
-                $is_descendant = true;
-                break;
-            }
+function dfh_render_lesson_tree($roots = null, $active_lesson = null)
+{
+    return dfh_render_lesson_list(dfh_get_root_lesson_ids($roots), dfh_lesson_tree_context($active_lesson));
+}
+
+/**
+ * The course plan: a Card for each root lesson, in its sub-brand colour,
+ * with the root as its title and its lessons as a Navigation Tree. The
+ * caller wraps it in a <nav> when the lessons can be opened.
+ */
+function dfh_render_course_plan($roots = null, $active_lesson = null)
+{
+    $context = dfh_lesson_tree_context($active_lesson);
+    $output = '<ol class="grid grid--2-col" role="list">';
+    foreach (dfh_get_root_lesson_ids($roots) as $root_id) {
+        $state = dfh_lesson_state($root_id, $context);
+        $title = dfh_lesson_label_html($root_id);
+        if (in_array($state, array('complete', 'in-progress', 'open'), true)) {
+            $title = '<a class="link link--plain" href="' . esc_url(get_permalink($root_id)) . '">' . $title . '</a>';
+        } elseif ('locked' === $state) {
+            $title .= '<span class="sr-only">, locked</span>';
         }
-        if (!$is_descendant)
-            $filtered_roots[] = $id;
+        $output .= '<li class="card ' . esc_attr(dfh_lesson_theme_class(dfh_get_lesson_hierarchy_number($root_id))) . '">'
+            . '<header class="card__header"><h3 class="card__title subheading">' . $title . '</h3>' . dfh_lesson_status_html($state) . '</header>'
+            . '<div class="card__body"><div class="navigation-tree navigation-tree--ruled navigation-tree--compact">'
+            . dfh_render_lesson_list(dfh_get_lesson_children($root_id), $context)
+            . '</div></div></li>';
     }
-
-    $lvl = intval($level);
-    if (null === $active_lesson) {
-        $active_lesson = function_exists('dfh_get_student_current_lesson') ? dfh_get_student_current_lesson() : null;
-    }
-    $output = '<ul class="lesson-list l' . $lvl . '">';
-    foreach ($filtered_roots as $r_id) {
-        $is_current = ($r_id === get_the_ID());
-        $lesson_item_class = $is_current ? ' class="current lesson-item l' . $lvl . '"' : ' class="lesson-item l' . $lvl . '"';
-        $code = dfh_get_lesson_hierarchy_number($r_id);
-        $code_html = $code ? '<span class="lesson-item__code">' . esc_html($code) . '</span> ' : '';
-        $data_lesson = $code ? $code : (string) $r_id;
-        $item_class = trim('lesson-list__item l' . $lvl . ' ' . dfh_lesson_theme_class($data_lesson));
-
-        $completed = function_exists('dfh_is_lesson_completed') ? dfh_is_lesson_completed($r_id) : false;
-        $bookmarked_root = function_exists('dfh_is_lesson_bookmarked') ? dfh_is_lesson_bookmarked($r_id) : false;
-        $bookmark_html_root = $bookmarked_root ? '<span class="lesson-item__bookmark" title="Bookmarked by you"><svg class="icon" width="32" height="32" aria-hidden="true"><use href="#BookmarkFilled" /></svg><span class="visually-hidden">Bookmarked</span></span>' : '';
-        // A lesson is considered "started" if it's completed or it's the user's current active lesson.
-        $started = $completed || ($active_lesson && ((int) $active_lesson === (int) $r_id));
-
-        if (!$started) {
-            // Not started: render as non-clickable span and omit the progress chip.
-            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span class="lesson-item l' . $lvl . '">' . $code_html . '<span class="lesson-item__label l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</span>' . $bookmark_html_root . '</span>';
-        } else {
-            $chip_label = $completed ? 'Complete' : 'In Progress';
-            $chip_class = $completed ? 'chip complete' : 'chip in-progress';
-            $output .= '<li class="' . $item_class . '" data-lesson="' . esc_attr($data_lesson) . '"><span ' . $lesson_item_class . '>' . $code_html . '<a href="' . esc_url(get_permalink($r_id)) . '" class="lesson-item__label link link--plain l' . $lvl . '">' . esc_html(get_the_title($r_id)) . '</a>' . $bookmark_html_root . '<span class="' . $chip_class . '">' . esc_html($chip_label) . '</span></span>';
-        }
-        $output .= dfh_render_lesson_children($r_id, $lvl + 1, $active_lesson);
-        $output .= '</li>';
-    }
-    $output .= '</ul>';
-
-    return $output;
+    return $output . '</ol>';
 }
 
 /**
@@ -715,10 +749,23 @@ add_action('personal_options_update', 'dfh_save_extra_user_profile_fields');
 add_action('edit_user_profile_update', 'dfh_save_extra_user_profile_fields');
 
 /**
+ * Every lesson open to anyone, for working on the templates: only on a local
+ * install, and only when its wp-config.php defines DFH_OPEN_LESSONS as true.
+ */
+function dfh_lessons_open()
+{
+    return 'local' === wp_get_environment_type() && defined('DFH_OPEN_LESSONS') && DFH_OPEN_LESSONS;
+}
+
+/**
  * 4. Helper Function: Check if User Has Access (With Admin Safety Override)
  */
 function dfh_user_has_course_access($user_id = 0)
 {
+    if (dfh_lessons_open()) {
+        return true;
+    }
+
     if (!$user_id) {
         $user_id = get_current_user_id();
     }
@@ -979,6 +1026,41 @@ function dfh_get_courses_for_lesson($lesson_id)
     }
 
     return array_values(array_unique($matched));
+}
+
+/**
+ * A course's root lesson IDs, however they were stored (an ACF array, an
+ * ID, a list in a string or a serialised array).
+ */
+function dfh_get_course_root_ids($course_id)
+{
+    $roots = function_exists('get_field') ? get_field('course_root_lessons', $course_id) : null;
+    if (empty($roots)) {
+        $roots = get_post_meta($course_id, 'course_root_lessons', true);
+    }
+    if (is_string($roots)) {
+        $maybe = @unserialize($roots);
+        $roots = false !== $maybe ? $maybe : preg_split('/\s*,\s*|\s+/u', trim($roots));
+    }
+    $ids = array();
+    foreach ((array) $roots as $root) {
+        $id = is_object($root) ? (int) $root->ID : (int) $root;
+        if ($id) {
+            $ids[] = $id;
+        }
+    }
+    return array_values(array_unique($ids));
+}
+
+/* Every lesson in a course, in reading order */
+function dfh_get_course_lesson_ids($course_id)
+{
+    $lessons = array();
+    foreach (dfh_get_root_lesson_ids(dfh_get_course_root_ids($course_id)) as $root_id) {
+        $lessons[] = $root_id;
+        $lessons = array_merge($lessons, dfh_get_ordered_lesson_tree($root_id));
+    }
+    return array_values(array_unique($lessons));
 }
 
 /**

@@ -25,7 +25,7 @@ if (!dfh_user_has_course_access()) {
 
 // 2. Progression Gate Check: Prevent URL manipulation skipping ahead
 // Administrators bypass this check so you can freely test or review any page.
-if (!user_can($user_id, 'administrator')) {
+if (!user_can($user_id, 'administrator') && !dfh_lessons_open()) {
     $is_completed = dfh_is_lesson_completed($lesson_id, $user_id);
     $current_allowed_lesson = dfh_get_student_current_lesson($user_id);
 
@@ -49,606 +49,255 @@ if (!user_can($user_id, 'administrator')) {
     }
 }
 
-// Proceed with standard lesson variables...
+// The lesson, its course and where it sits in it
 $adjacent = dfh_get_adjacent_lesson($lesson_id);
 $is_completed = dfh_is_lesson_completed($lesson_id);
 $is_bookmarked = dfh_is_lesson_bookmarked($lesson_id);
-$bookmark_text = $is_bookmarked ? 'Bookmarked' : 'Bookmark Lesson';
-$bookmark_class = $is_bookmarked ? 'button is-active bookmark-btn' : 'button bookmark-btn';
-$bookmark_icon = $is_bookmarked ? '#BookmarkFilled' : '#Bookmark';
-$playback_id = get_post_meta(get_the_ID(), 'mux_playback_id', true);
+$playback_id = get_post_meta($lesson_id, 'mux_playback_id', true);
+$lesson_code = dfh_get_lesson_hierarchy_number();
+$courses = dfh_get_courses_for_lesson($lesson_id);
+$course_id = $courses ? (int) $courses[0] : null;
+$course_lessons = $course_id ? dfh_get_course_lesson_ids($course_id) : dfh_get_ordered_lesson_tree(0);
+
+// The breadcrumb goes up a level: the parent lesson, else the course
+$parent_id = wp_get_post_parent_id($lesson_id);
+if ($parent_id) {
+    $up_url = get_permalink($parent_id);
+    $up_title = get_the_title($parent_id);
+} elseif ($course_id) {
+    $up_url = get_permalink($course_id);
+    $up_title = get_the_title($course_id);
+} else {
+    $up_url = home_url();
+    $up_title = 'Courses home';
+}
+
+// The main action: complete this lesson and go on, or finish the course
+$is_last_lesson = $course_lessons && (int) end($course_lessons) === (int) $lesson_id;
+if ($is_completed && $is_last_lesson) {
+    $progress_label = 'Course home';
+    $progress_icon = '#Home';
+} elseif ($is_last_lesson) {
+    $progress_label = 'Complete course';
+    $progress_icon = '#Check';
+} else {
+    $progress_label = 'Next lesson';
+    $progress_icon = '#ArrowRight';
+}
+
+// Progress through the course, for the panel
+$completed_lessons = array_map('intval', dfh_get_completed_lessons());
+$progress_total = count($course_lessons);
+$progress_count = count(array_intersect($completed_lessons, $course_lessons));
+$progress_percent = $progress_total ? round($progress_count / $progress_total * 100) : 0;
 
 /**
  * Template Name: Single Lesson
  * Template Post Type: lesson
- * 
+ *
  * The template for displaying all single lesson posts.
  */
 
 get_header();
 ?>
 
-<header class="header header--sticky max-md:header--compact lesson-head__container" aria-label="Lesson navigation">
-    <div class="lesson-head header__bar">
-        <div class="lesson-head__progress" aria-hidden="true"></div>
-        <div class="lesson-head__inner">
-            <?php
-            $lesson_code = dfh_get_lesson_hierarchy_number();
-            if ($lesson_code):
-                ?>
-                <span class="lesson-head__code-badge" title="Lesson code"><span class="visually-hidden">Lesson
-                        code:</span><?php echo esc_html($lesson_code); ?></span>
-            <?php endif; ?>
-            <nav class="lesson-head__nav stack stack--tight" aria-label="Breadcrumb">
-                <?php
-                $post_id = get_the_ID();
-                $parent_id = wp_get_post_parent_id($post_id);
-
-                // Breadcrumb: parent lesson when available; otherwise try to find parent Course
-                if ($parent_id): ?>
-                    <a class="lesson-head__nav-parent link link--plain"
-                        title="<?php echo esc_html(get_the_title($parent_id)); ?>"
-                        href="<?php echo esc_url(get_permalink($parent_id)); ?>"><?php echo esc_html(get_the_title($parent_id)); ?></a>
-                <?php else:
-                    // Attempt to find a Course that references this lesson as a root (ACF or postmeta)
-                    $course_id = null;
-                    $all_courses = get_posts(array('post_type' => 'course', 'posts_per_page' => -1, 'fields' => 'ids'));
-                    if (!empty($all_courses)) {
-                        foreach ($all_courses as $c_id) {
-                            $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
-                            if (is_string($roots)) {
-                                $maybe = @unserialize($roots);
-                                if ($maybe !== false)
-                                    $roots = $maybe;
-                            }
-                            if (!empty($roots) && in_array($post_id, (array) $roots)) {
-                                $course_id = $c_id;
-                                break;
-                            }
-                        }
-                    }
-
-                    if ($course_id): ?>
-                        <a class="lesson-head__nav-parent link link--plain"
-                            title="<?php echo esc_html(get_the_title($course_id)); ?>"
-                            href="<?php echo esc_url(get_permalink($course_id)); ?>"><?php echo esc_html(get_the_title($course_id)); ?></a>
-                    <?php else: ?>
-                        <a class="lesson-head__nav-parent link link--plain" href="<?php echo esc_url(home_url()); ?>">Home</a>
-                    <?php endif;
-                endif; ?>
-
-                <span class="lesson-head__nav-current"
-                    aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
-
-                <!-- Syllabus overlay toggle -->
-
-            </nav>
-            <div class="lesson-head__controls max-lg:hide-labels">
-
-                <?php if ($playback_id): ?>
-                    <button type="button" id="video-stick-toggle"
-                        class="button button--subtle lesson-video__toggle video-unstick" aria-controls="lesson-video-player"
-                        aria-pressed="false">
-                        <span class="visually-hidden">Stick video</span>
-                        <svg class="icon" width="32" height="32" aria-hidden="true">
-                            <use href="#Unlock" />
-                        </svg>
-                    </button>
-                <?php endif; ?>
-
-                <button class="button button--plain progress-toggle course-progress__toggle" command="toggle-popover"
-                    commandfor="course-progress">
-                    <span class="button__text">Progress</span>
-                    <svg class="icon" width="32" height="32" aria-hidden="true">
-                        <use href="#Navigation" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-</header>
+<?php get_template_part('content', 'lesson-head', array(
+    'code' => $lesson_code,
+    'up_url' => $up_url,
+    'up_title' => $up_title,
+    'playback_id' => $playback_id,
+    'progress' => true,
+)); ?>
 <main class="site-main lesson-page" id="main">
-    <!-- Syllabus overlay panel (hidden by default) -->
-    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack stack--tight'); ?>>
-
+    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack gap-0'); ?>>
         <header class="lesson-header prose font-sizing-fluid">
             <div class="wrapper">
-                <h1 class="lesson-header__title">
-                    <?php the_title(); ?>
-                </h1>
+                <h1 class="lesson-header__title"><?php the_title(); ?></h1>
                 <?php
-                $lesson_subtitle = function_exists('get_field') ? get_field('subtitle') : get_post_meta(get_the_ID(), 'subtitle', true);
-                if ($lesson_subtitle):
-                    ?>
-                    <p class="lesson-header__subtitle small-heading"><?php echo esc_html($lesson_subtitle); ?></p>
+                $lesson_subtitle = function_exists('get_field') ? get_field('subtitle') : get_post_meta($lesson_id, 'subtitle', true);
+                if ($lesson_subtitle): ?>
+                    <p class="small-heading"><?php echo esc_html($lesson_subtitle); ?></p>
                 <?php endif; ?>
-
                 <?php if ($is_completed): ?>
-                    <span class="lesson-header__kicker micro-heading text-success">Complete</span>
+                    <p class="status status--plain status--success"><span class="status__text">Complete</span></p>
                 <?php endif; ?>
             </div>
         </header>
-
-        <?php
-        // Video playback: Mux only (legacy fallback removed)
-        if ($playback_id): ?>
-            <div class="lesson-video">
-                <div class="lesson-video__container wrapper wrapper--flush">
-                    <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>"
-                        accent-color="#2eab93" metadata-video-title="<?php echo esc_attr(get_the_title()); ?>"
-                        style="width:100%;height:auto;" thumbnail-time="2">
-                    </mux-player>
-                </div>
-            </div>
-        <?php endif; ?>
+        <?php get_template_part('content', 'lesson-video', array('playback_id' => $playback_id)); ?>
         <div class="lesson-content">
-
-            <div class="wrapper lesson-main article__main">
+            <div class="wrapper article__main">
                 <div class="lesson-body article__body prose font-sizing-fluid"><?php the_content(); ?></div>
-                <aside class="lesson-aside article__aside stack stack--tight">
+                <aside class="lesson-aside article__aside stack" aria-label="Lesson resources">
                     <div class="lesson-bookmark">
-                        <button id="dfh-bookmark-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
-                            data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>"
-                            class="<?php echo esc_attr($bookmark_class); ?>">
-                            <span class="bookmark-label"><?php echo esc_html($bookmark_text); ?></span>
-                            <svg class="icon" width="32" height="32" title="Bookmark" aria-hidden="true">
-                                <use href="<?php echo esc_attr($bookmark_icon); ?>" />
+                        <button type="button" id="dfh-bookmark-btn" class="button"
+                            aria-pressed="<?php echo $is_bookmarked ? 'true' : 'false'; ?>"
+                            data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
+                            data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>">
+                            <span>Bookmark</span>
+                            <svg class="icon icon--off" width="1em" height="1em" aria-hidden="true" focusable="false">
+                                <use href="#Bookmark" />
+                            </svg>
+                            <svg class="icon icon--on" width="1em" height="1em" aria-hidden="true" focusable="false">
+                                <use href="#BookmarkFilled" />
+                            </svg>
+                            <svg class="icon spinner" width="1em" height="1em" aria-hidden="true" focusable="false">
+                                <use href="#LoaderArc" />
                             </svg>
                         </button>
                     </div>
-                    <?php
-                    // Gather stats and external links; render aside only if either exists
-                    $stats_meta = get_post_meta(get_the_ID(), 'lesson_stats', true);
-                    $external_links = get_post_meta(get_the_ID(), 'lesson_external_links', true);
-
-                    if (!empty($stats_meta) || !empty($external_links)): ?>
-
-                        <?php
-                        // Stats
-                        if (!empty($stats_meta)):
-                            $slines = explode("\n", $stats_meta);
-                            ?>
-                            <section class="lesson-resources lesson-stats" aria-describedby="lesson-stats__heading">
-                                <h2 class="subheading lesson-resources__heading" id="lesson-stats__heading">Key statistics</h2>
-                                <dl class="lesson-stats__list stack">
-                                    <?php foreach ($slines as $sline) {
-                                        $sline = trim($sline);
-                                        if (empty($sline))
-                                            continue;
-                                        $parts = explode('|', $sline);
-                                        $label = trim($parts[0]);
-                                        $value = isset($parts[1]) ? trim($parts[1]) : '';
-                                        $pc = isset($parts[2]) ? trim($parts[2]) : '';
-                                        if ($label === '' && $value === '')
-                                            continue;
-                                        ?>
-                                        <div class="stat" <?php echo ($pc ? 'style="--stat-progress:' . esc_attr($pc) . ';" data-pc="' . esc_attr($pc) . '"' : ''); ?>>
-                                            <dt class="stat-label"><?php echo esc_html($label); ?></dt>
-                                            <dd class="stat-value"><?php echo esc_html($value); ?></dd>
-                                        </div>
-                                    <?php } ?>
-                                </dl>
-                            </section>
-                            <?php
-                        endif;
-
-                        // External links
-                        if (!empty($external_links)):
-                            ?>
-                            <section class="lesson-resources lesson-links" aria-describedby="lesson-links-heading">
-                                <h2 class="subheading lesson-resources__heading" id="lesson-links-heading">Further reading &
-                                    links</h2>
-                                <ul class="resource-list stack">
-                                    <?php
-                                    $lines = explode("\n", $external_links);
-                                    foreach ($lines as $line) {
-                                        $line = trim($line);
-                                        if (empty($line))
-                                            continue;
-                                        $parts = explode('|', $line);
-                                        $link_title = trim($parts[0]);
-                                        $link_url = isset($parts[1]) ? trim($parts[1]) : '#';
-                                        echo '<li><a href="' . esc_url($link_url) . '" target="_blank" class="link link--plain" rel="noopener noreferrer">' . esc_html($link_title) . '</a></li>';
-                                    }
-                                    ?>
-                                </ul>
-                            </section>
-                            <?php
-                        endif;
-                        ?>
-                    <?php endif; ?>
-
-                    <?php
-                    $lesson_id = get_the_ID();
-                    $download_ids = get_post_meta($lesson_id, '_dfh_linked_download_ids', true);
-
-                    if (!empty($download_ids) && is_array($download_ids)):
-                        echo '<section class="lesson-resources lesson-downloads" aria-describedby="lesson-downloads-heading"><h2 class="subheading lesson-resources__heading" id="lesson-downloads-heading">Lesson downloads</h2><ul>';
-
-                        foreach ($download_ids as $download_id) {
-                            $download_post = get_post($download_id);
-                            $attachment_id = get_post_meta($download_id, '_dfh_download_attachment_id', true);
-                            $pdf_url = $attachment_id ? wp_get_attachment_url($attachment_id) : '';
-
-                            if ($download_post && $pdf_url) {
-                                ?>
-                                <li>
-                                    <div class="lesson-download stack stack--tight">
-                                        <?php if (has_post_thumbnail($download_id)): ?>
-                                            <div class="lesson-download__thumb">
-                                                <?php echo get_the_post_thumbnail($download_id, 'medium_large'); ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <svg class="icon icon--dir lesson-download__icon" width="32" height="32" aria-hidden="true">
-                                            <use href="#Download" />
-                                        </svg>
-                                        <div class="lesson-download__info">
-                                            <h3>
-                                                <a class="link link--plain" href="<?php echo esc_url($pdf_url); ?>"
-                                                    download><?php echo esc_html($download_post->post_title); ?> (PDF)</a>
-                                            </h3>
-                                            <?php if (trim($download_post->post_excerpt) !== ''): ?>
-                                                <p class="text-color-muted font-size-sm text-wrap-balance">
-                                                    <?php echo esc_html($download_post->post_excerpt); ?>
-                                                </p>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </li>
-                                <?php
-                            }
-                        }
-
-                        echo '</ul></section>';
-                    endif;
-                    ?>
+                    <?php get_template_part('content', 'lesson-resources', array('lesson_id' => $lesson_id)); ?>
                 </aside>
             </div>
         </div>
-
-
-        <!-- Child lessons -->
         <div class="lesson-explore stack">
             <?php
-            // Render child lessons for this lesson (if any).
-            $parent_id = get_the_ID();
-            $current_code = dfh_get_lesson_hierarchy_number($parent_id);
-            $child_level = 1;
-            if (!empty($current_code)) {
-                $child_level = count(explode('.', $current_code)) + 1;
-            }
-            ?>
-            <?php
-            $children_html = dfh_render_lesson_children($parent_id, $child_level);
-            if (!empty(trim($children_html))): ?>
-                <section class="wrapper lesson-explore__section lesson-children" aria-describedby="lesson-children-heading"
-                    data-level="<?php echo esc_attr($child_level); ?>">
+            $children_html = dfh_render_lesson_children($lesson_id);
+            if ($children_html): ?>
+                <section class="wrapper stack" aria-labelledby="lesson-children-heading">
                     <h2 class="heading" id="lesson-children-heading">Lessons in this section</h2>
-                    <div class="lesson-list__container">
-                        <?php echo $children_html; ?>
-                    </div>
+                    <nav class="navigation-tree navigation-tree--ruled navigation-tree--compact max-w-md" aria-labelledby="lesson-children-heading">
+                        <?php echo $children_html; ?></nav>
                 </section>
             <?php endif; ?>
-            <?php
-            // Check if this is the final lesson in the course.
-            // Prefer a course-aware check (find the course(s) that include this lesson
-            // and see whether this lesson is the last in that course's ordered list).
-            $is_last_lesson = false;
-            $courses_for_lesson = function_exists('dfh_get_courses_for_lesson') ? dfh_get_courses_for_lesson($lesson_id) : array();
-            if (!empty($courses_for_lesson)) {
-                foreach ($courses_for_lesson as $c_id) {
-                    // Get root lessons for this course (support ACF and plain postmeta)
-                    $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
-                    if (is_string($roots)) {
-                        $maybe = @unserialize($roots);
-                        if ($maybe !== false) {
-                            $roots = $maybe;
-                        }
-                    }
-                    if (empty($roots)) {
-                        $roots = array();
-                    }
-                    if (!is_array($roots)) {
-                        if (is_numeric($roots)) {
-                            $roots = array((int) $roots);
-                        } elseif (is_string($roots)) {
-                            $parts = preg_split('/\s*,\s*|\s+/u', trim($roots));
-                            $roots = array_map('intval', $parts);
-                        } else {
-                            $roots = array();
-                        }
-                    }
-
-                    $course_lessons = array();
-                    foreach ($roots as $r) {
-                        $course_lessons = array_merge($course_lessons, dfh_get_ordered_lesson_tree((int) $r));
-                    }
-                    $course_lessons = array_values(array_unique($course_lessons));
-
-                    if (!empty($course_lessons) && (int) end($course_lessons) === (int) $lesson_id) {
-                        $is_last_lesson = true;
-                        break;
-                    }
-                }
-            } else {
-                // Fall back to global adjacent calculation
-                $is_last_lesson = empty($adjacent['next']);
-            }
-
-            $button_label = $is_last_lesson ? 'Complete Course' : 'Next Lesson';
-            $button_class = $is_last_lesson ? 'button button--strong button--accent course-complete' : 'button button--strong button--accent next-lesson';
-
-            // Compute the label shown to the user when the lesson is already completed.
-            if ($is_completed) {
-                if ($is_last_lesson) {
-                    $display_button_label = 'Course Home';
-                    $button_class = 'button button--strong button--accent course-home';
-                } else {
-                    $display_button_label = 'Next Lesson';
-                }
-            } else {
-                $display_button_label = $button_label;
-            }
-            ?>
-
-            <div class="wrapper lesson-explore__section lesson-progression"
-                aria-describedby="lesson-progression__heading">
-                <h2 class="visually-hidden" id="progression-progress-heading">Proceed to the next step</h2>
-                <div class="lesson-progression__buttons container-type-inline-size">
+            <div class="wrapper lesson-progression">
+                <div class="cluster cluster--end">
                     <?php if ($adjacent['previous']): ?>
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
-                            class="button button--subtle button--responsive link-button prev-lesson">
-                            <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
+                            class="button button--subtle me-auto">
+                            <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false">
                                 <use href="#ArrowLeft" />
                             </svg>
-                            <span class="button__text">Previous Lesson</span>
+                            <span>Previous lesson</span>
                         </a>
                     <?php endif; ?>
-
-                    <?php
-                    // Choose an icon id for the progress button
-                    $complete_icon = $is_last_lesson ? '#Check' : '#ArrowRight';
-                    ?>
-                    <button id="dfh-complete-btn" data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
-                        data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_progress_nonce')); ?>"
-                        class="<?php echo esc_attr($button_class); ?>">
-                        <span class="progress-label"><?php echo esc_html($display_button_label); ?></span>
-                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
-                            <use href="<?php echo esc_attr($complete_icon); ?>" />
+                    <p class="small-text" role="status" id="dfh-complete-status"></p>
+                    <button type="button" id="dfh-complete-btn" class="button button--strong button--accent"
+                        data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
+                        data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_progress_nonce')); ?>">
+                        <span><?php echo esc_html($progress_label); ?></span>
+                        <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false">
+                            <use href="<?php echo esc_attr($progress_icon); ?>" />
+                        </svg>
+                        <svg class="icon spinner" width="1em" height="1em" aria-hidden="true" focusable="false">
+                            <use href="#LoaderArc" />
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
-
-
-    </article><!-- #post-<?php the_ID(); ?> -->
-
-    <aside id="course-progress" class="progress-panel course-progress" popover>
-        <div class="card card--scrollable card--sticky-header card--sticky-footer">
-            <?php
-            // Determine a course to display in the panel: prefer any already-found $course_id,
-            // otherwise check the current lesson and its ancestors for a course that lists them as roots.
-            $panel_course_id = isset($course_id) && $course_id ? $course_id : null;
-            if (empty($panel_course_id)) {
-                $ancestors = get_post_ancestors(get_the_ID());
-                array_unshift($ancestors, get_the_ID());
-
-                $all_courses = get_posts(array('post_type' => 'course', 'posts_per_page' => -1, 'fields' => 'ids'));
-                if (!empty($all_courses)) {
-                    foreach ($all_courses as $c_id) {
-                        $roots = function_exists('get_field') ? get_field('course_root_lessons', $c_id) : get_post_meta($c_id, 'course_root_lessons', true);
-                        if (is_string($roots)) {
-                            $maybe = @unserialize($roots);
-                            if ($maybe !== false)
-                                $roots = $maybe;
-                        }
-                        if (!empty($roots)) {
-                            foreach ($ancestors as $anc) {
-                                if (in_array($anc, (array) $roots)) {
-                                    $panel_course_id = $c_id;
-                                    break 2;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            ?>
-            <div class="card__content" tabindex="0" aria-label="Scrollable panel content">
-                <header class="card__header progress-panel__header">
-                    <a class="link link--plain inline gap-sm" href="<?php echo esc_url(home_url()); ?>">
-                        <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                            <use href="#Home" />
-                        </svg>
-                        <span>Courses home</span>
-                    </a>
-
-                    <button class="button button--plain syllabus-close" command="hide-popover"
-                        commandfor="course-progress" title="Close navigation">
-                        <svg class="icon icon--dir" width="32" height="32" aria-hidden="true">
-                            <use href="#Close" />
-                        </svg>
-                        <span class="visually-hidden">Close Navigation</span>
-                    </button>
-                </header>
-                <nav class="card__body progress-panel__course" aria-label="Course syllabus">
-
-                    <?php
-                    // Show the current Course title and link when available
-                    $display_course_id = !empty($panel_course_id) ? $panel_course_id : (!empty($course_id) ? $course_id : null);
-                    if ($display_course_id): ?>
-                        <h2 class="heading progress-panel__course-name"><a class="link link--plain"
-                                href="<?php echo esc_url(get_permalink($display_course_id)); ?>"><?php echo esc_html(get_the_title($display_course_id)); ?></a>
-                        </h2>
+    </article>
+    <dialog id="course-progress" class="dialog dialog--drawer" aria-labelledby="course-progress-title" closedby="any">
+        <article class="card">
+            <header class="card__header">
+                <h2 class="card__title heading" id="course-progress-title">
+                    <?php if ($course_id): ?>
+                        <a class="link link--plain"
+                            href="<?php echo esc_url(get_permalink($course_id)); ?>"><?php echo esc_html(get_the_title($course_id)); ?></a>
                     <?php else: ?>
-                        <h2 class="heading progress-panel__course-name">Course</h2>
+                        Course
                     <?php endif; ?>
-
-                    <?php
-                    $progress_roots = !empty($panel_course_id)
-                        ? (function_exists('get_field') ? get_field('course_root_lessons', $panel_course_id) : get_post_meta($panel_course_id, 'course_root_lessons', true))
-                        : array();
-                    if (!is_array($progress_roots)) {
-                        $progress_roots = empty($progress_roots) ? array() : array((int) $progress_roots);
-                    }
-
-                    $progress_lessons = array();
-                    if (empty($panel_course_id)) {
-                        $progress_lessons = dfh_get_ordered_lesson_tree(0);
-                    } else {
-                        foreach ($progress_roots as $progress_root) {
-                            $progress_root_id = is_object($progress_root) ? (int) $progress_root->ID : (int) $progress_root;
-                            if ($progress_root_id) {
-                                $progress_lessons[] = $progress_root_id;
-                                $progress_lessons = array_merge($progress_lessons, dfh_get_ordered_lesson_tree($progress_root_id));
-                            }
-                        }
-                    }
-                    $progress_lessons = array_values(array_unique($progress_lessons));
-                    $progress_completed = array_map('intval', dfh_get_completed_lessons());
-                    $progress_total = count($progress_lessons);
-                    $progress_count = count(array_intersect($progress_completed, $progress_lessons));
-                    $progress_percent = $progress_total > 0 ? round(($progress_count / $progress_total) * 100) : 0;
-                    ?>
-                    <div class="progress-panel__course-progress">
-                        <h3 class="progress-panel__course-progress-heading">Your progress:
-                            <?php echo esc_html($progress_percent); ?>% Complete
-                        </h3>
-                        <div class="progress-bar-container">
-                            <progress class="progress-bar" max="100"
-                                value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
-                        </div>
+                </h2>
+                <button type="button" class="button button--plain button--icon" commandfor="course-progress"
+                    command="close">
+                    <span class="sr-only">Close</span>
+                    <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
+                        <use href="#Close" />
+                    </svg>
+                </button>
+            </header>
+            <div class="card__body card__body--scrollable stack" tabindex="0" aria-labelledby="course-progress-title">
+                <div class="field">
+                    <div class="field__header">
+                        <label for="course-progress-bar" class="field__label label">Your progress</label>
+                        <span class="small-text"><?php echo esc_html($progress_percent); ?>% complete</span>
                     </div>
-
-                    <div class="lesson-list__container">
-                        <?php
-                        // If we have a course, get its roots; otherwise leave null to render top-level lessons
-                        $roots = null;
-                        if (!empty($course_id)) {
-                            $roots = function_exists('get_field') ? get_field('course_root_lessons', $course_id) : get_post_meta($course_id, 'course_root_lessons', true);
-                        }
-
-                        echo dfh_render_lesson_tree($roots, 1);
-                        ?>
-                    </div>
+                    <progress id="course-progress-bar" class="progress" max="100"
+                        value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
+                </div>
+                <nav class="navigation-tree navigation-tree--ruled navigation-tree--compact" aria-label="Lessons">
+                    <?php echo dfh_render_lesson_tree($course_id ? dfh_get_course_root_ids($course_id) : null); ?>
                 </nav>
-                <footer class="card__footer progress-panel__footer">
-                    <a href="https://designforhumans.blog" class="progress-panel__brand brand">
-                        Design for Humans
-                    </a>
-                </footer>
             </div>
-        </div>
-    </aside>
-</main><!-- #primary -->
-
-<script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
-<!-- Tiny Inline JS for AJAX Progression -->
+            <footer class="card__footer cluster cluster--between">
+                <a class="link link--plain inline gap-sm" href="<?php echo esc_url(home_url()); ?>">
+                    <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
+                        <use href="#Home" />
+                    </svg>
+                    <span>Courses home</span>
+                </a>
+                <a href="https://designforhumans.blog" class="brand"><span class="brand__name">Design For
+                        Humans</span></a>
+            </footer>
+        </article>
+    </dialog>
+    <div class="toast-stack" popover="manual" role="status" aria-label="Notifications" id="dfh-toasts"></div>
+</main>
+<?php if ($playback_id): ?>
+    <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+<?php endif; ?>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const videoStickToggle = document.getElementById('video-stick-toggle');
+    (() => {
+        const ajaxUrl = <?php echo wp_json_encode(admin_url('admin-ajax.php')); ?>;
+        const toasts = document.getElementById('dfh-toasts');
+        toasts.showPopover();
 
-        if (videoStickToggle) {
-            videoStickToggle.addEventListener('click', function () {
-                const makeSticky = videoStickToggle.getAttribute('aria-pressed') !== 'true';
-                const label = videoStickToggle.querySelector('.visually-hidden');
-                const use = videoStickToggle.querySelector('use');
+        // A Toast: success ones go after 6 seconds unless hovered or focused;
+        // errors stay until dismissed (WCAG 2.2.1)
+        const toast = (title, intent = 'success') => {
+            const item = document.createElement('div');
+            item.className = `banner banner--${intent} banner--round toast`;
+            item.innerHTML = `<span class="icon-box" aria-hidden="true"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#${intent === 'danger' ? 'Error' : 'Check'}"/></svg></span>
+                <div class="banner__body"><p class="text font-bold"></p></div>
+                <button type="button" class="button button--icon banner__action"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Close"/></svg><span class="sr-only">Dismiss</span></button>`;
+            item.querySelector('p').textContent = title;
+            item.querySelector('button').addEventListener('click', () => item.remove());
+            toasts.append(item);
+            if (intent === 'danger') return;
+            const close = () => { if (!item.matches(':hover, :focus-within')) item.remove(); else setTimeout(close, 1000); };
+            setTimeout(close, 6000);
+        };
 
-                videoStickToggle.classList.toggle('video-stick', makeSticky);
-                videoStickToggle.classList.toggle('video-unstick', !makeSticky);
-                videoStickToggle.setAttribute('aria-pressed', String(makeSticky));
+        const post = (data) => fetch(ajaxUrl, { method: 'POST', body: new URLSearchParams(data) }).then((r) => r.json());
 
-                if (label) label.textContent = makeSticky ? 'Unstick video' : 'Stick video';
-                if (use) use.setAttribute('href', makeSticky ? '#Lock' : '#Unlock');
-            });
-        }
+        // Busy: keep the Button's focus and name, block a second press
+        const busy = (button, on) => {
+            button.classList.toggle('is-busy', on);
+            on ? button.setAttribute('aria-disabled', 'true') : button.removeAttribute('aria-disabled');
+        };
 
-        const btn = document.getElementById('dfh-complete-btn');
-        if (!btn) return;
-
-        btn.addEventListener('click', function () {
-            const lessonId = this.getAttribute('data-lesson-id');
-            const nonce = this.getAttribute('data-nonce');
-
-            btn.disabled = true;
-            const progressLabel = btn.querySelector('.progress-label');
-            if (progressLabel) progressLabel.textContent = 'Saving...';
-
-            fetch('<?php echo esc_url(admin_url('admin-ajax.php')); ?>', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                body: new URLSearchParams({
-                    action: 'dfh_mark_complete',
-                    lesson_id: lessonId,
-                    nonce: nonce
+        const complete = document.getElementById('dfh-complete-btn');
+        const completeStatus = document.getElementById('dfh-complete-status');
+        complete?.addEventListener('click', () => {
+            if (complete.classList.contains('is-busy')) return;
+            busy(complete, true);
+            completeStatus.textContent = 'Saving your progress…';
+            post({ action: 'dfh_mark_complete', lesson_id: complete.dataset.lessonId, nonce: complete.dataset.nonce })
+                .then((data) => {
+                    if (!data.success || !data.data.next_url) throw new Error();
+                    completeStatus.textContent = 'Saved. Opening the next page…';
+                    window.location.href = data.data.next_url;
                 })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success && data.data.next_url) {
-                        window.location.href = data.data.next_url;
-                    } else {
-                        alert('Error updating progress. Please try again.');
-                        btn.disabled = false;
-                        if (progressLabel) progressLabel.textContent = '<?php echo esc_js($display_button_label); ?>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    btn.disabled = false;
-                    btn.textContent = 'Next lesson';
+                .catch(() => {
+                    busy(complete, false);
+                    completeStatus.textContent = 'Your progress wasn’t saved. Check your connection and try again.';
                 });
         });
 
-        const bookmarkBtn = document.getElementById('dfh-bookmark-btn');
-        if (!bookmarkBtn) return;
-
-        bookmarkBtn.addEventListener('click', function () {
-            const lessonId = this.getAttribute('data-lesson-id');
-            const nonce = this.getAttribute('data-nonce');
-
-            // Optimistic UI toggle effect
-            const isCurrentlyBookmarked = this.classList.contains('active');
-
-            fetch('<?php echo esc_url(admin_url('admin-ajax.php')); ?>', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                body: new URLSearchParams({
-                    action: 'dfh_toggle_bookmark',
-                    lesson_id: lessonId,
-                    nonce: nonce
+        const bookmark = document.getElementById('dfh-bookmark-btn');
+        bookmark?.addEventListener('click', () => {
+            if (bookmark.classList.contains('is-busy')) return;
+            busy(bookmark, true);
+            post({ action: 'dfh_toggle_bookmark', lesson_id: bookmark.dataset.lessonId, nonce: bookmark.dataset.nonce })
+                .then((data) => {
+                    if (!data.success) throw new Error();
+                    const on = Boolean(data.data.is_bookmarked);
+                    bookmark.setAttribute('aria-pressed', String(on));
+                    toast(on ? 'Lesson bookmarked' : 'Bookmark removed');
                 })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const label = bookmarkBtn.querySelector('.bookmark-label');
-                        const useEl = bookmarkBtn.querySelector('use');
-                        if (data.data.is_bookmarked) {
-                            if (label) label.textContent = 'Bookmarked';
-                            bookmarkBtn.classList.add('is-active');
-                            if (useEl) useEl.setAttribute('href', '#BookmarkFilled');
-                        } else {
-                            if (label) label.textContent = 'Bookmark Lesson';
-                            bookmarkBtn.classList.remove('is-active');
-                            if (useEl) useEl.setAttribute('href', '#Bookmark');
-                        }
-                    } else {
-                        alert('Could not update bookmark.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                .catch(() => toast('The bookmark wasn’t saved. Try again.', 'danger'))
+                .finally(() => busy(bookmark, false));
         });
-    });
+    })();
 </script>
-
 <?php
 get_footer();

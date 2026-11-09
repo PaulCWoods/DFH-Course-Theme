@@ -1,6 +1,8 @@
-<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1"
-    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="LoaderArc" viewBox="0 0 22 22" fill="currentColor" data-name="Layer 1">
+            <path d="M2 11H0C0 4.93 4.93 0 11 0v2c-4.96 0-9 4.04-9 9z"></path>
+        </symbol>
         <symbol id="AlignCenter" viewBox="0 0 22 22" fill="currentColor" data-name="Layer 1">
             <rect width="18" height="2" x="2" y="3"></rect>
             <rect width="12" height="2" x="5" y="10"></rect>
