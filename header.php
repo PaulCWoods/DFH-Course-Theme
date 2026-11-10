@@ -31,7 +31,8 @@
 <?php endforeach; ?>
     <link rel="stylesheet" href="<?php echo esc_url(dfh_shared_css()); ?>">
 
-    <link rel="stylesheet" href="<?php echo esc_url(get_stylesheet_directory_uri() . '/css/dfh-course.css'); ?>">
+    <?php /* The file's modified time, so a rebuilt file isn't served from a cache */ ?>
+    <link rel="stylesheet" href="<?php echo esc_url(get_stylesheet_directory_uri() . '/css/dfh-course.css?v=' . filemtime(get_stylesheet_directory() . '/css/dfh-course.css')); ?>">
 
     <!-- Modern scalable SVG favicon with dark mode support -->
     <link rel="icon" type="image/svg+xml"
