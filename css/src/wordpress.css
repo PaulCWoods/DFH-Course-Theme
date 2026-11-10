@@ -1,0 +1,32 @@
+/* WordPress classes
+   -----------------------------------------------------------------------------
+   WordPress's own front-end styles are dequeued (functions.php). These are the
+   classes its output and WooCommerce's still rely on, in the reset layer so
+   the library's components and utilities win over them. */
+
+/* Visually hidden text in WordPress and WooCommerce templates */
+.screen-reader-text:not(:focus, :focus-within) {
+    block-size: 1px;
+    border: 0;
+    clip-path: inset(50%);
+    inline-size: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Text alignment chosen in the editor */
+.has-text-align-left {
+    text-align: start;
+}
+
+.has-text-align-center,
+.aligncenter {
+    text-align: center;
+}
+
+.has-text-align-right {
+    text-align: end;
+}

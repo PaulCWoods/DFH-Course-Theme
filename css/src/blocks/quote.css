@@ -1,4 +1,4 @@
-// Quote (core/quote): the "+bold" style set in the editor's Advanced classes
+/* Quote (core/quote): the "+bold" style set in the editor's Advanced classes */
 .wp-block-quote.\+bold {
     background-color: var(--surface-card);
     border: 0;

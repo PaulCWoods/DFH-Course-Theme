@@ -1,13 +1,13 @@
-// WooCommerce
-// -----------------------------------------------------------------------------
-// What WooCommerce's own markup still needs: its show-password button, the
-// forms and order screens it generates, and the checkout blocks' fields.
-// My account's layout, navigation and addresses are the library's
-// (woocommerce/myaccount/).
+/* WooCommerce
+   -----------------------------------------------------------------------------
+   What WooCommerce's own markup still needs: its show-password button, the
+   forms and order screens it generates, and the checkout blocks' fields.
+   My account's layout, navigation and addresses are the library's
+   (woocommerce/myaccount/). */
 
-// -----------------------------------------------------------------------------
-// Password fields: WooCommerce's script wraps each in .password-input and
-// adds a show-password button at the end
+/* -----------------------------------------------------------------------------
+   Password fields: WooCommerce's script wraps each in .password-input and
+   adds a show-password button at the end */
 .password-input {
     display: grid;
     position: relative;
@@ -31,28 +31,27 @@
     }
 }
 
-// -----------------------------------------------------------------------------
-// Form styles: the account forms use the library's Field markup
-// (woocommerce/myaccount/); these cover WooCommerce's other forms
+/* -----------------------------------------------------------------------------
+   Form styles: the account forms use the library's Field markup
+   (woocommerce/myaccount/); these cover WooCommerce's other forms */
 
-// Checkbox/radio label styling
+/* Checkbox/radio label styling */
 .woocommerce-form__label-for-checkbox {
     align-items: center;
     display: flex;
     gap: 0.5rem;
 }
 
+/* -----------------------------------------------------------------------------
+   Notifications and messages */
 
-// -----------------------------------------------------------------------------
-// Notifications and messages
-
-// WooCommerce's notices are Banners (woocommerce/notices); they sit in the
-// flow above what they're about
+/* WooCommerce's notices are Banners (woocommerce/notices); they sit in the
+   flow above what they're about */
 .banner:is(.woocommerce-info, .woocommerce-message, .woocommerce-error) {
     margin-block-end: var(--spacing-breathe);
 }
 
-// The order-received notice on the thank-you page
+/* The order-received notice on the thank-you page */
 .woocommerce-notice {
     background-color: var(--surface-success);
     border: var(--border-width-thin) dashed var(--border-color-quiet);
@@ -62,9 +61,8 @@
     padding: var(--spacing);
 }
 
-
-// -----------------------------------------------------------------------------
-// Order styles
+/* -----------------------------------------------------------------------------
+   Order styles */
 
 .woocommerce-order {
     section {
@@ -74,14 +72,14 @@
 
     }
 
-    // Address block styling
+    /* Address block styling */
     address {
         background-color: var(--surface-card);
         padding: var(--spacing);
     }
 }
 
-// Order summary/overview list
+/* Order summary/overview list */
 .woocommerce-order-overview {
     background-color: var(--surface-card);
     list-style: none;
@@ -102,7 +100,7 @@
             word-break: break-all;
         }
 
-        // Divider between list items
+        /* Divider between list items */
         +li {
             border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
             margin-block-start: calc(var(--spacing) / 2);
@@ -117,8 +115,8 @@
     }
 }
 
-// The library's Field marks optional fields, as WooCommerce does too, so
-// its required asterisks go (the controls keep aria-required)
+/* The library's Field marks optional fields, as WooCommerce does too, so
+   its required asterisks go (the controls keep aria-required) */
 .field .required {
     display: none;
 }
@@ -140,17 +138,17 @@
     background-color: var(--input-background-color, var(--surface-card, Canvas));
     color: inherit;
 }
-// An order's number, date and status in its summary line: bold, not marked
+/* An order's number, date and status in its summary line: bold, not marked */
 mark:is(.order-number, .order-date, .order-status) {
     background-color: transparent;
     color: inherit;
     font-weight: var(--body-strong-font-weight, bold);
 }
 
-// -----------------------------------------------------------------------------
-// Stripe's parts in a payment box, which is a Stack
-// (woocommerce/checkout/payment-method.php): the saved-card list with no cards
-// (WooCommerce's script hides it too) and an empty error box take no gap
+/* -----------------------------------------------------------------------------
+   Stripe's parts in a payment box, which is a Stack
+   (woocommerce/checkout/payment-method.php): the saved-card list with no cards
+   (WooCommerce's script hides it too) and an empty error box take no gap */
 .payment_box :is(.wc-saved-payment-methods[data-count="0"], .stripe-source-errors:empty) {
     display: none;
 }

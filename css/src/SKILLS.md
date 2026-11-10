@@ -1,5 +1,5 @@
 
-# SCSS Maintenance Notes
+# CSS maintenance notes
 
 ## File organization
 
@@ -14,7 +14,7 @@
 - Start each utility or component file with a short title comment, an underline made of hyphens, and a brief description; include a usage example when helpful.
 - Order declarations consistently: layout/display, sizing, spacing, typography, color, positioning, then interaction/animation details where practical.
 - Use logical properties such as `inline-size`, `block-size`, `margin-block`, and `padding-inline` for writing-mode and responsive safety.
-- Prefer existing design tokens (`var(--...)`, `var(--spacing-...)`, and Sass variables) over new literal values.
+- Prefer existing design tokens (`var(--...)`, `var(--spacing-...)`) over new literal values.
 - Keep comments short and explain constraints, browser fallbacks, specificity decisions, or non-obvious layout math rather than narrating declarations.
 
 ## Techniques used here
@@ -25,4 +25,4 @@
 - Use logical sizing and safe-area insets for resilient mobile layouts.
 - Use grid for the lesson/content-aside relationship and flex for one-dimensional controls and stacked regions.
 - Use stable aspect ratios and overflow rules for embedded media and sticky regions.
-- Compile the Sass entrypoint after edits, then inspect the generated diff for unintended selector or value changes.
+- Build with `npm run build:css` after edits (Lightning CSS bundles css/src/index.css into css/dfh-course.css), then check the result in the browser.

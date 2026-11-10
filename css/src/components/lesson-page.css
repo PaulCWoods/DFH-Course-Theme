@@ -1,12 +1,10 @@
-@use "../theme/sassvars" as var;
+/* Lesson page
+   -----------------------------------------------------------------------------
+   Layout and component styles for the lesson page. Sections follow the page
+   from shell to header, content, and supporting areas. */
 
-// Lesson page
-// -----------------------------------------------------------------------------
-// Layout and component styles for the lesson page. Sections follow the page
-// from shell to header, content, and supporting areas.
-
-// -----------------------------------------------------------------------------
-// Page shell
+/* -----------------------------------------------------------------------------
+   Page shell */
 .site-main.lesson-page {
     padding: 0;
 }
@@ -15,18 +13,18 @@
     min-block-size: 100%;
 }
 
-// -----------------------------------------------------------------------------
-// Lesson navigation header
+/* -----------------------------------------------------------------------------
+   Lesson navigation header */
 
 .lesson-head__container {
     background-color: var(--surface-darker);
-    min-inline-size: 1px; // Needed to let the navigation link overflow ellipsis without breaking the layout.
+    min-inline-size: 1px; /* Needed to let the navigation link overflow ellipsis without breaking the layout. */
 
     @media screen {
         z-index: var(--site-header-z-index);
     }
 
-    @media screen and (height > #{var.$bp-lesson}) {
+    @media screen and (height > 60em) {
         container-type: scroll-state;
         inset-block-start: 0;
         position: sticky;
@@ -51,7 +49,7 @@
 }
 
 .lesson-head__controls {
-    // Keep header actions together without allowing them to shrink.
+    /* Keep header actions together without allowing them to shrink. */
     align-items: center;
     display: flex;
     flex-shrink: 0;
@@ -87,7 +85,7 @@
     text-overflow: ellipsis;
 }
 
-// Without a lesson number (the sample), the titles start at the bar's edge
+/* Without a lesson number (the sample), the titles start at the bar's edge */
 .lesson-head__nav:first-child > * {
     padding-inline-start: 0;
 }
@@ -117,7 +115,7 @@
     }
 }
 
-// The parent link scrolls away and the current lesson takes its place
+/* The parent link scrolls away and the current lesson takes its place */
 @supports (animation-timeline: scroll()) {
     @media (prefers-reduced-motion: no-preference) {
         @keyframes --hide-parent {
@@ -148,8 +146,8 @@
     }
 }
 
-// Scroll-driven effects are progressive enhancements; the static header
-// remains usable when animation-timeline is unavailable.
+/* Scroll-driven effects are progressive enhancements; the static header
+   remains usable when animation-timeline is unavailable. */
 @supports (animation-timeline: scroll()) {
 
     @media (prefers-reduced-motion: no-preference) {
@@ -182,14 +180,14 @@
     }
 }
 
-// Shared dark surface for the navigation, title, and video regions.
+/* Shared dark surface for the navigation, title, and video regions. */
 :is(.lesson-head, .lesson-header, .lesson-video) {
     background-color: var(--surface-darker);
     color: var(--foreground-on-dark);
 }
 
-// -----------------------------------------------------------------------------
-// Lesson title and metadata
+/* -----------------------------------------------------------------------------
+   Lesson title and metadata */
 
 :where(.lesson-header,
     .lesson-content,
@@ -204,20 +202,20 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    margin-block: 0; // keep title snug to content
+    margin-block: 0; /* keep title snug to content */
 }
 
-// -----------------------------------------------------------------------------
-// Video player and mobile pinning
+/* -----------------------------------------------------------------------------
+   Video player and mobile pinning */
 
 .lesson-video {
     padding-inline-start: calc(0px + env(safe-area-inset-left));
     padding-inline-end: calc(0px + env(safe-area-inset-left));
 
-    // Pinning is limited to the narrow, touch layout where the toggle exposes
-    // the sticky-player state.
+    /* Pinning is limited to the narrow, touch layout where the toggle exposes
+       the sticky-player state. */
     :root.video-stick & {
-        @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
+        @media (24em < width < 60em) and (aspect-ratio < 1/1) and (pointer: coarse) {
             position: sticky;
             inset-block-start: var(--header-compact-bar-min-size, var(--spacing-48));
             z-index: 1;
@@ -226,10 +224,10 @@
 }
 
 .lesson-video__toggle.button {
-    // The control is only useful where the player can become sticky.
+    /* The control is only useful where the player can become sticky. */
     display: none;
 
-    @media (24em < width < #{var.$bp-lesson}) and (aspect-ratio < 1/1) and (pointer: coarse) {
+    @media (24em < width < 60em) and (aspect-ratio < 1/1) and (pointer: coarse) {
         :root:has(.lesson-video) & {
             display: inline-flex;
         }
@@ -242,11 +240,11 @@
     overflow: hidden;
 }
 
-// -----------------------------------------------------------------------------
-// Lesson content layout
+/* -----------------------------------------------------------------------------
+   Lesson content layout */
 
-// Lesson content: the sample's overlay and the lesson's own content classes.
-// WordPress's blocks are in scss/blocks.
+/* Lesson content: the sample's overlay and the lesson's own content classes.
+   WordPress's blocks are in scss/blocks. */
 .lesson-body {
 
     &:empty {
@@ -276,7 +274,6 @@
             }
         }
     }
-
 
     ul.check-list {
         li::marker {
@@ -332,40 +329,43 @@
 
 }
 
+/* -----------------------------------------------------------------------------
+   Aside: bookmark and resources */
 
-// -----------------------------------------------------------------------------
-// Aside: bookmark and resources
-
-// The bookmark sits at the end of the column; on narrow screens the aside
-// follows the lesson, and the bookmark goes last.
+/* The bookmark sits at the end of the column; on narrow screens the aside
+   follows the lesson, and the bookmark goes last. */
 .lesson-bookmark {
     order: 4;
     text-align: end;
 
-    @media screen and (width > #{var.$bp-lesson}) {
+    @media screen and (width > 60em) {
         order: 0;
     }
 }
 
-// The column stays in view beside a long lesson. The negative margin keeps
-// room for focus rings while the visible column stays aligned.
+/* The column stays in view beside a long lesson (on screen: in print it
+   follows the lesson). The negative margin keeps room for focus rings while
+   the visible column stays aligned. */
 .lesson-aside {
     align-self: start;
-    inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-64)) + var(--spacing));
     margin: calc(var(--focus-ring-clearance) * -1);
     padding: var(--focus-ring-clearance);
-    position: sticky;
     reading-flow: flex-visual;
 
-    @media screen and (width > #{var.$bp-lesson}) {
-        // A tall column scrolls rather than push the lesson out of view.
+    @media screen {
+        inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-64)) + var(--spacing));
+        position: sticky;
+    }
+
+    @media screen and (width > 60em) {
+        /* A tall column scrolls rather than push the lesson out of view. */
         max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-64)) - var(--spacing) * 2);
         overflow: auto;
     }
 }
 
-// -----------------------------------------------------------------------------
-// Explore area: child lessons and progression
+/* -----------------------------------------------------------------------------
+   Explore area: child lessons and progression */
 
 .lesson-explore {
     --gap: calc(var(--spacing-cushion) * 2);

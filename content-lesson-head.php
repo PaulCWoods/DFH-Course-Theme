@@ -13,7 +13,7 @@ $playback_id = $args['playback_id'] ?? '';
 <a href="#main" class="skip-link">Skip to main content</a>
 <header class="header header--sticky max-md:header--compact lesson-head__container">
     <div class="lesson-head header__bar">
-        <div class="reading-progress color-scheme-dark" aria-hidden="true"></div>
+        <div class="reading-progress color-scheme-dark print:hide" aria-hidden="true"></div>
         <div class="lesson-head__inner">
             <?php if ($code): ?>
                 <span class="lesson-head__code-badge"><span class="sr-only">Lesson </span><?php echo esc_html($code); ?></span>
@@ -22,7 +22,7 @@ $playback_id = $args['playback_id'] ?? '';
                 <a class="lesson-head__nav-parent link link--plain" href="<?php echo esc_url($args['up_url']); ?>"><?php echo esc_html($args['up_title']); ?></a>
                 <span class="lesson-head__nav-current" aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
             </nav>
-            <div class="lesson-head__controls max-lg:hide-labels">
+            <div class="lesson-head__controls max-lg:hide-labels print:hide">
                 <?php if ($playback_id): ?>
                     <button type="button" id="video-stick-toggle" class="button button--subtle button--icon lesson-video__toggle"
                         aria-controls="lesson-video-player" aria-pressed="false">

@@ -1,4 +1,4 @@
-// Embed (core/embed): a video or other iframe at the ratio WordPress gives it
+/* Embed (core/embed): a video or other iframe at the ratio WordPress gives it */
 .wp-embed-aspect-16-9 {
     --embed-aspect-ratio: 16/9;
 }

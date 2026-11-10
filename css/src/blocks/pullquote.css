@@ -1,4 +1,4 @@
-// Pull quote (core/pullquote): a quote lifted out of the text, on a tint
+/* Pull quote (core/pullquote): a quote lifted out of the text, on a tint */
 .wp-block-pullquote {
     background-color: var(--surface-translucent);
     padding: var(--spacing-cushion);

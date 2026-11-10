@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Design For Humans course: the course's own CSS
+   --------------------------------------------------------------------------
+   The library loads first, from components.designforhumans.blog/css/<version>/:
+   dfh-components.css, themes/dfh.css, then the course sub-brands (header.php),
+   then DFH Shared Styles. This file holds only what the course adds, appended
+   to the library's cascade layers:
+   - reset: the WordPress classes its output still relies on
+   - tokens: the course's own tokens
+   - site: its components, the layer the library leaves for them: after its
+     components and layout primitives, and under its utilities (library
+     0.4.0 and later)
+   blocks/ holds the WordPress blocks the library has no equivalent for.
+   WordPress's own block styles are off on the front end (functions.php), and
+   lesson content sits in .prose, which styles headings, lists, figures,
+   code, quotes and tables, so each file holds only what its block adds, with
+   WordPress's class as the selector.
+   Built by `npm run build:css` into css/dfh-course.css.
+   ========================================================================== */
+
+@import url("wordpress.css") layer(reset);
+@import url("tokens.css") layer(tokens);
+
+@import url("components/form.css") layer(site);
+@import url("components/lesson-page.css") layer(site);
+@import url("components/login-page.css") layer(site);
+@import url("components/woocommerce.css") layer(site);
+
+@import url("blocks/codepen.css") layer(site);
+@import url("blocks/embed.css") layer(site);
+@import url("blocks/footnotes.css") layer(site);
+@import url("blocks/pullquote.css") layer(site);
+@import url("blocks/quote.css") layer(site);

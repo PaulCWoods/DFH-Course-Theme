@@ -1,0 +1,11 @@
+{
+  "name": "dfh-course-theme",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:css": "node scripts/build-css.mjs"
+  },
+  "devDependencies": {
+    "lightningcss": "^1.33.0"
+  }
+}

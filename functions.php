@@ -663,9 +663,9 @@ function dfh_render_course_plan($roots = null, $active_lesson = null)
             $title .= '<span class="sr-only">, locked</span>';
         }
         $frame = dfh_lesson_started($root_id, $context) ? ' border bg-accent border-accent' : ' border border-muted';
-        $output .= '<li class="card ' . esc_attr(dfh_lesson_theme_class(dfh_get_lesson_hierarchy_number($root_id)) . $frame) . '">'
+        $output .= '<li class="card card--ruled ' . esc_attr(dfh_lesson_theme_class(dfh_get_lesson_hierarchy_number($root_id)) . $frame) . '">'
             . '<header class="card__header"><h3 class="card__title heading">' . $title . '</h3>' . dfh_lesson_status_html($state) . '</header>'
-            . '<div class="card__body"><div class="navigation-tree navigation-tree--ruled navigation-tree--compact">'
+            . '<div class="card__body"><div class="navigation-tree navigation-tree--compact">'
             . dfh_render_lesson_list(dfh_get_lesson_children($root_id), $context)
             . '</div></div></li>';
     }
@@ -1486,7 +1486,7 @@ add_action('wp_enqueue_scripts', 'dfh_remove_select_woo', 100);
 /**
  * WordPress's own front-end styles. It prints them outside any cascade layer,
  * so they beat every rule in the library's layers whatever its specificity.
- * The course styles its content with the library instead; scss/_wordpress.scss
+ * The course styles its content with the library instead; css/src/wordpress.css
  * covers the WordPress classes that still need styling. The editor keeps them.
  */
 function dfh_remove_wordpress_styles()
@@ -1647,6 +1647,10 @@ add_filter('woocommerce_checkout_cart_item_quantity', '__return_empty_string');
 
 // Nothing about a course needs a note with the order
 add_filter('woocommerce_enable_order_notes_field', '__return_false');
+
+// The shop lists a handful of courses: no count or sort menu above them
+remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
 
 // The footnotes list takes the library's small text
 function dfh_footnotes_small_text($content)

@@ -4,7 +4,7 @@
  *
  * The cart and checkout (their pages hold WooCommerce's classic shortcodes;
  * the overrides in woocommerce/cart and woocommerce/checkout lay them out),
- * and the order received page after checkout.
+ * the order received page after checkout, and the shop (page-shop.php).
  */
 get_header();
 get_template_part('content', 'course-header');

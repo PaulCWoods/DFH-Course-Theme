@@ -128,7 +128,7 @@ get_header();
             <div class="wrapper article__main">
                 <div class="lesson-body article__body prose font-sizing-fluid"><?php the_content(); ?></div>
                 <aside class="lesson-aside article__aside stack gap-cushion" aria-label="Lesson resources">
-                    <div class="lesson-bookmark">
+                    <div class="lesson-bookmark print:hide">
                         <button type="button" id="dfh-bookmark-btn" class="button"
                             aria-pressed="<?php echo $is_bookmarked ? 'true' : 'false'; ?>"
                             data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
@@ -149,7 +149,7 @@ get_header();
                 </aside>
             </div>
         </div>
-        <div class="lesson-explore stack">
+        <div class="lesson-explore stack print:hide">
             <?php
             $children_html = dfh_render_lesson_children($lesson_id);
             if ($children_html): ?>
@@ -216,7 +216,7 @@ get_header();
                     <progress id="course-progress-bar" class="progress" max="100"
                         value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
                 </div>
-                <nav class="navigation-tree navigation-tree--ruled navigation-tree--compact" aria-label="Lessons">
+                <nav class="navigation-tree navigation-tree--compact" aria-label="Lessons">
                     <?php echo dfh_render_lesson_tree($course_id ? dfh_get_course_root_ids($course_id) : null); ?>
                 </nav>
             </div>

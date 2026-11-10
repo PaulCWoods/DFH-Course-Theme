@@ -1,5 +1,5 @@
-// WooCommerce's login form (My account, checkout), until the WooCommerce
-// pages are rebuilt
+/* WooCommerce's login form (My account, checkout), until the WooCommerce
+   pages are rebuilt */
 .woocommerce-form.login {
     background-color: var(--surface-translucent);
     display: flex;
