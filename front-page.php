@@ -102,8 +102,10 @@ get_header();
                                         <h3 class="card__title heading"><a class="link link--plain link--stretched"
                                                 href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                         <?php if (!empty($completed_courses[$course_id])): ?>
-                                            <span class="status status--plain status--success"><span
-                                                    class="status__text">Complete</span></span>
+                                            <span class="status status--success"><svg class="icon" width="1em" height="1em"
+                                                    aria-hidden="true" focusable="false">
+                                                    <use href="#Check" />
+                                                </svg><span class="status__text">Complete</span></span>
                                         <?php elseif ($user_id && dfh_user_has_course_access($user_id, $course_id)): ?>
                                             <span class="status status--plain status--accent"><span
                                                     class="status__text">Enrolled</span></span>

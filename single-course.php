@@ -128,7 +128,10 @@ get_template_part('content', 'course-header');
                     </form>
 
                 <?php elseif ('completed' === $active_lesson_status): ?>
-                    <p class="status status--plain status--success"><span class="status__text">Complete</span></p>
+                    <p class="status status--plain status--success"><svg class="icon" width="1em" height="1em"
+                            aria-hidden="true" focusable="false">
+                            <use href="#Check" />
+                        </svg><span class="status__text">Complete</span></p>
                     <h2 id="course-dynamic-info" class="heading">You've finished the course <span
                             aria-hidden="true">🎉</span></h2>
                     <p class="text">Congratulations: you've completed every lesson.</p>

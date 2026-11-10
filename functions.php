@@ -367,7 +367,7 @@ if (function_exists('acf_add_local_field_group')) {
  */
 function dfh_library_css($file)
 {
-    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.5.1';
+    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.5.2';
     return rtrim($base, '/') . '/' . $file;
 }
 
@@ -378,7 +378,7 @@ function dfh_library_css($file)
  */
 function dfh_shared_css()
 {
-    return defined('DFH_SHARED_CSS') ? DFH_SHARED_CSS : 'https://cdn.jsdelivr.net/gh/PaulCWoods/dfh-shared-styles@0.5.0/dist/dfh-site.css';
+    return defined('DFH_SHARED_CSS') ? DFH_SHARED_CSS : 'https://cdn.jsdelivr.net/gh/PaulCWoods/dfh-shared-styles@0.5.1/dist/dfh-site.css';
 }
 
 /**
@@ -557,7 +557,7 @@ function dfh_lesson_started($lesson_id, $context)
 function dfh_lesson_status_html($state)
 {
     $statuses = array(
-        'complete' => '<span class="status status--plain status--success"><span class="status__text">Complete</span></span>',
+        'complete' => '<span class="status status--plain status--success"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Check" /></svg><span class="status__text">Complete</span></span>',
         'in-progress' => '<span class="status status--plain status--accent"><span class="status__text">In progress</span></span>',
     );
     return $statuses[$state] ?? '';
@@ -602,14 +602,18 @@ function dfh_get_lesson_children($parent_id)
     ));
 }
 
-/* An <ol> of lessons, each with its own children nested inside it */
-function dfh_render_lesson_list($lesson_ids, $context)
+/* An <ol> of lessons, each with its own children nested inside it, and a
+   Divider between them when $divided */
+function dfh_render_lesson_list($lesson_ids, $context, $divided = false)
 {
     if (empty($lesson_ids)) {
         return '';
     }
     $output = '<ol>';
-    foreach ($lesson_ids as $lesson_id) {
+    foreach ($lesson_ids as $i => $lesson_id) {
+        if ($divided && $i > 0) {
+            $output .= '<li role="separator" class="divider"></li>';
+        }
         $output .= '<li>' . dfh_render_lesson_item($lesson_id, $context)
             . dfh_render_lesson_list(dfh_get_lesson_children($lesson_id), $context) . '</li>';
     }
@@ -642,7 +646,7 @@ function dfh_get_root_lesson_ids($roots)
 
 function dfh_render_lesson_tree($roots = null, $active_lesson = null)
 {
-    return dfh_render_lesson_list(dfh_get_root_lesson_ids($roots), dfh_lesson_tree_context($active_lesson));
+    return dfh_render_lesson_list(dfh_get_root_lesson_ids($roots), dfh_lesson_tree_context($active_lesson), true);
 }
 
 /**

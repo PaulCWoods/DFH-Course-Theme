@@ -119,7 +119,10 @@ get_header();
                     <p class="small-heading"><?php echo esc_html($lesson_subtitle); ?></p>
                 <?php endif; ?>
                 <?php if ($is_completed): ?>
-                    <p class="status status--plain status--success"><span class="status__text">Complete</span></p>
+                    <p class="status status--plain status--success"><svg class="icon" width="1em" height="1em"
+                            aria-hidden="true" focusable="false">
+                            <use href="#Check" />
+                        </svg><span class="status__text">Complete</span></p>
                 <?php endif; ?>
             </div>
         </header>
@@ -212,7 +215,7 @@ get_header();
                         <label for="course-progress-bar" class="field__label label">Your progress</label>
                         <span class="small-text"><?php echo esc_html($progress_percent); ?>% complete</span>
                     </div>
-                    <progress id="course-progress-bar" class="progress" max="100"
+                    <progress id="course-progress-bar" class="progress progress--sm" max="100"
                         value="<?php echo esc_attr($progress_percent); ?>"><?php echo esc_html($progress_percent); ?>%</progress>
                 </div>
                 <nav class="navigation-tree navigation-tree--compact" aria-label="Lessons">

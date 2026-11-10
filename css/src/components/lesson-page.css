@@ -81,12 +81,6 @@
 .lesson-head__nav-parent {
   opacity: 1;
   transform: translateY(0);
-
-  @supports (animation-timeline: scroll()) {
-    animation: --hide-parent linear both;
-    animation-timeline: scroll(root block);
-    animation-range: 4rem 8rem;
-  }
 }
 
 .lesson-head__nav-current {
@@ -94,17 +88,23 @@
   position: absolute;
   transform: translateY(50%);
   pointer-events: none;
-
-  @supports (animation-timeline: scroll()) {
-    animation: --show-current linear both;
-    animation-timeline: scroll(root block);
-    animation-range: calc(4rem + var(--spacing-cushion))
-      calc(8rem + var(--spacing-cushion));
-  }
 }
 
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
+    .lesson-head__nav-parent {
+      animation: --hide-parent linear both;
+    }
+
+    .lesson-head__nav-current {
+      animation: --show-current linear both;
+    }
+
+    :is(.lesson-head__nav-parent, .lesson-head__nav-current) {
+      animation-timeline: scroll(root block);
+      animation-range: 4rem 8rem;
+    }
+
     @keyframes --hide-parent {
       to {
         visibility: hidden;

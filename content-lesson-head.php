@@ -11,24 +11,32 @@ $code = $args['code'] ?? '';
 $playback_id = $args['playback_id'] ?? '';
 ?>
 <a href="#main" class="skip-link">Skip to main content</a>
-<header class="header header--sticky max-md:header--compact lesson-head__container bg-darker">
+<header class="header header--sticky lesson-head__container bg-darker">
     <div class="lesson-head header__bar color-scheme-dark">
         <div class="reading-progress color-scheme-dark print:hide" aria-hidden="true"></div>
         <div class="lesson-head__inner font-sizing-fluid">
             <?php if ($code): ?>
-                <span class="lesson-head__code-badge text font-bold"><span class="sr-only">Lesson </span><?php echo esc_html($code); ?></span>
+                <span class="lesson-head__code-badge text font-bold"><span class="sr-only">Lesson
+                    </span><?php echo esc_html($code); ?></span>
             <?php endif; ?>
             <nav class="lesson-head__nav stack text font-bold" aria-label="Breadcrumb">
-                <a class="lesson-head__nav-parent link link--plain" href="<?php echo esc_url($args['up_url']); ?>"><?php echo esc_html($args['up_title']); ?></a>
-                <span class="lesson-head__nav-current" aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
+                <a class="lesson-head__nav-parent link link--plain"
+                    href="<?php echo esc_url($args['up_url']); ?>"><?php echo esc_html($args['up_title']); ?></a>
+                <span class="lesson-head__nav-current"
+                    aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
             </nav>
             <div class="lesson-head__controls max-lg:hide-labels print:hide">
                 <?php if ($playback_id): ?>
-                    <button type="button" id="video-stick-toggle" class="button button--subtle button--icon lesson-video__toggle"
-                        aria-controls="lesson-video-player" aria-pressed="false">
+                    <button type="button" id="video-stick-toggle"
+                        class="button button--subtle button--icon lesson-video__toggle" aria-controls="lesson-video-player"
+                        aria-pressed="false">
                         <span class="sr-only">Keep the video in view</span>
-                        <svg class="icon icon--off" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Unlock" /></svg>
-                        <svg class="icon icon--on" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Lock" /></svg>
+                        <svg class="icon icon--off" width="1em" height="1em" aria-hidden="true" focusable="false">
+                            <use href="#Unlock" />
+                        </svg>
+                        <svg class="icon icon--on" width="1em" height="1em" aria-hidden="true" focusable="false">
+                            <use href="#Lock" />
+                        </svg>
                     </button>
                     <script>
                         document.getElementById('video-stick-toggle').addEventListener('click', (event) => {
@@ -42,7 +50,9 @@ $playback_id = $args['playback_id'] ?? '';
                 <?php if (!empty($args['progress'])): ?>
                     <button type="button" class="button button--plain" commandfor="course-progress" command="show-modal">
                         <span>Progress</span>
-                        <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Navigation" /></svg>
+                        <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
+                            <use href="#Navigation" />
+                        </svg>
                     </button>
                 <?php endif; ?>
             </div>
