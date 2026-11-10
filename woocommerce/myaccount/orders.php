@@ -17,11 +17,12 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
 
 <?php if ($has_orders): ?>
 
-    <table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table my_account_orders account-orders-table">
+    <div class="table-container" tabindex="0" role="region" aria-label="<?php esc_attr_e('Orders', 'woocommerce'); ?>">
+    <table class="table">
         <thead>
             <tr>
                 <?php foreach (wc_get_account_orders_columns() as $column_id => $column_name): ?>
-                    <th scope="col" class="woocommerce-orders-table__header woocommerce-orders-table__header-<?php echo esc_attr($column_id); ?><?php echo 'order-actions' === $column_id ? ' table__cell--fit' : ''; ?>"><?php echo esc_html($column_name); ?></th>
+                    <th scope="col"<?php echo 'order-actions' === $column_id ? ' class="table__cell--fit"' : ''; ?>><?php echo esc_html($column_name); ?></th>
                 <?php endforeach; ?>
             </tr>
         </thead>
@@ -31,14 +32,14 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
                 $order = wc_get_order($customer_order); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
                 $item_count = $order->get_item_count() - $order->get_item_count_refunded();
                 ?>
-                <tr class="woocommerce-orders-table__row woocommerce-orders-table__row--status-<?php echo esc_attr($order->get_status()); ?> order">
+                <tr>
                     <?php foreach (wc_get_account_orders_columns() as $column_id => $column_name):
                         $is_order_number = 'order-number' === $column_id;
                         ?>
                         <?php if ($is_order_number): ?>
-                            <th scope="row" class="woocommerce-orders-table__cell woocommerce-orders-table__cell-<?php echo esc_attr($column_id); ?>">
+                            <th scope="row">
                         <?php else: ?>
-                            <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-<?php echo esc_attr($column_id); ?><?php echo 'order-actions' === $column_id ? ' table__cell--fit' : ''; ?>">
+                            <td<?php echo 'order-actions' === $column_id ? ' class="table__cell--fit"' : ''; ?>>
                         <?php endif; ?>
 
                             <?php if (has_action('woocommerce_my_account_my_orders_column_' . $column_id)): ?>
@@ -68,7 +69,7 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
                                             /* translators: %1$s Action name, %2$s Order number. */
                                             $action_aria_label = empty($action['aria-label']) ? sprintf(__('%1$s order number %2$s', 'woocommerce'), $action['name'], $order->get_order_number()) : $action['aria-label'];
                                             ?>
-                                            <a href="<?php echo esc_url($action['url']); ?>" class="woocommerce-button button<?php echo 'cancel' === $key ? ' button--danger' : ''; ?> <?php echo sanitize_html_class($key); ?>" aria-label="<?php echo esc_attr($action_aria_label); ?>"><?php echo esc_html($action['name']); ?></a>
+                                            <a href="<?php echo esc_url($action['url']); ?>" class="button<?php echo 'cancel' === $key ? ' button--danger' : ''; ?> <?php echo sanitize_html_class($key); ?>" aria-label="<?php echo esc_attr($action_aria_label); ?>"><?php echo esc_html($action['name']); ?></a>
                                         <?php endforeach; ?>
                                     </div>
                                 <?php endif; ?>
@@ -84,16 +85,17 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
             <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
 
     <?php do_action('woocommerce_before_account_orders_pagination'); ?>
 
     <?php if (1 < $customer_orders->max_num_pages): ?>
-        <div class="woocommerce-pagination woocommerce-Pagination button-group prose-end">
+        <div class="button-group prose-end">
             <?php if (1 !== $current_page): ?>
-                <a class="woocommerce-button woocommerce-button--previous button" href="<?php echo esc_url(wc_get_endpoint_url('orders', $current_page - 1)); ?>"><?php esc_html_e('Previous', 'woocommerce'); ?></a>
+                <a class="button" href="<?php echo esc_url(wc_get_endpoint_url('orders', $current_page - 1)); ?>"><?php esc_html_e('Previous', 'woocommerce'); ?></a>
             <?php endif; ?>
             <?php if (intval($customer_orders->max_num_pages) !== $current_page): ?>
-                <a class="woocommerce-button woocommerce-button--next button" href="<?php echo esc_url(wc_get_endpoint_url('orders', $current_page + 1)); ?>"><?php esc_html_e('Next', 'woocommerce'); ?></a>
+                <a class="button" href="<?php echo esc_url(wc_get_endpoint_url('orders', $current_page + 1)); ?>"><?php esc_html_e('Next', 'woocommerce'); ?></a>
             <?php endif; ?>
         </div>
     <?php endif; ?>

@@ -23,7 +23,6 @@
 
 @import url("components/form.css") layer(site);
 @import url("components/lesson-page.css") layer(site);
-@import url("components/login-page.css") layer(site);
 @import url("components/woocommerce.css") layer(site);
 
 @import url("blocks/codepen.css") layer(site);

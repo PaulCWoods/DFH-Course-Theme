@@ -34,7 +34,7 @@ if (!wp_doing_ajax()) {
             ?>
         </ul>
     <?php endif; ?>
-    <div class="form-row place-order stack">
+    <div class="form-row stack">
         <noscript>
             <p class="text">
                 <?php

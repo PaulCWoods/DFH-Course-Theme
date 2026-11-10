@@ -65,14 +65,14 @@ get_template_part('content', 'course-header');
 
 <main class="main main--flush" id="main">
     <article>
-        <header class="poster poster--block-end" style="--poster-min-size: 50svh;">
+        <header class="poster poster--block-end color-palette-inverted" style="--poster-min-size: 50svh;">
             <?php if (has_post_thumbnail()) {
                 the_post_thumbnail('full', array('class' => 'poster__media', 'alt' => '', 'sizes' => '100vw', 'fetchpriority' => 'high', 'loading' => false));
             } ?>
-            <div class="poster__content">
+            <div class="poster__content bg-accent">
                 <div class="stack">
                     <h1 class="title"><?php the_title(); ?></h1>
-                    <div class="large-text font-bold"><?php the_excerpt(); ?></div>
+                    <div class="large-text font-bold text-pretty"><?php the_excerpt(); ?></div>
                 </div>
             </div>
         </header>

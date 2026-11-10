@@ -7,7 +7,7 @@ if (!dfh_user_has_course_access()) {
     get_header();
     get_template_part('content', 'course-header');
     ?>
-    <main class="restricted-access site-main" id="main">
+    <main class="main" id="main">
         <article class="article prose font-sizing-fluid wrapper">
             <h1>Student-only content</h1>
             <p>You need to be enrolled in the course to view this lesson.</p>
@@ -108,8 +108,8 @@ get_header();
     'playback_id' => $playback_id,
     'progress' => true,
 )); ?>
-<main class="site-main lesson-page" id="main">
-    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack gap-0'); ?>>
+<main class="main main--flush" id="main">
+    <article id="post-<?php the_ID(); ?>" <?php post_class('stack gap-0 min-h-full'); ?>>
         <header class="lesson-header prose font-sizing-fluid">
             <div class="wrapper">
                 <h1 class="lesson-header__title"><?php the_title(); ?></h1>
@@ -127,18 +127,17 @@ get_header();
         <div class="lesson-content">
             <div class="wrapper article__main">
                 <div class="lesson-body article__body prose font-sizing-fluid"><?php the_content(); ?></div>
-                <aside class="lesson-aside article__aside stack gap-cushion" aria-label="Lesson resources">
+                <aside class="lesson-aside article__aside stack gap-cushion-lg rule" aria-label="Lesson resources">
                     <div class="lesson-bookmark print:hide">
-                        <button type="button" id="dfh-bookmark-btn" class="button"
-                            aria-pressed="<?php echo $is_bookmarked ? 'true' : 'false'; ?>"
+                        <?php // The label says the state ("Bookmarked"), so this isn't a pressed toggle ?>
+                        <button type="button" id="dfh-bookmark-btn"
+                            class="button<?php echo $is_bookmarked ? ' button--strong' : ''; ?>"
                             data-lesson-id="<?php echo esc_attr($lesson_id); ?>"
                             data-nonce="<?php echo esc_attr(wp_create_nonce('dfh_bookmark_nonce')); ?>">
-                            <span>Bookmark</span>
-                            <svg class="icon icon--off" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                <use href="#Bookmark" />
-                            </svg>
-                            <svg class="icon icon--on" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                <use href="#BookmarkFilled" />
+                            <span
+                                class="dfh-bookmark-label"><?php echo $is_bookmarked ? 'Bookmarked' : 'Bookmark'; ?></span>
+                            <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
+                                <use href="<?php echo $is_bookmarked ? '#BookmarkFilled' : '#Bookmark'; ?>" />
                             </svg>
                             <svg class="icon spinner" width="1em" height="1em" aria-hidden="true" focusable="false">
                                 <use href="#LoaderArc" />
@@ -161,7 +160,7 @@ get_header();
                     </nav>
                 </section>
             <?php endif; ?>
-            <div class="wrapper lesson-progression">
+            <div class="wrapper mt-auto">
                 <div class="cluster cluster--end">
                     <?php if ($adjacent['previous']): ?>
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
@@ -291,7 +290,9 @@ get_header();
                 .then((data) => {
                     if (!data.success) throw new Error();
                     const on = Boolean(data.data.is_bookmarked);
-                    bookmark.setAttribute('aria-pressed', String(on));
+                    bookmark.classList.toggle('button--strong', on);
+                    bookmark.querySelector('.dfh-bookmark-label').textContent = on ? 'Bookmarked' : 'Bookmark';
+                    bookmark.querySelector('.icon:not(.spinner) use').setAttribute('href', on ? '#BookmarkFilled' : '#Bookmark');
                     toast(on ? 'Lesson bookmarked' : 'Bookmark removed');
                 })
                 .catch(() => toast('The bookmark wasn’t saved. Try again.', 'danger'))

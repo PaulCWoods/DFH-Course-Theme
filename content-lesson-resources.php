@@ -72,7 +72,7 @@ if (!empty($download_ids) && is_array($download_ids)): ?>
                         </div>
                     <?php endif; ?>
                     <header class="card__header">
-                        <h3 class="card__title small-heading">
+                        <h3 class="card__title subheading">
                             <a class="link link--plain link--stretched" href="<?php echo esc_url($pdf_url); ?>"
                                 download><?php echo esc_html($download_post->post_title); ?> <span
                                     class="text-muted">(PDF)</span></a>

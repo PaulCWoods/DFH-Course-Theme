@@ -25,8 +25,8 @@ do_action('woocommerce_before_cart'); ?>
             <table class="table shop_table cart woocommerce-cart-form__contents">
                 <thead>
                     <tr>
-                        <th scope="col" class="product-name"><?php esc_html_e('Course', 'dfh'); ?></th>
-                        <th scope="col" class="product-subtotal table__cell--numeric"><?php esc_html_e('Price', 'woocommerce'); ?></th>
+                        <th scope="col"><?php esc_html_e('Course', 'dfh'); ?></th>
+                        <th scope="col" class="table__cell--numeric"><?php esc_html_e('Price', 'woocommerce'); ?></th>
                         <th scope="col" class="product-remove table__cell--fit"><span class="sr-only"><?php esc_html_e('Remove item', 'woocommerce'); ?></span></th>
                     </tr>
                 </thead>
@@ -46,7 +46,7 @@ do_action('woocommerce_before_cart'); ?>
                         $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image('thumbnail', array('class' => 'thumbnail', 'alt' => '')), $cart_item, $cart_item_key);
                         ?>
                         <tr class="woocommerce-cart-form__cart-item <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
-                            <th scope="row" class="product-name">
+                            <th scope="row">
                                 <div class="inline">
                                     <?php echo $thumbnail; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                     <div class="lockup">
@@ -60,7 +60,7 @@ do_action('woocommerce_before_cart'); ?>
                                     </div>
                                 </div>
                             </th>
-                            <td class="product-subtotal table__cell--numeric">
+                            <td class="table__cell--numeric">
                                 <?php echo apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']), $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                             </td>
                             <td class="product-remove table__cell--fit">
@@ -107,7 +107,7 @@ do_action('woocommerce_before_cart'); ?>
 
     <?php do_action('woocommerce_before_cart_collaterals'); ?>
 
-    <div class="cart-collaterals stack self-start">
+    <div class="stack self-start">
         <?php do_action('woocommerce_cart_collaterals'); ?>
     </div>
 </div>

@@ -22,7 +22,7 @@ if ($available_gateways):
     current($available_gateways)->set_current();
     ?>
     <form id="add_payment_method" class="form prose-end" method="post">
-        <div id="payment" class="woocommerce-Payment stack">
+        <div id="payment" class="stack">
             <ul role="list" class="woocommerce-PaymentMethods payment_methods methods stack" aria-label="<?php esc_attr_e('Payment methods', 'woocommerce'); ?>">
                 <?php foreach ($available_gateways as $gateway): ?>
                     <li class="woocommerce-PaymentMethod woocommerce-PaymentMethod--<?php echo esc_attr($gateway->id); ?> payment_method_<?php echo esc_attr($gateway->id); ?> stack">
@@ -43,7 +43,7 @@ if ($available_gateways):
 
             <div class="form__actions button-group">
                 <?php wp_nonce_field('woocommerce-add-payment-method', 'woocommerce-add-payment-method-nonce'); ?>
-                <button type="submit" class="woocommerce-Button woocommerce-Button--alt button button--strong button--accent alt" id="place_order" value="<?php esc_attr_e('Add payment method', 'woocommerce'); ?>"><?php esc_html_e('Add payment method', 'woocommerce'); ?></button>
+                <button type="submit" class="button button--strong button--accent alt" id="place_order" value="<?php esc_attr_e('Add payment method', 'woocommerce'); ?>"><?php esc_html_e('Add payment method', 'woocommerce'); ?></button>
                 <input type="hidden" name="woocommerce_add_payment_method" id="woocommerce_add_payment_method" value="1" />
             </div>
         </div>

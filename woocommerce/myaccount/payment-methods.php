@@ -21,12 +21,12 @@ do_action('woocommerce_before_account_payment_methods', $has_methods); ?>
 
 <div class="stack prose-end">
     <?php if ($has_methods): ?>
-        <table class="woocommerce-MyAccount-paymentMethods shop_table account-payment-methods-table">
+        <div class="table-container" tabindex="0" role="region" aria-label="<?php esc_attr_e('Payment methods', 'woocommerce'); ?>">
+        <table class="table">
             <thead>
                 <tr>
                     <?php foreach ($columns as $column_id => $column_name): ?>
-                        <th scope="col"
-                            class="woocommerce-PaymentMethod--<?php echo esc_attr($column_id); ?><?php echo 'actions' === $column_id ? ' table__cell--fit' : ''; ?>">
+                        <th scope="col"<?php echo 'actions' === $column_id ? ' class="table__cell--fit"' : ''; ?>>
                             <?php if ('actions' === $column_id): ?>
                                 <span class="sr-only"><?php echo esc_html($column_name); ?></span>
                             <?php else: ?>
@@ -44,10 +44,10 @@ do_action('woocommerce_before_account_payment_methods', $has_methods); ?>
                             ? sprintf(esc_html__('%1$s ending in %2$s', 'woocommerce'), esc_html(wc_get_credit_card_type_label($method['method']['brand'])), esc_html($method['method']['last4']))
                             : esc_html(wc_get_credit_card_type_label($method['method']['brand']));
                         ?>
-                        <tr class="payment-method<?php echo !empty($method['is_default']) ? ' default-payment-method' : ''; ?>">
+                        <tr>
                             <?php foreach ($columns as $column_id => $column_name): ?>
                                 <?php if ('method' === $column_id): ?>
-                                    <th scope="row" class="woocommerce-PaymentMethod--method">
+                                    <th scope="row">
                                         <?php if (has_action('woocommerce_account_payment_methods_column_method')) {
                                             do_action('woocommerce_account_payment_methods_column_method', $method);
                                         } else {
@@ -59,8 +59,7 @@ do_action('woocommerce_before_account_payment_methods', $has_methods); ?>
                                         <?php endif; ?>
                                     </th>
                                 <?php else: ?>
-                                    <td
-                                        class="woocommerce-PaymentMethod--<?php echo esc_attr($column_id); ?><?php echo 'actions' === $column_id ? ' table__cell--fit' : ''; ?>">
+                                    <td<?php echo 'actions' === $column_id ? ' class="table__cell--fit"' : ''; ?>>
                                         <?php if (has_action('woocommerce_account_payment_methods_column_' . $column_id)) {
                                             do_action('woocommerce_account_payment_methods_column_' . $column_id, $method);
                                         } elseif ('expires' === $column_id) {
@@ -83,6 +82,7 @@ do_action('woocommerce_before_account_payment_methods', $has_methods); ?>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
     <?php else: ?>
         <?php wc_print_notice(esc_html__('No saved methods found.', 'woocommerce'), 'notice'); ?>
     <?php endif; ?>

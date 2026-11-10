@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<a href="<?php echo esc_url(wc_get_checkout_url()); ?>" class="checkout-button wc-forward button button--strong button--accent">
+<a href="<?php echo esc_url(wc_get_checkout_url()); ?>" class="button button--strong button--accent">
     <span><?php esc_html_e('Go to checkout', 'dfh'); ?></span>
     <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#ArrowRight" /></svg>
 </a>

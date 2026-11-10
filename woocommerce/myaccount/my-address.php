@@ -24,7 +24,7 @@ $get_addresses = apply_filters('woocommerce_my_account_get_addresses', $address_
 <ul class="grid grid--2-col grid--xs prose-end" role="list">
     <?php foreach ($get_addresses as $name => $address_title):
         $address = wc_get_account_formatted_address($name); ?>
-        <li class="card woocommerce-Address">
+        <li class="card">
             <header class="card__header">
                 <h2 class="card__title heading"><?php echo esc_html($address_title); ?></h2>
             </header>

@@ -22,7 +22,7 @@ defined('ABSPATH') || exit;
 
     <div class="card__body">
         <table class="table table--plain shop_table">
-            <tr class="cart-subtotal">
+            <tr>
                 <th scope="row"><?php esc_html_e('Subtotal', 'woocommerce'); ?></th>
                 <td class="table__cell--numeric"><?php wc_cart_totals_subtotal_html(); ?></td>
             </tr>
@@ -50,7 +50,7 @@ defined('ABSPATH') || exit;
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <tr class="tax-total">
+                    <tr>
                         <th scope="row"><?php echo esc_html(WC()->countries->tax_or_vat()); ?></th>
                         <td class="table__cell--numeric"><?php wc_cart_totals_taxes_total_html(); ?></td>
                     </tr>
@@ -59,7 +59,7 @@ defined('ABSPATH') || exit;
 
             <?php do_action('woocommerce_cart_totals_before_order_total'); ?>
 
-            <tr class="order-total">
+            <tr>
                 <th scope="row"><?php esc_html_e('Total', 'woocommerce'); ?></th>
                 <td class="table__cell--numeric"><?php wc_cart_totals_order_total_html(); ?></td>
             </tr>
@@ -69,7 +69,7 @@ defined('ABSPATH') || exit;
     </div>
 
     <footer class="card__footer">
-        <div class="wc-proceed-to-checkout button-group">
+        <div class="button-group">
             <?php do_action('woocommerce_proceed_to_checkout'); ?>
         </div>
     </footer>

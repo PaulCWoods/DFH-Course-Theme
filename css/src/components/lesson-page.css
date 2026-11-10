@@ -4,16 +4,6 @@
    from shell to header, content, and supporting areas. */
 
 /* -----------------------------------------------------------------------------
-   Page shell */
-.site-main.lesson-page {
-    padding: 0;
-}
-
-.lesson-article {
-    min-block-size: 100%;
-}
-
-/* -----------------------------------------------------------------------------
    Lesson navigation header */
 
 .lesson-head__container {
@@ -34,10 +24,6 @@
         view-timeline-name: --page-scroll;
     }
 
-}
-
-.lesson-head.site-header {
-    border-block-end: 0;
 }
 
 .lesson-head__inner {
@@ -146,40 +132,6 @@
     }
 }
 
-/* Scroll-driven effects are progressive enhancements; the static header
-   remains usable when animation-timeline is unavailable. */
-@supports (animation-timeline: scroll()) {
-
-    @media (prefers-reduced-motion: no-preference) {
-
-        @keyframes --hide-parent {
-            to {
-                opacity: 0;
-                transform: translateY(-50%);
-                visibility: hidden;
-                position: absolute;
-                pointer-events: none;
-            }
-        }
-
-        @keyframes --show-current {
-            from {
-                opacity: 0;
-                transform: translateY(50%);
-                position: absolute;
-                pointer-events: none;
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-                position: static;
-                pointer-events: auto;
-            }
-        }
-    }
-}
-
 /* Shared dark surface for the navigation, title, and video regions. */
 :is(.lesson-head, .lesson-header, .lesson-video) {
     background-color: var(--surface-darker);
@@ -244,7 +196,7 @@
    Lesson content layout */
 
 /* Lesson content: the sample's overlay and the lesson's own content classes.
-   WordPress's blocks are in scss/blocks. */
+   WordPress's blocks are in blocks/. */
 .lesson-body {
 
     &:empty {
@@ -378,8 +330,4 @@
         border-block-start: var(--border);
         box-shadow: none;
     }
-}
-
-.lesson-progression {
-    margin-block-start: auto;
 }

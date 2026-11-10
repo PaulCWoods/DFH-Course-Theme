@@ -22,7 +22,7 @@ if (!wc_coupons_enabled()) { // @codingStandardsIgnoreLine.
     <?php wc_print_notice(apply_filters('woocommerce_checkout_coupon_message', esc_html__('Have a coupon?', 'woocommerce') . ' <a href="#" role="button" aria-controls="woocommerce-checkout-form-coupon" aria-expanded="false" class="showcoupon link">' . esc_html__('Enter your code', 'dfh') . '</a>'), 'notice'); ?>
 </div>
 
-<form class="checkout_coupon woocommerce-form-coupon form max-w-md" method="post" style="display:none" id="woocommerce-checkout-form-coupon">
+<form class="checkout_coupon form max-w-md" method="post" style="display:none" id="woocommerce-checkout-form-coupon">
     <div class="field">
         <label for="coupon_code" class="field__label label"><?php esc_html_e('Coupon code', 'woocommerce'); ?></label>
         <input type="text" name="coupon_code" class="input" id="coupon_code" value="" autocomplete="off" />

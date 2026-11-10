@@ -21,8 +21,8 @@ get_template_part('content', 'lesson-head', array(
     'playback_id' => $playback_id,
 ));
 ?>
-<main class="site-main lesson-page" id="main">
-    <article id="post-<?php the_ID(); ?>" <?php post_class('lesson-article stack gap-0'); ?>>
+<main class="main main--flush" id="main">
+    <article id="post-<?php the_ID(); ?>" <?php post_class('stack gap-0 min-h-full'); ?>>
         <header class="lesson-header prose font-sizing-fluid">
             <div class="wrapper">
                 <p class="small-heading">Free sample</p>

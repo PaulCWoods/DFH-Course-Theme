@@ -1,7 +1,7 @@
 /* WooCommerce
    -----------------------------------------------------------------------------
    What WooCommerce's own markup still needs: its show-password button, the
-   forms and order screens it generates, and the checkout blocks' fields.
+   forms and order screens it generates.
    My account's layout, navigation and addresses are the library's
    (woocommerce/myaccount/). */
 
@@ -123,21 +123,8 @@
 
 .woocommerce-input-wrapper {
     display: grid;
-
 }
 
-.wc-block-components-form .wc-block-components-text-input :is([type="email"],
-    [type="password"],
-    [type="email"],
-    [type="number"],
-    [type="tel"],
-    [type="text"],
-    [type="url"]),
-.wc-block-checkout__form .wc-blocks-components-select select,
-.wc-block-components-textarea {
-    background-color: var(--input-background-color, var(--surface-card, Canvas));
-    color: inherit;
-}
 /* An order's number, date and status in its summary line: bold, not marked */
 mark:is(.order-number, .order-date, .order-status) {
     background-color: transparent;

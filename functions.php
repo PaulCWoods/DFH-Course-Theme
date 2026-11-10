@@ -1570,7 +1570,7 @@ function dfh_notice_allowed_icon($tags)
 add_filter('woocommerce_kses_notice_allowed_tags', 'dfh_notice_allowed_icon');
 
 /**
- * WooCommerce's account tables (orders, downloads, payment methods, an
+ * WooCommerce's account tables that its own templates print (downloads and an
  * order's details, there and on the order received page) as the library's Table, each in a labelled container
  * that scrolls on a narrow screen. After the shortcodes run (priority 11).
  */
@@ -1580,8 +1580,6 @@ function dfh_woocommerce_tables($content)
         return $content;
     }
     $labels = array(
-        'woocommerce-orders-table' => __('Orders', 'woocommerce'),
-        'woocommerce-MyAccount-paymentMethods' => __('Payment methods', 'woocommerce'),
         'woocommerce-table--order-downloads' => __('Downloads', 'woocommerce'),
         'woocommerce-table--order-details' => __('Order details', 'woocommerce'),
     );
@@ -1722,7 +1720,7 @@ function dfh_add_return_to_course_link($order_id)
         }
     }
     ?>
-    <p class="woocommerce-order-course-return text-center my-cushion">
+    <p class="text-center my-cushion">
         <a href="<?php echo esc_url($course_url); ?>" class="button button--strong button--accent">
             <span>Go to your course</span>
             <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false">

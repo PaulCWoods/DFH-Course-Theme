@@ -20,7 +20,7 @@ do_action('woocommerce_before_customer_login_form'); ?>
 
 <h2 class="heading"><?php esc_html_e('Log in', 'woocommerce'); ?></h2>
 
-<form class="form woocommerce-form woocommerce-form-login login" method="post" novalidate>
+<form class="form" method="post" novalidate>
 
     <?php do_action('woocommerce_login_form_start'); ?>
 
@@ -41,7 +41,7 @@ do_action('woocommerce_before_customer_login_form'); ?>
     </label>
     <?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>
     <div class="form__actions button-group">
-        <button type="submit" class="button button--strong button--accent woocommerce-form-login__submit" name="login" value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><span><?php esc_html_e('Log in', 'woocommerce'); ?></span></button>
+        <button type="submit" class="button button--strong button--accent" name="login" value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><span><?php esc_html_e('Log in', 'woocommerce'); ?></span></button>
     </div>
     <p class="text">
         <a class="link" href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php esc_html_e('Lost your password?', 'woocommerce'); ?></a>
