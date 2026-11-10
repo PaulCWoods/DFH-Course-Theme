@@ -1,11 +1,15 @@
-/* Quote (core/quote): the "+bold" style set in the editor's Advanced classes */
-.wp-block-quote.\+bold {
-    background-color: var(--surface-card);
-    border: 0;
-    padding-block: var(--spacing-breathe);
-    padding-inline: var(--spacing-cushion);
+/* ==========================================================================
+   Quote (core/quote): the "+bold" style set in the editor's Advanced
+   classes
+   ========================================================================== */
 
-    p {
-        font-weight: var(--lesson-quote-bold-font-weight);
-    }
+.wp-block-quote.\+bold {
+  background-color: var(--surface-card);
+  border: 0;
+  padding-block: var(--spacing-breathe);
+  padding-inline: var(--spacing-cushion);
+
+  p {
+    font-weight: var(--lesson-quote-bold-font-weight);
+  }
 }

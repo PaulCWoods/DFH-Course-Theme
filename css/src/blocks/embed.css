@@ -1,18 +1,22 @@
-/* Embed (core/embed): a video or other iframe at the ratio WordPress gives it */
+/* ==========================================================================
+   Embed (core/embed): a video or other iframe at the ratio WordPress gives
+   it
+   ========================================================================== */
+
 .wp-embed-aspect-16-9 {
-    --embed-aspect-ratio: 16/9;
+  --embed-aspect-ratio: 16/9;
 }
 
 .wp-embed-aspect-4-3 {
-    --embed-aspect-ratio: 4/3;
+  --embed-aspect-ratio: 4/3;
 }
 
 .wp-has-aspect-ratio .wp-block-embed__wrapper {
-    font-size: 0;
+  font-size: 0;
 
-    iframe {
-        aspect-ratio: var(--embed-aspect-ratio);
-        block-size: auto;
-        inline-size: 100%;
-    }
+  iframe {
+    aspect-ratio: var(--embed-aspect-ratio);
+    block-size: auto;
+    inline-size: 100%;
+  }
 }

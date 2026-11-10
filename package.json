@@ -3,9 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:css": "node scripts/build-css.mjs"
+    "build:css": "node scripts/build-css.mjs",
+    "format": "prettier --write \"css/src/**/*.css\""
   },
   "devDependencies": {
-    "lightningcss": "^1.33.0"
+    "lightningcss": "^1.33.0",
+    "prettier": "^3.9.10"
   }
 }

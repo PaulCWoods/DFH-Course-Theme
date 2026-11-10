@@ -1,17 +1,20 @@
-/* Pull quote (core/pullquote): a quote lifted out of the text, on a tint */
+/* ==========================================================================
+   Pull quote (core/pullquote): a quote lifted out of the text, on a tint
+   ========================================================================== */
+
 .wp-block-pullquote {
-    background-color: var(--surface-translucent);
-    padding: var(--spacing-cushion);
+  background-color: var(--surface-translucent);
+  padding: var(--spacing-cushion);
 
-    blockquote {
-        border: 0;
-        padding-inline-start: 0;
-    }
+  blockquote {
+    border: 0;
+    padding-inline-start: 0;
+  }
 
-    p {
-        font-family: var(--pullquote-font-family);
-        font-size: var(--pullquote-font-size);
-        line-height: var(--pullquote-line-height);
-        text-wrap: balance;
-    }
+  p {
+    font-family: var(--pullquote-font-family);
+    font-size: var(--pullquote-font-size);
+    line-height: var(--pullquote-line-height);
+    text-wrap: balance;
+  }
 }

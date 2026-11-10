@@ -1,333 +1,334 @@
-/* Lesson page
-   -----------------------------------------------------------------------------
-   Layout and component styles for the lesson page. Sections follow the page
-   from shell to header, content, and supporting areas. */
+/* ==========================================================================
+   Lesson page: the lesson's header bar, title, video, content and aside
+   --------------------------------------------------------------------------
+   The header bar is a library Header (content-lesson-head.php). What it adds
+   here, the lesson's code and a breadcrumb that gives way to the lesson's
+   title as the page scrolls, has no option in the library. The dark bands
+   (header, title, video) take .bg-darker and .color-scheme-dark in the
+   markup.
+   ========================================================================== */
 
-/* -----------------------------------------------------------------------------
-   Lesson navigation header */
+/* --------------------------------------------------------------------------
+   Header bar
+   -------------------------------------------------------------------------- */
 
 .lesson-head__container {
-    background-color: var(--surface-darker);
-    min-inline-size: 1px; /* Needed to let the navigation link overflow ellipsis without breaking the layout. */
+  /* Lets the breadcrumb's titles shrink to an ellipsis */
+  min-inline-size: 1px;
 
-    @media screen {
-        z-index: var(--site-header-z-index);
-    }
+  @media screen {
+    z-index: var(--z-index-sticky);
+  }
 
-    @media screen and (height > 60em) {
-        container-type: scroll-state;
-        inset-block-start: 0;
-        position: sticky;
-    }
+  /* Sticky only where a tall screen leaves room for the lesson below it */
+  @media screen and (height > 60em) {
+    container-type: scroll-state;
+    position: sticky;
+    inset-block-start: 0;
+  }
 
-    @supports (animation-timeline: scroll()) {
-        view-timeline-name: --page-scroll;
-    }
-
+  @supports (animation-timeline: scroll()) {
+    view-timeline-name: --page-scroll;
+  }
 }
 
 .lesson-head__inner {
-    align-items: center;
-    color-scheme: dark;
-    display: flex;
-    inline-size: 100%;
-    max-inline-size: var(--spacing-site-width);
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  max-inline-size: var(--spacing-site-width);
 }
 
+/* The actions keep their size beside a long title */
 .lesson-head__controls {
-    /* Keep header actions together without allowing them to shrink. */
-    align-items: center;
-    display: flex;
-    flex-shrink: 0;
-    gap: 0;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0;
 }
 
 .lesson-head__code-badge {
-    align-self: stretch;
-    align-items: center;
-    background-color: var(--surface-accent);
-    display: flex;
-    font-size: var(--typography-font-size-fluid-0);
-    font-variant-numeric: tabular-nums;
-    font-weight: bold;
-    padding-inline: var(--spacing-breathe-sm);
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  padding-inline: var(--spacing-breathe-sm);
+  font-variant-numeric: tabular-nums;
+  background-color: var(--surface-accent);
 }
 
 .lesson-head__nav {
-    align-self: stretch;
-    flex-grow: 1;
-    font-size: var(--typography-font-size-fluid-0);
-    justify-content: center;
-    min-inline-size: 1px;
-    position: relative;
-    white-space: nowrap;
+  flex-grow: 1;
+  align-self: stretch;
+  justify-content: center;
+  min-inline-size: 1px;
+  white-space: nowrap;
+  position: relative;
 }
 
 :is(.lesson-head__nav-parent, .lesson-head__nav-current) {
-    font-weight: bold;
-    max-inline-size: 100%;
-    overflow: hidden;
-    padding-inline: var(--spacing-cushion);
-    text-overflow: ellipsis;
+  overflow: hidden;
+  max-inline-size: 100%;
+  padding-inline: var(--spacing-cushion);
+  text-overflow: ellipsis;
 }
 
 /* Without a lesson number (the sample), the titles start at the bar's edge */
 .lesson-head__nav:first-child > * {
-    padding-inline-start: 0;
-}
-
-.lesson-head__nav-parent {
-    opacity: 1;
-    transform: translateY(0);
-
-    @supports (animation-timeline: scroll()) {
-        animation: --hide-parent linear both;
-        animation-timeline: scroll(root block);
-        animation-range: 4rem 8rem;
-
-    }
-}
-
-.lesson-head__nav-current {
-    opacity: 0;
-    transform: translateY(50%);
-    position: absolute;
-    pointer-events: none;
-
-    @supports (animation-timeline: scroll()) {
-        animation: --show-current linear both;
-        animation-timeline: scroll(root block);
-        animation-range: calc(4rem + var(--spacing-cushion)) calc(8rem + var(--spacing-cushion));
-    }
+  padding-inline-start: 0;
 }
 
 /* The parent link scrolls away and the current lesson takes its place */
+.lesson-head__nav-parent {
+  opacity: 1;
+  transform: translateY(0);
+
+  @supports (animation-timeline: scroll()) {
+    animation: --hide-parent linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 4rem 8rem;
+  }
+}
+
+.lesson-head__nav-current {
+  opacity: 0;
+  position: absolute;
+  transform: translateY(50%);
+  pointer-events: none;
+
+  @supports (animation-timeline: scroll()) {
+    animation: --show-current linear both;
+    animation-timeline: scroll(root block);
+    animation-range: calc(4rem + var(--spacing-cushion))
+      calc(8rem + var(--spacing-cushion));
+  }
+}
+
 @supports (animation-timeline: scroll()) {
-    @media (prefers-reduced-motion: no-preference) {
-        @keyframes --hide-parent {
-            to {
-                opacity: 0;
-                transform: translateY(-50%);
-                visibility: hidden;
-                position: absolute;
-                pointer-events: none;
-            }
-        }
-
-        @keyframes --show-current {
-            from {
-                opacity: 0;
-                transform: translateY(50%);
-                position: absolute;
-                pointer-events: none;
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-                position: static;
-                pointer-events: auto;
-            }
-        }
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes --hide-parent {
+      to {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
     }
+
+    @keyframes --show-current {
+      from {
+        opacity: 0;
+        position: absolute;
+        transform: translateY(50%);
+        pointer-events: none;
+      }
+
+      to {
+        opacity: 1;
+        position: static;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    }
+  }
 }
 
-/* Shared dark surface for the navigation, title, and video regions. */
-:is(.lesson-head, .lesson-header, .lesson-video) {
-    background-color: var(--surface-darker);
-    color: var(--foreground-on-dark);
-}
+/* --------------------------------------------------------------------------
+   Title, content and explore bands: clear of a notch at each side
+   -------------------------------------------------------------------------- */
 
-/* -----------------------------------------------------------------------------
-   Lesson title and metadata */
-
-:where(.lesson-header,
-    .lesson-content,
-    .lesson-explore) {
-    padding-block: var(--spacing-cushion);
-    padding-inline-start: calc(0px + env(safe-area-inset-left));
-    padding-inline-end: calc(0px + env(safe-area-inset-left));
+:where(.lesson-header, .lesson-content, .lesson-explore) {
+  padding-block: var(--spacing-cushion);
+  padding-inline: var(--safe-area-inset-inline-start, 0px)
+    var(--safe-area-inset-inline-end, 0px);
 }
 
 .lesson-header__title {
-    align-items: center;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-block: 0; /* keep title snug to content */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing);
+  margin-block: 0;
 }
 
-/* -----------------------------------------------------------------------------
-   Video player and mobile pinning */
+/* --------------------------------------------------------------------------
+   Video, which can stay in view on a narrow touch screen
+   -------------------------------------------------------------------------- */
 
 .lesson-video {
-    padding-inline-start: calc(0px + env(safe-area-inset-left));
-    padding-inline-end: calc(0px + env(safe-area-inset-left));
+  padding-inline: var(--safe-area-inset-inline-start, 0px)
+    var(--safe-area-inset-inline-end, 0px);
 
-    /* Pinning is limited to the narrow, touch layout where the toggle exposes
-       the sticky-player state. */
-    :root.video-stick & {
-        @media (24em < width < 60em) and (aspect-ratio < 1/1) and (pointer: coarse) {
-            position: sticky;
-            inset-block-start: var(--header-compact-bar-min-size, var(--spacing-48));
-            z-index: 1;
-        }
+  /* Pinned by the header's toggle (video-stick on <html>), only where that
+     toggle shows */
+  :root.video-stick & {
+    @media (24em < width < 60em) and (aspect-ratio < 1/1) and (pointer: coarse) {
+      position: sticky;
+      inset-block-start: var(--header-compact-bar-min-size, 3rem);
+      z-index: 1;
     }
+  }
 }
 
+/* The toggle only where the player can stay in view */
 .lesson-video__toggle.button {
-    /* The control is only useful where the player can become sticky. */
-    display: none;
+  display: none;
 
-    @media (24em < width < 60em) and (aspect-ratio < 1/1) and (pointer: coarse) {
-        :root:has(.lesson-video) & {
-            display: inline-flex;
-        }
+  @media (24em < width < 60em) and (aspect-ratio < 1/1) and (pointer: coarse) {
+    :root:has(.lesson-video) & {
+      display: inline-flex;
     }
+  }
 }
 
 .lesson-video__container {
-    aspect-ratio: 16 / 9;
-    font-size: 0;
-    overflow: hidden;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  font-size: 0;
 }
 
-/* -----------------------------------------------------------------------------
-   Lesson content layout */
+/* --------------------------------------------------------------------------
+   Lesson content: the sample's overlay, and the classes lessons set in the
+   editor. WordPress's blocks are in blocks/.
+   -------------------------------------------------------------------------- */
 
-/* Lesson content: the sample's overlay and the lesson's own content classes.
-   WordPress's blocks are in blocks/. */
 .lesson-body {
+  &:empty {
+    display: none;
+  }
 
-    &:empty {
-        display: none;
+  /* The sample fades out under a note that the rest needs the course */
+  &.\+sample {
+    position: relative;
+
+    .lesson-body__sample-text {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      min-block-size: calc(var(--spacing-block-2xs) * 1.5);
+      max-inline-size: none;
+      padding: var(--spacing-cushion);
+      text-align: center;
+      text-wrap: balance;
+      background-image: linear-gradient(transparent, var(--surface) 50%);
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline: 0;
+
+      span {
+        padding: var(--spacing);
+        border: var(--border);
+      }
+    }
+  }
+
+  ul.check-list {
+    li::marker {
+      content: "✓ ";
+      color: var(--foreground-success);
     }
 
-    &.\+sample {
-        position: relative;
-
-        .lesson-body__sample-text {
-            background-image: linear-gradient(transparent, var(--surface) 50%);
-            align-items: flex-end;
-            display: flex;
-            position: absolute;
-            inset-block-end: 0;
-            inset-inline: 0;
-            justify-content: center;
-            min-block-size: var(--spacing-192);
-            max-inline-size: none;
-            padding: var(--spacing-cushion);
-            text-align: center;
-            text-wrap: balance;
-
-            span {
-                border: var(--border);
-                padding: calc(var(--spacing));
-            }
-        }
+    /* A list inside keeps its own markers */
+    ul li::marker {
+      content: revert;
+      color: revert;
     }
+  }
 
-    ul.check-list {
-        li::marker {
-            color: var(--foreground-success);
-            content: "✓ ";
-        }
-
-        ul li:marker {
-            color: revert;
-            content: revert;
-        }
-    }
-
-    :is(aside, .callout-box) {
-        background-color: var(--surface-card);
-        box-shadow: var(--shadow);
-        margin-block: calc(var(--spacing-breathe) * 2);
-        padding-block: var(--spacing-breathe);
-        padding-inline: var(--spacing-cushion);
-
-        @media (prefers-contrast: more) {
-            border: var(--border);
-            box-shadow: none;
-        }
-
-        &:last-child {
-            margin-block-end: 0;
-        }
-    }
-
-    section {
-        border-block-start: var(--border-width) solid var(--border-color-quiet);
-        padding-block: calc(var(--spacing-breathe) * 2);
-    }
-
-    :is(aside, section, .callout-box) {
-        &.emoji {
-            &:before {
-                display: block;
-                font-size: 1.5em;
-                margin-block-end: var(--spacing-cushion);
-            }
-
-            &.idea:before {
-                content: "💡" / "";
-            }
-
-            &.warning:before {
-                content: "⚠️" / "";
-            }
-        }
-    }
-
-}
-
-/* -----------------------------------------------------------------------------
-   Aside: bookmark and resources */
-
-/* The bookmark sits at the end of the column; on narrow screens the aside
-   follows the lesson, and the bookmark goes last. */
-.lesson-bookmark {
-    order: 4;
-    text-align: end;
-
-    @media screen and (width > 60em) {
-        order: 0;
-    }
-}
-
-/* The column stays in view beside a long lesson (on screen: in print it
-   follows the lesson). The negative margin keeps room for focus rings while
-   the visible column stays aligned. */
-.lesson-aside {
-    align-self: start;
-    margin: calc(var(--focus-ring-clearance) * -1);
-    padding: var(--focus-ring-clearance);
-    reading-flow: flex-visual;
-
-    @media screen {
-        inset-block-start: calc(var(--lesson-aside-sticky-top, var(--spacing-64)) + var(--spacing));
-        position: sticky;
-    }
-
-    @media screen and (width > 60em) {
-        /* A tall column scrolls rather than push the lesson out of view. */
-        max-block-size: calc(100dvh - var(--lesson-aside-sticky-top, var(--spacing-64)) - var(--spacing) * 2);
-        overflow: auto;
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   Explore area: child lessons and progression */
-
-.lesson-explore {
-    --gap: calc(var(--spacing-cushion) * 2);
-    background: var(--surface-card);
-    box-shadow: var(--shadow-inner);
-    flex-grow: 1;
-    padding-block: calc(var(--spacing-cushion) * 2);
+  :is(aside, .callout-box) {
+    margin-block: calc(var(--spacing-breathe) * 2);
+    padding-block: var(--spacing-breathe);
+    padding-inline: var(--spacing-cushion);
+    background-color: var(--surface-card);
+    box-shadow: var(--shadow);
 
     @media (prefers-contrast: more) {
-        border-block-start: var(--border);
-        box-shadow: none;
+      border: var(--border);
+      box-shadow: none;
     }
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  section {
+    padding-block: calc(var(--spacing-breathe) * 2);
+    border-block-start: var(--border-width) solid var(--border-color-quiet);
+  }
+
+  /* An emoji above a callout or section, set by a class in the editor */
+  :is(aside, section, .callout-box).emoji {
+    &::before {
+      display: block;
+      margin-block-end: var(--spacing-cushion);
+      font-size: 1.5em;
+    }
+
+    &.idea::before {
+      content: "💡" / "";
+    }
+
+    &.warning::before {
+      content: "⚠️" / "";
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Aside: bookmark and resources
+   -------------------------------------------------------------------------- */
+
+/* On narrow screens the aside follows the lesson and the bookmark goes last;
+   beside the lesson it heads the column */
+.lesson-bookmark {
+  order: 4;
+  text-align: end;
+
+  @media screen and (width > 60em) {
+    order: 0;
+  }
+}
+
+/* The column stays in view beside a long lesson (on screen only: in print
+   it follows the lesson). The negative margin keeps room for focus rings
+   while the visible column stays aligned. */
+.lesson-aside {
+  align-self: start;
+  margin: calc(var(--focus-ring-clearance) * -1);
+  padding: var(--focus-ring-clearance);
+  reading-flow: flex-visual;
+
+  @media screen {
+    position: sticky;
+    inset-block-start: calc(
+      var(--lesson-aside-sticky-top, 4rem) + var(--spacing)
+    );
+  }
+
+  /* A tall column scrolls rather than push the lesson out of view */
+  @media screen and (width > 60em) {
+    overflow: auto;
+    max-block-size: calc(
+      100dvh - var(--lesson-aside-sticky-top, 4rem) - var(--spacing) * 2
+    );
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Explore: the child lessons and the next and previous lessons
+   -------------------------------------------------------------------------- */
+
+.lesson-explore {
+  --gap: calc(var(--spacing-cushion) * 2);
+
+  flex-grow: 1;
+  padding-block: calc(var(--spacing-cushion) * 2);
+  background-color: var(--surface-card);
+  box-shadow: var(--shadow-inner);
+
+  @media (prefers-contrast: more) {
+    border-block-start: var(--border);
+    box-shadow: none;
+  }
 }

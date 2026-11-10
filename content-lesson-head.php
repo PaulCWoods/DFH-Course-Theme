@@ -11,14 +11,14 @@ $code = $args['code'] ?? '';
 $playback_id = $args['playback_id'] ?? '';
 ?>
 <a href="#main" class="skip-link">Skip to main content</a>
-<header class="header header--sticky max-md:header--compact lesson-head__container">
-    <div class="lesson-head header__bar">
+<header class="header header--sticky max-md:header--compact lesson-head__container bg-darker">
+    <div class="lesson-head header__bar color-scheme-dark">
         <div class="reading-progress color-scheme-dark print:hide" aria-hidden="true"></div>
-        <div class="lesson-head__inner">
+        <div class="lesson-head__inner font-sizing-fluid">
             <?php if ($code): ?>
-                <span class="lesson-head__code-badge"><span class="sr-only">Lesson </span><?php echo esc_html($code); ?></span>
+                <span class="lesson-head__code-badge text font-bold"><span class="sr-only">Lesson </span><?php echo esc_html($code); ?></span>
             <?php endif; ?>
-            <nav class="lesson-head__nav stack" aria-label="Breadcrumb">
+            <nav class="lesson-head__nav stack text font-bold" aria-label="Breadcrumb">
                 <a class="lesson-head__nav-parent link link--plain" href="<?php echo esc_url($args['up_url']); ?>"><?php echo esc_html($args['up_title']); ?></a>
                 <span class="lesson-head__nav-current" aria-hidden="true"><?php echo esc_html(get_the_title()); ?></span>
             </nav>

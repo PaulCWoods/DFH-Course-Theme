@@ -1,3 +1,8 @@
+/* ==========================================================================
+   Form: labels in the forms WooCommerce and WordPress generate, which can't
+   carry the library's .label atom
+   ========================================================================== */
+
 label {
-    font-weight: var(--label-font-weight);
+  font-weight: var(--label-font-weight);
 }

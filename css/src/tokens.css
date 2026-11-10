@@ -1,20 +1,22 @@
-/* Course tokens
-   -----------------------------------------------------------------------------
-   The course's own. Its accent and each lesson's come from the library's
-   course sub-brands (themes/course*.css): theme-course on <html>, and a
-   lesson's class beside its data-lesson or data-syllabus. */
+/* ==========================================================================
+   Course tokens: what only the course reads
+   --------------------------------------------------------------------------
+   Its accent and each lesson's come from the library's course sub-brands
+   (themes/course*.css): theme-course on <html>, and a lesson's class beside
+   its data-lesson or data-syllabus. The tokens the DFH sites share are in
+   DFH Shared Styles.
+   ========================================================================== */
 
 :root {
-    --pullquote-font-family: var(--body-alt-font-family);
-    --pullquote-font-size: var(--body-lg-fluid-font-size);
-    --pullquote-line-height: var(--heading-line-height);
+  /* Pull quote (blocks/pullquote.css) */
+  --pullquote-font-family: var(--body-alt-font-family);
+  --pullquote-font-size: var(--body-lg-fluid-font-size);
+  --pullquote-line-height: var(--heading-line-height);
 
-    --lesson-header-height: var(--header-height, var(--spacing-64));
-    /* Keep the stats column below the masthead when it becomes sticky. */
-    --lesson-aside-sticky-top: var(--lesson-header-height);
-    --lesson-quote-bold-font-weight: var(--typography-font-weight-600);
+  /* Lesson page: the aside stays below the header bar when it sticks */
+  --lesson-header-height: var(--header-height, 4rem);
+  --lesson-aside-sticky-top: var(--lesson-header-height);
 
-    --prose-body-font-family: var(--body-font-family);
-
-    --site-header-z-index: var(--z-index-sticky);
+  /* Quote (blocks/quote.css) */
+  --lesson-quote-bold-font-weight: var(--font-weight-semibold);
 }

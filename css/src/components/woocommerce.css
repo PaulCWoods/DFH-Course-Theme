@@ -1,141 +1,148 @@
-/* WooCommerce
-   -----------------------------------------------------------------------------
-   What WooCommerce's own markup still needs: its show-password button, the
-   forms and order screens it generates.
+/* ==========================================================================
+   WooCommerce: what its own markup still needs
+   --------------------------------------------------------------------------
+   Its show-password button, and the forms and order screens it generates.
    My account's layout, navigation and addresses are the library's
-   (woocommerce/myaccount/). */
+   (woocommerce/myaccount/). The show-password button is a library finding:
+   the library has no password field with one.
+   ========================================================================== */
 
-/* -----------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
    Password fields: WooCommerce's script wraps each in .password-input and
-   adds a show-password button at the end */
+   adds a show-password button at the end
+   -------------------------------------------------------------------------- */
 .password-input {
-    display: grid;
-    position: relative;
+  display: grid;
+  position: relative;
 
-    .show-password-input {
-        align-items: center;
-        block-size: 100%;
-        display: flex;
-        inset-block-start: 0;
-        inset-inline-end: 0;
-        padding-inline: var(--spacing);
-        position: absolute;
-
-        &::before {
-            color: var(--foreground-muted);
-            content: attr(aria-label);
-            font-size: var(--typography-font-size--1);
-            text-box: trim-both cap alphabetic;
-            text-transform: uppercase;
-        }
-    }
-}
-
-/* -----------------------------------------------------------------------------
-   Form styles: the account forms use the library's Field markup
-   (woocommerce/myaccount/); these cover WooCommerce's other forms */
-
-/* Checkbox/radio label styling */
-.woocommerce-form__label-for-checkbox {
+  .show-password-input {
     align-items: center;
+    block-size: 100%;
     display: flex;
-    gap: 0.5rem;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    padding-inline: var(--spacing);
+    position: absolute;
+
+    &::before {
+      color: var(--foreground-muted);
+      content: attr(aria-label);
+      font-size: var(--body-sm-fixed-font-size);
+      text-box: trim-both cap alphabetic;
+      text-transform: uppercase;
+    }
+  }
 }
 
-/* -----------------------------------------------------------------------------
-   Notifications and messages */
+/* --------------------------------------------------------------------------
+   Forms: the account forms use the library's Field markup
+   (woocommerce/myaccount/); these cover WooCommerce's other forms
+   -------------------------------------------------------------------------- */
+
+/* A checkbox beside its label */
+.woocommerce-form__label-for-checkbox {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Notices
+   -------------------------------------------------------------------------- */
 
 /* WooCommerce's notices are Banners (woocommerce/notices); they sit in the
    flow above what they're about */
 .banner:is(.woocommerce-info, .woocommerce-message, .woocommerce-error) {
-    margin-block-end: var(--spacing-breathe);
+  margin-block-end: var(--spacing-breathe);
 }
 
 /* The order-received notice on the thank-you page */
 .woocommerce-notice {
-    background-color: var(--surface-success);
-    border: var(--border-width-thin) dashed var(--border-color-quiet);
-    border-color: var(--foreground-success);
-    color: var(--foreground-success);
-    margin-block-end: var(--spacing-breathe);
-    padding: var(--spacing);
+  background-color: var(--surface-success);
+  border: var(--border-width-thin) dashed var(--border-color-quiet);
+  border-color: var(--foreground-success);
+  color: var(--foreground-success);
+  margin-block-end: var(--spacing-breathe);
+  padding: var(--spacing);
 }
 
-/* -----------------------------------------------------------------------------
-   Order styles */
+/* --------------------------------------------------------------------------
+   Orders
+   -------------------------------------------------------------------------- */
 
 .woocommerce-order {
-    section {
-        border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
-        margin-block-start: var(--spacing-cushion);
-        padding-block-start: var(--spacing-cushion);
+  section {
+    border-block-start: var(--border-width-thin) dashed
+      var(--border-color-quiet);
+    margin-block-start: var(--spacing-cushion);
+    padding-block-start: var(--spacing-cushion);
+  }
 
-    }
-
-    /* Address block styling */
-    address {
-        background-color: var(--surface-card);
-        padding: var(--spacing);
-    }
+  address {
+    background-color: var(--surface-card);
+    padding: var(--spacing);
+  }
 }
 
-/* Order summary/overview list */
+/* The order summary: a label and value per row, ruled between rows */
 .woocommerce-order-overview {
-    background-color: var(--surface-card);
-    list-style: none;
-    margin-block-end: var(--spacing-cushion);
-    padding: var(--spacing-cushion);
+  background-color: var(--surface-card);
+  list-style: none;
+  margin-block-end: var(--spacing-cushion);
+  padding: var(--spacing-cushion);
 
-    li {
-        align-items: center;
-        display: grid;
-        gap: calc(var(--spacing) / 4);
+  li {
+    align-items: center;
+    display: grid;
+    gap: calc(var(--spacing) / 4);
 
-        @media screen and (width > 48em) {
-            grid-template-columns: var(--spacing-192) 1fr;
-        }
-
-        strong {
-            font-weight: bold;
-            word-break: break-all;
-        }
-
-        /* Divider between list items */
-        +li {
-            border-block-start: var(--border-width-thin) dashed var(--border-color-quiet);
-            margin-block-start: calc(var(--spacing) / 2);
-            padding-block-start: calc(var(--spacing) / 2);
-        }
+    @media screen and (width > 48em) {
+      grid-template-columns: calc(var(--spacing-block-2xs) * 1.5) 1fr;
     }
+
+    strong {
+      font-weight: var(--body-strong-font-weight);
+      word-break: break-all;
+    }
+
+    & + li {
+      border-block-start: var(--border-width-thin) dashed
+        var(--border-color-quiet);
+      margin-block-start: calc(var(--spacing) / 2);
+      padding-block-start: calc(var(--spacing) / 2);
+    }
+  }
 }
 
 .woocommerce-address-fields {
-    .address-field:has(+ #billing_address_2_field) {
-        margin-block-end: calc(var(--spacing) / 2);
-    }
+  .address-field:has(+ #billing_address_2_field) {
+    margin-block-end: calc(var(--spacing) / 2);
+  }
 }
 
 /* The library's Field marks optional fields, as WooCommerce does too, so
    its required asterisks go (the controls keep aria-required) */
 .field .required {
-    display: none;
+  display: none;
 }
 
 .woocommerce-input-wrapper {
-    display: grid;
+  display: grid;
 }
 
 /* An order's number, date and status in its summary line: bold, not marked */
 mark:is(.order-number, .order-date, .order-status) {
-    background-color: transparent;
-    color: inherit;
-    font-weight: var(--body-strong-font-weight, bold);
+  background-color: transparent;
+  color: inherit;
+  font-weight: var(--body-strong-font-weight);
 }
 
-/* -----------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
    Stripe's parts in a payment box, which is a Stack
    (woocommerce/checkout/payment-method.php): the saved-card list with no cards
-   (WooCommerce's script hides it too) and an empty error box take no gap */
-.payment_box :is(.wc-saved-payment-methods[data-count="0"], .stripe-source-errors:empty) {
-    display: none;
+   (WooCommerce's script hides it too) and an empty error box take no gap
+   -------------------------------------------------------------------------- */
+.payment_box
+  :is(.wc-saved-payment-methods[data-count="0"], .stripe-source-errors:empty) {
+  display: none;
 }

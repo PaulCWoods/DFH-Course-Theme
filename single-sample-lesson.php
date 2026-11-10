@@ -23,7 +23,7 @@ get_template_part('content', 'lesson-head', array(
 ?>
 <main class="main main--flush" id="main">
     <article id="post-<?php the_ID(); ?>" <?php post_class('stack gap-0 min-h-full'); ?>>
-        <header class="lesson-header prose font-sizing-fluid">
+        <header class="lesson-header prose font-sizing-fluid bg-darker color-scheme-dark">
             <div class="wrapper">
                 <p class="small-heading">Free sample</p>
                 <h1 class="lesson-header__title"><?php the_title(); ?></h1>

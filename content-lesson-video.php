@@ -7,7 +7,7 @@
 $playback_id = $args['playback_id'] ?? '';
 ?>
 <?php if ($playback_id): ?>
-    <div class="lesson-video print:hide">
+    <div class="lesson-video bg-darker color-scheme-dark print:hide">
         <div class="lesson-video__container wrapper wrapper--flush">
             <mux-player id="lesson-video-player" playback-id="<?php echo esc_attr($playback_id); ?>"
                 accent-color="#2eab93" metadata-video-title="<?php echo esc_attr(get_the_title()); ?>"
