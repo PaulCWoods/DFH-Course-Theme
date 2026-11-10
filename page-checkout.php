@@ -1,31 +1,24 @@
 <?php
 /**
  * Template Name: Checkout Page
- * 
+ *
+ * The cart and checkout (their pages hold WooCommerce's classic shortcodes;
+ * the overrides in woocommerce/cart and woocommerce/checkout lay them out),
+ * and the order received page after checkout.
  */
 get_header();
-get_template_part('content', 'account-header');
+get_template_part('content', 'course-header');
 ?>
-
-<main class="main shop-main" id="main">
-    <!-- Use a wider container or full layout for checkout/cart, prose for normal pages -->
-    <article class="article wrapper shop">
-
-        <header class="article__header">
-            <h1 class="title"><?php if (class_exists('WooCommerce') && is_cart()) : ?>Shopping cart<?php else : the_title(); endif; ?></h1>
-        </header>
-
-        <div class="article__content">
-            <?php
-            while (have_posts()):
-                the_post();
-                the_content();
-            endwhile;
-            ?>
-        </div>
-
-    </article>
+<main class="main" id="main">
+    <div class="wrapper stack py-cushion-lg">
+        <h1 class="title"><?php the_title(); ?></h1>
+        <?php
+        while (have_posts()):
+            the_post();
+            the_content();
+        endwhile;
+        ?>
+    </div>
 </main>
-
 <?php
 get_footer();

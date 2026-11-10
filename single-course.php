@@ -65,7 +65,7 @@ get_template_part('content', 'course-header');
 
 <main class="main main--flush" id="main">
     <article>
-        <header class="poster">
+        <header class="poster poster--block-end" style="--poster-min-size: 50svh;">
             <?php if (has_post_thumbnail()) {
                 the_post_thumbnail('full', array('class' => 'poster__media', 'alt' => '', 'sizes' => '100vw', 'fetchpriority' => 'high', 'loading' => false));
             } ?>
@@ -73,111 +73,131 @@ get_template_part('content', 'course-header');
                 <div class="stack">
                     <h1 class="title"><?php the_title(); ?></h1>
                     <div class="large-text font-bold"><?php the_excerpt(); ?></div>
-                    <hr class="divider divider--dashed" />
-
-                    <?php if ($course_closed): ?>
-                        <h2 class="heading">Coming soon</h2>
-                        <p class="text text-muted">This course isn't open yet. Check back soon.</p>
-
-                    <?php elseif ($has_pending_order && !$has_access): ?>
-                        <p class="small-heading text-muted">Welcome, <?php echo esc_html($user_name); ?></p>
-                        <h2 class="heading">Payment received</h2>
-                        <p class="text text-muted">Your payment is going through. You'll have the course as soon as it
-                            clears.</p>
-                        <div class="button-group">
-                            <a href="<?php echo esc_url(get_permalink()); ?>"
-                                class="button button--strong button--accent">Refresh the page</a>
-                        </div>
-
-                    <?php elseif (!is_user_logged_in()): ?>
-                        <h2 class="heading">Ready to start learning?</h2>
-                        <p class="text text-muted">
-                            <?php if ($course_product): ?>
-                                Create an account to enrol (<?php echo wp_kses_post($course_product->get_price_html()); ?>).
-                            <?php else: ?>
-                                Create an account to see the whole course.
-                            <?php endif; ?>
-                        </p>
-                        <div class="button-group">
-                            <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/register/'))); ?>"
-                                class="button button--strong button--accent">Register to enrol</a>
-                        </div>
-                        <p class="small-text text-muted">Already have an account? <a
-                                href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>"
-                                class="link font-bold">Log in</a> to enrol.</p>
-
-                    <?php elseif (!$has_access && $course_product): ?>
-                        <p class="small-heading text-muted">Welcome, <?php echo esc_html($user_name); ?></p>
-                        <h2 class="heading">Get the whole course</h2>
-                        <p class="text text-muted">Buy the course to open every lesson and keep track of your progress.</p>
-                        <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="button-group">
-                            <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
-                            <button type="submit" class="button button--strong button--accent">Buy the course:
-                                <?php echo wp_kses_post($course_product->get_price_html()); ?></button>
-                        </form>
-
-                    <?php elseif ('completed' === $active_lesson_status): ?>
-                        <p class="status status--plain status--success"><span class="status__text">Complete</span></p>
-                        <h2 class="heading">You've finished the course <span aria-hidden="true">🎉</span></h2>
-                        <p class="text">Congratulations: you've completed every lesson.</p>
-                        <div class="button-group">
-                            <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>"
-                                class="button button--strong button--accent">
-                                <span>Download your certificate (PDF)</span>
-                                <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                    <use href="#Download" />
-                                </svg>
-                            </a>
-                            <?php if ($all_lessons): ?>
-                                <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button">Review from the
-                                    start</a>
-                            <?php endif; ?>
-                        </div>
-                        <p class="small-text">What did you think of the course? <a class="link"
-                                href="https://designforhumans.blog/contact?subject=Course%20feedback">Let me know</a>.</p>
-
-                    <?php elseif ($completed_count > 0): ?>
-                        <p class="small-heading text-muted">Welcome back, <?php echo esc_html($user_name); ?></p>
-                        <h2 class="heading" id="course-progress-heading">Your progress:
-                            <?php echo esc_html($progress_percent); ?>% complete</h2>
-                        <progress class="progress" max="100" value="<?php echo esc_attr($progress_percent); ?>"
-                            aria-labelledby="course-progress-heading"><?php echo esc_html($progress_percent); ?>%</progress>
-                        <div class="button-group">
-                            <a href="<?php echo esc_url(get_permalink($active_lesson_status)); ?>"
-                                class="button button--strong button--accent">
-                                <span>Carry on: <?php echo esc_html(get_the_title($active_lesson_status)); ?></span>
-                                <?php echo $arrow; ?>
-                            </a>
-                        </div>
-
-                    <?php else: ?>
-                        <p class="small-heading text-muted">Welcome, <?php echo esc_html($user_name); ?></p>
-                        <h2 class="heading">Ready to begin?</h2>
-                        <?php if ($all_lessons): ?>
-                            <p class="text text-muted">Go straight to the first lesson.</p>
-                            <div class="button-group">
-                                <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>"
-                                    class="button button--strong button--accent">
-                                    <span>Start the course</span>
-                                    <?php echo $arrow; ?>
-                                </a>
-                            </div>
-                        <?php else: ?>
-                            <p class="text text-muted">The lessons are still being written. Check back soon.</p>
-                        <?php endif; ?>
-                    <?php endif; ?>
                 </div>
             </div>
         </header>
-
-        <section class="bg-card py-cushion-lg" aria-labelledby="course-about-heading">
+        <section class="section<?php echo 'completed' === $active_lesson_status ? ' bg-accent' : ''; ?>"
+            aria-labelledby="course-dynamic-info">
             <div class="wrapper stack">
+                <?php if ($course_closed): ?>
+                    <h2 id="course-dynamic-info" class="heading">Coming soon</h2>
+                    <p class="text text-muted">This course isn't open yet. Check back soon.</p>
+
+                <?php elseif ($has_pending_order && !$has_access): ?>
+                    <p class="small-heading text-muted">Welcome,
+                        <?php echo esc_html($user_name); ?>
+                    </p>
+                    <h2 id="course-dynamic-info" class="heading">Payment received</h2>
+                    <p class="text text-muted">Your payment is going through. You'll have the course as soon as it
+                        clears.</p>
+                    <div class="button-group">
+                        <a href="<?php echo esc_url(get_permalink()); ?>"
+                            class="button button--strong button--accent">Refresh
+                            the page</a>
+                    </div>
+
+                <?php elseif (!is_user_logged_in()): ?>
+                    <h2 id="course-dynamic-info" class="heading">Ready to start learning?</h2>
+                    <p class="text text-muted">
+                        <?php if ($course_product): ?>
+                            Create an account to enrol (
+                            <?php echo wp_kses_post($course_product->get_price_html()); ?>).
+                        <?php else: ?>
+                            Create an account to see the whole course.
+                        <?php endif; ?>
+                    </p>
+                    <div class="button-group">
+                        <a href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/register/'))); ?>"
+                            class="button button--strong button--accent">Register to enrol</a>
+                    </div>
+                    <p class="small-text text-muted">Already have an account? <a
+                            href="<?php echo esc_url(add_query_arg('redirect_to', get_permalink(), home_url('/login/'))); ?>"
+                            class="link font-bold">Log in</a> to enrol.</p>
+
+                <?php elseif (!$has_access && $course_product): ?>
+                    <p class="small-heading text-muted">Welcome,
+                        <?php echo esc_html($user_name); ?>
+                    </p>
+                    <h2 id="course-dynamic-info" class="heading">Get the whole course</h2>
+                    <p class="text text-muted">Buy the course to open every lesson and keep track of your progress.</p>
+                    <form action="<?php echo esc_url(wc_get_checkout_url()); ?>" method="post" class="button-group">
+                        <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($woo_product_id); ?>" />
+                        <button type="submit" class="button button--strong button--accent">Buy the course:
+                            <?php echo wp_kses_post($course_product->get_price_html()); ?>
+                        </button>
+                    </form>
+
+                <?php elseif ('completed' === $active_lesson_status): ?>
+                    <p class="status status--plain status--success"><span class="status__text">Complete</span></p>
+                    <h2 id="course-dynamic-info" class="heading">You've finished the course <span
+                            aria-hidden="true">🎉</span></h2>
+                    <p class="text">Congratulations: you've completed every lesson.</p>
+                    <div class="button-group">
+                        <a href="<?php echo esc_url(add_query_arg(array('action' => 'download_certificate', 'course_id' => $course_id, 'nonce' => wp_create_nonce('dfh_cert_' . $course_id)), home_url('/'))); ?>"
+                            class="button button--strong button--accent">
+                            <span>Download your certificate (PDF)</span>
+                            <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
+                                <use href="#Download" />
+                            </svg>
+                        </a>
+                        <?php if ($all_lessons): ?>
+                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>" class="button">Review from the
+                                start</a>
+                        <?php endif; ?>
+                    </div>
+                    <p class="small-text">What did you think of the course? <a class="link"
+                            href="https://designforhumans.blog/contact?subject=Course%20feedback">Let me know</a>.</p>
+
+                <?php elseif ($completed_count > 0): ?>
+                    <p class="small-heading text-muted">Welcome back,
+                        <?php echo esc_html($user_name); ?>
+                    </p>
+                    <h2 id="course-dynamic-info" class="heading" id="course-progress-heading">Your progress:
+                        <?php echo esc_html($progress_percent); ?>% complete
+                    </h2>
+                    <progress class="progress" max="100" value="<?php echo esc_attr($progress_percent); ?>"
+                        aria-labelledby="course-progress-heading">
+                        <?php echo esc_html($progress_percent); ?>%
+                    </progress>
+                    <div class="button-group">
+                        <a href="<?php echo esc_url(get_permalink($active_lesson_status)); ?>"
+                            class="button button--strong button--accent">
+                            <span>Carry on:
+                                <?php echo esc_html(get_the_title($active_lesson_status)); ?>
+                            </span>
+                            <?php echo $arrow; ?>
+                        </a>
+                    </div>
+
+                <?php else: ?>
+                    <p class="small-heading text-muted">Welcome,
+                        <?php echo esc_html($user_name); ?>
+                    </p>
+                    <h2 class="heading">Ready to begin?</h2>
+                    <?php if ($all_lessons): ?>
+                        <p class="text text-muted">Go straight to the first lesson.</p>
+                        <div class="button-group">
+                            <a href="<?php echo esc_url(get_permalink($all_lessons[0])); ?>"
+                                class="button button--strong button--accent">
+                                <span>Start the course</span>
+                                <?php echo $arrow; ?>
+                            </a>
+                        </div>
+                    <?php else: ?>
+                        <p class="text text-muted">The lessons are still being written. Check back soon.</p>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="course-about-heading">
+            <div class="wrapper prose font-sizing-fluid">
                 <h2 id="course-about-heading" class="heading">About this course</h2>
-                <div class="prose font-sizing-fluid"><?php the_content(); ?></div>
+                <?php the_content(); ?>
                 <?php
                 $sample_id = get_post_meta($course_id, '_dfh_linked_sample_id', true);
                 if ($sample_id && !$has_access): ?>
-                    <div class="button-group">
+                    <div class="button-group mt-cushion prose-end">
                         <a href="<?php echo esc_url(get_permalink($sample_id)); ?>" class="button">
                             <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
                                 <use href="#Search" />
@@ -189,14 +209,15 @@ get_template_part('content', 'course-header');
             </div>
         </section>
 
-        <section class="bg-card border-t py-cushion-lg" aria-labelledby="course-plan-heading">
+        <section class="section" aria-labelledby="course-plan-heading">
             <div class="wrapper stack">
                 <h2 id="course-plan-heading" class="heading">Course plan</h2>
                 <p class="small-text text-muted">Each lesson opens as you finish the one before.</p>
                 <?php if ($root_lesson_ids): ?>
                     <?php if ($has_access): ?>
                         <nav aria-labelledby="course-plan-heading">
-                            <?php echo dfh_render_course_plan($root_lesson_ids, $active_lesson_status); ?></nav>
+                            <?php echo dfh_render_course_plan($root_lesson_ids, $active_lesson_status); ?>
+                        </nav>
                     <?php else: ?>
                         <?php echo dfh_render_course_plan($root_lesson_ids, $active_lesson_status); ?>
                     <?php endif; ?>

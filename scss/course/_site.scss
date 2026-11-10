@@ -1,9 +1,0 @@
-@use "../theme/sassvars" as var;
-
-.site-header__nav-toggle.button {
-    display: inline-flex;
-
-    @media screen and (width > #{var.$bp-account}) {
-        display: none;
-    }
-}

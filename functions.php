@@ -1551,7 +1551,8 @@ function dfh_notice_banner($messages, $intent, $icon, $extra_class = '')
             <?php endif; ?>
             <?php if ($actions): ?>
                 <div class="cluster mt-sm">
-                    <?php echo implode('', $actions); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+                    <?php echo implode('', $actions); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                </div>
             <?php endif; ?>
         </div>
     </div>
@@ -1567,6 +1568,85 @@ function dfh_notice_allowed_icon($tags)
     return $tags;
 }
 add_filter('woocommerce_kses_notice_allowed_tags', 'dfh_notice_allowed_icon');
+
+/**
+ * WooCommerce's account tables (orders, downloads, payment methods, an
+ * order's details, there and on the order received page) as the library's Table, each in a labelled container
+ * that scrolls on a narrow screen. After the shortcodes run (priority 11).
+ */
+function dfh_woocommerce_tables($content)
+{
+    if (!function_exists('is_account_page') || !(is_account_page() || is_order_received_page())) {
+        return $content;
+    }
+    $labels = array(
+        'woocommerce-orders-table' => __('Orders', 'woocommerce'),
+        'woocommerce-MyAccount-paymentMethods' => __('Payment methods', 'woocommerce'),
+        'woocommerce-table--order-downloads' => __('Downloads', 'woocommerce'),
+        'woocommerce-table--order-details' => __('Order details', 'woocommerce'),
+    );
+    return preg_replace_callback('#<table class="([^"]*\bshop_table\b[^"]*)"(.*?)</table>#s', function ($match) use ($labels) {
+        $label = __('Table', 'dfh');
+        foreach ($labels as $class => $text) {
+            if (str_contains($match[1], $class)) {
+                $label = $text;
+            }
+        }
+        return '<div class="table-container" tabindex="0" role="region" aria-label="' . esc_attr($label) . '">'
+            . '<table class="table ' . $match[1] . '"' . $match[2] . '</table></div>';
+    }, $content);
+}
+add_filter('the_content', 'dfh_woocommerce_tables', 20);
+
+/**
+ * The checkout's order review as the library's Table. It sits in the order
+ * Card, which is narrow enough without a scrolling container, and
+ * WooCommerce's script replaces it whole as a fragment.
+ */
+function dfh_review_order_table($html)
+{
+    return str_replace('<table class="shop_table ', '<table class="table table--plain shop_table ', $html);
+}
+
+function dfh_review_order_fragment($fragments)
+{
+    if (isset($fragments['.woocommerce-checkout-review-order-table'])) {
+        $fragments['.woocommerce-checkout-review-order-table'] = dfh_review_order_table($fragments['.woocommerce-checkout-review-order-table']);
+    }
+    return $fragments;
+}
+add_filter('woocommerce_update_order_review_fragments', 'dfh_review_order_fragment');
+
+/**
+ * WooCommerce's saved cards ("Visa ending in 4242", "Use a new payment
+ * method") and its "Save to account" checkbox as the library's Choice, the
+ * list without bullets. Each input stays beside its label (see
+ * woocommerce/checkout/payment-method.php). Its script finds them by
+ * their classes, which stay.
+ */
+function dfh_payment_choices($html)
+{
+    $html = preg_replace_callback('#<input([^>]*)/>\s*<label for="([^"]+)"[^>]*>(.*?)</label>#s', function ($match) {
+        $input = str_replace(' style="width:auto;"', '', $match[1]);
+        $control = str_contains($input, 'type="checkbox"') ? 'checkbox-input' : 'radio-input';
+        $input = str_contains($input, 'class="')
+            ? str_replace('class="', 'class="' . $control . ' ', $input)
+            : $input . ' class="' . $control . '"';
+        return '<div class="choice"><input' . $input . ' /><label for="' . $match[2] . '">' . $match[3] . '</label></div>';
+    }, $html);
+    return str_replace('<ul class="woocommerce-SavedPaymentMethods ', '<ul role="list" class="stack woocommerce-SavedPaymentMethods ', $html);
+}
+add_filter('wc_payment_gateway_form_saved_payment_methods_html', 'dfh_payment_choices');
+add_filter('woocommerce_payment_gateway_save_new_payment_method_option_html', 'dfh_payment_choices');
+
+// A course sells one place at a time, so the cart has no quantities
+add_filter('woocommerce_is_sold_individually', '__return_true');
+
+// One place per course, so the order review leaves out the "× 1"
+add_filter('woocommerce_checkout_cart_item_quantity', '__return_empty_string');
+
+// Nothing about a course needs a note with the order
+add_filter('woocommerce_enable_order_notes_field', '__return_false');
 
 // The footnotes list takes the library's small text
 function dfh_footnotes_small_text($content)
@@ -2174,3 +2254,18 @@ function dfh_save_testimonial_meta($post_id)
     }
 }
 add_action('save_post_testimonial', 'dfh_save_testimonial_meta');
+
+/**
+ * Logged out, My account's front page (WooCommerce's login form) sends the
+ * visitor to the course's own login page, and back again after. Its lost and
+ * reset password sections stay. WooCommerce handles a posted login before
+ * this runs, so only page loads are sent on.
+ */
+function dfh_account_login_redirect()
+{
+    if ('GET' === $_SERVER['REQUEST_METHOD'] && !is_user_logged_in() && function_exists('is_account_page') && is_account_page() && !is_wc_endpoint_url()) {
+        wp_safe_redirect(add_query_arg('redirect_to', rawurlencode(wc_get_page_permalink('myaccount')), home_url('/login/')));
+        exit;
+    }
+}
+add_action('template_redirect', 'dfh_account_login_redirect');

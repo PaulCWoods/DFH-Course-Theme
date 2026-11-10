@@ -9,21 +9,9 @@
     --lesson-aside-sticky-top: var(--lesson-header-height);
     --lesson-quote-bold-font-weight: var(--typography-font-weight-600);
 
-    --my-account-nav-width: var(--spacing-320);
-    --my-account-nav-transition: var(--duration-md);
-
     --prose-body-font-family: var(--body-font-family);
 
-    --cart-address-card-width: var(--spacing-256);
-
     --site-header-z-index: var(--z-index-sticky);
-}
-
-// Disable component transitions for users who prefer reduced motion.
-@media (prefers-reduced-motion: reduce) {
-    :root {
-        --my-account-nav-transition: 0s;
-    }
 }
 
 // // Contextual link tokens for lessons and syllabus views.

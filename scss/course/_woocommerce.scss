@@ -1,141 +1,32 @@
 // WooCommerce
 // -----------------------------------------------------------------------------
-// Account, checkout, notification, order, and form styling for WooCommerce.
-
-@use "../theme/sassvars" as var;
+// What WooCommerce's own markup still needs: its show-password button, the
+// forms and order screens it generates, and the checkout blocks' fields.
+// My account's layout, navigation and addresses are the library's
+// (woocommerce/myaccount/).
 
 // -----------------------------------------------------------------------------
-// My account layout and navigation
+// Password fields: WooCommerce's script wraps each in .password-input and
+// adds a show-password button at the end
+.password-input {
+    display: grid;
+    position: relative;
 
-.my-account .woocommerce {
-    display: flex;
-    flex-direction: column;
-
-    @media screen and (width > #{var.$bp-account}) {
-        display: grid;
-        grid-template-columns: var(--my-account-nav-width) 1fr;
-    }
-
-    .title {
+    .show-password-input {
+        align-items: center;
+        block-size: 100%;
         display: flex;
-        flex-direction: column;
-        margin-block-end: var(--spacing-cushion);
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        line-height: inherit;
-        text-transform: inherit;
-    }
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        padding-inline: var(--spacing);
+        position: absolute;
 
-    // Account details grid layout for address cards
-    .u-columns {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(min(var(--cart-address-card-width, 16rem), 100%), 1fr));
-        gap: var(--spacing);
-
-        [class^="u-column"] {
-            border: var(--border-width-thin) dashed var(--border-color-quiet);
-            padding: var(--spacing);
-        }
-    }
-
-    // Form field wrapper styling
-    p:has(label) {
-        display: flex;
-        flex-direction: column;
-        gap: calc(var(--spacing) / 2);
-    }
-
-    // -------------------------------------------------------------------------
-    // Payment methods and payment boxes
-
-    .payment_methods {
-        list-style: none;
-        margin-block-end: var(--spacing-cushion);
-        margin-inline-start: 0;
-        padding: 0;
-
-        li {
-
-            // Payment method radio/checkbox inputs
-            >input:is([type="checkbox"], [type="radio"]) {
-                margin: 0;
-                vertical-align: middle;
-            }
-
-            // Payment method labels
-            >label {
-                margin-inline-start: calc(var(--spacing) / 2);
-                vertical-align: middle;
-            }
-        }
-    }
-
-    // Expandable payment method details
-    .payment_box {
-        background-color: var(--surface-card);
-        margin-block-start: var(--spacing);
-        padding: var(--spacing);
-    }
-
-    // Payment method table actions column
-    .payment-method-actions {
-        inline-size: 1px;
-        padding-inline: 0;
-        white-space: nowrap;
-    }
-
-    .account-payment-methods-table {
-        margin-block-end: var(--spacing-cushion);
-    }
-
-    .payment-method-method {
-        font-weight: bold;
-    }
-
-    .payment-method-expires {
-        text-align: center;
-    }
-
-    // -------------------------------------------------------------------------
-    // Password input with visibility toggle
-
-    .password-input {
-        display: grid;
-        position: relative;
-
-        // Show/hide password button
-        .show-password-input {
-            align-items: center;
-            block-size: 100%;
-            display: flex;
-            padding-inline: var(--spacing);
-            inset-block-start: 0;
-            inset-inline-end: 0;
-            position: absolute;
-
-            &:before {
-                color: var(--foreground-muted);
-                content: attr(aria-label);
-                font-size: var(--typography-font-size--1);
-                text-box: trim-both cap alphabetic;
-                text-transform: uppercase;
-            }
-        }
-    }
-
-    // Form container constraints
-    &:has(.woocommerce-form) {
-        max-inline-size: calc(var(--spacing-site-width) / 2);
-        margin-inline: auto;
-
-        @media screen and (width > #{var.$bp-account}) {
-            display: flex;
-            flex-direction: column;
-        }
-
-        h2 {
-            margin-block-end: var(--spacing-breathe);
+        &::before {
+            color: var(--foreground-muted);
+            content: attr(aria-label);
+            font-size: var(--typography-font-size--1);
+            text-box: trim-both cap alphabetic;
+            text-transform: uppercase;
         }
     }
 }
@@ -220,82 +111,6 @@
     }
 }
 
-// Alternate address styling selector
-.woocommerce-Address address {
-    background-color: var(--surface-card);
-    padding: var(--spacing);
-}
-
-.woocommerce-MyAccount-navigation {
-    background-color: var(--surface-card);
-    block-size: 0;
-    box-shadow: var(--shadow-none);
-    display: none;
-    padding: var(--spacing-cushion);
-    opacity: 0;
-    overflow: hidden;
-    transition:
-        display var(--my-account-nav-transition) ease-in-out allow-discrete,
-        block-size var(--my-account-nav-transition) ease-in-out,
-        box-shadow var(--my-account-nav-transition) ease-in-out,
-        margin var(--my-account-nav-transition) ease-in-out,
-        opacity var(--my-account-nav-transition) ease-in-out;
-
-    .site:has(.my-account-header__nav-toggle.open) & {
-        block-size: auto;
-        box-shadow: var(--shadow);
-        display: block;
-        margin-block-end: calc(var(--spacing-cushion) * 2);
-        opacity: 1;
-
-        @starting-style {
-            block-size: 0;
-            box-shadow: var(--shadow-none);
-                    opacity: 0;
-        }
-    }
-
-    @media screen and (width > #{var.$bp-account}) {
-        background-color: transparent;
-        block-size: auto;
-        box-shadow: none;
-        display: block;
-        margin: 0;
-        padding: 0;
-        opacity: 1;
-        transition: none;
-    }
-
-    ul {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing);
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-}
-
-.woocommerce-MyAccount-navigation-link {
-    &.is-active {
-        font-weight: bold;
-    }
-
-    a {
-        text-decoration-color: var(--link-underline-color, currentColor);
-        text-decoration-thickness: var(--link-underline-thickness, var(--underline-thickness, 1px));
-        text-underline-offset: var(--link-underline-offset, var(--underline-offset, 0.25em));
-
-        &:hover {
-            color: var(--link-hover-color);
-        }
-
-        &:active {
-            color: var(--link-active-color);
-        }
-    }
-}
-
 .woocommerce-address-fields {
     .address-field:has(+ #billing_address_2_field) {
         margin-block-end: calc(var(--spacing) / 2);
@@ -324,4 +139,18 @@
 .wc-block-components-textarea {
     background-color: var(--input-background-color, var(--surface-card, Canvas));
     color: inherit;
+}
+// An order's number, date and status in its summary line: bold, not marked
+mark:is(.order-number, .order-date, .order-status) {
+    background-color: transparent;
+    color: inherit;
+    font-weight: var(--body-strong-font-weight, bold);
+}
+
+// -----------------------------------------------------------------------------
+// Stripe's parts in a payment box, which is a Stack
+// (woocommerce/checkout/payment-method.php): the saved-card list with no cards
+// (WooCommerce's script hides it too) and an empty error box take no gap
+.payment_box :is(.wc-saved-payment-methods[data-count="0"], .stripe-source-errors:empty) {
+    display: none;
 }

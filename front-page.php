@@ -132,10 +132,11 @@ get_header();
                         $author_url = get_post_meta($testimonial->ID, '_dfh_testimonial_author_url', true); ?>
                         <li class="card card--strong">
                             <figure class="card__body stack">
-                                <svg class="icon icon--lg" width="1em" height="1em" aria-hidden="true" focusable="false">
+                                <svg class="icon icon--lg icon--accent" width="1em" height="1em" aria-hidden="true"
+                                    focusable="false">
                                     <use href="#Quote" />
                                 </svg>
-                                <blockquote class="text font-bold">
+                                <blockquote class="large-text">
                                     <?php echo apply_filters('the_content', $testimonial->post_content); ?>
                                 </blockquote>
                                 <?php if ($author): ?>

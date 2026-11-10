@@ -1,40 +1,6 @@
-// Login page
-// -----------------------------------------------------------------------------
-// Login form layout, supporting messages, and shared authentication surfaces.
-
-// -----------------------------------------------------------------------------
-// Login form layout
-.login-page {
-    align-items: center;
-    display: flex;
-
-    h1 {
-        margin-block-end: 1em;
-    }
-
-    .wrapper {
-        inline-size: 100%;
-        max-inline-size: calc(var(--spacing-site-width) / 2);
-    }
-}
-
-.login-message {
-    margin-block-end: var(--spacing-breathe);
-}
-
-// -----------------------------------------------------------------------------
-// Supporting login content
-.login-extras {
-    margin-block-start: var(--spacing-breathe);
-}
-
-.login-info {
-    margin-block-end: var(--spacing-breathe);
-}
-
-// Shared surface for native and WooCommerce login forms.
-.woocommerce-form.login,
-.login-page form {
+// WooCommerce's login form (My account, checkout), until the WooCommerce
+// pages are rebuilt
+.woocommerce-form.login {
     background-color: var(--surface-translucent);
     display: flex;
     flex-direction: column;
