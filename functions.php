@@ -191,7 +191,8 @@ function dfh_render_stats_meta_box_html($post)
         <textarea name="lesson_stats" rows="4" style="width: 100%; padding: 8px;"
             placeholder="Students | 120"><?php echo esc_textarea($stats); ?></textarea>
         <p style="font-size: 12px; color: #666; margin-top: 5px;">Each line should contain a label, a pipe, then the
-            number/value.</p>
+            number/value. A value given as a percentage (Completion | 72%) also shows as a bar; for one that isn't,
+            add the percentage after another pipe (Lessons done | 18 of 25 | 72%).</p>
     </div>
     <?php
 }
@@ -367,7 +368,7 @@ if (function_exists('acf_add_local_field_group')) {
  */
 function dfh_library_css($file)
 {
-    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/0.5.3';
+    $base = defined('DFH_COMPONENTS_CSS') ? DFH_COMPONENTS_CSS : 'https://components.designforhumans.blog/css/1.1.0';
     return rtrim($base, '/') . '/' . $file;
 }
 

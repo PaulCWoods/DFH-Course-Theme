@@ -15,11 +15,14 @@ if (!empty($stats_meta)): ?>
                 $parts = array_map('trim', explode('|', $line));
                 $label = $parts[0] ?? '';
                 $value = $parts[1] ?? '';
-                $percent = $parts[2] ?? '';
                 if ($label === '' && $value === '') {
                     continue;
-                } ?>
-                <div class="telemetry telemetry--subtle telemetry--inline justify-between" <?php echo is_numeric($percent) ? ' style="--value: ' . esc_attr(min(100, max(0, (float) $percent))) . '%;"' : ''; ?>>
+                }
+                // The fill: a value given as a percentage ("72%"), or a third
+                // field for one that isn't ("18 of 25 | 72%", the % optional)
+                $percent = isset($parts[2]) ? rtrim($parts[2], " %") : (preg_match('/^(\d+(?:\.\d+)?)\s*%$/', $value, $match) ? $match[1] : '');
+                $fill = is_numeric($percent) ? ' style="--value: ' . esc_attr(min(100, max(0, (float) $percent))) . '%;"' : ''; ?>
+                <div class="telemetry telemetry--subtle telemetry--inline justify-between" <?php echo $fill; ?>>
                     <dt class="small-text"><?php echo esc_html($label); ?></dt>
                     <dd class="subheading"><?php echo esc_html($value); ?></dd>
                 </div>

@@ -25,7 +25,10 @@
          course and its lesson colours (sub-brands: theme-course on <html>, a lesson's
          class beside its data-lesson or data-syllabus), the DFH site components the
          blog and the docs share (DFH Shared Styles), then the course's own CSS -->
-    <link rel="stylesheet" href="https://use.typekit.net/lrj6kun.css">
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net">
+    <link rel="preload" as="style" href="https://use.typekit.net/lrj6kun.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://use.typekit.net/lrj6kun.css"></noscript>
 <?php foreach (array('dfh-components.css', 'themes/dfh.css', 'themes/course.css', 'themes/course-aqua.css', 'themes/course-purple.css', 'themes/course-olive.css') as $sheet) : ?>
     <link rel="stylesheet" href="<?php echo esc_url(dfh_library_css($sheet)); ?>">
 <?php endforeach; ?>
