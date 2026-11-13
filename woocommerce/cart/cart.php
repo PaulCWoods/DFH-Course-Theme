@@ -67,7 +67,7 @@ do_action('woocommerce_before_cart'); ?>
                                 <?php echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                     'woocommerce_cart_item_remove_link',
                                     sprintf(
-                                        '<a role="button" href="%s" class="remove button button--plain button--icon" data-product_id="%s" data-product_sku="%s"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Delete" /></svg><span class="sr-only">%s</span></a>',
+                                        '<a role="button" href="%s" class="remove button button--plain button--icon" data-product_id="%s" data-product_sku="%s"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#trash" /></svg><span class="sr-only">%s</span></a>',
                                         esc_url(wc_get_cart_remove_url($cart_item_key)),
                                         esc_attr($product_id),
                                         esc_attr($_product->get_sku()),

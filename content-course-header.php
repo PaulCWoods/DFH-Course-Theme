@@ -13,7 +13,7 @@ $current = function ($is_current) {
     <div class="header__bar">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="brand">
             <svg class="brand__mark icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                <use href="#BrandDesignForHumans"></use>
+                <use href="#brand-design-for-humans"></use>
             </svg>
             <span class="brand__name">Courses</span>
         </a>

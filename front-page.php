@@ -67,7 +67,7 @@ get_header();
                         <a href="<?php echo esc_url($resume_url); ?>" class="button button--strong button--accent">
                             <span>Carry on with your course</span>
                             <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                <use href="#ArrowRight" />
+                                <use href="#arrow-right" />
                             </svg>
                         </a>
                     <?php endif; ?>
@@ -104,7 +104,7 @@ get_header();
                                         <?php if (!empty($completed_courses[$course_id])): ?>
                                             <span class="status status--success"><svg class="icon" width="1em" height="1em"
                                                     aria-hidden="true" focusable="false">
-                                                    <use href="#Check" />
+                                                    <use href="#check" />
                                                 </svg><span class="status__text">Complete</span></span>
                                         <?php elseif ($user_id && dfh_user_has_course_access($user_id, $course_id)): ?>
                                             <span class="status status--plain status--accent"><span
@@ -136,7 +136,7 @@ get_header();
                             <figure class="card__body stack">
                                 <svg class="icon icon--lg icon--accent" width="1em" height="1em" aria-hidden="true"
                                     focusable="false">
-                                    <use href="#Quote" />
+                                    <use href="#quote" />
                                 </svg>
                                 <blockquote class="large-text">
                                     <?php echo apply_filters('the_content', $testimonial->post_content); ?>

@@ -47,7 +47,7 @@ if (!empty($external_links)): ?>
                         <span class="block-link__text"><?php echo esc_html($parts[0]); ?><span class="sr-only"> (opens in a new
                                 tab)</span></span>
                         <svg class="block-link__arrow icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                            <use href="#External" />
+                            <use href="#external-link" />
                         </svg>
                     </a>
                 </li>
@@ -81,7 +81,7 @@ if (!empty($download_ids) && is_array($download_ids)): ?>
                                     class="text-muted">(PDF)</span></a>
                         </h3>
                         <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                            <use href="#Download" />
+                            <use href="#download" />
                         </svg>
                     </header>
                     <?php if (trim($download_post->post_excerpt) !== ''): ?>

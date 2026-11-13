@@ -32,10 +32,10 @@ $playback_id = $args['playback_id'] ?? '';
                         aria-pressed="false">
                         <span class="sr-only">Keep the video in view</span>
                         <svg class="icon icon--off" width="1em" height="1em" aria-hidden="true" focusable="false">
-                            <use href="#Unlock" />
+                            <use href="#lock-open" />
                         </svg>
                         <svg class="icon icon--on" width="1em" height="1em" aria-hidden="true" focusable="false">
-                            <use href="#Lock" />
+                            <use href="#lock" />
                         </svg>
                     </button>
                     <script>
@@ -51,7 +51,7 @@ $playback_id = $args['playback_id'] ?? '';
                     <button type="button" class="button button--plain" commandfor="course-progress" command="show-modal">
                         <span>Progress</span>
                         <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                            <use href="#Navigation" />
+                            <use href="#menu" />
                         </svg>
                     </button>
                 <?php endif; ?>

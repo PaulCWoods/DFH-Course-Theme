@@ -57,7 +57,7 @@ if (is_user_logged_in() && $has_access) {
 
 $current_user = wp_get_current_user();
 $user_name = $current_user->ID ? ($current_user->display_name ?: $current_user->user_login) : '';
-$arrow = '<svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#ArrowRight" /></svg>';
+$arrow = '<svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#arrow-right" /></svg>';
 
 get_header();
 get_template_part('content', 'course-header');
@@ -130,7 +130,7 @@ get_template_part('content', 'course-header');
                 <?php elseif ('completed' === $active_lesson_status): ?>
                     <p class="status status--plain status--success"><svg class="icon" width="1em" height="1em"
                             aria-hidden="true" focusable="false">
-                            <use href="#Check" />
+                            <use href="#check" />
                         </svg><span class="status__text">Complete</span></p>
                     <h2 id="course-dynamic-info" class="heading">You've finished the course <span
                             aria-hidden="true">🎉</span></h2>
@@ -140,7 +140,7 @@ get_template_part('content', 'course-header');
                             class="button button--strong button--accent">
                             <span>Download your certificate (PDF)</span>
                             <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                <use href="#Download" />
+                                <use href="#download" />
                             </svg>
                         </a>
                         <?php if ($all_lessons): ?>
@@ -203,7 +203,7 @@ get_template_part('content', 'course-header');
                     <div class="button-group mt-cushion prose-end">
                         <a href="<?php echo esc_url(get_permalink($sample_id)); ?>" class="button">
                             <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                <use href="#Search" />
+                                <use href="#search" />
                             </svg>
                             <span>Read a free sample</span>
                         </a>

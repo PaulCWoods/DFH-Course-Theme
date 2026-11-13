@@ -22,7 +22,7 @@ get_template_part('content', 'course-header');
                     <div class="button-group">
                         <a href="<?php echo esc_url(home_url()); ?>" class="button button--strong button--accent">
                             <span>Go to your courses</span>
-                            <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#ArrowRight" /></svg>
+                            <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#arrow-right" /></svg>
                         </a>
                     </div>
                 </div>

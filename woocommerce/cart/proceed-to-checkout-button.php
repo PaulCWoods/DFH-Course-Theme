@@ -15,5 +15,5 @@ if (!defined('ABSPATH')) {
 ?>
 <a href="<?php echo esc_url(wc_get_checkout_url()); ?>" class="button button--strong button--accent">
     <span><?php esc_html_e('Go to checkout', 'dfh'); ?></span>
-    <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#ArrowRight" /></svg>
+    <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#arrow-right" /></svg>
 </a>

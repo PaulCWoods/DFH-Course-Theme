@@ -76,13 +76,13 @@ if ($parent_id) {
 $is_last_lesson = $course_lessons && (int) end($course_lessons) === (int) $lesson_id;
 if ($is_completed && $is_last_lesson) {
     $progress_label = 'Course home';
-    $progress_icon = '#Home';
+    $progress_icon = '#house';
 } elseif ($is_last_lesson) {
     $progress_label = 'Complete course';
-    $progress_icon = '#Check';
+    $progress_icon = '#check';
 } else {
     $progress_label = 'Next lesson';
-    $progress_icon = '#ArrowRight';
+    $progress_icon = '#arrow-right';
 }
 
 // Progress through the course, for the panel
@@ -121,7 +121,7 @@ get_header();
                 <?php if ($is_completed): ?>
                     <p class="status status--plain status--success"><svg class="icon" width="1em" height="1em"
                             aria-hidden="true" focusable="false">
-                            <use href="#Check" />
+                            <use href="#check" />
                         </svg><span class="status__text">Complete</span></p>
                 <?php endif; ?>
             </div>
@@ -140,10 +140,10 @@ get_header();
                             <span
                                 class="dfh-bookmark-label"><?php echo $is_bookmarked ? 'Bookmarked' : 'Bookmark'; ?></span>
                             <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                <use href="<?php echo $is_bookmarked ? '#BookmarkFilled' : '#Bookmark'; ?>" />
+                                <use href="<?php echo $is_bookmarked ? '#bookmark-filled' : '#bookmark'; ?>" />
                             </svg>
                             <svg class="icon spinner" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                <use href="#LoaderArc" />
+                                <use href="#loader-circle" />
                             </svg>
                         </button>
                     </div>
@@ -169,7 +169,7 @@ get_header();
                         <a href="<?php echo esc_url(get_permalink($adjacent['previous'])); ?>"
                             class="button button--subtle me-auto">
                             <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false">
-                                <use href="#ArrowLeft" />
+                                <use href="#arrow-left" />
                             </svg>
                             <span>Previous lesson</span>
                         </a>
@@ -183,7 +183,7 @@ get_header();
                             <use href="<?php echo esc_attr($progress_icon); ?>" />
                         </svg>
                         <svg class="icon spinner" width="1em" height="1em" aria-hidden="true" focusable="false">
-                            <use href="#LoaderArc" />
+                            <use href="#loader-circle" />
                         </svg>
                     </button>
                 </div>
@@ -205,7 +205,7 @@ get_header();
                     command="close">
                     <span class="sr-only">Close</span>
                     <svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                        <use href="#Close" />
+                        <use href="#x" />
                     </svg>
                 </button>
             </header>
@@ -225,7 +225,7 @@ get_header();
             <footer class="card__footer">
                 <a href="<?php echo esc_url(home_url()); ?>" class="brand">
                     <svg class="brand__mark icon" width="1em" height="1em" aria-hidden="true" focusable="false">
-                        <use href="#BrandDesignForHumans"></use>
+                        <use href="#brand-design-for-humans"></use>
                     </svg>
                     <span class="brand__name">Courses</span>
                 </a>
@@ -250,7 +250,7 @@ get_header();
             item.className = `banner banner--${intent} banner--round toast`;
             item.innerHTML = `<span class="icon-box" aria-hidden="true"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#${intent === 'danger' ? 'Error' : 'Check'}"/></svg></span>
                 <div class="banner__body"><p class="text font-bold"></p></div>
-                <button type="button" class="button button--icon banner__action"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Close"/></svg><span class="sr-only">Dismiss</span></button>`;
+                <button type="button" class="button button--icon banner__action"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#x"/></svg><span class="sr-only">Dismiss</span></button>`;
             item.querySelector('p').textContent = title;
             item.querySelector('button').addEventListener('click', () => item.remove());
             toasts.append(item);
@@ -295,7 +295,7 @@ get_header();
                     const on = Boolean(data.data.is_bookmarked);
                     bookmark.classList.toggle('button--strong', on);
                     bookmark.querySelector('.dfh-bookmark-label').textContent = on ? 'Bookmarked' : 'Bookmark';
-                    bookmark.querySelector('.icon:not(.spinner) use').setAttribute('href', on ? '#BookmarkFilled' : '#Bookmark');
+                    bookmark.querySelector('.icon:not(.spinner) use').setAttribute('href', on ? '#bookmark-filled' : '#bookmark');
                     toast(on ? 'Lesson bookmarked' : 'Bookmark removed');
                 })
                 .catch(() => toast('The bookmark wasn’t saved. Try again.', 'danger'))

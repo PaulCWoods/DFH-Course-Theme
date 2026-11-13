@@ -558,7 +558,7 @@ function dfh_lesson_started($lesson_id, $context)
 function dfh_lesson_status_html($state)
 {
     $statuses = array(
-        'complete' => '<span class="status status--plain status--success"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Check" /></svg><span class="status__text">Complete</span></span>',
+        'complete' => '<span class="status status--plain status--success"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#check" /></svg><span class="status__text">Complete</span></span>',
         'in-progress' => '<span class="status status--plain status--accent"><span class="status__text">In progress</span></span>',
     );
     return $statuses[$state] ?? '';
@@ -580,11 +580,11 @@ function dfh_render_lesson_item($lesson_id, $context)
     }
     if ('locked' === $state) {
         return '<a role="link" class="button" aria-disabled="true">' . $label
-            . '<svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Lock" /></svg><span class="sr-only">, locked</span></a>';
+            . '<svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#lock" /></svg><span class="sr-only">, locked</span></a>';
     }
 
     $bookmark = dfh_is_lesson_bookmarked($lesson_id)
-        ? '<svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#BookmarkFilled" /></svg><span class="sr-only">, bookmarked</span>'
+        ? '<svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#bookmark-filled" /></svg><span class="sr-only">, bookmarked</span>'
         : '';
     $current = (int) $lesson_id === (int) get_the_ID() ? ' aria-current="page"' : '';
 
@@ -1729,7 +1729,7 @@ function dfh_add_return_to_course_link($order_id)
         <a href="<?php echo esc_url($course_url); ?>" class="button button--strong button--accent">
             <span>Go to your course</span>
             <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false">
-                <use href="#ArrowRight" />
+                <use href="#arrow-right" />
             </svg>
         </a>
     </p>

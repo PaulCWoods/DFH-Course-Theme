@@ -60,7 +60,7 @@ get_template_part('content', 'course-header');
                     <div class="button-group">
                         <a href="<?php echo esc_url(home_url()); ?>" class="button button--strong button--accent">
                             <span>Go to your courses</span>
-                            <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#ArrowRight" /></svg>
+                            <svg class="icon icon--dir" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#arrow-right" /></svg>
                         </a>
                     </div>
                 </div>
@@ -70,7 +70,7 @@ get_template_part('content', 'course-header');
                     <form name="registerform" id="registerform" class="form" method="post">
                         <?php if ($registration_error): ?>
                             <div id="register-error" class="banner banner--danger" tabindex="-1" aria-labelledby="register-error-title">
-                                <span class="icon-box" aria-hidden="true"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Warning" /></svg></span>
+                                <span class="icon-box" aria-hidden="true"><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#triangle-exclamation-point" /></svg></span>
                                 <div class="banner__body">
                                     <h2 id="register-error-title" class="text font-bold">Your account wasn't created</h2>
                                     <p class="text"><?php echo esc_html($registration_error); ?></p>

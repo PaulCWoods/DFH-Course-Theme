@@ -38,7 +38,7 @@ $dfh_account_menu = function () {
 
 <div class="button-group @3xl:hide">
     <button type="button" class="button" commandfor="account-nav" command="show-modal" aria-haspopup="dialog">
-        <svg class="button__icon icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Navigation" /></svg>
+        <svg class="button__icon icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#menu" /></svg>
         <span><?php esc_html_e('Account pages', 'dfh'); ?></span>
     </button>
 </div>
@@ -47,7 +47,7 @@ $dfh_account_menu = function () {
     <article class="card">
         <header class="card__header">
             <h2 id="account-nav-title" class="card__title small-heading"><?php esc_html_e('Account pages', 'dfh'); ?></h2>
-            <button type="button" class="button button--plain button--icon" commandfor="account-nav" command="close"><span class="sr-only"><?php esc_html_e('Close', 'dfh'); ?></span><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#Close" /></svg></button>
+            <button type="button" class="button button--plain button--icon" commandfor="account-nav" command="close"><span class="sr-only"><?php esc_html_e('Close', 'dfh'); ?></span><svg class="icon" width="1em" height="1em" aria-hidden="true" focusable="false"><use href="#x" /></svg></button>
         </header>
         <div class="card__body card__body--scrollable">
             <nav class="navigation-tree" aria-labelledby="account-nav-title">
