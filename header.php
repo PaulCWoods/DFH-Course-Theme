@@ -3,8 +3,13 @@
 
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport"
-        content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- Rem sizes follow the text size people set on their phone -->
+    <meta name="text-scale" content="scale">
+    <meta name="color-scheme" content="light dark">
+    <!-- The browser's own bars match the page (--surface in the DFH theme) -->
+    <meta name="theme-color" content="#f4f3f1" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1d1d1a" media="(prefers-color-scheme: dark)">
     <?php
     // Build page title as "[Page title] | Design for Humans Courses"
     if (function_exists('is_singular') && is_singular()) {
